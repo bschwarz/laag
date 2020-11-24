@@ -166,3 +166,9 @@ test('Check if an Operation exists (true)', () => {
 test('Check if an Operation exists (false)', () => {
     expect(doc.operationExists('/petsX', 'get')).toBe(false);
 });
+test('Check if an Path exists (true)', () => {
+    expect(doc.pathExists('/pets')).toBe(true);
+});
+test('Check if an Path exists (false)', () => {
+    expect(doc.pathExists('/petsX')).toBe(false);
+});
