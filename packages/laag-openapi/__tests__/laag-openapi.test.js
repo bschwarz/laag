@@ -155,3 +155,7 @@ test('Get all unique HTTP methods across all operations', () => {
     console.log(doc.getAllHttpMethods());
     expect(doc.getAllHttpMethods().length).toBe(3);
 });
+test('Get all status codes for an operation', () => {
+    console.log(doc.getStatusCodes('/pets', 'get'));
+    expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
+});
