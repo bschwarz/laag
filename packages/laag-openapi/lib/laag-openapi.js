@@ -448,6 +448,20 @@ class Openapi  {
         this.doc.security = value;
     }
     /**
+    * Retrieves the tags object
+    * @returns (Object) - returns object containing all of the tags information
+    */
+    get tags() {
+        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : {};
+    }
+    /**
+    * sets the tags object in it's native form
+    * @param (Object) - the tags object
+    */
+    set tags(value) {
+        this.doc.tags = value;
+    }
+    /**
     * Gets all the possible unique set of HTTP methods from all of the operations
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
