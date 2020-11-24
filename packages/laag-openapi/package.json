@@ -1,0 +1,33 @@
+{
+  "name": "laag-openapi",
+  "version": "0.0.1",
+  "description": "library for interfacing with swagger/openapi documents",
+  "keywords": [
+    "rest",
+    "swagger",
+    "openapi",
+    "definition",
+    "design"
+  ],
+  "author": "Brett Schwarz <brett.schwarz@gmail.com>",
+  "homepage": "https://github.com/bschwarz/laag",
+  "license": "MIT",
+  "main": "lib/laag-openapi.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bschwarz/laag.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/bschwarz/laag/issues"
+  }
+}
