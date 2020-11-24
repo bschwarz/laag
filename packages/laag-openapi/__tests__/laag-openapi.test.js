@@ -172,3 +172,11 @@ test('Check if an Path exists (true)', () => {
 test('Check if an Path exists (false)', () => {
     expect(doc.pathExists('/petsX')).toBe(false);
 });
+test('Get Operation RequestBody Media Type', () => {
+    console.log(doc.getOperationRequestMedia('/pets', 'post'));
+    expect(Object.keys(doc.getOperationRequestMedia('/pets', 'post')).length).toBe(1);
+});
+test('Get Operation Description', () => {
+    console.log(doc.getOperationDescription('/pets', 'post'));
+    expect(Object.keys(doc.getOperationDescription('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
+});
