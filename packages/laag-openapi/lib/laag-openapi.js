@@ -494,26 +494,24 @@ class Openapi  {
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
     */
-    getOperationRequest(path, verb) {
+    getOperationRequestMedia(path, verb) {
         let ret = [];
         if (! this.operationExists(path, verb)) return [];
         
-        if (this.doc.paths[path][verb]['requestBody']['content']) {
+        if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody', 'content')) {
             ret = Object.keys(this.doc.paths[path][verb]['requestBody']['content']);
         }
 
-        return ret
+        return ret;
     }
     /**
     * gets the description for an operation
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
     */
-    getOpDescription(path, verb) {
+    getOperationDescription(path, verb) {
         if (! this.operationExists(path, verb)) return '';
-
-        let d = this.doc.paths[path][verb]['description'] ? this.doc.paths[path][verb]['description'] : '';
-        return d.length <= 30 ? d : d.substr(0,29)+'...';
+        return this.doc.paths[path][verb]['description'] || '';
     }
     /**
     * gets base URL for the API. Will get first one if there are multiple servers specified
