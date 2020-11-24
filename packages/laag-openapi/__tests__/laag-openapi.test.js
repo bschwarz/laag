@@ -151,11 +151,18 @@ test('Append paths level extension', () => {
     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
     console.log(docNew.getPathNames());
 });
-test('Get all unique HTTP methods across all operations', () => {
-    console.log(doc.getAllHttpMethods());
+test('Get All Unique HTTP Methods Across All Operations', () => {
     expect(doc.getAllHttpMethods().length).toBe(3);
 });
-test('Get all status codes for an operation', () => {
-    console.log(doc.getStatusCodes('/pets', 'get'));
+test('Get All Status Codes for an Operation', () => {
     expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
+});
+test('Get Operation Id for an Operation', () => {
+    expect(doc.getOperationId('/pets', 'get')).toBe('findPets');
+});
+test('Check if an Operation exists (true)', () => {
+    expect(doc.operationExists('/pets', 'get')).toBe(true);
+});
+test('Check if an Operation exists (false)', () => {
+    expect(doc.operationExists('/petsX', 'get')).toBe(false);
 });
