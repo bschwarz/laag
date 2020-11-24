@@ -151,3 +151,7 @@ test('Append paths level extension', () => {
     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
     console.log(docNew.getPathNames());
 });
+test('Get all unique HTTP methods across all operations', () => {
+    console.log(doc.getAllHttpMethods());
+    expect(doc.getAllHttpMethods().length).toBe(3);
+});
