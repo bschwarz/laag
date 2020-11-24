@@ -445,7 +445,7 @@ class Openapi  {
 
         // if (dictKeysExists(doc, path, verb, responses) doc[path] && doc[path][verb] && doc[path][verb].responses) {
         if (this.dictKeysExists(doc, path, verb, 'responses')) {
-            for (let R of Object.keys(doc[path][verb].responses).sort()) {
+            for (let R of Object.keys(doc[path][verb].responses).filter(x => x != 'default').sort()) {
                 d = doc[path][verb].responses[R].description || '';
                 m = doc[path][verb].responses[R].content ? Object.keys(doc[path][verb].responses[R].content) : [];
                 ret.push({code: R, description: d, media: m});
