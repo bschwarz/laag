@@ -420,6 +420,13 @@ class Openapi  {
         return paths.length > 0 ? paths.filter(x => !x.startsWith('x-')) : [];
     }
     /**
+    * Retrieves the paths object
+    * @returns (String) - returns object containing the path information
+    */
+    getPath(path) {
+        return this.dictKeysExists(this.doc, 'paths', path) ? this.doc.paths[path] : {};
+    }
+    /**
     * Retrieves the components object
     * @returns (Object) - returns object containing all of the components information
     */
