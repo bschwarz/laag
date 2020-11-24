@@ -180,3 +180,18 @@ test('Get Operation Description', () => {
     console.log(doc.getOperationDescription('/pets', 'post'));
     expect(Object.keys(doc.getOperationDescription('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
 });
+test('Set/Get components', () => {
+    let x = {schemas: {}, responses: {}, parameters: {}, examples: {}, requestBodies: {}, headers: {}};
+    docNew.components = x;
+    console.log('COMPONENTS');
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(Object.keys(docNew.components).length).toBe(6);
+});
+test('Set/Get security', () => {
+    let x = {};
+    x['ApiKeyAuth'] = [];
+    docNew.security = x;
+    console.log('security');
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(Object.keys(docNew.security).length).toBe(1);
+});
