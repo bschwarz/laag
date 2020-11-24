@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = Openapi;
-
 //
 // This file contains both the Swagger/OpenAPI interface
 //
@@ -525,3 +523,5 @@ class Openapi  {
         return this.doc.servers ? this.doc.servers[0] : {};
     }
 }
+
+module.exports.Openapi = Openapi;
