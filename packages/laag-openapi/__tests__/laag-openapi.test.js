@@ -3,15 +3,15 @@
 // const openapi = require('..');
 const fs = require('fs');
 const { getMaxListeners } = require('process');
-const openapi = require('../lib/laag-openapi.js');
+const Openapi = require('../lib/laag-openapi.js');
 
 let doc = null;
 let docNew = null;
 
 beforeAll(() => {
     let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
-    doc = new openapi.Openapi(data);
-    docNew = new openapi.Openapi();
+    doc = new Openapi(data);
+    docNew = new Openapi();
 });
 
 //
