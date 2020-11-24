@@ -410,7 +410,30 @@ class Openapi  {
             this.doc.paths[name] = value;
         }
     }
-   /**
+    /**
+    * Gets all the paths, sorted by alpha and length
+    * @returns (Array) - array of all of the paths (resources)
+    */
+    getPathNames() {
+        const sf = function(a,b) {return a.localeCompare(b, 'en', {'sensitivity': 'base'});}
+        const paths = Object.keys(this.doc.paths).sort(sf);
+        return paths.length > 0 ? paths.filter(x => !x.startsWith('x-')) : [];
+    }
+    /**
+    * Retrieves the components object
+    * @returns (Object) - returns object containing all of the components information
+    */
+    get components() {
+        return this.dictKeysExists(this.doc, 'components') ? this.doc.components : {};
+    }
+    /**
+    * sets the components object in it's native form
+    * @param (Object) - the components object
+    */
+    set components(value) {
+        this.doc.components = value;
+    }
+    /**
     * Gets all the possible unique set of HTTP methods from all of the operations
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
@@ -422,15 +445,6 @@ class Openapi  {
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
-    }
-    /**
-    * Gets all the paths, sorted by alpha and length
-    * @returns (Array) - array of all of the paths (resources)
-    */
-    getPathNames() {
-        const sf = function(a,b) {return a.localeCompare(b, 'en', {'sensitivity': 'base'});}
-        const paths = Object.keys(this.doc.paths).sort(sf);
-        return paths.length > 0 ? paths.filter(x => !x.startsWith('x-')) : [];
     }
     /**
     * Gets all the possible HTTP status codes for an operation
