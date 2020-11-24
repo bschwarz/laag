@@ -434,6 +434,20 @@ class Openapi  {
         this.doc.components = value;
     }
     /**
+    * Retrieves the security object
+    * @returns (Object) - returns object containing all of the security information
+    */
+    get security() {
+        return this.dictKeysExists(this.doc, 'security') ? this.doc.security : {};
+    }
+    /**
+    * sets the security object in it's native form
+    * @param (Object) - the security object
+    */
+    set security(value) {
+        this.doc.security = value;
+    }
+    /**
     * Gets all the possible unique set of HTTP methods from all of the operations
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
