@@ -462,6 +462,20 @@ class Openapi  {
         this.doc.tags = value;
     }
     /**
+    * Retrieves the externalDocs object
+    * @returns (Object) - returns object containing all of the externalDocs information
+    */
+    get externalDocs() {
+        return this.dictKeysExists(this.doc, 'externalDocs') ? this.doc.externalDocs : {};
+    }
+    /**
+    * sets the externalDocs object in it's native form
+    * @param (Object) - the externalDocs object
+    */
+    set externalDocs(value) {
+        this.doc.externalDocs = value;
+    }
+    /**
     * Gets all the possible unique set of HTTP methods from all of the operations
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
