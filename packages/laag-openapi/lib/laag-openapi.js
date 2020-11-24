@@ -441,6 +441,13 @@ class Openapi  {
         this.doc.components = value;
     }
     /**
+    * Retrieves the components schemas object
+    * @returns (Object) - returns object containing all of the components information
+    */
+    get componentsSchemas() {
+        return this.dictKeysExists(this.doc, 'components') ? this.doc.components : {};
+    }
+    /**
     * Retrieves the security object
     * @returns (Object) - returns object containing all of the security information
     */
@@ -585,4 +592,4 @@ class Openapi  {
     }
 }
 
-module.exports.Openapi = Openapi;
+exports.Openapi = Openapi;
