@@ -23,4 +23,4 @@ Displaying API: Swagger Petstore v1.0.0
 Paths defined in this API:
 /pets
 /pets/{id}
-~~~
+```
