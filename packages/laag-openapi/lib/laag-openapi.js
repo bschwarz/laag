@@ -592,4 +592,4 @@ class Openapi  {
     }
 }
 
-exports.Openapi = Openapi;
+module.exports = Openapi;
