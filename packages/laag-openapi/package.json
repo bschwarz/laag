@@ -10,7 +10,7 @@
     "design"
   ],
   "author": "Brett Schwarz <brett.schwarz@gmail.com>",
-  "homepage": "https://github.com/bschwarz/laag",
+  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/laag-openapi",
   "license": "MIT",
   "main": "lib/laag-openapi.js",
   "directories": {
