@@ -202,3 +202,10 @@ test('Set/Get tags', () => {
     console.log(docNew.getDefinition('prettyjson'));
     expect(Object.keys(docNew.tags).length).toBe(2);
 });
+test('Set/Get externalDocs', () => {
+    let x = {url: 'xxx', description: 'this is a externalDocs'};
+    docNew.externalDocs = x;
+    console.log('externalDocs');
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(Object.keys(docNew.externalDocs).length).toBe(2);
+});
