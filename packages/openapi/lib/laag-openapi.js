@@ -307,8 +307,10 @@ class Openapi  {
         //
         // We want to make sure what is passed in is valid params,
         // so we check and only save those that are valid
+        // Note: 'name' is required if license object exists, so 
+        //       prepopulate in case it wasn't passed in
         //
-        let newValue = {};
+        let newValue = {name: ''};
         for (let I of Object.keys(value)) {
             if (['name', 'url'].includes(I)) {
                 newValue[I] = value[I];
@@ -336,7 +338,8 @@ class Openapi  {
         //
         let ret = [];
         for (let O of value) {
-            let newValue = {};
+            // url is required in servers, so pre populate in case wasn't passed in
+            let newValue = {url: ''};
             for (let I of Object.keys(O)) {
                 if (['variables', 'url', 'description'].includes(I)) {
                     newValue[I] = O[I];
@@ -473,7 +476,21 @@ class Openapi  {
     * @param (Object) - the tags object
     */
     set tags(value) {
-        this.doc.tags = value;
+        //
+        // We want to make sure what is passed in is valid params,
+        // so we check and only save those that are valid
+        // Note: 'name' is required if license object exists, so 
+        //       prepopulate in case it wasn't passed in
+        //
+        let newValue = {name: ''};
+        for (let I of Object.keys(value)) {
+            if (['name', 'description', 'externalDocs'].includes(I)) {
+                newValue[I] = value[I];
+            } else if (I.startsWith('x-')) {
+                newValue[I] = value[I];
+            }
+        }
+        this.doc.tags = newValue;
     }
     /**
     * Retrieves the externalDocs object
@@ -487,7 +504,21 @@ class Openapi  {
     * @param (Object) - the externalDocs object
     */
     set externalDocs(value) {
-        this.doc.externalDocs = value;
+        //
+        // We want to make sure what is passed in is valid params,
+        // so we check and only save those that are valid
+        // Note: 'url' is required if license object exists, so 
+        //       prepopulate in case it wasn't passed in
+        //
+        let newValue = {url: ''};
+        for (let I of Object.keys(value)) {
+            if (['url', 'description'].includes(I)) {
+                newValue[I] = value[I];
+            } else if (I.startsWith('x-')) {
+                newValue[I] = value[I];
+            }
+        }
+        this.doc.externalDocs = newValue;
     }
     /**
     * Gets all the possible unique set of HTTP methods from all of the operations
