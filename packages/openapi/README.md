@@ -1,12 +1,16 @@
-# `laag-openapi`
+# `@laag/openapi`
 
 This is a library to interface to Swagger/Openapi rest definition documents. If gives an interface to read and write those documents from within a Node or JS application.
 
+## Install
+```
+npm i @laag/openapi --save
+```
 ## Usage
 
 ### Reading an existing document
 ```
-const Openapi = require('laag-openapi');
+const Openapi = require('@laag/openapi');
 let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
 doc = new Openapi(data);
 
@@ -26,7 +30,7 @@ Paths defined in this API:
 
 ### Writing a new document
 ```
-const Openapi = require('laag-openapi');
+const Openapi = require('@laag/openapi');
 
 //
 // Create empty doc
