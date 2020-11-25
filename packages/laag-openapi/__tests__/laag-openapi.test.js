@@ -2,7 +2,6 @@
 
 // const openapi = require('..');
 const fs = require('fs');
-const { getMaxListeners } = require('process');
 const Openapi = require('../lib/laag-openapi.js');
 
 let doc = null;
