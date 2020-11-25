@@ -53,6 +53,8 @@ const path = {'get': {description: 'This fetches myresource', operationId: 'getM
 doc.appendPath('/myresounce', path);
 
 console.log(doc.getDefinition('prettyjson'));
+```
+
 ### Output
 ```
 {
