@@ -9,6 +9,7 @@ npm i @laag/openapi --save
 ## Usage
 
 ### Reading an existing document
+#### Source Code
 ```
 const Openapi = require('@laag/openapi');
 let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
@@ -20,7 +21,7 @@ for (const pathname of doc.getPathNames()) {
     console.log(pathname);
 }
 ```
-### Output
+#### Output
 ```
 Displaying API: Swagger Petstore v1.0.0
 Paths defined in this API:
@@ -29,6 +30,7 @@ Paths defined in this API:
 ```
 
 ### Writing a new document
+#### Source Code
 ```
 const Openapi = require('@laag/openapi');
 
@@ -55,7 +57,7 @@ doc.appendPath('/myresounce', path);
 console.log(doc.getDefinition('prettyjson'));
 ```
 
-### Output
+#### Output
 ```
 {
   "openapi": "3.0.2",
