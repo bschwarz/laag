@@ -11,13 +11,9 @@ const doc = new Openapi();
 doc.title = "My Awesome API";
 doc.version = "1.0.0";
 doc.description = "This is just an API to showcase laag";
-const contact = {name: 'Brett', email: 'abc@compay.com'};
-doc.contact = contact;
-let servers = [];
-servers.push({url: 'some.url.com', description: 'This is the main URL to hit the API with'});
-doc.servers = servers;
-const ext = {'x-my-custom-extension': 'My Value'};
-doc.rootExtensions = ext;
+doc.contact = {name: 'Brett', email: 'abc@compay.com'};
+doc.servers = [{url: 'some.url.com', description: 'This is the main URL to hit the API with'}];
+doc.rootExtensions = {'x-my-custom-extension': 'My Value'};
 //
 // add a path (Note: this is just a partial path definition)
 //
