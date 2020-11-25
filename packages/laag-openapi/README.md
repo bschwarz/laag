@@ -88,39 +88,3 @@ console.log(doc.getDefinition('prettyjson'));
   "x-my-custom-extension": "My Value"
 }
 ```
-### Output
-```
-{
-  "openapi": "3.0.2",
-  "info": {
-    "title": "My Awesome API",
-    "version": "1.0.0",
-    "description": "This is just an API to showcase laag",
-    "contact": {
-      "name": "Brett",
-      "email": "abc@compay.com"
-    }
-  },
-  "paths": {
-    "/myresource": {
-      "get": {
-        "description": "This fetches myresource",
-        "operationId": "getMyresource",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "some.url.com",
-      "description": "This is the main URL to hit the API with"
-    }
-  ],
-  "x-my-custom-extension": "My Value"
-}
-
-```
