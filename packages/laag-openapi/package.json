@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/bschwarz/laag/issues"
   },
-  "gitHead": "4527cd8e453ac8252838833eaa5f21af36525b54"
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "2e596fd044bca8ffd60779a3779a894d867486b9"
 }
