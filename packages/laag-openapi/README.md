@@ -102,7 +102,7 @@ console.log(doc.getDefinition('prettyjson'));
     }
   },
   "paths": {
-    "/myresounce": {
+    "/myresource": {
       "get": {
         "description": "This fetches myresource",
         "operationId": "getMyresource",
