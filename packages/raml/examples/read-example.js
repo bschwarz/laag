@@ -1,7 +1,7 @@
 const fs = require('fs');
-const Openapi = require('../lib/laag-openapi');
-let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
-doc = new Openapi(data);
+const Raml = require('../lib/laag-raml');
+let data = fs.readFileSync('examples/example.raml', 'utf8');
+doc = new Raml(data);
 
 console.log(`Displaying API: ${doc.title} v${doc.version}`);
 console.log('Paths defined in this API:');

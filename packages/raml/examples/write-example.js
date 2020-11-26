@@ -1,9 +1,9 @@
-const Openapi = require('../lib/laag-openapi');
+const Raml = require('../lib/laag-raml');
 
 //
 // Create empty doc
 //
-const doc = new Openapi();
+const doc = new Raml();
 
 //
 // Set some general properties
