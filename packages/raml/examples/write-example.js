@@ -4,7 +4,6 @@ const Raml = require('../lib/laag-raml');
 // Create empty doc
 //
 const doc = new Raml();
-
 //
 // Set some general properties
 //
