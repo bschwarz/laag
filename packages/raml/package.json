@@ -1,18 +1,17 @@
 {
-  "name": "@laag/openapi",
-  "version": "1.0.3-alpha.0",
-  "description": "library for interfacing with swagger/openapi documents",
+  "name": "@laag/raml",
+  "version": "1.0.1-alpha.0",
+  "description": "library for interfacing with raml documents",
   "keywords": [
     "rest",
-    "swagger",
-    "openapi",
+    "raml",
     "definition",
     "design"
   ],
   "author": "Brett Schwarz <brett.schwarz@gmail.com>",
-  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/openapi",
+  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/raml",
   "license": "MIT",
-  "main": "lib/laag-openapi.js",
+  "main": "lib/laag-raml.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -33,5 +32,4 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd"
 }
