@@ -11,7 +11,7 @@ doc.title = "My Awesome API";
 doc.version = "1.0.0";
 doc.description = "This is just an API to showcase laag";
 // doc.contact = {name: 'Brett', email: 'abc@compay.com'};
-doc.servers = [{url: 'some.url.com', description: 'This is the main URL to hit the API with'}];
+// doc.servers = [{url: 'some.url.com', description: 'This is the main URL to hit the API with'}];
 doc.rootExtensions = {myannontation: 'My Value'};
 //
 // add a path (Note: this is just a partial path definition)
