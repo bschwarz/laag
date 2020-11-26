@@ -67,5 +67,51 @@
             }
          }
       }
+   },
+   "/documents": {
+      "post": {
+         "headers": {
+            "UserID": {
+               "description": "resource for documents",
+               "type": "string",
+               "example": "somedocument"
+            }
+         },
+         "body": {
+            "application/json": {
+               "type": "Org",
+               "example": {
+                  "value": {
+                     "name": "Doe Enterprise",
+                     "value": "Silver"
+                  }
+               }
+            }
+         }
+      },
+      "get": {
+         "description": "Returns an document.",
+         "responses": {
+            "201": {
+               "body": {
+                  "application/json": {
+                     "type": "Org",
+                     "examples": {
+                        "acme": {
+                           "name": "Acme"
+                        },
+                        "softwareCorp": {
+                           "value": {
+                              "name": "Software Corp",
+                              "address": "35 Central Street",
+                              "value": "Gold"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
    }
 }
