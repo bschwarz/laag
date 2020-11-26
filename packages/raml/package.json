@@ -1,11 +1,10 @@
 {
-  "name": "@laag/raml",
+  "name": "raml",
   "version": "1.0.1-alpha.0",
-  "description": "library for interfacing with raml documents",
+  "description": "library to read/write RAML documents",
   "keywords": [
     "rest",
     "raml",
-    "definition",
     "design"
   ],
   "author": "Brett Schwarz <brett.schwarz@gmail.com>",
@@ -21,15 +20,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bschwarz/laag.git"
+    "url": "git+https://bschwarz:Il0vemys0ns@github.com/bschwarz/laag.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/bschwarz/laag/issues"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  }
 }
