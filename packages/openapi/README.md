@@ -1,6 +1,6 @@
 # `@laag/openapi`
 
-This is a library to interface to Swagger/Openapi rest definition documents. If gives an interface to read and write those documents from within a Node or JS application.
+This is a library to interface to [Swagger/Openapi](https://www.openapis.org/) rest definition documents. If gives an interface to read and write those documents from within a Node or JS application. This interface will follow the same interface as the [@laag/raml](https://github.com/bschwarz/laag/tree/main/packages/raml) interface.
 
 ## Install
 ```
