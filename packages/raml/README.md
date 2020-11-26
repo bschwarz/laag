@@ -1,10 +1,10 @@
-# `@laag/openapi`
+# `@laag/raml`
 
 This is a library to interface to [RAML](https://raml.org/) rest definition documents. If gives an interface to read and write those documents from within a Node or JS application. This interface will follow the same interface as the [@laag/openapi](https://github.com/bschwarz/laag/tree/main/packages/openapi) interface.
 
 ## Install
 ```
-npm i @laag/openapi --save
+npm i @laag/raml --save
 ```
 ## Usage
 
@@ -12,6 +12,7 @@ npm i @laag/openapi --save
 #### Source Code
 ```
 const Raml = require('@laag/raml');
+const fs = require('fs');
 let data = fs.readFileSync('examples/example.raml', 'utf8');
 doc = new Raml(data);
 
@@ -23,10 +24,10 @@ for (const pathname of doc.getPathNames()) {
 ```
 #### Output
 ```
-Displaying API: Swagger Petstore v1.0.0
+Displaying API: API with Examples vnull
 Paths defined in this API:
-/pets
-/pets/{id}
+/documents
+/organisation
 ```
 
 ### Writing a new document
@@ -38,16 +39,15 @@ const Raml = require('@laag/raml');
 // Create empty doc
 //
 const doc = new Raml();
-
 //
 // Set some general properties
 //
 doc.title = "My Awesome API";
 doc.version = "1.0.0";
 doc.description = "This is just an API to showcase laag";
-doc.contact = {name: 'Brett', email: 'abc@compay.com'};
+// doc.contact = {name: 'Brett', email: 'abc@compay.com'};
 doc.servers = [{url: 'some.url.com', description: 'This is the main URL to hit the API with'}];
-doc.rootExtensions = {'x-my-custom-extension': 'My Value'};
+doc.rootExtensions = {myannontation: 'My Value'};
 //
 // add a path (Note: this is just a partial path definition)
 //
@@ -55,40 +55,32 @@ const path = {'get': {description: 'This fetches myresource', operationId: 'getM
 doc.appendPath('/myresounce', path);
 
 console.log(doc.getDefinition('prettyjson'));
+
 ```
 
 #### Output
 ```
 {
-  "openapi": "3.0.2",
-  "info": {
-    "title": "My Awesome API",
-    "version": "1.0.0",
-    "description": "This is just an API to showcase laag",
-    "contact": {
-      "name": "Brett",
-      "email": "abc@compay.com"
-    }
-  },
-  "paths": {
-    "/myresounce": {
-      "get": {
-        "description": "This fetches myresource",
-        "operationId": "getMyresource",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    }
-  },
+  "title": "My Awesome API",
+  "version": "1.0.0",
+  "description": "This is just an API to showcase laag",
   "servers": [
     {
       "url": "some.url.com",
       "description": "This is the main URL to hit the API with"
     }
   ],
-  "x-my-custom-extension": "My Value"
+  "(myannontation)": "My Value",
+  "/myresounce": {
+    "get": {
+      "description": "This fetches myresource",
+      "operationId": "getMyresource",
+      "responses": {
+        "200": {
+          "description": "Success"
+        }
+      }
+    }
+  }
 }
 ```
