@@ -45,6 +45,8 @@ const doc = new Raml();
 doc.title = "My Awesome API";
 doc.version = "1.0.0";
 doc.description = "This is just an API to showcase laag";
+doc.baseUri = 'https://somewhere.com/myapi/v1';
+doc.protocols = ['http', 'https'];
 doc.rootExtensions = {myannontation: 'My Value'};
 //
 // add a path (Note: this is just a partial path definition)
@@ -62,6 +64,11 @@ console.log(doc.getDefinition('prettyjson'));
   "title": "My Awesome API",
   "version": "1.0.0",
   "description": "This is just an API to showcase laag",
+  "baseUri": "https://somewhere.com/myapi/v1",
+  "protocols": [
+    "http",
+    "https"
+  ],
   "(myannontation)": "My Value",
   "/myresounce": {
     "get": {
