@@ -86,6 +86,14 @@ test('Set/Get baseUri', () => {
     docNew.baseUri = 'https://google.com';
     expect(docNew.baseUri).toBe('https://google.com');
 });
+test('Set/Get Protocols array', () => {
+    docNew.protocols = ['http'];
+    expect(docNew.protocols.length).toBe(1);
+});
+test('Append a Protocol', () => {
+    docNew.appendProtocol('https');
+    expect(docNew.protocols.length).toBe(2);
+});
 // test('Set/Get Terms Of Service of the RAML Definition', () => {
 //     docNew.termsOfService = 'this is the terms';
 //     expect(docNew.termsOfService).toBe('this is the terms');
