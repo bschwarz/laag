@@ -22,6 +22,7 @@ class Openapi  {
         }
         this.pathList = this.getPathNames();
         this._baseUri = '';
+        this._protocols = '';
     }
     /**
     * Retrieve the document version
@@ -372,6 +373,29 @@ class Openapi  {
     */
     set baseUri(value) {
         this._baseUri = value;
+    }
+    /**
+    * Retrieves the protocols
+    * @returns (Array) - returns protocols
+    */
+    get protocols() {
+        return this._protocols || [];
+    }
+    /**
+    * Sets the protocols array
+    * @param (String) value - athe value of the protocols
+    */
+    set protocols(value) {
+        this._protocols = value;
+    }
+    /**
+    * Appends value to the protocols array
+    * @param (String) value - the value of the protocol
+    */
+    appendProtocol(value) {
+        let old = [...this._protocols];
+        old.push(value);
+        this._protocols = old;
     }
     /**
     * Retrieves the paths object
