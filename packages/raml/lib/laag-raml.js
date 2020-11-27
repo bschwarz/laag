@@ -365,6 +365,20 @@ class Raml  {
         this.doc.servers.push(value);
     }
     /**
+    * Retrieves the baseUri
+    * @returns (String) - returns baseUri
+    */
+    get baseUri() {
+        return this.doc.baseUri || '';
+    }
+    /**
+    * Sets the baseUri value
+    * @param (Array) value - the value of the baseUri
+    */
+    set baseUri(value) {
+        this.doc.baseUri = value;
+    }
+    /**
     * Retrieves the paths object
     * @returns (Array) - returns object containing all of the path information
     */
