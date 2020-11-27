@@ -373,10 +373,40 @@ class Raml  {
     }
     /**
     * Sets the baseUri value
-    * @param (Array) value - the value of the baseUri
+    * @param (String) value - the value of the baseUri
     */
     set baseUri(value) {
         this.doc.baseUri = value;
+    }
+    /**
+    * Retrieves the protocols array
+    * @returns (Array) - returns protocols array
+    */
+    get protocols() {
+        return this.doc.protocols || [];
+    }
+    /**
+    * Sets the protocols value
+    * @param (Array) value - the value of the protocols array
+    */
+    set protocols(value) {
+        this.doc.protocols = value;
+    }
+    /**
+    * Appends value to the protocols array
+    * @param (String) value - the value of the protocol
+    */
+    appendProtocol(value) {
+        let old = [...this.doc.protocols];
+        old.push(value);
+        this.doc.protocols = old;
+    }
+    /**
+    * Sets the protocols value
+    * @param (Array) value - the value of the protocols array
+    */
+    set protocols(value) {
+        this.doc.protocols = value;
     }
     /**
     * Retrieves the paths object
