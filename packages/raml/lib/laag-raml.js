@@ -20,6 +20,7 @@ class Raml  {
             this.doc = {title: ''};
         }
         this.pathList = this.getPathNames();
+        this._servers = [];
     }
     /**
     * Retrieve the document version
@@ -331,7 +332,7 @@ class Raml  {
     * @returns (Array) - returns array containing server information
     */
     get servers() {
-        return this.dictKeysExists(this.doc, 'servers') ? this.doc.servers : [];
+        return this._servers || [];
     }
     /**
     * Sets the servers array
@@ -355,14 +356,14 @@ class Raml  {
             }
             ret.push(newValue);
         }
-        this.doc.servers = ret;
+        this._servers = ret;
     }
     /**
     * Appends a server
     * @param (Object) value - an object with the server info
     */
     appendServer(value) {
-        this.doc.servers.push(value);
+        this._servers.push(value);
     }
     /**
     * Retrieves the baseUri
