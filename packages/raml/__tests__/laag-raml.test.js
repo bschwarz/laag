@@ -118,18 +118,18 @@ test('Append a Protocol', () => {
 //     docNew.license = x;
 //     expect(Object.keys(docNew.license).length).toBe(3);
 // });
-// test('Set/Get Servers Object of the RAML Definition', () => {
-//     let x = {};
-//     let arr = [];
-//     x.description = 'my url';
-//     x.url = 'google.com';
-//     x['x-custom'] = 'custom contact';
-//     x.junk = 'junk';
-//     arr.push(x);
-//     docNew.servers = arr;
-//     console.log(docNew.getDefinition('prettyjson'));
-//     expect(docNew.servers.length).toBe(1);
-// });
+test('Set/Get Servers Object of the RAML Definition', () => {
+    let x = {};
+    let arr = [];
+    x.description = 'my url';
+    x.url = 'google.com';
+    x['x-custom'] = 'custom contact';
+    x.junk = 'junk';
+    arr.push(x);
+    docNew.servers = arr;
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(docNew.servers.length).toBe(1);
+});
 // test('Set paths level extension', () => {
 //     let x = {};
 //     let y = {};
