@@ -82,6 +82,10 @@ test('Set Description of the RAML Definition', () => {
     docNew.description = 'this is a description';
     expect(docNew.description).toBe('this is a description');
 });
+test('Set/Get baseUri', () => {
+    docNew.baseUri = 'https://google.com';
+    expect(docNew.baseUri).toBe('https://google.com');
+});
 // test('Set/Get Terms Of Service of the RAML Definition', () => {
 //     docNew.termsOfService = 'this is the terms';
 //     expect(docNew.termsOfService).toBe('this is the terms');
