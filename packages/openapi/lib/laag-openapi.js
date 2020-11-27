@@ -21,6 +21,7 @@ class Openapi  {
             this.doc = {openapi: '', info: {title: '', version: ''}, paths: {}};
         }
         this.pathList = this.getPathNames();
+        this._baseUri = '';
     }
     /**
     * Retrieve the document version
@@ -357,6 +358,20 @@ class Openapi  {
     */
     appendServer(value) {
         this.doc.servers.push(value);
+    }
+    /**
+    * Retrieves the baseUri
+    * @returns (String) - returns baseUri
+    */
+    get baseUri() {
+        return this._baseUri || '';
+    }
+    /**
+    * Sets the baseUri array
+    * @param (String) value - athe value of the baseUri
+    */
+    set baseUri(value) {
+        this._baseUri = value;
     }
     /**
     * Retrieves the paths object
