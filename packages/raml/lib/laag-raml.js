@@ -639,6 +639,22 @@ class Raml  {
         return v + str.charAt(0).toUpperCase() + str.substr(1);
     }
     /**
+    * util function to set the operationId if exists
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @param {string} value - the name/id for the operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    setOperationId(path, verb, value) {
+
+        let v = verb.toLowerCase();
+        if (this.operationExists(path, verb)) {
+            this.doc[path][v].displayName = value;
+        }
+        
+        return this.doc[path][v].displayName || '';
+    }
+    /**
     * util to check if an operation (verb + path) exists in the definition
     * @param {string} path - the path segment of the resource
     * @param {string} verb - the HTTP verb for this operation
