@@ -109,15 +109,15 @@ test('Set/Get Contact Object of the RAML Definition', () => {
     docNew.contact = x;
     expect(Object.keys(docNew.contact).length).toBe(4);
 });
-// test('Set/Get License Object of the RAML Definition', () => {
-//     let x = {};
-//     x['name'] = 'brett';
-//     x['url'] = 'google.com';
-//     x['x-custom'] = 'custom contact';
-//     x['junk'] = 'junk';
-//     docNew.license = x;
-//     expect(Object.keys(docNew.license).length).toBe(3);
-// });
+test('Set/Get License Object of the RAML Definition', () => {
+    let x = {};
+    x['name'] = 'brett';
+    x['url'] = 'google.com';
+    x['x-custom'] = 'custom contact';
+    x['junk'] = 'junk';
+    docNew.license = x;
+    expect(Object.keys(docNew.license).length).toBe(3);
+});
 test('Set/Get Servers Object of the RAML Definition', () => {
     let x = {};
     let arr = [];
