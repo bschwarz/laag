@@ -20,6 +20,7 @@ class Raml  {
             this.doc = {title: ''};
         }
         this.pathList = this.getPathNames();
+        this._paths = {};
         //
         // These fields are present in OpenAPI, but not RAML, but we can get/set them
         // internally, but they won't show up in the definition output
@@ -421,14 +422,20 @@ class Raml  {
     * @returns (Array) - returns object containing all of the path information
     */
     get paths() {
-        return this.dictKeysExists(this.doc, 'paths') ? this.doc.paths : {};
+        
+        for (const P of Object.keys(this.doc)) {
+            if (P.trim().startsWith('/')) {
+                this._paths[P] = this.doc[P];
+            }
+        }
+        return this._paths;
     }
     /**
     * sets the paths object in it's native form
     * @param (Object) - the paths object
     */
     set paths(value) {
-        this.doc.paths = value;
+        this._paths = value;
     }
     /**
     * Appends a path to the paths object
@@ -585,8 +592,8 @@ class Raml  {
     getAllHttpMethods() {
         let methods = new Set();
 
-        for (let P of Object.keys(this.doc.paths)) {
-            Object.keys(this.doc.paths[P]).forEach(item => methods.add(item));
+        for (let P of Object.keys(this.paths)) {
+            Object.keys(this.paths[P]).forEach(item => methods.add(item));
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
