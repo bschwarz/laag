@@ -20,9 +20,14 @@ class Raml  {
             this.doc = {title: ''};
         }
         this.pathList = this.getPathNames();
+        //
+        // These fields are present in OpenAPI, but not RAML, but we can get/set them
+        // internally, but they won't show up in the definition output
+        //
         this._servers = [];
         this._termsOfService = '';
         this._contact = {};
+        this._license = {};
     }
     /**
     * Retrieve the document version
@@ -306,7 +311,7 @@ class Raml  {
     * @returns (Object) - Object with the license information
     */
     get license() {
-        return this.dictKeysExists(this.doc, 'info', 'license') ? this.doc.info.license : {};
+        return this._license || {};
     }
     /**
     * Sets the license object
@@ -327,7 +332,7 @@ class Raml  {
                 newValue[I] = value[I];
             }
         }
-        this.doc.info.license = newValue;
+        this._license = newValue;
     }
     /**
     * Retrieves the servers array
