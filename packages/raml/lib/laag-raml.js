@@ -655,6 +655,27 @@ class Raml  {
         return this.doc[path][v].displayName || '';
     }
     /**
+    * alias for getOperationId
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    getDisplayName(path, verb) {
+        
+        return this.getOperationId(path, verb);
+    }
+    /**
+    * alias for setOperationId
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @param {string} value - the name/id for the operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    setDisplayName(path, verb, value) {
+
+        return this.setOperationId(path, verb, value);
+    }
+    /**
     * util to check if an operation (verb + path) exists in the definition
     * @param {string} path - the path segment of the resource
     * @param {string} verb - the HTTP verb for this operation
