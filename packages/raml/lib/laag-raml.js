@@ -21,6 +21,7 @@ class Raml  {
         }
         this.pathList = this.getPathNames();
         this._servers = [];
+        this._termsOfService = '';
     }
     /**
     * Retrieve the document version
@@ -264,14 +265,14 @@ class Raml  {
     * @returns (String) - terms of service
     */
     get termsOfService() {
-        return null;
+        return this._termsOfService;
     }
     /**
     * Sets the terms of service for the API from the RAML document
     * @param (String) value - the value to use for the termsOfService of the definition
     */
     set termsOfService(value) {
-        let obj = {};
+        this._termsOfService = value;
     }
     /**
     * Retrieves the contact object
