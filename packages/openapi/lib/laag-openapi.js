@@ -613,6 +613,45 @@ class Openapi  {
         return v + str.charAt(0).toUpperCase() + str.substr(1);
     }
     /**
+    * util function to set the operationId if exists
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @param {string} value - the name/id for the operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    setOperationId(path, verb, value) {
+
+        let v = verb.toLowerCase();
+        let ret = '';
+        if (this.operationExists(path, verb)) {
+            this.doc.paths[path][v].operationId = value;
+            ret = this.doc.paths[path][v].operationId;
+        }
+        
+        return ret;
+    }
+    /**
+    * alias for getOperationId
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    getDisplayName(path, verb) {
+        
+        return this.getOperationId(path, verb);
+    }
+    /**
+    * alias for setOperationId
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - the HTTP verb for this operation
+    * @param {string} value - the name/id for the operation
+    * @returns (String) - name of the operation ID associated with this operation
+    */
+    setDisplayName(path, verb, value) {
+
+        return this.setOperationId(path, verb, value);
+    }
+    /**
     * util to check if an operation (verb + path) exists in the definition
     * @param {string} path - the path segment of the resource
     * @param {string} verb - the HTTP verb for this operation
