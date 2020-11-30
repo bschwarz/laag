@@ -630,8 +630,8 @@ class Raml  {
 
         let v = verb.toLowerCase();
 
-        if (this.operationExists(path, verb) && this.doc.paths[path][v].operationId) {
-            return this.doc.paths[path][v].operationId;
+        if (this.operationExists(path, verb) && this.doc[path][v].displayName) {
+            return this.doc[path][v].displayName;
         }
 
         let str = path.replace('/', '').split('/').pop().replace(/{([^}]*)}/g, '$1');
@@ -646,7 +646,7 @@ class Raml  {
     operationExists(path, verb) {
         let v = verb.toLowerCase();
 
-        return (this.doc.paths[path] && this.doc.paths[path][v]) ? true : false;
+        return (this.doc[path] && this.doc[path][v]) ? true : false;
     }
     /**
     * util to check if an path exists in the definition
