@@ -176,6 +176,10 @@ test('Get All Status Codes for an Operation', () => {
 test('Get Operation Id for an Operation', () => {
     expect(doc.getOperationId('/pets', 'get')).toBe('findPets');
 });
+test('Set Operation Id for an Operation', () => {
+    doc.setOperationId('/organisation', 'get', 'someId');
+    expect(doc.getOperationId('/organisation', 'get')).toBe('someId');
+});
 test('Check if an Operation exists (true)', () => {
     expect(doc.operationExists('/pets', 'get')).toBe(true);
 });
