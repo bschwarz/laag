@@ -605,7 +605,7 @@ class Raml  {
     * @returns (Object) - Object with code, description and media for each status code
     */
     getStatusCodes(path, verb) {
-        let doc = this.doc.paths;
+        let doc = this.doc;
         let ret = [];
         let d,m;
 
@@ -613,7 +613,7 @@ class Raml  {
         if (this.dictKeysExists(doc, path, verb, 'responses')) {
             for (let R of Object.keys(doc[path][verb].responses).filter(x => x != 'default').sort()) {
                 d = doc[path][verb].responses[R].description || '';
-                m = doc[path][verb].responses[R].content ? Object.keys(doc[path][verb].responses[R].content) : [];
+                m = doc[path][verb].responses[R].body ? Object.keys(doc[path][verb].responses[R].body) : [];
                 ret.push({code: R, description: d, media: m});
             }
         }
