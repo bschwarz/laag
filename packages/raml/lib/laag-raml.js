@@ -647,12 +647,14 @@ class Raml  {
     */
     setOperationId(path, verb, value) {
 
+        let ret = '';
         let v = verb.toLowerCase();
         if (this.operationExists(path, verb)) {
             this.doc[path][v].displayName = value;
+            ret = this.doc[path][v].displayName;
         }
         
-        return this.doc[path][v].displayName || '';
+        return ret;
     }
     /**
     * alias for getOperationId
