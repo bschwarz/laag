@@ -94,10 +94,10 @@ test('Append a Protocol', () => {
     docNew.appendProtocol('https');
     expect(docNew.protocols.length).toBe(2);
 });
-// test('Set/Get Terms Of Service of the RAML Definition', () => {
-//     docNew.termsOfService = 'this is the terms';
-//     expect(docNew.termsOfService).toBe('this is the terms');
-// });
+test('Set/Get Terms Of Service of the RAML Definition', () => {
+    docNew.termsOfService = 'this is the terms';
+    expect(docNew.termsOfService).toBe('this is the terms');
+});
 
 // test('Set/Get Contact Object of the RAML Definition', () => {
 //     let x = {};
