@@ -161,12 +161,12 @@ test('Get All Unique HTTP Methods Across All Operations', () => {
 test('Get All Status Codes for an Operation', () => {
     expect(doc.getStatusCodes('/organisation', 'get').length).toBe(1);
 });
-test('Get Operation Id for an Operation', () => {
-    expect(doc.getOperationId('/organisation', 'get')).toBe('getOrganisation');
+test('Get Display Name for an Operation', () => {
+    expect(doc.getDisplayName('/organisation', 'get')).toBe('getOrganisation');
 });
-test('Set Operation Id for an Operation', () => {
-    doc.setOperationId('/organisation', 'get', 'someId');
-    expect(doc.getOperationId('/organisation', 'get')).toBe('someId');
+test('Set Display Name for an Operation', () => {
+    doc.setDisplayName('/organisation', 'get', 'someId');
+    expect(doc.getDisplayName('/organisation', 'get')).toBe('someId');
 });
 // test('Check if an Operation exists (true)', () => {
 //     expect(doc.operationExists('/organisation', 'get')).toBe(true);
