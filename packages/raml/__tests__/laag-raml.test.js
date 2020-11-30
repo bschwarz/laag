@@ -158,9 +158,9 @@ test('Set/Get Servers Object of the RAML Definition', () => {
 test('Get All Unique HTTP Methods Across All Operations', () => {
     expect(doc.getAllHttpMethods().length).toBe(2);
 });
-// test('Get All Status Codes for an Operation', () => {
-//     expect(doc.getStatusCodes('/organisation', 'get').length).toBe(1);
-// });
+test('Get All Status Codes for an Operation', () => {
+    expect(doc.getStatusCodes('/organisation', 'get').length).toBe(1);
+});
 // test('Get Operation Id for an Operation', () => {
 //     expect(doc.getOperationId('/organisation', 'get')).toBe('getOrganisation');
 // });
