@@ -22,6 +22,7 @@ class Raml  {
         this.pathList = this.getPathNames();
         this._servers = [];
         this._termsOfService = '';
+        this._contact = {};
     }
     /**
     * Retrieve the document version
@@ -279,7 +280,7 @@ class Raml  {
     * @returns (Object) - the object with the contact information
     */
     get contact() {
-        return this.dictKeysExists(this.doc, 'info', 'contact') ? this.doc.info.contact : {};
+        return this._contact || {};
     }
     /**
     * Sets the contact object
@@ -298,7 +299,7 @@ class Raml  {
                 newValue[I] = value[I];
             }
         }
-        this.doc.contact = newValue;
+        this._contact = newValue;
     }
     /**
     * Retrieves the license object
