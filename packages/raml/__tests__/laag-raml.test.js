@@ -155,9 +155,9 @@ test('Set/Get Servers Object of the RAML Definition', () => {
 //     console.log(doc.getPath('/organisation'));
 //     expect(Object.keys(doc.getPath('/organisation')).length).toBe(2);
 // });
-// test('Get All Unique HTTP Methods Across All Operations', () => {
-//     expect(doc.getAllHttpMethods().length).toBe(3);
-// });
+test('Get All Unique HTTP Methods Across All Operations', () => {
+    expect(doc.getAllHttpMethods().length).toBe(2);
+});
 // test('Get All Status Codes for an Operation', () => {
 //     expect(doc.getStatusCodes('/organisation', 'get').length).toBe(1);
 // });
