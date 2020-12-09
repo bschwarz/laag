@@ -184,10 +184,10 @@ test('Get Operation RequestBody Media Type', () => {
     console.log(doc.getOperationRequestMedia('/organisation', 'post'));
     expect(Object.keys(doc.getOperationRequestMedia('/organisation', 'post')).length).toBe(1);
 });
-// test('Get Operation Description', () => {
-//     console.log(doc.getOperationDescription('/organisation', 'post'));
-//     expect(Object.keys(doc.getOperationDescription('/organisation', 'post')).length).toBeGreaterThanOrEqual(5);
-// });
+test('Get Operation Description', () => {
+    console.log(doc.getOperationDescription('/organisation', 'get'));
+    expect(Object.keys(doc.getOperationDescription('/organisation', 'get')).length).toBeGreaterThanOrEqual(5);
+});
 // test('Set/Get components', () => {
 //     let x = {schemas: {}, responses: {}, parameters: {}, examples: {}, requestBodies: {}, headers: {}};
 //     docNew.components = x;
