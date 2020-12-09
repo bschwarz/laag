@@ -168,9 +168,9 @@ test('Set Display Name for an Operation', () => {
     doc.setDisplayName('/organisation', 'get', 'someId');
     expect(doc.getDisplayName('/organisation', 'get')).toBe('someId');
 });
-// test('Check if an Operation exists (true)', () => {
-//     expect(doc.operationExists('/organisation', 'get')).toBe(true);
-// });
+test('Check if an Operation exists (true)', () => {
+    expect(doc.operationExists('/organisation', 'get')).toBe(true);
+});
 // test('Check if an Operation exists (false)', () => {
 //     expect(doc.operationExists('/organisationX', 'get')).toBe(false);
 // });
