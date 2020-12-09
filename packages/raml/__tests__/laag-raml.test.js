@@ -130,26 +130,26 @@ test('Set/Get Servers Object of the RAML Definition', () => {
     console.log(docNew.getDefinition('prettyjson'));
     expect(docNew.servers.length).toBe(1);
 });
-// test('Set paths level extension', () => {
-//     let x = {};
-//     let y = {};
-//     x['x-ext1'] = 'ext1';
-//     docNew.pathsExtensions = x;
-//     y['x-ext-paths2'] = 'ext2';
-//     y['x-ext-path3'] = 'ext3';
-//     docNew.pathsExtensions = y;
-//     console.log('PATHS LEVEL');
-//     console.log(docNew.getDefinition('prettyjson'));
-//     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
-// });
-// test('Append paths level extension', () => {
-//     let y = {};
-//     y['x-ext2'] = 'ext2';
-//     docNew.pathsExtensions = y;
-//     docNew.appendPathsExtension('x-another-paths', 'value for other paths');
-//     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
-//     console.log(docNew.getPathNames());
-// });
+test('Set paths level extension', () => {
+    let x = {};
+    let y = {};
+    x['x-ext1'] = 'ext1';
+    docNew.pathsExtensions = x;
+    y['x-ext-paths2'] = 'ext2';
+    y['x-ext-path3'] = 'ext3';
+    docNew.pathsExtensions = y;
+    console.log('PATHS LEVEL');
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
+});
+test('Append paths level extension', () => {
+    let y = {};
+    y['x-ext2'] = 'ext2';
+    docNew.pathsExtensions = y;
+    docNew.appendPathsExtension('x-another-paths', 'value for other paths');
+    expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
+    console.log(docNew.getPathNames());
+});
 // test('Get a Specific Path', () => {
 //     console.log('GET PATH');
 //     console.log(doc.getPath('/organisation'));
