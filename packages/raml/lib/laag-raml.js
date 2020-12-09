@@ -29,6 +29,7 @@ class Raml  {
         this._termsOfService = '';
         this._contact = {};
         this._license = {};
+        this._pathAnnotations = {};
     }
     /**
     * Retrieve the document version
@@ -141,7 +142,6 @@ class Raml  {
         for (const [key, value] of Object.entries(values)) {
             let newKey = `(${key.replace("(", "",).replace(")","")})`;
             obj[newKey] = value;
-
         }
         if (level === 'root') {
             this.doc = obj;
@@ -449,12 +449,16 @@ class Raml  {
         }
         this.doc[path] = value;
     }
+    //
+    // pathsExtension doesn't really make sense, since there is not a paths
+    // object in raml
+    //
    /**
     * Retrieves the extensions at paths object of the doc
     * @returns (Object) - returns in the form of {key1: value1, key2: value2 ... }
     */
     get pathsExtensions() {
-        return this.getExtensions('paths');
+        return this._pathAnnotations;
     }
     /**
     * Sets (replaces) the extensions at the paths object of the doc
@@ -462,7 +466,12 @@ class Raml  {
     */
     set pathsExtensions(values) {
 
-        this.setExtensions(values, 'paths');
+        let obj = {};
+        for (const [key, value] of Object.entries(values)) {
+            let newKey = `(${key.replace("(", "",).replace(")","")})`;
+            obj[newKey] = value;
+        }
+        this._pathAnnotations = values;
     }
     /**
     * Appends am extensions at the root of the doc
@@ -471,12 +480,11 @@ class Raml  {
     */
     appendPathsExtension(name, value) {
         //
-        // extensions must start with x-. We are silent if it fails
+        // extensions are in (). We are silent if it fails
         // here.
         //
-        if (name.startsWith('x-')) {
-            this.doc.paths[name] = value;
-        }
+        let newName = `(${name.replace("(", "",).replace(")","")})`;
+        this._pathAnnotations[newName] = value;
     }
     /**
     * Gets all the paths, sorted by alpha and length
