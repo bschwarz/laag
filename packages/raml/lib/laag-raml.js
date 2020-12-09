@@ -692,7 +692,7 @@ class Raml  {
     * @param {string} path - the path segment of the resource
     */
     pathExists(path) {
-        return this.doc.paths[path] ? true : false;
+        return this.doc[path] ? true : false;
     }
     /**
     * gets the media types for an operation request
