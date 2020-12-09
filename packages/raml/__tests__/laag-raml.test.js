@@ -177,9 +177,9 @@ test('Check if an Operation exists (false)', () => {
 test('Check if an Path exists (true)', () => {
     expect(doc.pathExists('/organisation')).toBe(true);
 });
-// test('Check if an Path exists (false)', () => {
-//     expect(doc.pathExists('/organisationX')).toBe(false);
-// });
+test('Check if an Path exists (false)', () => {
+    expect(doc.pathExists('/organisationX')).toBe(false);
+});
 // test('Get Operation RequestBody Media Type', () => {
 //     console.log(doc.getOperationRequestMedia('/organisation', 'post'));
 //     expect(Object.keys(doc.getOperationRequestMedia('/organisation', 'post')).length).toBe(1);
