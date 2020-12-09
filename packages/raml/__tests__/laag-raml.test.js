@@ -180,10 +180,10 @@ test('Check if an Path exists (true)', () => {
 test('Check if an Path exists (false)', () => {
     expect(doc.pathExists('/organisationX')).toBe(false);
 });
-// test('Get Operation RequestBody Media Type', () => {
-//     console.log(doc.getOperationRequestMedia('/organisation', 'post'));
-//     expect(Object.keys(doc.getOperationRequestMedia('/organisation', 'post')).length).toBe(1);
-// });
+test('Get Operation RequestBody Media Type', () => {
+    console.log(doc.getOperationRequestMedia('/organisation', 'post'));
+    expect(Object.keys(doc.getOperationRequestMedia('/organisation', 'post')).length).toBe(1);
+});
 // test('Get Operation Description', () => {
 //     console.log(doc.getOperationDescription('/organisation', 'post'));
 //     expect(Object.keys(doc.getOperationDescription('/organisation', 'post')).length).toBeGreaterThanOrEqual(5);
