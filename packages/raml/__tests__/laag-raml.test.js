@@ -171,9 +171,9 @@ test('Set Display Name for an Operation', () => {
 test('Check if an Operation exists (true)', () => {
     expect(doc.operationExists('/organisation', 'get')).toBe(true);
 });
-// test('Check if an Operation exists (false)', () => {
-//     expect(doc.operationExists('/organisationX', 'get')).toBe(false);
-// });
+test('Check if an Operation exists (false)', () => {
+    expect(doc.operationExists('/organisationX', 'get')).toBe(false);
+});
 // test('Check if an Path exists (true)', () => {
 //     expect(doc.pathExists('/organisation')).toBe(true);
 // });
