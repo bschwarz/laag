@@ -716,7 +716,7 @@ class Raml  {
     */
     getOperationDescription(path, verb) {
         if (! this.operationExists(path, verb)) return '';
-        return this.doc.paths[path][verb]['description'] || '';
+        return this.doc[path][verb]['description'] || '';
     }
     /**
     * gets base URL for the API. Will get first one if there are multiple servers specified
