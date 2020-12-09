@@ -703,8 +703,8 @@ class Raml  {
         let ret = [];
         if (! this.operationExists(path, verb)) return [];
         
-        if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody', 'content')) {
-            ret = Object.keys(this.doc.paths[path][verb]['requestBody']['content']);
+        if (this.dictKeysExists(this.doc[path][verb],'body')) {
+            ret = Object.keys(this.doc[path][verb]['body']);
         }
 
         return ret;
