@@ -203,13 +203,13 @@ test('Get Operation Description', () => {
 //     console.log(docNew.getDefinition('prettyjson'));
 //     expect(Object.keys(docNew.security).length).toBe(1);
 // });
-// test('Set/Get tags', () => {
-//     let x = {name: 'xxx', description: 'this is a tag'};
-//     docNew.tags = x;
-//     console.log('tags');
-//     console.log(docNew.getDefinition('prettyjson'));
-//     expect(Object.keys(docNew.tags).length).toBe(2);
-// });
+test('Set/Get tags', () => {
+    let x = {name: 'xxx', description: 'this is a tag'};
+    docNew.tags = x;
+    console.log('tags');
+    console.log(docNew.getDefinition('prettyjson'));
+    expect(Object.keys(docNew.tags).length).toBe(2);
+});
 // test('Set/Get externalDocs', () => {
 //     let x = {url: 'xxx', description: 'this is a externalDocs'};
 //     docNew.externalDocs = x;
