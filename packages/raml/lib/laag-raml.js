@@ -30,6 +30,7 @@ class Raml  {
         this._contact = {};
         this._license = {};
         this._pathAnnotations = {};
+        this._tags = {};
     }
     /**
     * Retrieve the document version
@@ -542,28 +543,14 @@ class Raml  {
     * @returns (Object) - returns object containing all of the tags information
     */
     get tags() {
-        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : {};
+        return this._tags;
     }
     /**
     * sets the tags object in it's native form
     * @param (Object) - the tags object
     */
     set tags(value) {
-        //
-        // We want to make sure what is passed in is valid params,
-        // so we check and only save those that are valid
-        // Note: 'name' is required if license object exists, so 
-        //       prepopulate in case it wasn't passed in
-        //
-        let newValue = {name: ''};
-        for (let I of Object.keys(value)) {
-            if (['name', 'description', 'externalDocs'].includes(I)) {
-                newValue[I] = value[I];
-            } else if (I.startsWith('x-')) {
-                newValue[I] = value[I];
-            }
-        }
-        this.doc.tags = newValue;
+        this._tags = value;
     }
     /**
     * Retrieves the externalDocs object
