@@ -701,14 +701,17 @@ class Openapi  {
     }
 }
 
+/** General Class that others can subclass */
 class Component {
+    static members = [];
     constructor(name) {
-        
+        Header.members.push(this);
     }
 }
 
 /** Class representing a header component */
 class Header extends Component {
+    
     constructor(name) {
         super(name);
         this.name = name;
