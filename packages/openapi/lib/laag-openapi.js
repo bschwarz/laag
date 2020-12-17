@@ -4,7 +4,7 @@
 // This file contains both the Swagger/OpenAPI interface
 //
 
-/** Class representing plantuml markdowns. */
+/** Class representing an Openapi document */
 class Openapi  {
     /**
     * Ingests the API specification and passes
@@ -701,4 +701,40 @@ class Openapi  {
     }
 }
 
-module.exports = Openapi;
+class Component {
+    constructor(name) {
+        
+    }
+}
+
+/** Class representing a header component */
+class Header extends Component {
+    constructor(name) {
+        super(name);
+        this.name = name;
+        this.header = {}
+    }
+    /**
+    * gets the description for a component header
+    * @param {string} name - name of the component header
+    */
+    get description() {
+        return this.header.description || '';
+    }
+    /**
+    * sets the description for a component header
+    * @param {string} name - name of the component header
+    */
+    set description(description) {
+        return this.header.description = description;
+    }
+    getHeader() {
+        let obj = {};
+        obj[this.name] = this.header;
+        return obj;
+    }
+}
+module.exports = {
+    Openapi,
+    Header
+};
