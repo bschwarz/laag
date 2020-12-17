@@ -711,7 +711,13 @@ class Component {
 
 /** Class representing a header component */
 class Header extends Component {
-    
+    static getHeaders() {
+        let obj = {};
+        for (let H of Header.members) {
+            obj[H.name] = H.header;
+        }
+        return obj;
+    }
     constructor(name) {
         super(name);
         this.name = name;
