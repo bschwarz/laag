@@ -31,3 +31,15 @@ test('Get/Set header description', () => {
     }
     expect(ret.length).toBe(3);
 });
+//
+// Test get all header objects
+//
+test('print out header objects', () => {
+    let head1 = new Header('MyCustomHeader1');
+    let head2 = new Header('MyCustomHeader2');
+    head1.description = "description1"
+    head2.description = "description2"
+    let keys = Object.keys(Header.getHeaders());
+    console.log(Header.getHeaders());
+    expect(keys.length).toBe(3);
+});
