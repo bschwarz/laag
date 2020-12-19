@@ -45,6 +45,34 @@ test('Get/Set header required type error', () => {
     Header.deleteHeader(head1);
 });
 //
+// Test get/set header deprecated
+//
+test('Get/Set header deprecated', () => {
+    let head1 = new Header('MyCustomHeader1');
+    head1.description = "description1"
+    head1.deprecated = true
+    console.log(head1.getHeader());
+    expect(head1.deprecated).toBe(true);
+    Header.deleteHeader(head1);
+});
+//
+// Test get/set header deprecated type error
+//
+test('Get/Set header deprecated type error', () => {
+    function t(header) {
+        header.deprecated = "true"
+    }
+    let head1 = new Header('MyCustomHeader1');
+    try {
+        head1.deprecated = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    let idx = Header.members.indexOf(head1);
+    
+    Header.deleteHeader(head1);
+});
+//
 // Test get all description
 //
 test('Get/Set header description', () => {
@@ -57,6 +85,15 @@ test('Get/Set header description', () => {
         ret.push(x.description);
     }
     expect(ret.length).toBe(4);
+});
+//
+// Test delete Header instance
+//
+test('Delete Header instance', () => {
+    let pre = Header.members.length;
+    let head1 = new Header('MyCustomHeader1');
+    Header.deleteHeader(head1);
+    expect(Header.members.length).toBe(pre);
 });
 //
 // Test get all header objects
