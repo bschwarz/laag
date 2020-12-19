@@ -18,6 +18,33 @@ test('Get/Set header description', () => {
     expect(head1.description).toBe('This is my description');
 });
 //
+// Test get/set header required
+//
+test('Get/Set header required', () => {
+    let head1 = new Header('MyCustomHeader1');
+    head1.description = "description1"
+    head1.required = true
+    console.log(head1.getHeader());
+    expect(head1.required).toBe(true);
+});
+//
+// Test get/set header required type error
+//
+test('Get/Set header required type error', () => {
+    function t(header) {
+        header.required = "true"
+    }
+    let head1 = new Header('MyCustomHeader1');
+    try {
+        head1.required = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    let idx = Header.members.indexOf(head1);
+    
+    Header.deleteHeader(head1);
+});
+//
 // Test get all description
 //
 test('Get/Set header description', () => {
@@ -29,7 +56,7 @@ test('Get/Set header description', () => {
     for (let x of Header.members) {
         ret.push(x.description);
     }
-    expect(ret.length).toBe(3);
+    expect(ret.length).toBe(4);
 });
 //
 // Test get all header objects
