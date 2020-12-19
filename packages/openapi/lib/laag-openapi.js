@@ -714,9 +714,16 @@ class Header extends Component {
     static getHeaders() {
         let obj = {};
         for (let H of Header.members) {
-            obj[H.name] = H.header;
+            obj[H.name] = H.getHeader();
         }
         return obj;
+    }
+    static deleteHeader(header) {
+        let idx = Header.members.indexOf(header);
+        if (idx > -1) {
+            Header.members.splice(idx, 1);
+            header = null;
+        }
     }
     constructor(name) {
         super(name);
@@ -732,11 +739,30 @@ class Header extends Component {
     }
     /**
     * sets the description for a component header
-    * @param {string} name - name of the component header
+    * @param {string} name - description of the header
     */
     set description(description) {
         return this.header.description = description;
     }
+    /**
+    * gets the description for a component header
+    */
+    get required() {
+        return this.header.required || '';
+    }
+    /**
+    * sets the description for a component header
+    * @param {string} flag - boolean if required or not
+    */
+    set required(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this.header.required = flag;
+    }
+    /**
+    * gets the header object
+    */
     getHeader() {
         let obj = {};
         obj[this.name] = this.header;
