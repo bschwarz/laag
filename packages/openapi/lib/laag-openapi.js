@@ -761,6 +761,22 @@ class Header extends Component {
         return this.header.required = flag;
     }
     /**
+    * gets the deprecated header value
+    */
+    get deprecated() {
+        return this.header.deprecated || '';
+    }
+    /**
+    * sets the deprecated flag for a component header
+    * @param {string} flag - boolean if deprecated or not
+    */
+    set deprecated(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this.header.deprecated = flag;
+    }
+    /**
     * gets the header object
     */
     getHeader() {
