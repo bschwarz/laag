@@ -107,3 +107,22 @@ test('print out header objects', () => {
     console.log(Header.getHeaders());
     expect(keys.length).toBe(3);
 });
+//
+// Test Header extensions
+//
+test('Set Header extension', () => {
+    let x = {};
+    x['x-ext1'] = 'ext1';
+    x['x-ext2'] = 'ext2';
+    let head1 = new Header('MyCustomHeader1');
+    head1.extensions = x;
+    console.log('ROOT LEVEL');
+    console.log(head1.getHeader());
+    expect(Object.keys(head1.extensions).length).toBe(2);
+});
+test('Append root level extension', () => {
+    let head1 = new Header('MyCustomHeader1');
+    head1.appendRootExtension('x-another-root', 'value for other root');
+    console.log(head1.getHeader());
+    expect(Object.keys(head1.extensions).length).toBe(1);
+});
