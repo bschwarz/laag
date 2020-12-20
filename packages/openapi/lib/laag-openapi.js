@@ -706,7 +706,7 @@ class Openapi extends Core {
     }
 }
 
-/** General Class that others can subclass */
+/** General Class that components can subclass */
 class Component extends Core {
     static members = [];
     constructor(name) {
@@ -734,27 +734,27 @@ class Header extends Component {
     constructor(name) {
         super(name);
         this.name = name;
-        this.header = {}
+        this.doc = {}
     }
     /**
     * gets the description for a component header
     * @param {string} name - name of the component header
     */
     get description() {
-        return this.header.description || '';
+        return this.doc.description || '';
     }
     /**
     * sets the description for a component header
     * @param {string} name - description of the header
     */
     set description(description) {
-        return this.header.description = description;
+        return this.doc.description = description;
     }
     /**
     * gets the description for a component header
     */
     get required() {
-        return this.header.required || '';
+        return this.doc.required || '';
     }
     /**
     * sets the description for a component header
@@ -764,13 +764,13 @@ class Header extends Component {
         if (typeof flag != "boolean"){
             throw new TypeError("value must be a boolean");
         }
-        return this.header.required = flag;
+        return this.doc.required = flag;
     }
     /**
     * gets the deprecated header value
     */
     get deprecated() {
-        return this.header.deprecated || '';
+        return this.doc.deprecated || '';
     }
     /**
     * sets the deprecated flag for a component header
@@ -780,14 +780,42 @@ class Header extends Component {
         if (typeof flag != "boolean"){
             throw new TypeError("value must be a boolean");
         }
-        return this.header.deprecated = flag;
+        return this.doc.deprecated = flag;
+    }
+    /**
+    * Retrieves the extensions for the Header
+    * @returns (Object) - returns in the form of {key1: value1, key2: value2 ... }
+    */
+    get extensions() {
+        return this.getExtensions();
+    }
+    /**
+    * Sets (replaces) the extensions for a Header
+    * @param (Object) values - object of key/value pairs of extensions to add {key1: value1, key2: value2 ... }
+    */
+    set extensions(values) {
+        this.setExtensions(values);
+    }
+    /**
+    * Appends am extensions Header
+    * @param (string) name - name of the extension
+    * @param (string) value - value of the extension
+    */
+    appendRootExtension(name, value) {
+        //
+        // extensions must start with x-. We are silent if it fails
+        // here.
+        //
+        if (name.startsWith('x-')) {
+            this.doc[name] = value;
+        }
     }
     /**
     * gets the header object
     */
     getHeader() {
         let obj = {};
-        obj[this.name] = this.header;
+        obj[this.name] = this.doc;
         return obj;
     }
 }
