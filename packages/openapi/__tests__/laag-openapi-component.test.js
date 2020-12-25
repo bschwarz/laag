@@ -32,16 +32,13 @@ test('Get/Set header required', () => {
 // Test get/set header required type error
 //
 test('Get/Set header required type error', () => {
-    function t(header) {
-        header.required = "true"
-    }
+
     let head1 = new Header('MyCustomHeader1');
     try {
         head1.required = "true"
     } catch(e) {
         expect(e instanceof TypeError).toBe(true);
     }
-    let idx = Header.members.indexOf(head1);
     
     Header.deleteHeader(head1);
 });
@@ -60,16 +57,12 @@ test('Get/Set header deprecated', () => {
 // Test get/set header deprecated type error
 //
 test('Get/Set header deprecated type error', () => {
-    function t(header) {
-        header.deprecated = "true"
-    }
     let head1 = new Header('MyCustomHeader1');
     try {
         head1.deprecated = "true"
     } catch(e) {
         expect(e instanceof TypeError).toBe(true);
     }
-    let idx = Header.members.indexOf(head1);
     
     Header.deleteHeader(head1);
 });
@@ -158,4 +151,84 @@ test('Get/Set parameter in', () => {
     param3.in = "path"
     console.log(param3.getParameter());
     expect(param3.in).toBe('path');
+});
+//
+// Test get/set parameter required type error
+//
+test('Get/Set parameter required type error', () => {
+    let param1 = new Header('MyCustomParam1');
+    try {
+        param1.required = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Header.deleteHeader(param1);
+});
+//
+// Test get/set parameter deprecated
+//
+test('Get/Set parameter deprecated', () => {
+    let param1 = new Parameter('MyCustomParam1');
+    param1.description = "description1"
+    param1.deprecated = true
+    console.log(param1.getParameter());
+    expect(param1.deprecated).toBe(true);
+    Parameter.deleteParameter(param1);
+});
+//
+// Test get/set header deprecated type error
+//
+test('Get/Set parameter deprecated type error', () => {
+    let param1 = new Parameter('MyCustomParameter1');
+    try {
+        param1.deprecated = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Parameter.deleteParameter(param1);
+});
+//
+// Test get/set parameter allowEmptyValue
+//
+test('Get/Set parameter allowEmptyValue', () => {
+    let param5 = new Parameter('MyCustomParam5');
+    param5.description = "description1"
+    param5.allowEmptyValue = true
+    console.log(param5.getParameter());
+    expect(param5.allowEmptyValue).toBe(true);
+    Parameter.deleteParameter(param5);
+});
+//
+// Test get/set parameter allowEmptyValue type error
+//
+test('Get/Set parameter allowEmptyValue type error', () => {
+    let param1 = new Parameter('MyCustomParameter1');
+    try {
+        param1.allowEmptyValue = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Parameter.deleteParameter(param1);
+});
+//
+// Test parameter extensions
+//
+test('Set parameter extension', () => {
+    let x = {};
+    x['x-ext1'] = 'ext1';
+    x['x-ext2'] = 'ext2';
+    let param1 = new Parameter('MyCustomParam1');
+    param1.extensions = x;
+    console.log('ROOT LEVEL');
+    console.log(param1.getParameter());
+    expect(Object.keys(param1.extensions).length).toBe(2);
+});
+test('Append root level extension for parameter', () => {
+    let param1 = new Parameter('MyCustomParam1');
+    param1.appendRootExtension('x-another-root', 'value for other root');
+    console.log(param1.getParameter());
+    expect(Object.keys(param1.extensions).length).toBe(1);
 });
