@@ -819,7 +819,82 @@ class Header extends Component {
         return obj;
     }
 }
+
+/** Class representing a header component */
+//
+// name and in are required parameters for this object
+//
+class Parameter extends Component {
+    static getParameters() {
+        let obj = {};
+        for (let H of Parameter.members) {
+            obj[H.name] = H.getParameter();
+        }
+        return obj;
+    }
+    static deleteParameter(param) {
+        let idx = Parameter.members.indexOf(param);
+        if (idx > -1) {
+            Parameter.members.splice(idx, 1);
+            header = null;
+        }
+    }
+    constructor(name) {
+        super(name);
+        this.objname = name;
+        this.doc = {}
+    }
+    /**
+    * gets the name of the parameter
+    */
+    get name() {
+        return this.doc.name || '';
+    }
+    /**
+    * sets the name for a component header
+    * @param {string} name - name of the header
+    */
+    set name(name) {
+        return this.doc.name = name;
+    }
+    /**
+    * gets the in of the parameter
+    */
+    get in() {
+        return this.doc.in || '';
+    }
+    /**
+    * sets the name for a component header
+    * @param {string} name - name of the header
+    */
+    set in(location) {
+        return this.doc.in = location;
+    }
+    /**
+    * gets the description for a component header
+    * @param {string} name - name of the component header
+    */
+    get description() {
+        return this.doc.description || '';
+    }
+    /**
+    * sets the description for a component header
+    * @param {string} name - description of the header
+    */
+    set description(description) {
+        return this.doc.description = description;
+    }
+    /**
+    * gets the parameter object
+    */
+    getParameter() {
+        let obj = {};
+        obj[this.objname] = this.doc;
+        return obj;
+    }
+}
 module.exports = {
     Openapi,
-    Header
+    Header,
+    Parameter
 };
