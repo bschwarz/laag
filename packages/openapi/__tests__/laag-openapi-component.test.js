@@ -1,5 +1,6 @@
 const Openapi = require('../lib/laag-openapi.js').Openapi;
 const Header = require('../lib/laag-openapi.js').Header;
+const Parameter = require('../lib/laag-openapi.js').Parameter;
 
 let doc = null;
 let docNew = null;
@@ -125,4 +126,36 @@ test('Append root level extension', () => {
     head1.appendRootExtension('x-another-root', 'value for other root');
     console.log(head1.getHeader());
     expect(Object.keys(head1.extensions).length).toBe(1);
+});
+
+//
+// Parameters
+//
+
+//
+// Test setting/getting name of parameter
+//
+test('Get/Set parameter name', () => {
+    let param1 = new Parameter('MyParam1');
+    param1.name = "MyParam1"
+    console.log(param1.getParameter());
+    expect(param1.name).toBe('MyParam1');
+});
+//
+// Test setting/getting description of parameter
+//
+test('Get/Set parameter description', () => {
+    let param2 = new Parameter('MyParam2');
+    param2.description = "This is my description"
+    console.log(param2.getParameter());
+    expect(param2.description).toBe('This is my description');
+});
+//
+// Test setting/getting in of parameter
+//
+test('Get/Set parameter in', () => {
+    let param3 = new Parameter('MyParam3');
+    param3.in = "path"
+    console.log(param3.getParameter());
+    expect(param3.in).toBe('path');
 });
