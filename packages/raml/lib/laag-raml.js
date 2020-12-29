@@ -726,5 +726,139 @@ class Raml extends Core {
         return this.doc.servers ? this.doc.servers[0] : {};
     }
 }
+/** Class representing a header component */
+class Header extends Core {
+    static members = [];
+    static getHeaders() {
+        let obj = {};
+        for (let H of Header.members) {
+            obj[H.name] = H.getHeader();
+        }
+        return obj;
+    }
+    static deleteHeader(header) {
+        let idx = Header.members.indexOf(header);
+        if (idx > -1) {
+            Header.members.splice(idx, 1);
+            header = null;
+        }
+    }
+    constructor(name) {
+        super();
+        this.name = name;
+        this.doc = {};
+        this._required = false;
+        Header.members.push(this);
+    }
+    /**
+    * gets the description for a component header
+    * @param {string} name - name of the component header
+    */
+    get description() {
+        return this.doc.description || '';
+    }
+    /**
+    * sets the description for a component header
+    * @param {string} name - description of the header
+    */
+    set description(description) {
+        return this.doc.description = description;
+    }
+    /**
+    * gets the description for a component header
+    */
+    get required() {
+        return this._required || false;
+    }
+    /**
+    * sets the description for a component header
+    * @param {string} flag - boolean if required or not
+    */
+    set required(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this._required = flag;
+    }
+    /**
+    * gets the deprecated header value
+    */
+    get deprecated() {
+        return this._deprecated || false;
+    }
+    /**
+    * sets the deprecated flag for a component header
+    * @param {string} flag - boolean if deprecated or not
+    */
+    set deprecated(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this._deprecated = flag;
+    }
+    /**
+    * Retrieves the extensions for the Header
+    * @returns (Object) - returns in the form of {key1: value1, key2: value2 ... }
+    */
+    get extensions() {
+        return this.getExtensions();
+    }
+    /**
+    * Sets (replaces) the extensions for a Header
+    * @param (Object) values - object of key/value pairs of extensions to add {key1: value1, key2: value2 ... }
+    */
+    set extensions(values) {
+        this.setExtensions(values);
+    }
+    /**
+    * Retrieves datatype of the header
+    * @returns (string) - returns in the form of {key1: value1, key2: value2 ... }
+    */
+    get type() {
+        return this.doc.type || '';
+    }
+    /**
+    * Sets (replaces) the datatype for a Header
+    * @param (string) datatype - datatype of header
+    */
+    set type(datatype) {
+        this.doc.type = datatype;
+    }
+    /**
+    * Retrieves example for the header
+    * @returns (string) - returns the example for the header
+    */
+    get example() {
+        return this.doc.example || '';
+    }
+    /**
+    * Sets (replaces) the example for a Header
+    * @param (string) example - example of header
+    */
+    set example(example) {
+        this.doc.example = example;
+    }
+    /**
+    * Appends am extensions Header
+    * @param (string) name - name of the extension
+    * @param (string) value - value of the extension
+    */
+    appendRootExtension(name, value) {
 
-module.exports = Raml;
+        let newName = `(${name.replace("(", "",).replace(")","")})`;
+        this.doc[newName] = value;
+    }
+    /**
+    * gets the header object
+    */
+    getHeader() {
+        let obj = {};
+        obj[this.name] = this.doc;
+        return obj;
+    }
+}
+
+module.exports = {
+    Raml,
+    Header
+};
