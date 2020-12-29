@@ -727,6 +727,8 @@ class Header extends Core {
         super();
         this.name = name;
         this.doc = {};
+        this._type = '';
+        this._example = '';
         Header.members.push(this);
     }
     /**
@@ -788,6 +790,34 @@ class Header extends Core {
     */
     set extensions(values) {
         this.setExtensions(values);
+    }
+    /**
+    * Retrieves datatype of the header
+    * @returns (string) - returns in the form of {key1: value1, key2: value2 ... }
+    */
+    get type() {
+        return this._type || '';
+    }
+    /**
+    * Sets (replaces) the datatype for a Header
+    * @param (string) datatype - datatype of header
+    */
+    set type(datatype) {
+        this._type = datatype;
+    }
+    /**
+    * Retrieves example for the header
+    * @returns (string) - returns the example for the header
+    */
+    get example() {
+        return this._example || '';
+    }
+    /**
+    * Sets (replaces) the example for a Header
+    * @param (string) example - example of header
+    */
+    set example(example) {
+        this._example = example;
     }
     /**
     * Appends am extensions Header
