@@ -3,66 +3,8 @@
 //
 // This file contains both the RAML interface
 //
-
-class Raml  {
-    /**
-    * Ingests the API specification and passes
-    * @param {string} doc - The API specification file (e.g. RAML) in JSON format
-    */
-    constructor(doc = null) {
-        //
-        // pre load in the paths since many methods rely on this
-        //
-        this._docVersion = '1.0';
-        if (doc) {
-            this.doc = JSON.parse(doc);
-        } else {
-            this.doc = {title: ''};
-        }
-        this.pathList = this.getPathNames();
-        this._paths = {};
-        //
-        // These fields are present in OpenAPI, but not RAML, but we can get/set them
-        // internally, but they won't show up in the definition output
-        //
-        this._servers = [];
-        this._termsOfService = '';
-        this._contact = {};
-        this._license = {};
-        this._pathAnnotations = {};
-        this._tags = {};
-    }
-    /**
-    * Retrieve the document version
-    * @returns (String) - returns document version
-    */
-    get docVersion() {
-        return this._docVersion;
-    }
-    /**
-    * Sets the document version
-    * @param (String) value - value of the doc version
-    */
-    set docVersion(value) {
-        this._docVersion = value;
-    }
-    /**
-    * Retrieve the defintion as a js object or in JSON
-    * @param (String) format - type of format to return
-    * @returns (Object, String) - returns representation of the defintion
-    */
-    getDefinition(format = 'js') {
-        let doc;
-        // this.doc.openapi = this.docVersion; TODO: check if there is a version in the document
-        if (format === 'js') {
-            doc = this.doc;
-        } else if (format === 'json') {
-            doc = JSON.stringify(this.doc);
-        } else if (format === 'prettyjson') {
-            doc = JSON.stringify(this.doc, null, 2);
-        }
-
-        return doc;
+class Core {
+    constructor() {
     }
     /**
     * Helper method to see if keys exist in an object
@@ -149,6 +91,69 @@ class Raml  {
         } else {
             this.doc[level] = obj;
         }
+    }
+}
+
+class Raml extends Core {
+    /**
+    * Ingests the API specification and passes
+    * @param {string} doc - The API specification file (e.g. RAML) in JSON format
+    */
+    constructor(doc = null) {
+        super();
+        //
+        // pre load in the paths since many methods rely on this
+        //
+        this._docVersion = '1.0';
+        if (doc) {
+            this.doc = JSON.parse(doc);
+        } else {
+            this.doc = {title: ''};
+        }
+        this.pathList = this.getPathNames();
+        this._paths = {};
+        //
+        // These fields are present in OpenAPI, but not RAML, but we can get/set them
+        // internally, but they won't show up in the definition output
+        //
+        this._servers = [];
+        this._termsOfService = '';
+        this._contact = {};
+        this._license = {};
+        this._pathAnnotations = {};
+        this._tags = {};
+    }
+    /**
+    * Retrieve the document version
+    * @returns (String) - returns document version
+    */
+    get docVersion() {
+        return this._docVersion;
+    }
+    /**
+    * Sets the document version
+    * @param (String) value - value of the doc version
+    */
+    set docVersion(value) {
+        this._docVersion = value;
+    }
+    /**
+    * Retrieve the defintion as a js object or in JSON
+    * @param (String) format - type of format to return
+    * @returns (Object, String) - returns representation of the defintion
+    */
+    getDefinition(format = 'js') {
+        let doc;
+        // this.doc.openapi = this.docVersion; TODO: check if there is a version in the document
+        if (format === 'js') {
+            doc = this.doc;
+        } else if (format === 'json') {
+            doc = JSON.stringify(this.doc);
+        } else if (format === 'prettyjson') {
+            doc = JSON.stringify(this.doc, null, 2);
+        }
+
+        return doc;
     }
     /**
     * Retrieves the extensions at the root of the doc, and
