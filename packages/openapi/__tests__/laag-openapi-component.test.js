@@ -120,6 +120,26 @@ test('Append root level extension', () => {
     console.log(head1.getHeader());
     expect(Object.keys(head1.extensions).length).toBe(1);
 });
+//
+// Test setting/getting in of type in Header
+//
+test('Get/Set type param in Header', () => {
+    let head1 = new Header('MyParam3');
+    head1.type = "string"
+    console.log(head1.getHeader());
+    expect(head1.type).toBe('string');
+});
+//
+// Test setting/getting in of example in Header
+//
+test('Get/Set example param in Header', () => {
+    let head1 = new Header('MyParam3');
+    head1.example = "MyExample"
+    console.log(head1.getHeader());
+    expect(head1.example).toBe('MyExample');
+});
+
+
 
 //
 // Parameters
