@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const Raml = require('../lib/laag-raml.js');
+const Raml = require('../lib/laag-raml.js').Raml;
 
 let doc = null;
 let docNew = null;
