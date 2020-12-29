@@ -706,17 +706,9 @@ class Openapi extends Core {
     }
 }
 
-/** General Class that components can subclass */
-class Component extends Core {
-    static members = [];
-    constructor(name) {
-        super();
-        Header.members.push(this);
-    }
-}
-
 /** Class representing a header component */
-class Header extends Component {
+class Header extends Core {
+    static members = [];
     static getHeaders() {
         let obj = {};
         for (let H of Header.members) {
@@ -732,9 +724,10 @@ class Header extends Component {
         }
     }
     constructor(name) {
-        super(name);
+        super();
         this.name = name;
-        this.doc = {}
+        this.doc = {};
+        Header.members.push(this);
     }
     /**
     * gets the description for a component header
@@ -824,7 +817,8 @@ class Header extends Component {
 //
 // name and in are required parameters for this object
 //
-class Parameter extends Component {
+class Parameter extends Core {
+    static members = [];
     static getParameters() {
         let obj = {};
         for (let H of Parameter.members) {
@@ -840,9 +834,10 @@ class Parameter extends Component {
         }
     }
     constructor(name) {
-        super(name);
+        super();
         this.objname = name;
-        this.doc = {}
+        this.doc = {};
+        Parameter.members.push(this);
     }
     /**
     * gets the name of the parameter
