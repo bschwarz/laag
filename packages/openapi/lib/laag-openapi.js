@@ -763,7 +763,7 @@ class Header extends Core {
     * gets the deprecated header value
     */
     get deprecated() {
-        return this.doc.deprecated || '';
+        return this.doc.deprecated || false;
     }
     /**
     * sets the deprecated flag for a component header
@@ -883,7 +883,7 @@ class Parameter extends Core {
     * gets the required for a component parameter
     */
     get required() {
-        return this.doc.required || '';
+        return this.doc.required || false;
     }
     /**
     * sets the required for a component parameter
