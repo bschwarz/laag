@@ -4,6 +4,9 @@
 // This file contains both the RAML interface
 //
 class Core {
+    /**
+    * Creates a Core object used by other classes
+    */
     constructor() {
     }
     /**
@@ -96,7 +99,7 @@ class Core {
 
 class Raml extends Core {
     /**
-    * Ingests the API specification and passes
+    * Ingests the API specification
     * @param {string} doc - The API specification file (e.g. RAML) in JSON format
     */
     constructor(doc = null) {
@@ -743,16 +746,20 @@ class Header extends Core {
             header = null;
         }
     }
+    /**
+    * Creates a Header object
+    * @param {string} name - name of the header
+    */
     constructor(name) {
         super();
         this.name = name;
         this.doc = {};
         this._required = false;
+        this._deprecated = false;
         Header.members.push(this);
     }
     /**
     * gets the description for a component header
-    * @param {string} name - name of the component header
     */
     get description() {
         return this.doc.description || '';
@@ -857,8 +864,143 @@ class Header extends Core {
         return obj;
     }
 }
+/** Class representing a header component */
+//
+// name and in are required parameters for this object
+//
+class Parameter extends Core {
+    static members = [];
+    static getParameters() {
+        let obj = {};
+        for (let H of Parameter.members) {
+            obj[H.name] = H.getParameter();
+        }
+        return obj;
+    }
+    static deleteParameter(param) {
+        let idx = Parameter.members.indexOf(param);
+        if (idx > -1) {
+            Parameter.members.splice(idx, 1);
+            param = null;
+        }
+    }
+    /**
+    * Creates a Parameter object
+    * @param {string} name - name of the parameter
+    */
+    constructor(name) {
+        super();
+        this.objname = name;
+        this.doc = {};
+        Parameter.members.push(this);
+    }
+    /**
+    * gets the name of the parameter
+    */
+    get name() {
+        return this.doc.name || '';
+    }
+    /**
+    * sets the name for a component parameter
+    * @param {string} name - name of the parameter
+    */
+    set name(name) {
+        return this.doc.name = name;
+    }
+    /**
+    * gets the in of the parameter
+    */
+    get in() {
+        return this.doc.in || '';
+    }
+    /**
+    * sets the name for a component parameter
+    * @param {string} name - name of the parameter
+    */
+    set in(location) {
+        return this.doc.in = location;
+    }
+    /**
+    * gets the description for a component parameter
+    * @param {string} name - name of the component header
+    */
+    get description() {
+        return this.doc.description || '';
+    }
+    /**
+    * sets the description for a component parameter
+    * @param {string} name - description of the header
+    */
+    set description(description) {
+        return this.doc.description = description;
+    }
+    /**
+    * gets the required for a component parameter
+    */
+    get required() {
+        return this.doc.required || false;
+    }
+    /**
+    * sets the required for a component parameter
+    * @param {string} name - required of the parameter
+    */
+    set required(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this.doc.required = flag;
+    }
+    /**
+    * gets the allowEmptyValue for a component parameter
+    */
+    get allowEmptyValue() {
+        return this.doc.allowEmptyValue || '';
+    }
+    /**
+    * sets the allowEmptyValue for a component parameter
+    * @param {string} name - required of the parameter
+    */
+    set allowEmptyValue(flag) {
+        if (typeof flag != "boolean"){
+            throw new TypeError("value must be a boolean");
+        }
+        return this.doc.allowEmptyValue = flag;
+    }
+    /**
+    * Retrieves the extensions for the parameter
+    * @returns (Object) - returns in the form of {key1: value1, key2: value2 ... }
+    */
+    get extensions() {
+        return this.getExtensions();
+    }
+    /**
+    * Sets (replaces) the extensions for a parameter
+    * @param (Object) values - object of key/value pairs of extensions to add {key1: value1, key2: value2 ... }
+    */
+    set extensions(values) {
+        this.setExtensions(values);
+    }
+    /**
+    * Appends am extensions parameter
+    * @param (string) name - name of the extension
+    * @param (string) value - value of the extension
+    */
+    appendRootExtension(name, value) {
+        let newName = `(${name.replace("(", "",).replace(")","")})`;
+        this.doc[newName] = value;
+    }
+    /**
+    * gets the parameter object
+    */
+    getParameter() {
+        let obj = {};
+        obj[this.objname] = this.doc;
+        return obj;
+    }
+}
 
 module.exports = {
     Raml,
-    Header
+    Header,
+    Parameter
 };
