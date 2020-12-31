@@ -4,6 +4,9 @@
 // This file contains both the Swagger/OpenAPI interface
 //
 class Core {
+    /**
+    * Creates a Core object used by other classes
+    */
     constructor() {
     }
     /**
@@ -82,7 +85,7 @@ class Core {
 /** Class representing an Openapi document */
 class Openapi extends Core {
     /**
-    * Ingests the API specification and passes
+    * Ingests the API specification
     * @param {string} doc - The API specification file (e.g. Swagger) in JSON format
     */
     constructor(doc = null) {
@@ -723,6 +726,10 @@ class Header extends Core {
             header = null;
         }
     }
+    /**
+    * Creates a Header object
+    * @param {string} name - name of the header
+    */
     constructor(name) {
         super();
         this.name = name;
@@ -863,6 +870,10 @@ class Parameter extends Core {
             param = null;
         }
     }
+    /**
+    * Creates a Parameter object
+    * @param {string} name - name of the parameter
+    */
     constructor(name) {
         super();
         this.objname = name;
