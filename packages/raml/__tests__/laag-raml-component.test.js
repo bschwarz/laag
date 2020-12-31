@@ -1,6 +1,6 @@
 const Raml = require('../lib/laag-raml.js').Raml;
 const Header = require('../lib/laag-raml.js').Header;
-// const Parameter = require('../lib/laag-openapi.js').Parameter;
+const Parameter = require('../lib/laag-raml.js').Parameter;
 
 let doc = null;
 let docNew = null;
@@ -137,4 +137,117 @@ test('Get/Set example param in Header', () => {
     head1.example = "MyExample"
     console.log(head1.getHeader());
     expect(head1.example).toBe('MyExample');
+});
+
+
+//
+// Parameters
+//
+
+//
+// Test setting/getting name of parameter
+//
+test('Get/Set parameter name', () => {
+    let param1 = new Parameter('MyParam1');
+    param1.name = "MyParam1"
+    console.log(param1.getParameter());
+    expect(param1.name).toBe('MyParam1');
+});
+//
+// Test setting/getting description of parameter
+//
+test('Get/Set parameter description', () => {
+    let param2 = new Parameter('MyParam2');
+    param2.description = "This is my description"
+    console.log(param2.getParameter());
+    expect(param2.description).toBe('This is my description');
+});
+//
+// Test setting/getting in of parameter
+//
+test('Get/Set parameter in', () => {
+    let param3 = new Parameter('MyParam3');
+    param3.in = "path"
+    console.log(param3.getParameter());
+    expect(param3.in).toBe('path');
+});
+//
+// Test get/set parameter required type error
+//
+test('Get/Set parameter required type error', () => {
+    let param1 = new Header('MyCustomParam1');
+    try {
+        param1.required = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Header.deleteHeader(param1);
+});
+//
+// Test get/set parameter deprecated
+//
+test('Get/Set parameter deprecated', () => {
+    let param1 = new Parameter('MyCustomParam1');
+    param1.description = "description1"
+    param1.deprecated = true
+    console.log(param1.getParameter());
+    expect(param1.deprecated).toBe(true);
+    Parameter.deleteParameter(param1);
+});
+//
+// Test get/set header deprecated type error
+//
+test('Get/Set parameter deprecated type error', () => {
+    let param1 = new Parameter('MyCustomParameter1');
+    try {
+        param1.deprecated = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Parameter.deleteParameter(param1);
+});
+//
+// Test get/set parameter allowEmptyValue
+//
+test('Get/Set parameter allowEmptyValue', () => {
+    let param5 = new Parameter('MyCustomParam5');
+    param5.description = "description1"
+    param5.allowEmptyValue = true
+    console.log(param5.getParameter());
+    expect(param5.allowEmptyValue).toBe(true);
+    Parameter.deleteParameter(param5);
+});
+//
+// Test get/set parameter allowEmptyValue type error
+//
+test('Get/Set parameter allowEmptyValue type error', () => {
+    let param1 = new Parameter('MyCustomParameter1');
+    try {
+        param1.allowEmptyValue = "true"
+    } catch(e) {
+        expect(e instanceof TypeError).toBe(true);
+    }
+    
+    Parameter.deleteParameter(param1);
+});
+//
+// Test parameter extensions
+//
+test('Set parameter extension', () => {
+    let x = {};
+    x['x-ext1'] = 'ext1';
+    x['x-ext2'] = 'ext2';
+    let param1 = new Parameter('MyCustomParam1');
+    param1.extensions = x;
+    console.log('ROOT LEVEL');
+    console.log(param1.getParameter());
+    expect(Object.keys(param1.extensions).length).toBe(2);
+});
+test('Append root level extension for parameter', () => {
+    let param1 = new Parameter('MyCustomParam1');
+    param1.appendRootExtension('x-another-root', 'value for other root');
+    console.log(param1.getParameter());
+    expect(Object.keys(param1.extensions).length).toBe(1);
 });
