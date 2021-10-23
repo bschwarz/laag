@@ -95,7 +95,7 @@ class Openapi extends Core {
         if (doc) {
             this.doc = typeof doc === 'string' ? JSON.parse(doc) : doc;
         } else {
-            this.doc = {openapi: '', info: {title: '', version: ''}, paths: {}};
+            this.doc = {openapi: '3.0.2', info: {title: '', version: ''}, paths: {}};
         }
         //
         // pre load in the paths since many methods rely on this
@@ -706,7 +706,7 @@ class Openapi extends Core {
     * TODO (bschwarz) - this doesn't make sense for openapi3
     */
     getBasePath() {
-        return this.doc.servers ? this.doc.servers[0] : {};
+        return this._basePath || null;
     }
 }
 
@@ -851,7 +851,7 @@ class Header extends Core {
     }
 }
 
-/** Class representing a header component */
+/** Class representing a Parameter component */
 //
 // name and in are required parameters for this object
 //
