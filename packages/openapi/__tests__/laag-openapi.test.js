@@ -33,7 +33,11 @@ test('Get Definition doc in Pretty JSON', () => {
 test('Check if dictKeysExists works', () => {
     expect(doc.dictKeysExists(doc.paths,'/pets', 'get')).toBe(true);
 });
-
+test('Rename a path', () => {
+    doc.renamePath('/pets', '/petsX');
+    expect(doc.getPathNames().includes('/petsX')).toBe(true);
+    doc.renamePath('/petsX', '/pets');
+});
 
 //
 // Test building doc

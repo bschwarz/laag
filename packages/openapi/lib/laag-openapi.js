@@ -99,10 +99,6 @@ class Openapi extends Core {
         } else {
             this.doc = {openapi: '3.0.2', info: {title: '', version: '1.0.0'}, paths: {}};
         }
-        //
-        // pre load in the paths since many methods rely on this
-        //
-        this.pathList = this.getPathNames();
         this._baseUri = '';
         this._protocols = '';
     }
@@ -683,7 +679,7 @@ class Openapi extends Core {
     getOperationIds() {
 
         let ret = [];
-        for (let P of this.pathList) {
+        for (let P of this.getPathNames()) {
             for (let M of this.validHttpMethods) {
                 if (this.operationExists(P, M)) {
                     ret.push({id: this.getOperationId(P,M), path: P, method: M});
@@ -821,6 +817,33 @@ class Openapi extends Core {
             }
         }
         return ret;
+    }
+    /**
+    * renames a path
+    * @param {string} currentName - the current path name
+    * @param {string} newName - the new path name
+    */
+    renamePath(currentName, newName) {
+
+        currentName = currentName.trim();
+        newName = newName.trim();
+        if (!currentName.startsWith('/')) {
+            currentName = '/'+currentName;
+        }
+        if (!newName.startsWith('/')) {
+            newName = '/'+newName;
+        }
+        if (!this.pathExists(currentName)) {
+            return;
+        }
+        if (this.pathExists(newName)) {
+            throw new Error(`path ${newName} already exists`);
+        }
+        let tmp = this.doc.paths[currentName];
+        delete this.doc.paths[currentName];
+        this.doc.paths[newName] = tmp;
+
+        return;
     }
 }
 
