@@ -183,6 +183,10 @@ test('Set Operation Id for an Operation', () => {
     doc.setOperationId('/pets', 'get', 'someId');
     expect(doc.getOperationId('/pets', 'get')).toBe('someId');
 });
+test('Get Operation Ids for all Operations', () => {
+    console.log(doc.getOperationIds());
+    expect(doc.getOperationIds().length).toBe(4);
+});
 test('Check if an Operation exists (true)', () => {
     expect(doc.operationExists('/pets', 'get')).toBe(true);
 });

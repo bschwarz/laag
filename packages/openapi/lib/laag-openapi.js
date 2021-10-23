@@ -677,6 +677,22 @@ class Openapi extends Core {
         return this.setOperationId(path, verb, value);
     }
     /**
+    * gets all operation IDs per path/method
+    * @returns (Array of Objects) - array of objects with id, path and method
+    */
+    getOperationIds() {
+
+        let ret = [];
+        for (let P of this.pathList) {
+            for (let M of this.validHttpMethods) {
+                if (this.operationExists(P, M)) {
+                    ret.push({id: this.getOperationId(P,M), path: P, method: M});
+                }
+            }
+        }
+        return ret;
+    }
+    /**
     * util to check if an operation (verb + path) exists in the definition
     * @param {string} path - the path segment of the resource
     * @param {string} verb - the HTTP verb for this operation
