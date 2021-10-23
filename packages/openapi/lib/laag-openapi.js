@@ -92,6 +92,7 @@ class Openapi extends Core {
         super();
 
         this._docVersion = '3.0.2';
+        this._basePath = null;
         if (doc) {
             this.doc = typeof doc === 'string' ? JSON.parse(doc) : doc;
         } else {
@@ -103,6 +104,20 @@ class Openapi extends Core {
         this.pathList = this.getPathNames();
         this._baseUri = '';
         this._protocols = '';
+    }
+    /**
+    * Retrieve the base path
+    * @returns (String) - returns base path
+    */
+    get basePath() {
+        return this._basePath;
+    }
+    /**
+    * Sets the base path
+    * @param (String) value - value of the base path
+    */
+    set basePath(value) {
+        this._basePath = value;
     }
     /**
     * Retrieve the document version

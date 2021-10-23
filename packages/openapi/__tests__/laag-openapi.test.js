@@ -40,8 +40,11 @@ test('Check if dictKeysExists works', () => {
 //
 test('Set/Get document version', () => {
     docNew.docVersion = '3.0.0';
-    // console.log(docNew.getDefinition('prettyjson'));
     expect(docNew.docVersion).toBe('3.0.0');
+});
+test('Set/Get base path', () => {
+    docNew.basePath = 'http://somewhere.com';
+    expect(docNew.basePath).toBe('http://somewhere.com');
 });
 test('Set root level extension', () => {
     let x = {};
