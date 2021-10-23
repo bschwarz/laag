@@ -8,6 +8,7 @@ class Core {
     * Creates a Core object used by other classes
     */
     constructor() {
+        this.validHttpMethods = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
     }
     /**
     * Helper method to see if keys exist in an object
@@ -588,11 +589,10 @@ class Openapi extends Core {
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
     getAllHttpMethods() {
-        let valid = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
         let methods = new Set();
 
         for (let P of Object.keys(this.doc.paths)) {
-            Object.keys(this.doc.paths[P]).forEach(item => { if (valid.includes(item)) { methods.add(item) } });
+            Object.keys(this.doc.paths[P]).forEach(item => { if (this.validHttpMethods.includes(item)) { methods.add(item) } });
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
@@ -730,7 +730,6 @@ class Openapi extends Core {
     }
     /**
     * gets base URL for the API. Will get first one if there are multiple servers specified
-    * TODO (bschwarz) - this doesn't make sense for openapi3
     */
     getBasePath() {
         return this._basePath || null;
