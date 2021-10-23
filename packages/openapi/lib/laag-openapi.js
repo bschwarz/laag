@@ -714,6 +714,7 @@ class Openapi extends Core {
     * @param {string} verb - HTTP verb of the operation
     */
     getOperationDescription(path, verb) {
+        verb = verb.toLowerCase();
         if (! this.operationExists(path, verb)) return '';
         return this.doc.paths[path][verb]['description'] || '';
     }
