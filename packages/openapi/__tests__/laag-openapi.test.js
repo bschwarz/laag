@@ -2,7 +2,7 @@
 
 // const openapi = require('..');
 const fs = require('fs');
-const Openapi = require('../lib/laag-openapi.js').Openapi;
+const { Openapi } = require('../lib/laag-openapi.js');
 
 let doc = null;
 let docNew = null;
