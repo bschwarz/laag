@@ -11,7 +11,7 @@ npm i @laag/openapi --save
 ### Reading an existing document
 #### Source Code
 ```
-const Openapi = require('@laag/openapi');
+const { Openapi } = require('@laag/openapi');
 let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
 doc = new Openapi(data);
 
