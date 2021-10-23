@@ -1,6 +1,6 @@
-const Openapi = require('../lib/laag-openapi.js').Openapi;
-const Header = require('../lib/laag-openapi.js').Header;
-const Parameter = require('../lib/laag-openapi.js').Parameter;
+const { Openapi, Header, Parameter } = require('../lib/laag-openapi.js');
+// const Header = require('../lib/laag-openapi.js').Header;
+// const Parameter = require('../lib/laag-openapi.js').Parameter;
 
 let doc = null;
 let docNew = null;

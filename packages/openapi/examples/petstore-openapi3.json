@@ -81,7 +81,7 @@
       "post": {
         "description": "Creates a new pet in the store.  Duplicates are allowed",
         "operationId": "addPet",
-	"deprecated": true,
+        "deprecated": true,
         "requestBody": {
           "description": "Pet to add to the store",
           "required": true,
@@ -118,6 +118,18 @@
       }
     },
     "/pets/{id}": {
+      "parameters": [
+        {
+          "name": "XXXX",
+          "in": "header",
+          "description": "ID of pet to fetch",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
       "get": {
         "description": "Returns a user based on a single ID, if the user does not have access to the pet",
         "operationId": "find pet by id",

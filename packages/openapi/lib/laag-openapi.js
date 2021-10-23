@@ -141,7 +141,7 @@ class Openapi extends Core {
     */
     getDefinition(format = 'js') {
         let doc;
-        this.doc.openapi = this.docVersion;
+        // this.doc.openapi = this.docVersion;
         if (format === 'js') {
             doc = this.doc;
         } else if (format === 'json') {
@@ -735,6 +735,16 @@ class Openapi extends Core {
         return this.doc.paths[path][verb]['description'] || '';
     }
     /**
+    * gets the data for an operation
+    * @param {string} path - the path of the resource
+    * @param {string} verb - HTTP verb of the operation
+    */
+    getOperationData(path, verb) {
+        verb = verb.toLowerCase();
+        if (!this.operationExists(path, verb)) return {};
+        return this.doc.paths[path][verb] || {};
+    }
+    /**
     * gets a boolean on whether the operation is deprecated or not
     * @param {string} path - the path of the resource
     * @param {string} verb - HTTP verb of the operation
@@ -752,7 +762,6 @@ class Openapi extends Core {
     getSuccessCode(path, verb) {
         verb = verb.toLowerCase();
         let codes = this.getStatusCodes(path, verb);
-        console.log(codes);
         for (let C of codes) {
             if (parseInt(C.code) >= 200 && parseInt(C.code) < 300) {
                 return C.code.toString();
@@ -765,6 +774,53 @@ class Openapi extends Core {
     */
     getBasePath() {
         return this._basePath || null;
+    }
+    /**
+    * gets the parameters for an operation
+    * @param {string} path - the path of the resource
+    * @param {string} verb - HTTP verb of the operation. If 'path' is specified, then it just gets the parameters that are for all methods of a path
+    * @param {boolean} all - if true, will return the parameters for verb as well as any path relative parameters
+    */
+    getOperationParameters(path, verb, all=false) {
+        verb = verb.toLowerCase();
+        let ret = [];
+        let pathobj = this.getPath(path);
+        let obj;
+        if (verb === 'path') {
+            obj = pathobj;
+        } else {
+            if (! pathobj[verb]) {
+                return [];
+            }
+            obj = pathobj[verb];
+        }
+        if (obj.parameters) {
+            for (let item of obj.parameters) {
+                let obj = {};
+                obj.path = path;
+                obj.method = verb.toUpperCase();
+                obj.name = item.name;
+                obj.location = item.in;
+                obj.required = item.required || false;
+                obj.type = item.schema.type;
+                obj.description = item.description;
+                ret.push(obj);
+            }
+        }
+        if (all) {
+            for (let item of pathobj.parameters) {
+                let obj = {};
+                obj.path = path;
+                obj.method = verb.toUpperCase();
+                obj.name = item.name;
+                obj.location = item.in;
+                obj.required = item.required || false;
+                obj.type = item.schema.type;
+                obj.description = item.description;
+                ret.push(obj);
+            }
+        }
+        return ret;
     }
 }
 

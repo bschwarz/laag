@@ -187,7 +187,7 @@ test('Set Operation Id for an Operation', () => {
     expect(doc.getOperationId('/pets', 'get')).toBe('someId');
 });
 test('Get Operation Ids for all Operations', () => {
-    console.log(doc.getOperationIds());
+    // console.log(doc.getOperationIds());
     expect(doc.getOperationIds().length).toBe(4);
 });
 test('Check if an Operation exists (true)', () => {
@@ -209,6 +209,18 @@ test('Get Operation RequestBody Media Type', () => {
 test('Get Operation Description', () => {
     // console.log(doc.getOperationDescription('/pets', 'post'));
     expect(Object.keys(doc.getOperationDescription('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
+});
+test('Get Operation Data', () => {
+    // console.log(doc.getOperationData('/pets', 'post'));
+    expect(Object.keys(doc.getOperationData('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
+});
+test('Get Operation Parameters', () => {
+    // console.log(doc.getOperationParameters('/pets/{id}', 'get'));
+    // console.log(doc.getOperationParameters('/pets/{id}', 'path'));
+    // console.log(doc.getOperationParameters('/pets/{id}', 'get', true));
+    expect(doc.getOperationParameters('/pets/{id}', 'get').length).toBe(1);
+    expect(doc.getOperationParameters('/pets/{id}', 'path').length).toBe(1);
+    expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
 });
 test('Check operation deprecation', () => {
     expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);
