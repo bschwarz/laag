@@ -588,10 +588,11 @@ class Openapi extends Core {
     * @returns (Array) - array of unique HTTP methods (verbs) across all operations
     */
     getAllHttpMethods() {
+        let valid = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
         let methods = new Set();
 
         for (let P of Object.keys(this.doc.paths)) {
-            Object.keys(this.doc.paths[P]).forEach(item => methods.add(item));
+            Object.keys(this.doc.paths[P]).forEach(item => { if (valid.includes(item)) { methods.add(item) } });
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
