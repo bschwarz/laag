@@ -745,6 +745,22 @@ class Openapi extends Core {
         return this.doc.paths[path][verb]['deprecated'] || false;
     }
     /**
+    * gets the success code for an operation
+    * @param {string} path - the path of the resource
+    * @param {string} verb - HTTP verb of the operation
+    */
+    getSuccessCode(path, verb) {
+        verb = verb.toLowerCase();
+        let codes = this.getStatusCodes(path, verb);
+        console.log(codes);
+        for (let C of codes) {
+            if (parseInt(C.code) >= 200 && parseInt(C.code) < 300) {
+                return C.code.toString();
+            }
+        }
+        return '';
+    }
+    /**
     * gets base URL for the API. Will get first one if there are multiple servers specified
     */
     getBasePath() {

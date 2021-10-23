@@ -176,6 +176,9 @@ test('Get All Unique HTTP Methods Across All Operations', () => {
 test('Get All Status Codes for an Operation', () => {
     expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
 });
+test('Get Success Code for an Operation', () => {
+    expect(doc.getSuccessCode('/pets/{id}', 'delete')).toBe('204');
+});
 test('Get Operation Id for an Operation', () => {
     expect(doc.getOperationId('/pets', 'get')).toBe('findPets');
 });
