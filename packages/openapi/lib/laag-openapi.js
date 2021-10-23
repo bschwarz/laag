@@ -95,7 +95,7 @@ class Openapi extends Core {
         if (doc) {
             this.doc = typeof doc === 'string' ? JSON.parse(doc) : doc;
         } else {
-            this.doc = {openapi: '3.0.2', info: {title: '', version: ''}, paths: {}};
+            this.doc = {openapi: '3.0.2', info: {title: '', version: '1.0.0'}, paths: {}};
         }
         //
         // pre load in the paths since many methods rely on this
