@@ -710,13 +710,23 @@ class Openapi extends Core {
     }
     /**
     * gets the description for an operation
-    * @param {string} path - the path segment of the resource
+    * @param {string} path - the path of the resource
     * @param {string} verb - HTTP verb of the operation
     */
     getOperationDescription(path, verb) {
         verb = verb.toLowerCase();
         if (! this.operationExists(path, verb)) return '';
         return this.doc.paths[path][verb]['description'] || '';
+    }
+    /**
+    * gets a boolean on whether the operation is deprecated or not
+    * @param {string} path - the path of the resource
+    * @param {string} verb - HTTP verb of the operation
+    */
+    isOperationDeprecated(path, verb) {
+        verb = verb.toLowerCase();
+        if (! this.operationExists(path, verb)) return true;
+        return this.doc.paths[path][verb]['deprecated'] || false;
     }
     /**
     * gets base URL for the API. Will get first one if there are multiple servers specified

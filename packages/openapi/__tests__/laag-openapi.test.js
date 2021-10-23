@@ -203,6 +203,9 @@ test('Get Operation Description', () => {
     // console.log(doc.getOperationDescription('/pets', 'post'));
     expect(Object.keys(doc.getOperationDescription('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
 });
+test('Check operation deprecation', () => {
+    expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);
+});
 test('Set/Get components', () => {
     let x = {schemas: {}, responses: {}, parameters: {}, examples: {}, requestBodies: {}, headers: {}};
     docNew.components = x;

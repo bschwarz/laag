@@ -81,6 +81,7 @@
       "post": {
         "description": "Creates a new pet in the store.  Duplicates are allowed",
         "operationId": "addPet",
+	"deprecated": true,
         "requestBody": {
           "description": "Pet to add to the store",
           "required": true,
