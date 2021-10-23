@@ -90,15 +90,16 @@ class Openapi extends Core {
     */
     constructor(doc = null) {
         super();
-        //
-        // pre load in the paths since many methods rely on this
-        //
+
         this._docVersion = '3.0.2';
         if (doc) {
-            this.doc = JSON.parse(doc);
+            this.doc = typeof doc === 'string' ? JSON.parse(doc) : doc;
         } else {
             this.doc = {openapi: '', info: {title: '', version: ''}, paths: {}};
         }
+        //
+        // pre load in the paths since many methods rely on this
+        //
         this.pathList = this.getPathNames();
         this._baseUri = '';
         this._protocols = '';
