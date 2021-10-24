@@ -38,6 +38,10 @@ test('Rename a path', () => {
     expect(doc.getPathNames().includes('/petsX')).toBe(true);
     doc.renamePath('/petsX', '/pets');
 });
+test('Get tree representation of the paths', () => {
+    let objs = doc.getPathsAsTree();
+    expect(objs[0].name === 'pets').toBe(true);
+});
 
 //
 // Test building doc

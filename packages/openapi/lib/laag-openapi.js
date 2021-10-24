@@ -4,11 +4,17 @@
 // This file contains both the Swagger/OpenAPI interface
 //
 class Core {
+    static validHttpMethods = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
+    /**
+    * @description returns some random key
+    */
+    static randomKey() {
+        return Date.now()*1000 + Math.floor((Math.random() * 1000) + 1);
+    }
     /**
     * Creates a Core object used by other classes
     */
     constructor() {
-        this.validHttpMethods = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
     }
     /**
     * Helper method to see if keys exist in an object
@@ -588,7 +594,7 @@ class Openapi extends Core {
         let methods = new Set();
 
         for (let P of Object.keys(this.doc.paths)) {
-            Object.keys(this.doc.paths[P]).forEach(item => { if (this.validHttpMethods.includes(item)) { methods.add(item) } });
+            Object.keys(this.doc.paths[P]).forEach(item => { if (Core.validHttpMethods.includes(item)) { methods.add(item) } });
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
@@ -680,7 +686,7 @@ class Openapi extends Core {
 
         let ret = [];
         for (let P of this.getPathNames()) {
-            for (let M of this.validHttpMethods) {
+            for (let M of Core.validHttpMethods) {
                 if (this.operationExists(P, M)) {
                     ret.push({id: this.getOperationId(P,M), path: P, method: M});
                 }
@@ -844,6 +850,101 @@ class Openapi extends Core {
         this.doc.paths[newName] = tmp;
 
         return;
+    }
+    /**
+    * @description breaks up each path segment and creates a tree representation of the paths
+    * @param {array} paths - array of objects organized in the tree like structure
+    */
+    getPathsAsTree() {
+        return this.genTree(this.genObjectsFromPaths(this.doc.paths));
+    }
+    /**
+    * @description util function to convert flat list of paths to tree hierarchy
+    * @param {array} paths - array of objects with each object representing a path
+    */
+    genTree(pathsArray) {
+        pathsArray = pathsArray.reduce(function(tree, f) {
+            let parr = f.path.split('/');
+            let dir = parr.filter((v,i) =>  i < parr.length-1).join('/');
+            
+            if (tree[dir]) {
+                tree[dir].children.push(f)
+            } else {
+                tree[dir] = { implied: true, children: [f] }
+            }
+
+            if (tree[f.path]) {
+                f.children = tree[f.path].children
+            } else {
+                f.children = []
+            }
+
+            return (tree[f.path] = f), tree
+        }, {})
+
+        return Object.keys(pathsArray).reduce(function(tree, f) {
+            if (pathsArray[f].implied) {
+                return tree.concat(pathsArray[f].children)
+            }
+
+            return tree
+        }, [])
+    }
+    /**
+    * @description util function to convert URIs to array of path objects
+    * @param {array} paths - array of paths ['/some/where', '/over/there']
+    */
+    genObjectsFromPaths(paths) {
+        // let paths = [];
+        let pobj = {};
+        let pslen = 0, pscnt = 0;
+        let children = [];
+        let key = '';
+        let fullpath = '';
+        let sortedpaths = Object.keys(paths).sort(function(a,b) {return a.localeCompare(b, 'en', {'sensitivity': 'base'});});
+        // First we put the paths into an array of objects, with each object with a pathSegment
+        // with full path as a parameter. This gets fed into treeify later which converts to tree structure
+        for (let P of sortedpaths) {
+            let pathSegments = P.replace(/^\/+|\/+$/g, '').split(/[\/]/);
+            pslen = pathSegments.length;
+            // we loop over each path segment because the tree widget will need to account for
+            // every path segment, and it may not be in other paths.
+            pscnt = 1;
+            fullpath = '';
+            for (let PS of pathSegments) {
+                // this is for each path. Later we do same check but across all paths
+                fullpath = '/'+pathSegments.slice(0,pscnt).join('/');
+                key = Core.randomKey().toString();
+                pobj = {key: key, name: PS, path: fullpath, data: {}};
+                if (pscnt === pslen) {
+                    for (let m of Core.validHttpMethods) {
+                        pobj.data[m] = paths[P][m] ? true : false;
+                    }
+                    
+                }
+                
+                children.push(pobj);
+                pscnt++;
+            }
+
+        }
+        let idx = 0;
+        let filtered = [];
+        for (let C of children) {
+            // if the node does not have any data, and if the node
+            // already exists in the filtered array, then since how the 
+            // nodes were sorted, we assume the first one is the correct one
+            // and so we don't include any duplicates afterwards.
+            if (Object.keys(C.data).length === 0) {
+                if ((filtered.filter(x => x.name === C.name).length > 0)) {
+                    continue;
+                };
+            }
+            filtered.push(C);
+            idx++;
+        }
+
+        return filtered;
     }
 }
 
