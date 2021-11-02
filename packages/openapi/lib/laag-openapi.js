@@ -1003,7 +1003,7 @@ class Openapi extends Core {
             let code = this.getSuccessCode(path, verb);
             data = this.getOperationResponse(path, verb, code);
             if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
-                console.log("DNE", data);
+                return;
             }
             schema = data.content['application/json'].schema;
         }
