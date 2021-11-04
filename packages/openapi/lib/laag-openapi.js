@@ -727,6 +727,23 @@ class Openapi extends Core {
         return ret;
     }
     /**
+    /**
+    * gets the media types for an operation response
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - HTTP verb of the operation
+    * @param {string} verb - HTTP status code of the operation
+    */
+    getOperationResponse(path, verb, statusCode) {
+        let ret = {};
+        if (! this.operationExists(path, verb)) return {};
+        
+        if (this.dictKeysExists(this.doc.paths[path][verb],'responses', statusCode)) {
+            ret = this.doc.paths[path][verb]['responses'][statusCode];
+        }
+
+        return ret;
+    }
+    /**
     * gets the description for an operation
     * @param {string} path - the path of the resource
     * @param {string} verb - HTTP verb of the operation
@@ -945,6 +962,98 @@ class Openapi extends Core {
         }
 
         return filtered;
+    }
+    /**
+     * Retrieves a component based on the $ref path
+     *
+     * @param {Object} refPath - the path to the component
+     * @return {Object} object representing the component
+     * @memberof Openapi
+     */
+    getComponentFromPath(refPath) {
+        refPath = refPath.replace('#/', '');
+        let parts = refPath.split('/');
+        if (!this.dictKeysExists(this.doc, ...parts)) {
+            console.log("DNE", parts);
+        }
+        return this.doc[parts[0]][parts[1]][parts[2]];
+    }
+    /**
+     * Generates sample JSON payload from either request or response
+     *
+     * @param {Object} start - the starting object for recursion
+     * @param {Object} path - the resource path
+     * @param {Object} verb - the HTTP verb for the operation
+     * @param {String} type - either request or response
+     * @return {*} json
+     * @memberof Openapi
+     */
+    generateJsonSample(start, path, verb, type='request') {
+
+        // console.log(start, path, verb);
+        if (!this.operationExists(path, verb)) {
+            console.log('NO SUCH OPERATION', path, verb);
+            return;
+        }
+        let data;
+        let schema;
+        if (type === 'request') {
+            // data = this.getOperationRequest();
+        } else {
+            let code = this.getSuccessCode(path, verb);
+            data = this.getOperationResponse(path, verb, code);
+            if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
+                return;
+            }
+            schema = data.content['application/json'].schema;
+        }
+        let example;
+        return this.getSchema(example, schema);
+    }
+    /**
+     * recursively gets the schema
+     *
+     * @param {Object} start - the starting object for recursion
+     * @param {Object} schema - the starting schema
+     * @return {*} json
+     * @memberof Openapi
+     */
+    getSchema(start, schema) {
+        let newSchema;
+        let key;
+        if (schema['$ref']) {
+            schema = this.getComponentFromPath(schema['$ref']);
+        }
+        if (schema['allOf']) {
+            let all = {};
+            let obj;
+            for (let E of schema['allOf']) {
+                obj = this.getComponentFromPath(E['$ref']);
+                all = {...all, ...obj.properties};
+            }
+            schema = {type: 'object', properties: all};
+            // schema = this.getComponentFromPath(schema['allOf'][0]['$ref']);
+        }
+        if (schema.type === 'object') {
+            start = start || {};
+            for (let K of Object.keys(schema.properties)) {
+                if (schema.properties[K].type === 'array') {
+                    start[K] = this.getSchema(start[K], schema.properties[K]);
+                } else if (schema.properties[K].type === 'object') {
+                    start[K] = this.getSchema(start[K], schema.properties[K]);
+                } else {
+                    start[K] = schema.properties[K].example || '';
+                }
+            }
+        } else if (schema.type === 'array') {
+            start = start || {};
+            let x = [];
+            x.push(this.getSchema(start, schema.items));
+            start = x;
+        }
+    
+        return start;
+
     }
 }
 
