@@ -1,6 +1,6 @@
 {
   "name": "@laag/openapi",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "library for interfacing with swagger/openapi documents",
   "keywords": [
     "rest",
@@ -33,9 +33,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd",
-  "dependencies": {
-    "latest": "^0.2.0",
-    "node": "^12"
-  }
+  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd"
 }
