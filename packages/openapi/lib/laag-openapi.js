@@ -535,7 +535,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the tags information
     */
     get tags() {
-        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : {};
+        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : [];
     }
     /**
     * sets the tags object in it's native form
