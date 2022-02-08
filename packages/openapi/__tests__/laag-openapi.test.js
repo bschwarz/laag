@@ -262,3 +262,6 @@ test('Set/Get externalDocs', () => {
     // console.log(docNew.getDefinition('prettyjson'));
     expect(Object.keys(docNew.externalDocs).length).toBe(2);
 });
+test('Get curl commands', () => {
+    expect(Object.keys(doc.generateCurlCommands('/pets', 'post')).length).toBe(1);
+});
