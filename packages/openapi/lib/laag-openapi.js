@@ -1055,6 +1055,34 @@ class Openapi extends Core {
         return start;
 
     }
+    /**
+     * generate curl commands based on verb and path
+     *
+     * @param {Object} path - the resource path
+     * @param {Object} verb - the HTTP verb for the operation
+     * @return {Array} curl commands
+     * @memberof Openapi
+     */
+    generateCurlCommands(path, verb) {
+        let ret = [];
+        let cmd = '';
+        method = method.toUpperCase();
+        let opAppend = '';
+
+        if (['POST', 'PUT', 'PATCH'].includes(verb)) {
+            // TODO: need to account for multiple content-types
+            let ctype = this.getOperationRequestMedia(path, verb)
+            opAppend = `-H "Content-Type: ${ctype[0]}" -d <request-payload>`;
+        }
+        for (let S of this.servers) {
+            cmd = `curl -i -X ${verb} "${S.url}${path}" -H "Authorization: <auth-token>" ${opAppend}`;
+            console.log(cmd);
+            ret.push({command: cmd, description: S.description})
+        }
+
+        return ret;
+    }
+
 }
 
 /** Class representing a header component */
