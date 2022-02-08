@@ -1066,7 +1066,7 @@ class Openapi extends Core {
     generateCurlCommands(path, verb) {
         let ret = [];
         let cmd = '';
-        method = method.toUpperCase();
+        verb = verb.toUpperCase();
         let opAppend = '';
 
         if (['POST', 'PUT', 'PATCH'].includes(verb)) {
