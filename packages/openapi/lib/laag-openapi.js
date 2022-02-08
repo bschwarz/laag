@@ -718,6 +718,7 @@ class Openapi extends Core {
     */
     getOperationRequestMedia(path, verb) {
         let ret = [];
+        verb = verb.toLocaleLowerCase();
         if (! this.operationExists(path, verb)) return [];
         
         if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody', 'content')) {
