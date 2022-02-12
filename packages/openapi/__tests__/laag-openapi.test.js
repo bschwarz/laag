@@ -243,6 +243,12 @@ test('Get Resource Summary', () => {
     let resources = doc.getResourceSummary();
     expect(resources[0].get).toBe(true);
 });
+test('Get operation Summary', () => {
+    let resources = doc.getOperationSummary();
+    console.log(resources);
+    expect(resources.length).toBe(4);
+    expect(resources[0].resource).toBe('/pets');
+});
 test('Get Resource Summary, negative case', () => {
     doc.httpMethods = ['post'];
     let resources = doc.getResourceSummary();
