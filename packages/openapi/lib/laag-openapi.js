@@ -1078,7 +1078,6 @@ class Openapi extends Core {
         }
         for (let S of this.servers) {
             cmd = `curl -i -X ${verb} "${S.url}${path}" -H "Authorization: <auth-token>" ${opAppend}`;
-            console.log(cmd);
             ret.push({command: cmd, description: S.description})
         }
 
@@ -1088,13 +1087,21 @@ class Openapi extends Core {
      * generate a list of objects where each object represents a resource
      * and it's methods
      *
-     * @param {Object} path - the resource path
-     * @param {Object} verb - the HTTP verb for the operation
      * @return {Array} curl commands
      * @memberof Openapi
      */
-    getResourceSummary(path, verb) {
-
+    getResourceSummary() {
+        let ret = [];
+        for (let P of this.getPathNames()) {
+            let path = this.getPath(P);
+            let obj = {resource: P, description: path.description || '' };
+            let methods = Object.keys(path);
+            for (let M of this._httpMethods) {
+                obj[M] = methods.includes(M) ? true : false;
+            }
+            ret.push(obj);
+        }
+        return ret;
     }
 }
 
