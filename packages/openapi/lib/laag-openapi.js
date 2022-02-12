@@ -4,7 +4,7 @@
 // This file contains both the Swagger/OpenAPI interface
 //
 class Core {
-    static validHttpMethods = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options'];
+    static validHttpMethods = ['get', 'post', 'put', 'delete', 'patch', 'head', 'options'];
     /**
     * @description returns some random key
     */
@@ -107,20 +107,21 @@ class Openapi extends Core {
         }
         this._baseUri = '';
         this._protocols = '';
+        this._httpMethods = ['get', 'post', 'put', 'delete', 'patch', 'head'];
     }
     /**
-    * Retrieve the base path
-    * @returns (String) - returns base path
+    * Retrieve the HTTP methods
+    * @returns (Array) - an array of HTTP methods
     */
-    get basePath() {
-        return this._basePath;
+    get httpMethods() {
+        return this._httpMethods;
     }
     /**
     * Sets the base path
-    * @param (String) value - value of the base path
+    * @param (array) value - array of HTTP methods to use in other methods
     */
-    set basePath(value) {
-        this._basePath = value;
+    set httpMethods(methods) {
+        this._httpMethods = methods;
     }
     /**
     * Retrieve the document version
@@ -594,7 +595,7 @@ class Openapi extends Core {
         let methods = new Set();
 
         for (let P of Object.keys(this.doc.paths)) {
-            Object.keys(this.doc.paths[P]).forEach(item => { if (Core.validHttpMethods.includes(item)) { methods.add(item) } });
+            Object.keys(this.doc.paths[P]).forEach(item => { if (this.httpMethods.includes(item)) { methods.add(item) } });
         }
         let unique = Array.from(methods);
         return  unique.length > 0 ? unique : [];
@@ -686,7 +687,7 @@ class Openapi extends Core {
 
         let ret = [];
         for (let P of this.getPathNames()) {
-            for (let M of Core.validHttpMethods) {
+            for (let M of this.httpMethods) {
                 if (this.operationExists(P, M)) {
                     ret.push({id: this.getOperationId(P,M), path: P, method: M});
                 }
@@ -935,7 +936,7 @@ class Openapi extends Core {
                 key = Core.randomKey().toString();
                 pobj = {key: key, name: PS, path: fullpath, data: {}};
                 if (pscnt === pslen) {
-                    for (let m of Core.validHttpMethods) {
+                    for (let m of this.httpMethods) {
                         pobj.data[m] = paths[P][m] ? true : false;
                     }
                     
@@ -1064,7 +1065,7 @@ class Openapi extends Core {
      * @return {Array} curl commands
      * @memberof Openapi
      */
-    generateCurlCommands(path, verb) {
+    getCurlCommands(path, verb) {
         let ret = [];
         let cmd = '';
         verb = verb.toUpperCase();
@@ -1083,7 +1084,18 @@ class Openapi extends Core {
 
         return ret;
     }
+    /**
+     * generate a list of objects where each object represents a resource
+     * and it's methods
+     *
+     * @param {Object} path - the resource path
+     * @param {Object} verb - the HTTP verb for the operation
+     * @return {Array} curl commands
+     * @memberof Openapi
+     */
+    getResourceSummary(path, verb) {
 
+    }
 }
 
 /** Class representing a header component */
