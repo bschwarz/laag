@@ -1087,7 +1087,7 @@ class Openapi extends Core {
      * generate a list of objects where each object represents a resource
      * and it's methods
      *
-     * @return {Array} curl commands
+     * @return {Array} - array of resources and methods
      * @memberof Openapi
      */
     getResourceSummary() {
@@ -1100,6 +1100,35 @@ class Openapi extends Core {
                 obj[M] = methods.includes(M) ? true : false;
             }
             ret.push(obj);
+        }
+        return ret;
+    }
+    /**
+     * generate a list of objects where each object represents a resource
+     * and it's methods
+     *
+     * @return {Array} - array of resources and methods
+     * @memberof Openapi
+     */
+    getOperationSummary() {
+        let ret = [];
+        for (let P of this.getPathNames()) {
+            let path = this.getPath(P);
+            let obj = {};
+            let methods = Object.keys(path);
+            for (let M of methods) {
+                if (this.httpMethods.includes(M)) {
+                    obj = {resource: P};
+                    console.log(`GOT ${M}`);
+                    obj.method = M;
+                    obj.description = path[M].description || '';
+                    obj.summary = path[M].summary || '';
+                    obj.operationId = path[M].operationId || '';
+                    obj.deprecated = path[M].deprecated || false;
+                    obj.tags = path[M].tags || [];
+                    ret.push(obj);
+                }
+            }
         }
         return ret;
     }
