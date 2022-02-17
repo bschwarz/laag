@@ -173,6 +173,10 @@ test('Get All Unique HTTP Methods Across All Operations', () => {
 test('Get All Status Codes for an Operation', () => {
     expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
 });
+test('Get All Status Codes for all Operations', () => {
+    console.log(doc.getAllStatusCodes())
+    expect(doc.getAllStatusCodes().length).toBe(2);
+});
 test('Get Success Code for an Operation', () => {
     expect(doc.getSuccessCode('/pets/{id}', 'delete')).toBe('204');
 });
@@ -245,7 +249,6 @@ test('Get Resource Summary', () => {
 });
 test('Get operation Summary', () => {
     let resources = doc.getOperationSummary();
-    console.log(resources);
     expect(resources.length).toBe(4);
     expect(resources[0].resource).toBe('/pets');
 });

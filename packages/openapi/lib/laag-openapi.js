@@ -622,6 +622,21 @@ class Openapi extends Core {
         return ret.length > 0 ? ret : [];
     }
     /**
+    * Gets all the possible defiend HTTP status codes for all operation
+    * @returns (Object) - Object with code, description and media for each status code
+    */
+    getAllStatusCodes() {
+        let ret = new Set();
+        for (let P of this.getPathNames()) {
+            for (let M of Object.keys(this.doc.paths[P])) {
+                for (let S of this.getStatusCodes(P, M)) {
+                    ret.add(S.code);
+                }
+            }
+        }
+        return Array.from(ret);
+    }
+    /**
     * util function to get the operationId if exists, and generate one if it does not exist
     * If one doesn't exist, then it will construct based on the path and method, camel cased
     * @param {string} path - the path segment of the resource
@@ -1074,7 +1089,7 @@ class Openapi extends Core {
         if (['POST', 'PUT', 'PATCH'].includes(verb)) {
             // TODO: need to account for multiple content-types
             let ctype = this.getOperationRequestMedia(path, verb)
-            opAppend = `-H "Content-Type: ${ctype[0]}" -d <request-payload>`;
+            opAppend = `-H "Content-Type: ${ctype[0]}" -d '<request-payload>'`;
         }
         for (let S of this.servers) {
             cmd = `curl -i -X ${verb} "${S.url}${path}" -H "Authorization: <auth-token>" ${opAppend}`;
@@ -1119,7 +1134,6 @@ class Openapi extends Core {
             for (let M of methods) {
                 if (this.httpMethods.includes(M)) {
                     obj = {resource: P};
-                    console.log(`GOT ${M}`);
                     obj.method = M;
                     obj.description = path[M].description || '';
                     obj.summary = path[M].summary || '';
