@@ -15,7 +15,6 @@ beforeAll(() => {
 test('Get/Set header description', () => {
     let head1 = new Header('MyCustomHeader');
     head1.description = "This is my description"
-    console.log(head1.getHeader());
     expect(head1.description).toBe('This is my description');
 });
 //
@@ -25,7 +24,6 @@ test('Get/Set header required', () => {
     let head1 = new Header('MyCustomHeader1');
     head1.description = "description1"
     head1.required = true
-    console.log(head1.getHeader());
     expect(head1.required).toBe(true);
 });
 //
@@ -49,7 +47,6 @@ test('Get/Set header deprecated', () => {
     let head1 = new Header('MyCustomHeader1');
     head1.description = "description1"
     head1.deprecated = true
-    console.log(head1.getHeader());
     expect(head1.deprecated).toBe(true);
     Header.deleteHeader(head1);
 });
@@ -98,7 +95,6 @@ test('print out header objects', () => {
     head1.description = "description1"
     head2.description = "description2"
     let keys = Object.keys(Header.getHeaders());
-    console.log(Header.getHeaders());
     expect(keys.length).toBe(3);
 });
 //
@@ -110,14 +106,11 @@ test('Set Header extension', () => {
     x['x-ext2'] = 'ext2';
     let head1 = new Header('MyCustomHeader1');
     head1.extensions = x;
-    console.log('ROOT LEVEL');
-    console.log(head1.getHeader());
     expect(Object.keys(head1.extensions).length).toBe(2);
 });
 test('Append root level extension', () => {
     let head1 = new Header('MyCustomHeader1');
     head1.appendRootExtension('x-another-root', 'value for other root');
-    console.log(head1.getHeader());
     expect(Object.keys(head1.extensions).length).toBe(1);
 });
 //
@@ -126,7 +119,6 @@ test('Append root level extension', () => {
 test('Get/Set type param in Header', () => {
     let head1 = new Header('MyParam3');
     head1.type = "string"
-    console.log(head1.getHeader());
     expect(head1.type).toBe('string');
 });
 //
@@ -135,7 +127,6 @@ test('Get/Set type param in Header', () => {
 test('Get/Set example param in Header', () => {
     let head1 = new Header('MyParam3');
     head1.example = "MyExample"
-    console.log(head1.getHeader());
     expect(head1.example).toBe('MyExample');
 });
 
@@ -151,7 +142,6 @@ test('Get/Set example param in Header', () => {
 test('Get/Set parameter name', () => {
     let param1 = new Parameter('MyParam1');
     param1.name = "MyParam1"
-    console.log(param1.getParameter());
     expect(param1.name).toBe('MyParam1');
 });
 //
@@ -160,7 +150,6 @@ test('Get/Set parameter name', () => {
 test('Get/Set parameter description', () => {
     let param2 = new Parameter('MyParam2');
     param2.description = "This is my description"
-    console.log(param2.getParameter());
     expect(param2.description).toBe('This is my description');
 });
 //
@@ -169,7 +158,6 @@ test('Get/Set parameter description', () => {
 test('Get/Set parameter in', () => {
     let param3 = new Parameter('MyParam3');
     param3.in = "path"
-    console.log(param3.getParameter());
     expect(param3.in).toBe('path');
 });
 //
@@ -192,7 +180,6 @@ test('Get/Set parameter deprecated', () => {
     let param1 = new Parameter('MyCustomParam1');
     param1.description = "description1"
     param1.deprecated = true
-    console.log(param1.getParameter());
     expect(param1.deprecated).toBe(true);
     Parameter.deleteParameter(param1);
 });
@@ -216,7 +203,6 @@ test('Get/Set parameter allowEmptyValue', () => {
     let param5 = new Parameter('MyCustomParam5');
     param5.description = "description1"
     param5.allowEmptyValue = true
-    console.log(param5.getParameter());
     expect(param5.allowEmptyValue).toBe(true);
     Parameter.deleteParameter(param5);
 });
@@ -242,13 +228,11 @@ test('Set parameter extension', () => {
     x['x-ext2'] = 'ext2';
     let param1 = new Parameter('MyCustomParam1');
     param1.extensions = x;
-    console.log('ROOT LEVEL');
     console.log(param1.getParameter());
     expect(Object.keys(param1.extensions).length).toBe(2);
 });
 test('Append root level extension for parameter', () => {
     let param1 = new Parameter('MyCustomParam1');
     param1.appendRootExtension('x-another-root', 'value for other root');
-    console.log(param1.getParameter());
     expect(Object.keys(param1.extensions).length).toBe(1);
 });
