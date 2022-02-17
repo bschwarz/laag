@@ -1,6 +1,6 @@
 {
   "name": "@laag/openapi",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "library for interfacing with swagger/openapi documents",
   "keywords": [
     "rest",
