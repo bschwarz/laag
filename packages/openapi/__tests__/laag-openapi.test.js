@@ -174,11 +174,9 @@ test('Get All Status Codes for an Operation', () => {
     expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
 });
 test('Get All Status Codes for *all* Operations', () => {
-    console.log(doc.getAllStatusCodes())
     expect(doc.getAllStatusCodes().length).toBe(2);
 });
 test('Get All Status Codes Summary for *all* Operations', () => {
-    console.log(doc.getStatusCodeSummary())
     expect(doc.getStatusCodeSummary().length).toBe(4);
 });
 test('Get Success Code for an Operation', () => {
@@ -219,6 +217,10 @@ test('Get Operation Parameters', () => {
     expect(doc.getOperationParameters('/pets/{id}', 'get').length).toBe(1);
     expect(doc.getOperationParameters('/pets/{id}', 'path').length).toBe(1);
     expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
+});
+test('Get Operation Parameter Summary', () => {
+    console.log(doc.getParameterSummary())
+    expect(doc.getParameterSummary().length).toBe(4);
 });
 test('Check operation deprecation', () => {
     expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);

@@ -1170,6 +1170,24 @@ class Openapi extends Core {
         }
         return ret;
      }
+    /**
+     * generate a list of objects where each object represents a resource
+     * and it's method and if that operation/resource combination has
+     * the status code out of all of the status codes.
+     *
+     * @return {Array} - array of resources, methods and status codes
+     * @memberof Openapi
+     */
+     getParameterSummary() {
+        let ret = [];
+        for (let P of this.getPathNames()) {
+            ret = [...ret,...this.getOperationParameters(P, 'all')];
+            for (let M of Object.keys(this.doc.paths[P])) {
+                ret = [...ret,...this.getOperationParameters(P, M)];
+            }
+        }
+        return ret;
+    }
 }
 
 /** Class representing a header component */
