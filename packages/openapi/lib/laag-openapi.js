@@ -1146,6 +1146,30 @@ class Openapi extends Core {
         }
         return ret;
     }
+    /**
+     * generate a list of objects where each object represents a resource
+     * and it's method and associated status codes
+     *
+     * @return {Array} - array of resources, methods and status codes
+     * @memberof Openapi
+     */
+     getStatusCodeSummary() {
+        let ret = [];
+        for (let P of this.getPathNames()) {
+            for (let M of Object.keys(this.doc.paths[P])) {
+                if (! this.httpMethods.includes(M)) {
+                    continue;
+                }
+                let obj = {method: M.toUpperCase(), resource: P};
+                let statuses = this.getStatusCodes(P, M).map(x => x.code);
+                for (let S of this.getAllStatusCodes()) {
+                    obj[S] = statuses.includes(S) ? true : false;
+                }
+                ret.push(obj)
+            }
+        }
+        return ret;
+     }
 }
 
 /** Class representing a header component */
