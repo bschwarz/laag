@@ -744,11 +744,10 @@ class Openapi extends Core {
         return ret;
     }
     /**
-    /**
-    * gets the media types for an operation response
+    * gets the response object for a path/verb
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
-    * @param {string} verb - HTTP status code of the operation
+    * @param {string} statusCode - HTTP status code of the operation
     */
     getOperationResponse(path, verb, statusCode) {
         let ret = {};
@@ -756,6 +755,21 @@ class Openapi extends Core {
         
         if (this.dictKeysExists(this.doc.paths[path][verb],'responses', statusCode)) {
             ret = this.doc.paths[path][verb]['responses'][statusCode];
+        }
+
+        return ret;
+    }
+    /**
+    * gets the request object for a path/verb
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - HTTP verb of the operation
+    */
+    getOperationRequest(path, verb, statusCode) {
+        let ret = {};
+        if (! this.operationExists(path, verb)) return {};
+        
+        if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody', 'content')) {
+            ret = this.doc.paths[path][verb]['requestBody'];
         }
 
         return ret;
@@ -1015,7 +1029,12 @@ class Openapi extends Core {
         let data;
         let schema;
         if (type === 'request') {
-            // data = this.getOperationRequest();
+            let code = this.getSuccessCode(path, verb);
+            data = this.getOperationRequest(path, verb);
+            if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
+                return null;
+            }
+            schema = data['content']['application/json'].schema;
         } else {
             let code = this.getSuccessCode(path, verb);
             data = this.getOperationResponse(path, verb, code);
