@@ -847,7 +847,7 @@ class Openapi extends Core {
         if (obj.parameters) {
             for (let item of obj.parameters) {
                 let obj = {};
-                obj.path = path;
+                obj.resource = path;
                 obj.method = verb.toUpperCase();
                 obj.name = item.name;
                 obj.location = item.in;
@@ -860,7 +860,7 @@ class Openapi extends Core {
         if (all) {
             for (let item of pathobj.parameters) {
                 let obj = {};
-                obj.path = path;
+                obj.resource = path;
                 obj.method = verb.toUpperCase();
                 obj.name = item.name;
                 obj.location = item.in;
