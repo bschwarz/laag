@@ -1005,7 +1005,7 @@ class Openapi extends Core {
      * @return {*} json
      * @memberof Openapi
      */
-    generateJsonSample(start, path, verb, type='request') {
+    generateJsonSample(path, verb, type='request') {
 
         // console.log(start, path, verb);
         if (!this.operationExists(path, verb)) {
@@ -1020,7 +1020,7 @@ class Openapi extends Core {
             let code = this.getSuccessCode(path, verb);
             data = this.getOperationResponse(path, verb, code);
             if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
-                return;
+                return null;
             }
             schema = data.content['application/json'].schema;
         }
@@ -1035,7 +1035,7 @@ class Openapi extends Core {
      * @return {*} json
      * @memberof Openapi
      */
-    getSchema(start, schema) {
+     getSchema(start, schema) {
         let newSchema;
         let key;
         if (schema['$ref']) {
@@ -1051,13 +1051,16 @@ class Openapi extends Core {
             schema = {type: 'object', properties: all};
             // schema = this.getComponentFromPath(schema['allOf'][0]['$ref']);
         }
-        if (schema.type === 'object') {
+        if (schema.type === 'object' || typeof schema.type === 'undefined') {
             start = start || {};
             for (let K of Object.keys(schema.properties)) {
                 if (schema.properties[K].type === 'array') {
                     start[K] = this.getSchema(start[K], schema.properties[K]);
                 } else if (schema.properties[K].type === 'object') {
                     start[K] = this.getSchema(start[K], schema.properties[K]);
+                } else if (schema.properties[K]['$ref']) {
+                    let newschema = this.getComponentFromPath(schema.properties[K]['$ref']);
+                    start[K] = this.getSchema(start[K], newschema);
                 } else {
                     start[K] = schema.properties[K].example || '';
                 }
@@ -1068,7 +1071,7 @@ class Openapi extends Core {
             x.push(this.getSchema(start, schema.items));
             start = x;
         }
-    
+   
         return start;
 
     }
