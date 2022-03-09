@@ -220,7 +220,7 @@ test('Get Operation Parameters', () => {
 });
 test('Get Operation Parameter Summary', () => {
     console.log(doc.getParameterSummary())
-    expect(doc.getParameterSummary().length).toBe(4);
+    expect(doc.getParameterSummary().length).toBe(5);
 });
 test('Check operation deprecation', () => {
     expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);

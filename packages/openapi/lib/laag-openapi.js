@@ -1184,7 +1184,7 @@ class Openapi extends Core {
      getParameterSummary() {
         let ret = [];
         for (let P of this.getPathNames()) {
-            ret = [...ret,...this.getOperationParameters(P, 'all')];
+            ret = [...ret,...this.getOperationParameters(P, 'path')];
             for (let M of Object.keys(this.doc.paths[P])) {
                 ret = [...ret,...this.getOperationParameters(P, M)];
             }
