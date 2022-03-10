@@ -1210,6 +1210,25 @@ class Openapi extends Core {
         }
         return ret;
     }
+    /**
+     * gets any path parameters that are in a path, either defined
+     * as {param} or :param
+     *
+     * @param {Object} path - the resource path
+     * @return {Array} - array of resources, methods and status codes
+     * @memberof Openapi
+     */
+    getParametersFromPath(path) {
+        let rg1 = RegExp(/{([^}]*)}/g);;
+        let rg2 = RegExp(/:([\w-]+)/g);
+
+        let params = Array.from(path.matchAll(rg1), x => x[1]);
+        if (params.length === 0) {
+            params = Array.from(path.matchAll(rg2), x => x[1]);
+        }
+
+        return params;
+    }
 }
 
 /** Class representing a header component */

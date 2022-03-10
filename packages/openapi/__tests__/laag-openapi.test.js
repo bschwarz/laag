@@ -219,7 +219,6 @@ test('Get Operation Parameters', () => {
     expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
 });
 test('Get Operation Parameter Summary', () => {
-    console.log(doc.getParameterSummary())
     expect(doc.getParameterSummary().length).toBe(5);
 });
 test('Check operation deprecation', () => {
@@ -263,4 +262,14 @@ test('Get Resource Summary, negative case', () => {
     let resources = doc.getResourceSummary();
     let getCmds = resources.filter(x => x.hasOwnProperty('get'));
     expect(getCmds.length).toBe(0);
+});
+test('Get Parameters from path with {}', () => {
+    let res = doc.getParametersFromPath('/one/{two_2}/three/{four}');
+    console.log(res);
+    expect(res.length).toBe(2);
+});
+test('Get Parameters from path with :', () => {
+    let res = doc.getParametersFromPath('/one/:two-2/three/:four');
+    console.log(res);
+    expect(res.length).toBe(2);
 });
