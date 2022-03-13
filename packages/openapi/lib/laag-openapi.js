@@ -848,7 +848,7 @@ class Openapi extends Core {
             for (let item of obj.parameters) {
                 let obj = {};
                 obj.resource = path;
-                obj.method = verb.toUpperCase();
+                obj.method = verb;
                 obj.name = item.name;
                 obj.location = item.in;
                 obj.required = item.required || false;
@@ -861,7 +861,7 @@ class Openapi extends Core {
             for (let item of pathobj.parameters) {
                 let obj = {};
                 obj.resource = path;
-                obj.method = verb.toUpperCase();
+                obj.method = verb;
                 obj.name = item.name;
                 obj.location = item.in;
                 obj.required = item.required || false;
@@ -1029,7 +1029,6 @@ class Openapi extends Core {
         let data;
         let schema;
         if (type === 'request') {
-            let code = this.getSuccessCode(path, verb);
             data = this.getOperationRequest(path, verb);
             if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
                 return null;
@@ -1182,7 +1181,7 @@ class Openapi extends Core {
                 if (! this.httpMethods.includes(M)) {
                     continue;
                 }
-                let obj = {method: M.toUpperCase(), resource: P};
+                let obj = {method: M, resource: P};
                 let statuses = this.getStatusCodes(P, M).map(x => x.code);
                 for (let S of this.getAllStatusCodes()) {
                     obj[S] = statuses.includes(S) ? true : false;
