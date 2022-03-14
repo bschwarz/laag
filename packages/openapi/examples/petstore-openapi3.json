@@ -31,6 +31,17 @@
         "operationId": "findPets",
         "parameters": [
           {
+            "name": "some-header",
+            "in": "header",
+            "description": "tags to filter by",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "example": "this_is_example"
+            }
+          },
+          {
             "name": "tags",
             "in": "query",
             "description": "tags to filter by",
