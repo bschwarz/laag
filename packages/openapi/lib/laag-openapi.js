@@ -5,6 +5,15 @@
 //
 class Core {
     static validHttpMethods = ['get', 'post', 'put', 'delete', 'patch', 'head', 'options'];
+    static statusCodeReason = {200: 'OK', 201: 'Created', 202: 'Accepted', 203: 'Non-Authoritative Information',
+                               204: 'No Content', 205: 'Reset Content', 206: 'Partial Content', 400: 'Bad Request',
+                               401: 'Unauthorized', 403: 'Forbidden', 404: 'Not Found', 405: 'Method Not Allowed',
+                               406: 'Not Acceptable', 409: 'Conflict', 410: 'Gone', 411: 'Length Required',
+                               412: 'Precondition Failed', 413: 'Payload Too Large', 414: 'URI Too Long',
+                               415: 'Unsupported Media Type', 416: 'Range Not Satisfiable', 417: 'Expectation Failed',
+                               428: 'Precondition Required', 429: 'Too Many Requests', 
+                               431: 'Request Header Fields Too Large', 500: 'Internal Server Error', 502: 'Bad Gateway',
+                               503: 'Service Unavailable', 504: 'Gateway Timeout', 505: 'HTTP Version Not Supported'};
     /**
     * @description returns some random key
     */
@@ -110,14 +119,14 @@ class Openapi extends Core {
         this._httpMethods = ['get', 'post', 'put', 'delete', 'patch', 'head'];
     }
     /**
-    * Retrieve the HTTP methods
+    * Retrieve the HTTP methods list
     * @returns (Array) - an array of HTTP methods
     */
     get httpMethods() {
         return this._httpMethods;
     }
     /**
-    * Sets the base path
+    * Sets the httpMethods
     * @param (array) value - array of HTTP methods to use in other methods
     */
     set httpMethods(methods) {
@@ -744,6 +753,23 @@ class Openapi extends Core {
         return ret;
     }
     /**
+    * gets the media types for an operation response
+    * @param {string} path - the path segment of the resource
+    * @param {string} verb - HTTP verb of the operation
+    */
+    getOperationResponseMedia(path, verb) {
+        let ret = [];
+        verb = verb.toLocaleLowerCase();
+        if (! this.operationExists(path, verb)) return [];
+        
+        let success = this.getSuccessCode(path, verb);
+        if (this.dictKeysExists(this.doc.paths[path][verb],'responses', success, 'content')) {
+            ret = Object.keys(this.doc.paths[path][verb]['responses'][success]['content']);
+        }
+
+        return ret;
+    }
+    /**
     * gets the response object for a path/verb
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
@@ -1063,7 +1089,11 @@ class Openapi extends Core {
             let all = {};
             let obj;
             for (let E of schema['allOf']) {
-                obj = this.getComponentFromPath(E['$ref']);
+                if (E['$ref']) {
+                    obj = this.getComponentFromPath(E['$ref']);
+                } else {
+                    obj = E;
+                }
                 all = {...all, ...obj.properties};
             }
             schema = {type: 'object', properties: all};
@@ -1227,6 +1257,79 @@ class Openapi extends Core {
         }
 
         return params;
+    }
+    /**
+     * gets the URL parts and returns them as an array
+     * SCHEMA = 2
+     * DOMAIN = 3
+     * PORT = 5
+     * PATH = 6
+     * FILE = 8
+     * QUERYSTRING = 9
+     * HASH = 12
+     *
+     * @param {Object} url - the url to parse
+     * @return {Array} - array of URL parts
+     * @memberof Openapi
+     */
+    getUrlParts(url) {
+        let re = RegExp(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)(:([^\/]*))?((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(\?([^#]*))?(#(.*))?$/);
+        return re.exec(url);
+    }
+    /**
+     * gets the headers sample for the request
+     *
+     * @param {Object} path - the resource path
+     * @param {Object} method - the HTTP method for the operation
+     * @return {String} - string of headers for request sample
+     * @memberof Openapi
+     */
+    getRequestHeadersSample(path, method) {
+        let host;
+        if (this.servers.length === 0) {
+            host = 'some.host.com';
+        } else {
+            let parts = this.getUrlParts(this.servers[0].url);
+            host = parts[3];
+            host += `/${parts[8]}`;
+        }
+        let ret = `${method.toUpperCase()} ${path} HTTP/1.1\n`;
+        ret += `Host: ${host}\n`;
+        let headers = this.getOperationParameters(path, method).filter(x => x.location === 'header');
+        let samp = JSON.stringify(this.generateJsonSample(path, method, 'request'));
+        // TODO: need to be able to handle multiple media types
+        if (samp.length !== 0) {
+            let media = this.getOperationRequestMedia(path, method)[0];
+            ret += `Content-Type: ${media}\n`;
+            ret += `Content-Length: ${samp.length}\n`;
+        }
+        for (let H of headers) {
+            ret += `${H.name}: ${H.example || 'example_header_value'}\n`;
+        }
+
+        return ret;
+    }
+    /**
+     * gets the headers sample for the response
+     *
+     * @param {Object} path - the resource path
+     * @param {Object} method - the HTTP method for the operation
+     * @return {String} - string of headers for request sample
+     * @memberof Openapi
+     */
+    getResponseHeadersSample(path, method) {
+        let code = this.getSuccessCode(path, method);
+        let ret = `HTTP/1.1 ${code} ${Core.statusCodeReason[code] || ''}\n`;
+        ret += `Date: ${(new Date()).toUTCString()}\n`; 
+        let samp = JSON.stringify(this.generateJsonSample(path, method, 'response'));
+        // TODO: need to be able to handle multiple media types
+        if (samp.length !== 0) {
+            let media = this.getOperationResponseMedia(path, method)[0];
+            ret += `Content-Type: ${media}\n`;
+            ret += `Content-Length: ${samp.length}\n`;
+        }
+
+        return ret;
     }
 }
 

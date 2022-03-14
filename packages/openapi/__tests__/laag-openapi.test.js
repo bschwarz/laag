@@ -219,7 +219,7 @@ test('Get Operation Parameters', () => {
     expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
 });
 test('Get Operation Parameter Summary', () => {
-    expect(doc.getParameterSummary().length).toBe(5);
+    expect(doc.getParameterSummary().length).toBe(6);
 });
 test('Check operation deprecation', () => {
     expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);
@@ -265,11 +265,17 @@ test('Get Resource Summary, negative case', () => {
 });
 test('Get Parameters from path with {}', () => {
     let res = doc.getParametersFromPath('/one/{two_2}/three/{four}');
-    console.log(res);
     expect(res.length).toBe(2);
 });
 test('Get Parameters from path with :', () => {
     let res = doc.getParametersFromPath('/one/:two-2/three/:four');
-    console.log(res);
     expect(res.length).toBe(2);
+});
+test('Get Header request header sample', () => {
+    let res = doc.getRequestHeadersSample('/pets', 'post');
+    expect(res.length).not.toBe(0);
+});
+test('Get Header response header sample', () => {
+    let res = doc.getResponseHeadersSample('/pets', 'get');
+    expect(res.length).not.toBe(0);
 });
