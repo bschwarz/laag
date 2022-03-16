@@ -282,3 +282,12 @@ test('Get Header response header sample', () => {
     let res = doc.getResponseHeadersSample('/pets', 'get');
     expect(res.length).not.toBe(0);
 });
+test('Get Header request header sample - no body', () => {
+    let res = doc.getRequestHeadersSample('/pets', 'get');
+    expect(res.match('Content-Length')).toBe(null);
+});
+test('Get Header response header sample - no body', () => {
+    let res = doc.getResponseHeadersSample('/pets/{id}', 'delete');
+    console.log(res)
+    expect(res.match('Content-Length')).toBe(null);
+});
