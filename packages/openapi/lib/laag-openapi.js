@@ -1150,6 +1150,52 @@ class Openapi extends Core {
         return ret;
     }
     /**
+     * generate python code based on verb and path
+     *
+     * @param {Object} path - the resource path
+     * @param {Object} verb - the HTTP verb for the operation
+     * @return {Array} Python code
+     * @memberof Openapi
+     */
+     getPythonCode(path, verb) {
+        let ret = 'import requests\n\n';
+        let cmd = '';
+        // verb = verb.toUpperCase();
+        let opAppend = '';
+
+        let cnt = 1;
+        for (let S of this.servers) {
+            ret +=`# Endpoint for '${S.description}'\n`;
+            if (cnt === 1) {
+                ret += `URL = '${S.url}${path}'\n`;
+            } else {
+                ret += `# URL = '${S.url}${path}'\n`;
+            }
+            cnt += 1;
+        }
+        // TODO: fill these in from spec
+        ret += '\n# Add query params here\n'
+        ret += 'qparams = {}\n\n';
+        ret += '# Add headers here\n'
+        ret += 'headers = {}\n\n';
+        let body = this.generateJsonSample(path, verb, 'request');
+        if (body) {
+            ret += '# Add request body here (see HTTP request tab for example)\n'
+            ret += 'data = {}\n\n';
+            ret += `response = requests.${verb}(url = URL, params = qparams, headers = headers, data = data)\n`;
+        } else {
+            ret += `response = requests.${verb}(url = URL, params = qparams, headers = headers, data = data)\n`;
+        }
+        // TODO: account for other media types
+        body = this.generateJsonSample(path, verb, 'response');
+        if (body) {
+            ret += 'data = response.json()\n';
+        }
+        ret += 'status = response.status_code'
+
+        return ret;
+    }
+    /**
      * generate a list of objects where each object represents a resource
      * and it's methods
      *

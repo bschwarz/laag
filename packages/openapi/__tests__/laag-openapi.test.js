@@ -248,6 +248,9 @@ test('Set/Get externalDocs', () => {
 test('Get curl commands', () => {
     expect(Object.keys(doc.getCurlCommands('/pets', 'post')).length).toBe(1);
 });
+test('Get python code', () => {
+    expect(Object.keys(doc.getPythonCode('/pets', 'post')).length).not.toBe(0);
+});
 test('Get Resource Summary', () => {
     let resources = doc.getResourceSummary();
     expect(resources[0].get).toBe(true);
