@@ -1332,14 +1332,15 @@ class Openapi extends Core {
      */
     getRequestHeadersSample(path, method) {
         let host;
+        let xpath = '';
         if (this.servers.length === 0) {
             host = 'some.host.com';
         } else {
             let parts = this.getUrlParts(this.servers[0].url);
             host = parts[3];
-            host += `/${parts[8]}`;
+            xpath = `/${parts[8]}`;
         }
-        let ret = `${method.toUpperCase()} ${path} HTTP/1.1\n`;
+        let ret = `${method.toUpperCase()} ${xpath}${path} HTTP/1.1\n`;
         ret += `Host: ${host}\n`;
         let headers = this.getOperationParameters(path, method).filter(x => x.location === 'header');
         let samp = JSON.stringify(this.generateJsonSample(path, method, 'request'));
