@@ -1343,9 +1343,10 @@ class Openapi extends Core {
         let ret = `${method.toUpperCase()} ${xpath}${path} HTTP/1.1\n`;
         ret += `Host: ${host}\n`;
         let headers = this.getOperationParameters(path, method).filter(x => x.location === 'header');
-        let samp = JSON.stringify(this.generateJsonSample(path, method, 'request'));
+        let body = this.generateJsonSample(path, method, 'request');
         // TODO: need to be able to handle multiple media types
-        if (samp.length !== 0) {
+        if (body) {
+            let samp = JSON.stringify(body);
             let media = this.getOperationRequestMedia(path, method)[0];
             ret += `Content-Type: ${media}\n`;
             ret += `Content-Length: ${samp.length}\n`;
@@ -1368,9 +1369,10 @@ class Openapi extends Core {
         let code = this.getSuccessCode(path, method);
         let ret = `HTTP/1.1 ${code} ${Core.statusCodeReason[code] || ''}\n`;
         ret += `Date: ${(new Date()).toUTCString()}\n`; 
-        let samp = JSON.stringify(this.generateJsonSample(path, method, 'response'));
+        let body = this.generateJsonSample(path, method, 'response');
         // TODO: need to be able to handle multiple media types
-        if (samp.length !== 0) {
+        if (body) {
+            let samp = JSON.stringify(body);
             let media = this.getOperationResponseMedia(path, method)[0];
             ret += `Content-Type: ${media}\n`;
             ret += `Content-Length: ${samp.length}\n`;
