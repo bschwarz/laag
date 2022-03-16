@@ -1099,7 +1099,7 @@ class Openapi extends Core {
             schema = {type: 'object', properties: all};
             // schema = this.getComponentFromPath(schema['allOf'][0]['$ref']);
         }
-        if (schema.type === 'object' || typeof schema.type === 'undefined') {
+        if ((schema.type === 'object' || typeof schema.type === 'undefined') && schema.properties) {
             start = start || {};
             for (let K of Object.keys(schema.properties)) {
                 if (schema.properties[K].type === 'array') {
