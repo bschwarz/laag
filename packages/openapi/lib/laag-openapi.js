@@ -1337,8 +1337,13 @@ class Openapi extends Core {
             host = 'some.host.com';
         } else {
             let parts = this.getUrlParts(this.servers[0].url);
-            host = parts[3];
-            xpath = `/${parts[8]}`;
+            if (parts) {
+                host = parts[3];
+                xpath = `/${parts[8]}`;
+            } else {
+                host = 'some.host.com';
+                xpath = '';
+            }
         }
         let ret = `${method.toUpperCase()} ${xpath}${path} HTTP/1.1\n`;
         ret += `Host: ${host}\n`;
