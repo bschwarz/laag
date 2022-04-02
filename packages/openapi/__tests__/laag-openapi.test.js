@@ -291,3 +291,13 @@ test('Get Header response header sample - no body', () => {
     console.log(res)
     expect(res.match('Content-Length')).toBe(null);
 });
+test('Delete an operation', () => {
+    let res = doc.deleteOperation('/pets/{id}', 'delete');
+    console.log(res);
+    expect(doc.operationExists('/pets/{id}', 'delete')).toBe(false);
+});
+test('Delete a path', () => {
+    let res = doc.deletePath('/pets/{id}');
+    console.log(res);
+    expect(doc.pathExists('/pets/{id}')).toBe(false);
+});

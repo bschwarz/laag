@@ -926,6 +926,35 @@ class Openapi extends Core {
         return;
     }
     /**
+    * deletes a path
+    * @param {string} path - the path name
+    */
+    deletePath(path) {
+
+        path = path.trim();
+        if (this.doc.paths[path]) {
+            delete this.doc.paths[path];
+            return true;
+        }
+
+        return false;
+    }
+    /**
+    * deletes an operation in a pth
+    * @param {string} path - the path name
+    */
+    deleteOperation(path, method) {
+
+        path = path.trim();
+        method = method.trim().toLowerCase();
+        if (this.doc.paths[path][method]) {
+            delete this.doc.paths[path][method];
+            return true;
+        }
+
+        return false;
+    }
+    /**
     * @description breaks up each path segment and creates a tree representation of the paths
     * @param {array} paths - array of objects organized in the tree like structure
     */
