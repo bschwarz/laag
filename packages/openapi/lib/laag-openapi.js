@@ -524,7 +524,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the components information
     */
     get componentsSchemas() {
-        return this.dictKeysExists(this.doc, 'components') ? this.doc.components : {};
+        return this.dictKeysExists(this.doc, 'components', 'schemas') ? this.doc.components.schemas : {};
     }
     /**
     * Retrieves the security object
@@ -756,15 +756,18 @@ class Openapi extends Core {
     * gets the media types for an operation response
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
+    * @param {integer} code - HTTP status code of the operation
     */
-    getOperationResponseMedia(path, verb) {
+    getOperationResponseMedia(path, verb, code=null) {
         let ret = [];
         verb = verb.toLocaleLowerCase();
         if (! this.operationExists(path, verb)) return [];
         
-        let success = this.getSuccessCode(path, verb);
-        if (this.dictKeysExists(this.doc.paths[path][verb],'responses', success, 'content')) {
-            ret = Object.keys(this.doc.paths[path][verb]['responses'][success]['content']);
+        if (! code) {
+            code = this.getSuccessCode(path, verb);
+        }
+        if (this.dictKeysExists(this.doc.paths[path][verb],'responses', code, 'content')) {
+            ret = Object.keys(this.doc.paths[path][verb]['responses'][code]['content']);
         }
 
         return ret;
@@ -790,7 +793,7 @@ class Openapi extends Core {
     * @param {string} path - the path segment of the resource
     * @param {string} verb - HTTP verb of the operation
     */
-    getOperationRequest(path, verb, statusCode) {
+    getOperationRequest(path, verb) {
         let ret = {};
         if (! this.operationExists(path, verb)) return {};
         
@@ -884,7 +887,8 @@ class Openapi extends Core {
             }
         }
         if (all) {
-            for (let item of pathobj.parameters) {
+            let params = pathobj.parameters || [];
+            for (let item of params) {
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
