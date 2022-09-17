@@ -881,7 +881,7 @@ class Openapi extends Core {
                 obj.name = item.name;
                 obj.location = item.in;
                 obj.required = item.required || false;
-                obj.type = item.schema.type;
+                obj.type = item.schema.type || 'string';
                 obj.description = item.description;
                 ret.push(obj);
             }
