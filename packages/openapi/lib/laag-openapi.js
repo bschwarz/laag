@@ -881,11 +881,11 @@ class Openapi extends Core {
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
-                obj.name = item.name;
-                obj.location = item.in;
+                obj.name = item.name || 'UNKNOWN';
+                obj.location = item.in || 'header';
                 obj.required = item.required || false;
                 obj.type = item.schema.type || 'string';
-                obj.description = item.description;
+                obj.description = item.description || '';
                 ret.push(obj);
             }
         }
@@ -895,11 +895,11 @@ class Openapi extends Core {
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
-                obj.name = item.name;
-                obj.location = item.in;
+                obj.name = item.name || 'UNKNOWN';
+                obj.location = item.in || 'header';
                 obj.required = item.required || false;
-                obj.type = item.schema.type;
-                obj.description = item.description;
+                obj.type = item.schema.type || 'string';
+                obj.description = item.description || '';
                 ret.push(obj);
             }
         }
