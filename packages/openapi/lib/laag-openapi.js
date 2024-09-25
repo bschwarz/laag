@@ -254,7 +254,7 @@ class Openapi extends Core {
     * @returns (String) - title for the definition
     */
     get title() {
-        return this.dictKeysExists(this.doc, 'info', 'title') ? this.doc.info.title : null;
+        return this.doc?.info?.title ?? null;
     }
     /**
     * Sets the title for the API from the openapi3 document
@@ -268,7 +268,7 @@ class Openapi extends Core {
     * @returns (String) - description for the definition
     */
     get description() {
-        return this.dictKeysExists(this.doc, 'info', 'description') ? this.doc.info.description : null;
+        return this.doc?.info?.description ?? null;
     }
     /**
     * Sets the description for the API from the openapi3 document
@@ -282,7 +282,7 @@ class Openapi extends Core {
     * @returns (String) - version for the definition
     */
     get version() {
-        return this.dictKeysExists(this.doc, 'info', 'version') ? this.doc.info.version : null;
+        return this.doc?.info?.version ?? null;
     }
     /**
     * Sets the version for the API from the openapi3 document
@@ -296,7 +296,7 @@ class Openapi extends Core {
     * @returns (String) - terms of service
     */
     get termsOfService() {
-        return this.dictKeysExists(this.doc, 'info', 'termsOfService') ? this.doc.info.termsOfService : null;
+        return this.doc?.info?.termsOfService ?? null;
     }
     /**
     * Sets the terms of service for the API from the openapi3 document
@@ -310,7 +310,7 @@ class Openapi extends Core {
     * @returns (Object) - the object with the contact information
     */
     get contact() {
-        return this.dictKeysExists(this.doc, 'info', 'contact') ? this.doc.info.contact : {};
+        return this.doc?.info?.contact ?? {};
     }
     /**
     * Sets the contact object
@@ -336,7 +336,7 @@ class Openapi extends Core {
     * @returns (Object) - Object with the license information
     */
     get license() {
-        return this.dictKeysExists(this.doc, 'info', 'license') ? this.doc.info.license : {};
+        return this.doc?.info?.license ?? {};
     }
     /**
     * Sets the license object
@@ -364,7 +364,7 @@ class Openapi extends Core {
     * @returns (Array) - returns array containing server information
     */
     get servers() {
-        return this.dictKeysExists(this.doc, 'servers') ? this.doc.servers : [];
+        return this.doc?.servers ?? [];
     }
     /**
     * Sets the servers array
@@ -439,7 +439,7 @@ class Openapi extends Core {
     * @returns (Array) - returns object containing all of the path information
     */
     get paths() {
-        return this.dictKeysExists(this.doc, 'paths') ? this.doc.paths : {};
+        return this.doc?.paths ?? {};
     }
     /**
     * sets the paths object in it's native form
@@ -503,14 +503,14 @@ class Openapi extends Core {
     * @returns (String) - returns object containing the path information
     */
     getPath(path) {
-        return this.dictKeysExists(this.doc, 'paths', path) ? this.doc.paths[path] : {};
+        return this.doc?.paths?.[path] ?? {};
     }
     /**
     * Retrieves the components object
     * @returns (Object) - returns object containing all of the components information
     */
     get components() {
-        return this.dictKeysExists(this.doc, 'components') ? this.doc.components : {};
+        return this.doc?.components ?? {};
     }
     /**
     * sets the components object in it's native form
@@ -524,14 +524,14 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the components information
     */
     get componentsSchemas() {
-        return this.dictKeysExists(this.doc, 'components', 'schemas') ? this.doc.components.schemas : {};
+        return this.doc?.components?.schemas ?? {};
     }
     /**
     * Retrieves the security object
     * @returns (Object) - returns object containing all of the security information
     */
-    get security() {
-        return this.dictKeysExists(this.doc, 'security') ? this.doc.security : {};
+    get security() {      
+        return this.doc?.security ?? {};  
     }
     /**
     * sets the security object in it's native form
@@ -545,7 +545,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the tags information
     */
     get tags() {
-        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : [];
+        return this.doc?.tags ?? []; 
     }
     /**
     * sets the tags object in it's native form
@@ -573,7 +573,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the externalDocs information
     */
     get externalDocs() {
-        return this.dictKeysExists(this.doc, 'externalDocs') ? this.doc.externalDocs : {};
+        return this.doc?.externalDocs ?? {}; 
     }
     /**
     * sets the externalDocs object in it's native form
