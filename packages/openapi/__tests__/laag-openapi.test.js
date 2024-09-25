@@ -165,7 +165,7 @@ test('Append paths level extension', () => {
     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
 });
 test('Get a Specific Path', () => {
-    expect(Object.keys(doc.getPath('/pets')).length).toBe(3);
+    expect(Object.keys(doc.getPath('/pets')).length).toBe(4);
 });
 test('Get All Unique HTTP Methods Across All Operations', () => {
     expect(doc.getAllHttpMethods().length).toBe(3);
@@ -219,7 +219,12 @@ test('Get Operation Parameters', () => {
     expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
 });
 test('Get Operation Parameter Summary', () => {
-    expect(doc.getParameterSummary().length).toBe(6);
+    expect(doc.getParameterSummary().length).toBe(8);
+});
+test('Get Operation Parameter Summary and check for reference', () => {
+    let summary = doc.getParameterSummary();
+    let value = summary.filter(x => x.name === "testParameter");
+    expect(value.length).toBe(1);
 });
 test('Check operation deprecation', () => {
     expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);
@@ -288,16 +293,13 @@ test('Get Header request header sample - no body', () => {
 });
 test('Get Header response header sample - no body', () => {
     let res = doc.getResponseHeadersSample('/pets/{id}', 'delete');
-    console.log(res)
     expect(res.match('Content-Length')).toBe(null);
 });
 test('Delete an operation', () => {
     let res = doc.deleteOperation('/pets/{id}', 'delete');
-    console.log(res);
     expect(doc.operationExists('/pets/{id}', 'delete')).toBe(false);
 });
 test('Delete a path', () => {
     let res = doc.deletePath('/pets/{id}');
-    console.log(res);
     expect(doc.pathExists('/pets/{id}')).toBe(false);
 });
