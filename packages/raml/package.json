@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://bschwarz:Il0vemys0ns@github.com/bschwarz/laag.git"
+    "url": "git+https://github.com/bschwarz/laag.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
