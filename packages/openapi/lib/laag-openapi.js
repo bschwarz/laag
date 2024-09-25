@@ -875,6 +875,9 @@ class Openapi extends Core {
         }
         if (obj.parameters) {
             for (let item of obj.parameters) {
+                if (item['$ref']) {
+                    item = this.getComponentFromPath(item['$ref']);
+                }
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
