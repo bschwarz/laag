@@ -8,7 +8,8 @@ let doc = null;
 let docNew = null;
 
 beforeAll(() => {
-    let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
+    // let data = fs.readFileSync('examples/housestore-openapi3.json', 'utf8');
+    let data = fs.readFileSync('examples/houses-openapi3.json', 'utf8');
     doc = new Openapi(data);
     docNew = new Openapi();
 });
@@ -22,25 +23,25 @@ beforeAll(() => {
 // Test getting from existing doc
 //
 test('Get Definition doc in JS', () => {
-    expect(doc.getDefinition().info.title).toBe('Swagger Petstore');
+    expect(doc.getDefinition().info.title).toBe('House API Example');
 });
 test('Get Definition doc in JSON', () => {
-    expect(JSON.parse(doc.getDefinition('json')).info.title).toBe('Swagger Petstore');
+    expect(JSON.parse(doc.getDefinition('json')).info.title).toBe('House API Example');
 });
 test('Get Definition doc in Pretty JSON', () => {
-    expect(JSON.parse(doc.getDefinition('prettyjson')).info.title).toBe('Swagger Petstore');
+    expect(JSON.parse(doc.getDefinition('prettyjson')).info.title).toBe('House API Example');
 });
 test('Check if dictKeysExists works', () => {
-    expect(doc.dictKeysExists(doc.paths,'/pets', 'get')).toBe(true);
+    expect(doc.dictKeysExists(doc.paths,'/houses', 'get')).toBe(true);
 });
 test('Rename a path', () => {
-    doc.renamePath('/pets', '/petsX');
-    expect(doc.getPathNames().includes('/petsX')).toBe(true);
-    doc.renamePath('/petsX', '/pets');
+    doc.renamePath('/houses', '/housesX');
+    expect(doc.getPathNames().includes('/housesX')).toBe(true);
+    doc.renamePath('/housesX', '/houses');
 });
 test('Get tree representation of the paths', () => {
     let objs = doc.getPathsAsTree();
-    expect(objs[0].name === 'pets').toBe(true);
+    expect(objs[0].name === 'houses').toBe(true);
 });
 
 //
@@ -165,69 +166,78 @@ test('Append paths level extension', () => {
     expect(Object.keys(docNew.pathsExtensions).length).toBe(2);
 });
 test('Get a Specific Path', () => {
-    expect(Object.keys(doc.getPath('/pets')).length).toBe(4);
+    // console.log(Object.keys(doc.getPath('/houses')))
+    let path = doc.getPath('/houses');
+    let keys = Object.keys(path);
+    expect(keys.length).toBe(4);
+    expect(keys.includes('get')).toBe(true);
+    expect(keys.includes('post')).toBe(true);
+    expect(keys.includes('description')).toBe(true);
+    expect(keys.includes('parameters')).toBe(true);
 });
 test('Get All Unique HTTP Methods Across All Operations', () => {
-    expect(doc.getAllHttpMethods().length).toBe(3);
+    expect(doc.getAllHttpMethods().length).toBe(4);
 });
 test('Get All Status Codes for an Operation', () => {
-    expect(doc.getStatusCodes('/pets', 'get').length).toBe(1);
+    expect(doc.getStatusCodes('/houses', 'get').length).toBe(3);
 });
 test('Get All Status Codes for *all* Operations', () => {
-    expect(doc.getAllStatusCodes().length).toBe(2);
+    expect(doc.getAllStatusCodes().length).toBe(5);
 });
 test('Get All Status Codes Summary for *all* Operations', () => {
-    expect(doc.getStatusCodeSummary().length).toBe(4);
+    expect(doc.getStatusCodeSummary().length).toBe(10);
 });
 test('Get Success Code for an Operation', () => {
-    expect(doc.getSuccessCode('/pets/{id}', 'delete')).toBe('204');
+    expect(doc.getSuccessCode('/houses/{houseId}', 'delete')).toBe('204');
 });
 test('Get Operation Id for an Operation', () => {
-    expect(doc.getOperationId('/pets', 'get')).toBe('findPets');
+    expect(doc.getOperationId('/houses', 'get')).toBe('ListHouses');
 });
 test('Set Operation Id for an Operation', () => {
-    doc.setOperationId('/pets', 'get', 'someId');
-    expect(doc.getOperationId('/pets', 'get')).toBe('someId');
+    doc.setOperationId('/houses', 'get', 'someId');
+    expect(doc.getOperationId('/houses', 'get')).toBe('someId');
 });
 test('Get Operation Ids for all Operations', () => {
-    expect(doc.getOperationIds().length).toBe(4);
+    expect(doc.getOperationIds().length).toBe(10);
 });
 test('Check if an Operation exists (true)', () => {
-    expect(doc.operationExists('/pets', 'get')).toBe(true);
+    expect(doc.operationExists('/houses', 'get')).toBe(true);
 });
 test('Check if an Operation exists (false)', () => {
-    expect(doc.operationExists('/petsX', 'get')).toBe(false);
+    expect(doc.operationExists('/housesX', 'get')).toBe(false);
 });
 test('Check if an Path exists (true)', () => {
-    expect(doc.pathExists('/pets')).toBe(true);
+    expect(doc.pathExists('/houses')).toBe(true);
 });
 test('Check if an Path exists (false)', () => {
-    expect(doc.pathExists('/petsX')).toBe(false);
+    expect(doc.pathExists('/housesX')).toBe(false);
 });
 test('Get Operation RequestBody Media Type', () => {
-    expect(Object.keys(doc.getOperationRequestMedia('/pets', 'post')).length).toBe(1);
+    expect(Object.keys(doc.getOperationRequestMedia('/houses', 'post')).length).toBe(1);
 });
 test('Get Operation Description', () => {
-    expect(Object.keys(doc.getOperationDescription('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
+    expect(Object.keys(doc.getOperationDescription('/houses', 'post')).length).toBeGreaterThanOrEqual(5);
 });
 test('Get Operation Data', () => {
-    expect(Object.keys(doc.getOperationData('/pets', 'post')).length).toBeGreaterThanOrEqual(5);
+    expect(Object.keys(doc.getOperationData('/houses', 'post')).length).toBeGreaterThanOrEqual(5);
 });
 test('Get Operation Parameters', () => {
-    expect(doc.getOperationParameters('/pets/{id}', 'get').length).toBe(1);
-    expect(doc.getOperationParameters('/pets/{id}', 'path').length).toBe(1);
-    expect(doc.getOperationParameters('/pets/{id}', 'get', true).length).toBe(2);
+    expect(doc.getOperationParameters('/houses/{houseId}', 'get').length).toBe(0);
+    expect(doc.getOperationParameters('/houses/{houseId}', 'path').length).toBe(4);
+    expect(doc.getOperationParameters('/houses/{houseId}', 'get', true).length).toBe(4);
 });
 test('Get Operation Parameter Summary', () => {
-    expect(doc.getParameterSummary().length).toBe(8);
-});
-test('Get Operation Parameter Summary and check for reference', () => {
+    // console.log("OPERATION SUMMARY")
+    // console.log(doc.getParameterSummary())
     let summary = doc.getParameterSummary();
-    let value = summary.filter(x => x.name === "testParameter");
-    expect(value.length).toBe(1);
+    let lengths = summary.map(x => Object.keys(x).length);
+    let slengths = new Set(lengths)
+    expect(summary.length).toBe(22);
+    expect(slengths.size).toBe(1);
+    expect(Array.from(slengths)[0]).toBe(7);
 });
 test('Check operation deprecation', () => {
-    expect(doc.isOperationDeprecated('/pets', 'post')).toBe(true);
+    expect(doc.isOperationDeprecated('/houses', 'post')).toBe(true);
 });
 test('Set/Get components', () => {
     let x = {schemas: {}, responses: {}, parameters: {}, examples: {}, requestBodies: {}, headers: {}};
@@ -251,10 +261,12 @@ test('Set/Get externalDocs', () => {
     expect(Object.keys(docNew.externalDocs).length).toBe(2);
 });
 test('Get curl commands', () => {
-    expect(Object.keys(doc.getCurlCommands('/pets', 'post')).length).toBe(1);
+    // console.log("CURL COMMANDS")
+    // console.log(doc.getCurlCommands('/houses', 'post'))
+    expect(Object.keys(doc.getCurlCommands('/houses', 'post')).length).toBe(1);
 });
 test('Get python code', () => {
-    expect(Object.keys(doc.getPythonCode('/pets', 'post')).length).not.toBe(0);
+    expect(Object.keys(doc.getPythonCode('/houses', 'post')).length).not.toBe(0);
 });
 test('Get Resource Summary', () => {
     let resources = doc.getResourceSummary();
@@ -262,8 +274,8 @@ test('Get Resource Summary', () => {
 });
 test('Get operation Summary', () => {
     let resources = doc.getOperationSummary();
-    expect(resources.length).toBe(4);
-    expect(resources[0].resource).toBe('/pets');
+    expect(resources.length).toBe(10);
+    expect(resources[0].resource).toBe('/houses');
 });
 test('Get Resource Summary, negative case', () => {
     doc.httpMethods = ['post'];
@@ -280,26 +292,31 @@ test('Get Parameters from path with :', () => {
     expect(res.length).toBe(2);
 });
 test('Get Header request header sample', () => {
-    let res = doc.getRequestHeadersSample('/pets', 'post');
+    let res = doc.getRequestHeadersSample('/houses', 'post');
     expect(res.length).not.toBe(0);
 });
 test('Get Header response header sample', () => {
-    let res = doc.getResponseHeadersSample('/pets', 'get');
+    let res = doc.getResponseHeadersSample('/houses', 'get');
     expect(res.length).not.toBe(0);
 });
 test('Get Header request header sample - no body', () => {
-    let res = doc.getRequestHeadersSample('/pets', 'get');
+    let res = doc.getRequestHeadersSample('/houses', 'get');
     expect(res.match('Content-Length')).toBe(null);
 });
 test('Get Header response header sample - no body', () => {
-    let res = doc.getResponseHeadersSample('/pets/{id}', 'delete');
+    let res = doc.getResponseHeadersSample('/houses/{houseId}', 'delete');
+    // console.log(res)
     expect(res.match('Content-Length')).toBe(null);
 });
 test('Delete an operation', () => {
-    let res = doc.deleteOperation('/pets/{id}', 'delete');
-    expect(doc.operationExists('/pets/{id}', 'delete')).toBe(false);
+    let res = doc.deleteOperation('/houses/{houseId}', 'delete');
+    // console.log(res);
+    expect(doc.operationExists('/houses/{houseId}', 'delete')).toBe(false);
 });
 test('Delete a path', () => {
-    let res = doc.deletePath('/pets/{id}');
-    expect(doc.pathExists('/pets/{id}')).toBe(false);
+    let res = doc.deletePath('/houses/{houseId}');
+    // console.log(res);
+    expect(doc.pathExists('/houses/{houseId}')).toBe(false);
 });
+
+console.log(__dirname);

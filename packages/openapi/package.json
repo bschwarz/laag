@@ -1,6 +1,6 @@
 {
   "name": "@laag/openapi",
-  "version": "1.7.2",
+  "version": "1.8.2",
   "description": "library for interfacing with swagger/openapi documents",
   "keywords": [
     "rest",
@@ -25,7 +25,7 @@
     "url": "git+https://github.com/bschwarz/laag.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/bschwarz/laag/issues"
@@ -33,5 +33,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd"
+  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "js-yaml": "^4.1.0"
+  }
 }

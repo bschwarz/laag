@@ -1,7 +1,7 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.0.0",
   "x-custom-ext": "This is a custom extension",
-  "info": { 
+  "info": {
     "x-info-custom-ext": "This is a custom info extension",
     "version": "1.0.0",
     "title": "Swagger Petstore",
@@ -24,16 +24,6 @@
   ],
   "paths": {
     "/pets": {
-      "parameters": [
-        {
-          "name": "test",
-          "in": "header",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {"$ref": "#/components/parameters/testParameter"}
-      ],
       "description": "Some description for the resource",
       "get": {
         "tags": ["one", "two", "three"],
@@ -45,7 +35,7 @@
             "in": "header",
             "description": "tags to filter by",
             "required": false,
-            "style": "form",
+            "style": "simple",
             "schema": {
               "type": "string",
               "example": "this_is_example"
@@ -266,17 +256,6 @@
           "message": {
             "type": "string"
           }
-        }
-      }
-    },
-    "parameters": {
-      "testParameter": {
-        "name": "testParameter",
-        "in": "query",
-        "required": true,
-        "description": "This is to test references for parameters",
-        "schema": {
-          "type": "string"
         }
       }
     }

@@ -254,7 +254,7 @@ class Openapi extends Core {
     * @returns (String) - title for the definition
     */
     get title() {
-        return this.doc?.info?.title ?? null;
+        return this.dictKeysExists(this.doc, 'info', 'title') ? this.doc.info.title : null;
     }
     /**
     * Sets the title for the API from the openapi3 document
@@ -268,7 +268,7 @@ class Openapi extends Core {
     * @returns (String) - description for the definition
     */
     get description() {
-        return this.doc?.info?.description ?? null;
+        return this.dictKeysExists(this.doc, 'info', 'description') ? this.doc.info.description : null;
     }
     /**
     * Sets the description for the API from the openapi3 document
@@ -282,7 +282,7 @@ class Openapi extends Core {
     * @returns (String) - version for the definition
     */
     get version() {
-        return this.doc?.info?.version ?? null;
+        return this.dictKeysExists(this.doc, 'info', 'version') ? this.doc.info.version : null;
     }
     /**
     * Sets the version for the API from the openapi3 document
@@ -296,7 +296,7 @@ class Openapi extends Core {
     * @returns (String) - terms of service
     */
     get termsOfService() {
-        return this.doc?.info?.termsOfService ?? null;
+        return this.dictKeysExists(this.doc, 'info', 'termsOfService') ? this.doc.info.termsOfService : null;
     }
     /**
     * Sets the terms of service for the API from the openapi3 document
@@ -310,7 +310,7 @@ class Openapi extends Core {
     * @returns (Object) - the object with the contact information
     */
     get contact() {
-        return this.doc?.info?.contact ?? {};
+        return this.dictKeysExists(this.doc, 'info', 'contact') ? this.doc.info.contact : {};
     }
     /**
     * Sets the contact object
@@ -336,7 +336,7 @@ class Openapi extends Core {
     * @returns (Object) - Object with the license information
     */
     get license() {
-        return this.doc?.info?.license ?? {};
+        return this.dictKeysExists(this.doc, 'info', 'license') ? this.doc.info.license : {};
     }
     /**
     * Sets the license object
@@ -364,7 +364,7 @@ class Openapi extends Core {
     * @returns (Array) - returns array containing server information
     */
     get servers() {
-        return this.doc?.servers ?? [];
+        return this.dictKeysExists(this.doc, 'servers') ? this.doc.servers : [];
     }
     /**
     * Sets the servers array
@@ -439,7 +439,7 @@ class Openapi extends Core {
     * @returns (Array) - returns object containing all of the path information
     */
     get paths() {
-        return this.doc?.paths ?? {};
+        return this.dictKeysExists(this.doc, 'paths') ? this.doc.paths : {};
     }
     /**
     * sets the paths object in it's native form
@@ -503,14 +503,14 @@ class Openapi extends Core {
     * @returns (String) - returns object containing the path information
     */
     getPath(path) {
-        return this.doc?.paths?.[path] ?? {};
+        return this.dictKeysExists(this.doc, 'paths', path) ? this.doc.paths[path] : {};
     }
     /**
     * Retrieves the components object
     * @returns (Object) - returns object containing all of the components information
     */
     get components() {
-        return this.doc?.components ?? {};
+        return this.dictKeysExists(this.doc, 'components') ? this.doc.components : {};
     }
     /**
     * sets the components object in it's native form
@@ -524,14 +524,14 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the components information
     */
     get componentsSchemas() {
-        return this.doc?.components?.schemas ?? {};
+        return this.dictKeysExists(this.doc, 'components', 'schemas') ? this.doc.components.schemas : {};
     }
     /**
     * Retrieves the security object
     * @returns (Object) - returns object containing all of the security information
     */
-    get security() {      
-        return this.doc?.security ?? {};  
+    get security() {
+        return this.dictKeysExists(this.doc, 'security') ? this.doc.security : {};
     }
     /**
     * sets the security object in it's native form
@@ -545,7 +545,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the tags information
     */
     get tags() {
-        return this.doc?.tags ?? []; 
+        return this.dictKeysExists(this.doc, 'tags') ? this.doc.tags : [];
     }
     /**
     * sets the tags object in it's native form
@@ -573,7 +573,7 @@ class Openapi extends Core {
     * @returns (Object) - returns object containing all of the externalDocs information
     */
     get externalDocs() {
-        return this.doc?.externalDocs ?? {}; 
+        return this.dictKeysExists(this.doc, 'externalDocs') ? this.doc.externalDocs : {};
     }
     /**
     * sets the externalDocs object in it's native form
@@ -726,7 +726,6 @@ class Openapi extends Core {
     */
     operationExists(path, verb) {
         let v = verb.toLowerCase();
-
         return (this.doc.paths[path] && this.doc.paths[path][v]) ? true : false;
     }
     /**
@@ -742,15 +741,25 @@ class Openapi extends Core {
     * @param {string} verb - HTTP verb of the operation
     */
     getOperationRequestMedia(path, verb) {
-        let ret = [];
+        let item = [];
         verb = verb.toLocaleLowerCase();
         if (! this.operationExists(path, verb)) return [];
         
         if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody', 'content')) {
-            ret = Object.keys(this.doc.paths[path][verb]['requestBody']['content']);
+            item = this.doc.paths[path][verb]['requestBody']['content'];
+            if (item['$ref']) {
+                item = this.getComponentFromPath(item['$ref']);
+                item = item.content;
+            }
+        } else if (this.dictKeysExists(this.doc.paths[path][verb],'requestBody')) {
+            item = this.doc.paths[path][verb]['requestBody'];
+            if (item['$ref']) {
+                item = this.getComponentFromPath(item['$ref']);
+                item = item.content;
+            }
         }
 
-        return ret;
+        return Object.keys(item);
     }
     /**
     * gets the media types for an operation response
@@ -881,10 +890,10 @@ class Openapi extends Core {
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
-                obj.name = item.name || 'UNKNOWN';
-                obj.location = item.in || 'header';
+                obj.name = item.name;
+                obj.location = item.in;
                 obj.required = item.required || false;
-                obj.type = item.schema.type || 'string';
+                obj.type = item.schema?.type || 'string';
                 obj.description = item.description || '';
                 ret.push(obj);
             }
@@ -895,10 +904,10 @@ class Openapi extends Core {
                 let obj = {};
                 obj.resource = path;
                 obj.method = verb;
-                obj.name = item.name || 'UNKNOWN';
-                obj.location = item.in || 'header';
+                obj.name = item.name;
+                obj.location = item.in;
                 obj.required = item.required || false;
-                obj.type = item.schema.type || 'string';
+                obj.type = item.schema?.type || 'string';
                 obj.description = item.description || '';
                 ret.push(obj);
             }
@@ -1180,7 +1189,7 @@ class Openapi extends Core {
         }
         for (let S of this.servers) {
             cmd = `curl -i -X ${verb} "${S.url}${path}" -H "Authorization: <auth-token>" ${opAppend}`;
-            ret.push({command: cmd, description: S.description})
+            ret.push({command: cmd, description: S.description || ""})
         }
 
         return ret;
