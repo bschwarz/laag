@@ -25,7 +25,7 @@
     "url": "git+https://github.com/bschwarz/laag.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "bun test"
   },
   "bugs": {
     "url": "https://github.com/bschwarz/laag/issues"

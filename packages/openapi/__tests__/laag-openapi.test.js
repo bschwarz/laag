@@ -1,15 +1,11 @@
-// import {Openapi} from '../lib/laag-openapi.js';
-
-// const openapi = require('..');
-const fs = require('fs');
-const { Openapi } = require('../lib/laag-openapi.js');
+import { describe, expect, test, beforeAll } from 'bun:test'
+import { Openapi } from '../lib/laag-openapi.js';
+import data from '../examples/houses-openapi3.json';
 
 let doc = null;
 let docNew = null;
 
 beforeAll(() => {
-    // let data = fs.readFileSync('examples/housestore-openapi3.json', 'utf8');
-    let data = fs.readFileSync('examples/houses-openapi3.json', 'utf8');
     doc = new Openapi(data);
     docNew = new Openapi();
 });
