@@ -35,7 +35,6 @@
   },
   "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd",
   "dependencies": {
-    "jest": "^29.7.0",
     "js-yaml": "^4.1.0"
   }
 }
