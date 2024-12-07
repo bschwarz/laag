@@ -287,6 +287,12 @@ test('Get Parameters from path with :', () => {
     let res = doc.getParametersFromPath('/one/:two-2/three/:four');
     expect(res.length).toBe(2);
 });
+test('Generate JSON sample :', () => {
+    let res = doc.generateJsonSample('/houses', 'get', 'response') || {};
+    console.log(res)
+    expect(!!res.houses).toBe(true);
+});
+
 test('Get Header request header sample', () => {
     let res = doc.getRequestHeadersSample('/houses', 'post');
     expect(res.length).not.toBe(0);

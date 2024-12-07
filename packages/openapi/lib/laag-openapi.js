@@ -1099,6 +1099,7 @@ class Openapi extends Core {
         }
         let data;
         let schema;
+        
         if (type === 'request') {
             data = this.getOperationRequest(path, verb);
             if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
@@ -1108,10 +1109,21 @@ class Openapi extends Core {
         } else {
             let code = this.getSuccessCode(path, verb);
             data = this.getOperationResponse(path, verb, code);
-            if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
+            if (!!data['$ref']) {
+                // console.log(data['$ref'])
+                // console.log(this.getComponentFromPath(data['$ref']))
+                let component = this.getComponentFromPath(data['$ref'])
+                if (this.dictKeysExists(component, 'content', 'application/json', 'schema')) {
+                    schema = component['content']['application/json'].schema
+                } else {
+                    schema = {};
+                }
+            } else if (!this.dictKeysExists(data, 'content', 'application/json', 'schema')) {
+                console.log('DNE')
                 return null;
+            } else {
+                schema = data.content['application/json'].schema;
             }
-            schema = data.content['application/json'].schema;
         }
         let example;
         return this.getSchema(example, schema);
@@ -1147,13 +1159,18 @@ class Openapi extends Core {
         if ((schema.type === 'object' || typeof schema.type === 'undefined') && schema.properties) {
             start = start || {};
             for (let K of Object.keys(schema.properties)) {
+
                 if (schema.properties[K].type === 'array') {
                     start[K] = this.getSchema(start[K], schema.properties[K]);
                 } else if (schema.properties[K].type === 'object') {
                     start[K] = this.getSchema(start[K], schema.properties[K]);
                 } else if (schema.properties[K]['$ref']) {
                     let newschema = this.getComponentFromPath(schema.properties[K]['$ref']);
-                    start[K] = this.getSchema(start[K], newschema);
+                    if (!!newschema['type']) {
+                        start[K] = newschema.example || '';
+                    } else {
+                        start[K] = this.getSchema(start[K], newschema);
+                    }
                 } else {
                     start[K] = schema.properties[K].example || '';
                 }
@@ -1164,9 +1181,7 @@ class Openapi extends Core {
             x.push(this.getSchema(start, schema.items));
             start = x;
         }
-   
         return start;
-
     }
     /**
      * generate curl commands based on verb and path
