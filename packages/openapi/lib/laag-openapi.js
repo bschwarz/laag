@@ -1159,7 +1159,6 @@ class Openapi extends Core {
         if ((schema.type === 'object' || typeof schema.type === 'undefined') && schema.properties) {
             start = start || {};
             for (let K of Object.keys(schema.properties)) {
-
                 if (schema.properties[K].type === 'array') {
                     start[K] = this.getSchema(start[K], schema.properties[K]);
                 } else if (schema.properties[K].type === 'object') {
@@ -1175,6 +1174,9 @@ class Openapi extends Core {
                     start[K] = schema.properties[K].example || '';
                 }
             }
+        } else if ((schema.type === 'object' || typeof schema.type === 'undefined') && schema.additionalProperties) {
+            start = start || {};
+            start['{property1}'] = this.getSchema(start.property1, schema.additionalProperties);
         } else if (schema.type === 'array') {
             start = start || {};
             let x = [];
