@@ -42,7 +42,7 @@ export default [
     },
   },
   {
-    ignores: ['dist/', 'lib/', 'node_modules/', 'coverage/', '*.js', '*.mjs'],
+    ignores: ['dist/', 'lib/', 'node_modules/', 'coverage/', '*.js', '*.mjs', '**/*.d.ts'],
   },
   prettierConfig,
 ];

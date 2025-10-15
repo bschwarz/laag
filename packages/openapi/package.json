@@ -1,31 +1,70 @@
 {
   "name": "@laag/openapi",
-  "version": "1.8.4",
-  "description": "library for interfacing with swagger/openapi documents",
+  "version": "2.0.0",
+  "description": "TypeScript library for interfacing with OpenAPI/Swagger documents",
   "keywords": [
     "rest",
     "swagger",
     "openapi",
     "definition",
-    "design"
+    "design",
+    "typescript",
+    "api"
   ],
   "author": "Brett Schwarz <brett.schwarz@gmail.com>",
   "homepage": "https://github.com/bschwarz/laag/tree/main/packages/openapi",
   "license": "MIT",
-  "main": "lib/laag-openapi.js",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "browser": "./dist/browser/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "browser": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/browser/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "directories": {
-    "lib": "lib",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bschwarz/laag.git"
   },
   "scripts": {
-    "test": "bun test"
+    "build": "bun run build:clean && bun run build:esm && bun run build:cjs && bun run build:browser && bun run build:types && bun run build:post",
+    "build:clean": "rm -rf dist",
+    "build:esm": "bun build src/index.ts --outdir dist/esm --format esm --target node --external @laag/core",
+    "build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs --target node --external @laag/core",
+    "build:browser": "bun build src/index.ts --outdir dist/browser --format esm --target browser --minify --sourcemap --external @laag/core",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/types --skipLibCheck --rootDir src",
+    "build:post": "node scripts/post-build.js",
+    "build:watch": "bun build src/index.ts --outdir dist/esm --format esm --target node --external @laag/core --watch",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prepublishOnly": "bun run build && bun run test && bun run type-check"
   },
   "bugs": {
     "url": "https://github.com/bschwarz/laag/issues"
@@ -33,8 +72,22 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "445cf2b47220fa4a9837ac2ab4053d02d23df7bd",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "@laag/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   }
 }
