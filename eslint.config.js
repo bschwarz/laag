@@ -35,6 +35,38 @@ export default [
     },
   },
   {
+    files: ['packages/*/__tests__/**/*.ts'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+      globals: {
+        process: 'readonly',
+        global: 'readonly',
+        require: 'readonly',
+        Bun: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': typescript,
+      prettier,
+    },
+    rules: {
+      ...typescript.configs.recommended.rules,
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-console': 'warn',
+      'no-undef': 'off', // TypeScript handles this
+      'prefer-const': 'error',
+      'no-var': 'error',
+    },
+  },
+  {
     files: ['**/*.test.ts', '**/*.spec.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
