@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run type checking
+bun run type-check
+
+# Run linting
+bun run lint
+
+# Run formatting check
+bun run format --check
+
+# Run tests
+bun test
