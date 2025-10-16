@@ -14,8 +14,12 @@
     }
   },
   "files": [
-    "dist/"
+    "dist/",
+    "src/",
+    "README.md",
+    "LICENSE"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "bun run ../../scripts/build-package.ts",
     "build:watch": "bun run ../../scripts/build-package.ts --watch",
@@ -26,7 +30,8 @@
     "test:watch": "bun test --watch",
     "type-check": "tsc --noEmit",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prepublishOnly": "bun run build && bun run test && bun run type-check"
   },
   "keywords": [
     "api",
@@ -35,9 +40,24 @@
     "swagger",
     "raml",
     "typescript",
-    "utilities"
+    "utilities",
+    "core",
+    "base-class",
+    "error-handling"
   ],
-  "author": "laag contributors",
+  "author": "Brett Schwarz <brett.schwarz@gmail.com>",
+  "contributors": [
+    "laag contributors"
+  ],
+  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bschwarz/laag.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/bschwarz/laag/issues"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

@@ -74,7 +74,7 @@ class PackageBuilder {
     this.log('Building ESM...');
     const sourceMapFlag = sourceMaps ? '--sourceMap' : '';
     execSync(
-      `tsc --project tsconfig.json --module ESNext --moduleResolution bundler --outDir dist/esm --target ES2020 ${sourceMapFlag}`,
+      `tsc --project tsconfig.json --module ESNext --moduleResolution bundler --outDir dist/esm --rootDir src --target ES2020 ${sourceMapFlag}`,
       {
         stdio: 'inherit',
         cwd: this.packageDir,
@@ -86,7 +86,7 @@ class PackageBuilder {
     this.log('Building CommonJS...');
     const sourceMapFlag = sourceMaps ? '--sourceMap' : '';
     execSync(
-      `tsc --project tsconfig.json --module CommonJS --moduleResolution node --outDir dist/cjs --target ES2020 ${sourceMapFlag}`,
+      `tsc --project tsconfig.json --module CommonJS --moduleResolution node --outDir dist/cjs --rootDir src --target ES2020 ${sourceMapFlag}`,
       {
         stdio: 'inherit',
         cwd: this.packageDir,
@@ -97,7 +97,7 @@ class PackageBuilder {
   private buildTypes(): void {
     this.log('Generating type declarations...');
     execSync(
-      'tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types --skipLibCheck',
+      'tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types --rootDir src --skipLibCheck',
       {
         stdio: 'inherit',
         cwd: this.packageDir,
