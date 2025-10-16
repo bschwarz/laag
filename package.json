@@ -27,7 +27,10 @@
     "dev": "bun run build:watch",
     "dev:package": "bun run scripts/build-workspace.ts --watch --package",
     "validate:workflows": "bun run scripts/validate-workflows.ts",
-    "ci:local": "bun run quality && bun test && bun run build"
+    "ci:local": "bun run quality && bun test && bun run build",
+    "docs": "typedoc",
+    "docs:serve": "bun run docs && cd docs/api && python3 -m http.server 8080",
+    "docs:clean": "rm -rf docs/api"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
@@ -39,6 +42,8 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^8.0.0",
     "prettier": "^3.6.2",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^5.0.0",
     "yaml": "^2.8.1"
   },

@@ -1,5 +1,12 @@
 /**
- * Modernized TypeScript implementation of the OpenAPI/Swagger document interface
+ * Modernized TypeScript implementation of the OpenAPI/Swagger document interface.
+ *
+ * @fileoverview This module provides a comprehensive TypeScript implementation for
+ * working with OpenAPI 3.0 specification documents. It includes full type safety,
+ * validation, and utility methods for common operations.
+ *
+ * @module @laag/openapi/openapi
+ * @since 2.0.0
  */
 
 import type { ValidationResult } from '@laag/core';
@@ -25,7 +32,45 @@ import {
 } from './types.js';
 
 /**
- * Main class for working with OpenAPI/Swagger documents
+ * Main class for working with OpenAPI/Swagger documents.
+ *
+ * The Openapi class provides a comprehensive interface for creating, reading, and
+ * manipulating OpenAPI 3.0 specification documents. It extends the LaagBase class
+ * to provide common functionality while adding OpenAPI-specific methods and validation.
+ *
+ * Key features:
+ * - Full TypeScript support with comprehensive type definitions
+ * - Document validation according to OpenAPI 3.0 specification
+ * - Utility methods for common operations (paths, operations, components)
+ * - Extension property support (x-* properties)
+ * - Backward compatibility with existing APIs
+ *
+ * @class Openapi
+ * @extends LaagBase
+ * @since 2.0.0
+ *
+ * @example
+ * ```typescript
+ * import { Openapi } from '@laag/openapi';
+ *
+ * // Create from object
+ * const api = new Openapi({
+ *   openapi: '3.0.2',
+ *   info: { title: 'My API', version: '1.0.0' },
+ *   paths: {}
+ * });
+ *
+ * // Create from JSON string
+ * const api2 = new Openapi('{"openapi":"3.0.2","info":{"title":"My API","version":"1.0.0"},"paths":{}}');
+ *
+ * // Add a path
+ * api.appendPath('/users', {
+ *   get: {
+ *     summary: 'Get users',
+ *     responses: { '200': { description: 'Success' } }
+ *   }
+ * });
+ * ```
  */
 export class Openapi extends LaagBase {
   private _docVersion: string = '3.0.2';
@@ -69,8 +114,37 @@ export class Openapi extends LaagBase {
   };
 
   /**
-   * Creates an OpenAPI document instance
-   * @param doc - The OpenAPI document as a string (JSON) or object
+   * Creates a new OpenAPI document instance.
+   *
+   * If no document is provided, a minimal valid OpenAPI document structure is created
+   * with default values. If a document is provided but missing required fields,
+   * they will be initialized with default values.
+   *
+   * @param doc - The OpenAPI document as a JSON string or object. If not provided,
+   *              a minimal valid document structure is created.
+   *
+   * @throws {ParseError} When the provided string cannot be parsed as valid JSON.
+   *
+   * @example
+   * ```typescript
+   * // Create empty document with defaults
+   * const api = new Openapi();
+   *
+   * // Create from existing document
+   * const api2 = new Openapi({
+   *   openapi: '3.0.2',
+   *   info: { title: 'My API', version: '1.0.0' },
+   *   paths: {
+   *     '/users': {
+   *       get: { responses: { '200': { description: 'Success' } } }
+   *     }
+   *   }
+   * });
+   *
+   * // Create from JSON string
+   * const jsonDoc = '{"openapi":"3.0.2","info":{"title":"API","version":"1.0.0"},"paths":{}}';
+   * const api3 = new Openapi(jsonDoc);
+   * ```
    */
   constructor(doc?: string | OpenAPIDocument) {
     super(doc);
@@ -82,7 +156,27 @@ export class Openapi extends LaagBase {
   }
 
   /**
-   * Validate the OpenAPI document structure
+   * Validate the OpenAPI document structure according to the OpenAPI 3.0 specification.
+   *
+   * This method checks for required fields and basic structural validity. It validates:
+   * - Required root-level fields (openapi, info, paths)
+   * - Required info object fields (title, version)
+   * - Basic structure compliance
+   *
+   * @returns A validation result object containing the validation status and any errors found.
+   *
+   * @override
+   * @since 2.0.0
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi({ openapi: '3.0.2', paths: {} }); // Missing info
+   * const result = api.validate();
+   *
+   * console.log(result.valid); // false
+   * console.log(result.errors);
+   * // [{ path: 'info', message: 'Info object is required', code: 'REQUIRED_FIELD_MISSING' }]
+   * ```
    */
   validate(): ValidationResult {
     const errors = [];
