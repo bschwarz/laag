@@ -17,14 +17,16 @@
     "dist/"
   ],
   "scripts": {
-    "build": "bun run build:clean && bun run build:esm && bun run build:cjs && bun run build:types",
+    "build": "bun run ../../scripts/build-package.ts",
+    "build:watch": "bun run ../../scripts/build-package.ts --watch",
     "build:clean": "rm -rf dist",
-    "build:esm": "bun build src/index.ts --outdir dist/esm --format esm --target node",
-    "build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs --target node",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
-    "dev": "bun run build --watch",
+    "clean": "rm -rf dist",
+    "dev": "bun run build:watch",
     "test": "bun test",
-    "type-check": "tsc --noEmit"
+    "test:watch": "bun test --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix"
   },
   "keywords": [
     "api",

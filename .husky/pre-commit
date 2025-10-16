@@ -1,14 +1,13 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Run type checking
-bun run type-check
+echo "🔍 Running pre-commit quality checks..."
 
-# Run linting
-bun run lint
-
-# Run formatting check
-bun run format --check
+# Run comprehensive quality checks
+bun run quality
 
 # Run tests
+echo "🧪 Running tests..."
 bun test
+
+echo "✅ Pre-commit checks passed!"

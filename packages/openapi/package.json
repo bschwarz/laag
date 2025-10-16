@@ -51,19 +51,16 @@
     "url": "git+https://github.com/bschwarz/laag.git"
   },
   "scripts": {
-    "build": "bun run build:clean && bun run build:esm && bun run build:cjs && bun run build:browser && bun run build:types && bun run build:post",
+    "build": "bun run ../../scripts/build-package.ts",
+    "build:watch": "bun run ../../scripts/build-package.ts --watch",
     "build:clean": "rm -rf dist",
-    "build:esm": "bun build src/index.ts --outdir dist/esm --format esm --target node --external @laag/core",
-    "build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs --target node --external @laag/core",
-    "build:browser": "bun build src/index.ts --outdir dist/browser --format esm --target browser --minify --sourcemap --external @laag/core",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist/types --skipLibCheck --rootDir src",
-    "build:post": "node scripts/post-build.js",
-    "build:watch": "bun build src/index.ts --outdir dist/esm --format esm --target node --external @laag/core --watch",
+    "clean": "rm -rf dist",
+    "dev": "bun run build:watch",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix",
+    "lint": "eslint src/**/*.ts __tests__/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts __tests__/**/*.ts --fix",
     "prepublishOnly": "bun run build && bun run test && bun run type-check"
   },
   "bugs": {

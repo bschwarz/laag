@@ -3,13 +3,17 @@
 This is a library to interface to [RAML](https://raml.org/) rest definition documents. If gives an interface to read and write those documents from within a Node or JS application. This interface will follow the same interface as the [@laag/openapi](https://github.com/bschwarz/laag/tree/main/packages/openapi) interface.
 
 ## Install
+
 ```
 npm i @laag/raml --save
 ```
+
 ## Usage
 
 ### Reading an existing document
+
 #### Source Code
+
 ```
 const Raml = require('@laag/raml');
 const fs = require('fs');
@@ -22,7 +26,9 @@ for (const pathname of doc.getPathNames()) {
     console.log(pathname);
 }
 ```
+
 #### Output
+
 ```
 Displaying API: API with Examples vnull
 Paths defined in this API:
@@ -31,7 +37,9 @@ Paths defined in this API:
 ```
 
 ### Writing a new document
+
 #### Source Code
+
 ```
 const Raml = require('@laag/raml');
 
@@ -59,6 +67,7 @@ console.log(doc.getDefinition('prettyjson'));
 ```
 
 #### Output
+
 ```
 {
   "title": "My Awesome API",

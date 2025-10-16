@@ -3,15 +3,19 @@
 This is a library to interface to [Swagger/Openapi](https://www.openapis.org/) rest definition documents. If gives an interface to read and write those documents from within a Node or JS application. This interface will follow the same interface as the [@laag/raml](https://github.com/bschwarz/laag/tree/main/packages/raml) (in progress) interface.
 
 ## Install
+
 ```
 npm i @laag/openapi --save
 ```
+
 ## Usage
 
 The package is written in CommonJs, so this should work within Nodejs scripts as well using scripts using ES module (i.e. modern browser code).
 
 ### Reading an existing document
+
 #### Source Code
+
 ```
 const { Openapi } = require('@laag/openapi');
 let data = fs.readFileSync('examples/petstore-openapi3.json', 'utf8');
@@ -23,7 +27,9 @@ for (const pathname of doc.getPathNames()) {
     console.log(pathname);
 }
 ```
+
 #### Output
+
 ```
 Displaying API: Swagger Petstore v1.0.0
 Paths defined in this API:
@@ -32,7 +38,9 @@ Paths defined in this API:
 ```
 
 ### Writing a new document
+
 #### Source Code
+
 ```
 const Openapi = require('@laag/openapi');
 
@@ -60,6 +68,7 @@ console.log(doc.getDefinition('prettyjson'));
 ```
 
 #### Output
+
 ```
 {
   "openapi": "3.0.2",

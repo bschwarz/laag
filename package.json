@@ -6,16 +6,28 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "bun run build:all",
-    "build:all": "bun run --filter='*' build",
+    "build": "bun run scripts/build-workspace.ts",
+    "build:watch": "bun run scripts/build-workspace.ts --watch",
+    "build:core": "bun run scripts/build-workspace.ts --package=@laag/core",
+    "build:openapi": "bun run scripts/build-workspace.ts --package=@laag/openapi",
+    "build:raml": "bun run scripts/build-workspace.ts --package=@laag/raml",
+    "build:clean": "bun run clean && bun run build",
+    "build:list": "bun run scripts/build-workspace.ts --list",
     "test": "bun test --recursive",
     "test:watch": "bun test --watch --recursive",
-    "lint": "eslint packages/*/src/**/*.ts",
-    "lint:fix": "eslint packages/*/src/**/*.ts --fix",
-    "format": "prettier --write packages/*/src/**/*.ts",
+    "lint": "eslint packages/*/src/**/*.ts packages/*/__tests__/**/*.ts",
+    "lint:fix": "eslint packages/*/src/**/*.ts packages/*/__tests__/**/*.ts --fix",
+    "format": "prettier --write packages/*/src/**/*.ts packages/*/__tests__/**/*.ts *.md packages/*/README.md",
+    "format:check": "prettier --check packages/*/src/**/*.ts packages/*/__tests__/**/*.ts *.md packages/*/README.md",
     "type-check": "tsc --noEmit",
-    "clean": "bun run --filter='*' clean",
-    "dev": "bun run --filter='*' dev"
+    "type-check:all": "bun run --filter='*' type-check",
+    "quality": "bun run type-check && bun run lint && bun run format:check",
+    "quality:fix": "bun run type-check && bun run lint:fix && bun run format",
+    "clean": "bun run --filter='*' clean && rm -rf packages/*/dist",
+    "dev": "bun run build:watch",
+    "dev:package": "bun run scripts/build-workspace.ts --watch --package",
+    "validate:workflows": "bun run scripts/validate-workflows.ts",
+    "ci:local": "bun run quality && bun test && bun run build"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
@@ -27,7 +39,8 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^8.0.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "yaml": "^2.8.1"
   },
   "engines": {
     "node": ">=18.0.0",

@@ -75,14 +75,10 @@ export class Openapi extends LaagBase {
   constructor(doc?: string | OpenAPIDocument) {
     super(doc);
 
-    // Initialize with default OpenAPI document structure if empty
-    if (!this.doc.openapi) {
-      this.doc = {
-        openapi: '3.0.2',
-        info: { title: '', version: '1.0.0' },
-        paths: {},
-      };
-    }
+    // Initialize with default OpenAPI document structure if empty or missing required fields
+    this.doc.openapi ??= '3.0.2';
+    this.doc.info ??= { title: '', version: '1.0.0' };
+    this.doc.paths ??= {};
   }
 
   /**
@@ -189,9 +185,7 @@ export class Openapi extends LaagBase {
   }
 
   get title(): string | null {
-    return this.dictKeysExists(this.doc, 'info', 'title')
-      ? (this.doc.info as InfoObject).title
-      : null;
+    return this.dictKeysExists(this.doc, 'info.title') ? (this.doc.info as InfoObject).title : null;
   }
 
   set title(value: string) {
@@ -200,7 +194,7 @@ export class Openapi extends LaagBase {
   }
 
   get description(): string | null {
-    return this.dictKeysExists(this.doc, 'info', 'description')
+    return this.dictKeysExists(this.doc, 'info.description')
       ? ((this.doc.info as InfoObject).description ?? null)
       : null;
   }
@@ -211,7 +205,7 @@ export class Openapi extends LaagBase {
   }
 
   get version(): string | null {
-    return this.dictKeysExists(this.doc, 'info', 'version')
+    return this.dictKeysExists(this.doc, 'info.version')
       ? (this.doc.info as InfoObject).version
       : null;
   }
@@ -222,7 +216,7 @@ export class Openapi extends LaagBase {
   }
 
   get termsOfService(): string | null {
-    return this.dictKeysExists(this.doc, 'info', 'termsOfService')
+    return this.dictKeysExists(this.doc, 'info.termsOfService')
       ? ((this.doc.info as InfoObject).termsOfService ?? null)
       : null;
   }
@@ -233,7 +227,7 @@ export class Openapi extends LaagBase {
   }
 
   get contact(): ContactObject {
-    return this.dictKeysExists(this.doc, 'info', 'contact')
+    return this.dictKeysExists(this.doc, 'info.contact')
       ? ((this.doc.info as InfoObject).contact ?? {})
       : {};
   }
@@ -253,7 +247,7 @@ export class Openapi extends LaagBase {
   }
 
   get license(): LicenseObject {
-    return this.dictKeysExists(this.doc, 'info', 'license')
+    return this.dictKeysExists(this.doc, 'info.license')
       ? ((this.doc.info as InfoObject).license ?? { name: '' })
       : { name: '' };
   }
@@ -344,7 +338,7 @@ export class Openapi extends LaagBase {
   }
 
   getPath(path: string): PathItemObject {
-    return this.dictKeysExists(this.doc, 'paths', path)
+    return this.dictKeysExists(this.doc, `paths.${path}`)
       ? ((this.doc.paths as PathsObject)[path] ?? {})
       : {};
   }
@@ -361,7 +355,7 @@ export class Openapi extends LaagBase {
   }
 
   get componentsSchemas(): Record<string, SchemaObject | ReferenceObject> {
-    return this.dictKeysExists(this.doc, 'components', 'schemas')
+    return this.dictKeysExists(this.doc, 'components.schemas')
       ? ((this.doc.components as ComponentsObject).schemas ?? {})
       : {};
   }
