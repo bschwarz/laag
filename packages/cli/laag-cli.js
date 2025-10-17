@@ -49,16 +49,22 @@ let jsonObj = yaml.load(fs.readFileSync(fname, 'utf8'));
 // let data = fs.readFileSync(jsonObj, 'utf8');
 
 // const newStr = str.replace(/^#/, "");
-doc = new Openapi(jsonObj);
+const doc = new Openapi(jsonObj);
 
-console.log(`Displaying API: ${doc.title} v${doc.version}`);
+console.log(`Displaying API: ${doc.info.title} v${doc.info.version}`);
 console.log('Paths defined in this API:');
-// for (const pathname of doc.getPathNames()) {
-//     console.log(pathname);
-// }
 
-let summary = doc.getOperationSummary();
-for (const R of summary) {
-  console.log(`${R.method.toUpperCase()} ${R.resource}`);
+// Get all operations and display them
+const operations = doc.getOperationIds();
+if (operations.length > 0) {
+  for (const op of operations) {
+    const summary = doc.getOperationDescription(op.path, op.method) || op.id;
+    console.log(`${op.method.toUpperCase()} ${op.path} - ${summary}`);
+  }
+} else {
+  // Fallback: just show paths
+  const paths = doc.getPathNames();
+  for (const path of paths) {
+    console.log(`  ${path}`);
+  }
 }
-// console.log(summary)

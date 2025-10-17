@@ -14,15 +14,16 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { Openapi } from '../../packages/openapi/src/index.js';
 import type {
-    ComponentsObject,
-    PathItemObject,
-    SchemaObject
+  ComponentsObject,
+  PathItemObject,
+  SchemaObject
 } from '../../packages/openapi/src/types.js';
 
 console.log('🚀 Advanced Operations Examples for @laag/openapi\n');
 
 // Load the sample API for advanced operations
-const jsonPath = join(import.meta.dir, '../data/petstore-simple.json');
+// const jsonPath = join(import.meta.dir, '../data/petstore-simple.json');
+const jsonPath = join(import.meta.dir, '../../packages/openapi/examples/houses-openapi3.json');
 const jsonData = readFileSync(jsonPath, 'utf8');
 const api = new Openapi(jsonData);
 
