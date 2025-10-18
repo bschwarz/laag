@@ -43,6 +43,11 @@ const api = new Openapi({
 // Access API information
 console.log(api.info.title); // "My API"
 console.log(api.getPathNames()); // ["/users"]
+
+// Generate samples and code
+const requestSample = api.generateJsonSample('/users', 'post', 'request');
+const pythonCode = api.getPythonCode('/users', 'post');
+const jsCode = api.getJavaScriptCode('/users', 'post');
 ```
 
 ### CLI Usage
@@ -63,6 +68,7 @@ laag --help
 - **🔍 Validation**: Built-in validation according to OpenAPI 3.0+ specifications
 - **🛠️ Developer Friendly**: Extensive documentation and examples
 - **🌐 Cross-Platform**: Works in Node.js, browsers, and edge environments
+- **🎯 Sample Generation**: Generate JSON samples, curl commands, and code in Python, JavaScript, and TypeScript
 
 ## Documentation
 

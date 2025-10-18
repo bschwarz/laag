@@ -726,13 +726,13 @@ export class Openapi extends LaagBase {
     const cleanPath = refPath.replace('#/', '');
     const parts = cleanPath.split('/');
 
-    if (!this.dictKeysExists(this.doc, ...parts)) {
-      // Component not found, return empty object
-      return {};
-    }
-
+    // Navigate through the document structure
     let current: Record<string, unknown> = this.doc as Record<string, unknown>;
     for (const part of parts) {
+      if (!current || typeof current !== 'object' || !(part in current)) {
+        // Component not found, return empty object
+        return {};
+      }
       current = current[part] as Record<string, unknown>;
     }
 
@@ -782,5 +782,494 @@ export class Openapi extends LaagBase {
     if (name.startsWith('x-') && this.doc.paths) {
       (this.doc.paths as Record<string, unknown>)[name] = value;
     }
+  }
+
+  // Sample generation methods
+
+  /**
+   * Generates sample JSON payload from either request or response schema
+   *
+   * @param path - The resource path for the operation
+   * @param verb - The HTTP verb for the operation
+   * @param type - Either 'request' or 'response'
+   * @returns Sample JSON object or null if no schema found
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const requestSample = api.generateJsonSample('/users', 'post', 'request');
+   * const responseSample = api.generateJsonSample('/users', 'post', 'response');
+   * ```
+   */
+  generateJsonSample(
+    path: string,
+    verb: string,
+    type: 'request' | 'response' = 'request'
+  ): unknown {
+    if (!this.operationExists(path, verb)) {
+      return null;
+    }
+
+    let schema: SchemaObject | undefined;
+
+    if (type === 'request') {
+      let requestBody = this.getOperationRequest(path, verb) as RequestBodyObject | ReferenceObject;
+
+      // Resolve reference if needed
+      if ('$ref' in requestBody && typeof requestBody.$ref === 'string') {
+        requestBody = this.getComponentFromPath(requestBody.$ref) as RequestBodyObject;
+      }
+
+      const typedRequestBody = requestBody as RequestBodyObject;
+      if (!typedRequestBody?.content?.['application/json']?.schema) {
+        return null;
+      }
+      schema = typedRequestBody.content['application/json'].schema as SchemaObject;
+    } else {
+      const code = this.getSuccessCode(path, verb);
+      const response = this.getOperationResponse(path, verb, code) as ResponseObject;
+
+      if ('$ref' in response && typeof response.$ref === 'string') {
+        const component = this.getComponentFromPath(response.$ref) as ResponseObject;
+        if (!component?.content?.['application/json']?.schema) {
+          return null;
+        }
+        schema = component.content['application/json'].schema as SchemaObject;
+      } else if (!response?.content?.['application/json']?.schema) {
+        return null;
+      } else {
+        schema = response.content['application/json'].schema as SchemaObject;
+      }
+    }
+
+    return this.generateSchemaExample(schema);
+  }
+
+  /**
+   * Recursively generates example data from a JSON schema
+   *
+   * @param schema - The JSON schema to generate example from
+   * @returns Generated example object
+   */
+  private generateSchemaExample(schema: SchemaObject): unknown {
+    if ('$ref' in schema && typeof schema.$ref === 'string') {
+      const resolvedSchema = this.getComponentFromPath(schema.$ref) as SchemaObject;
+      return this.generateSchemaExample(resolvedSchema);
+    }
+
+    // Handle allOf composition
+    if (schema.allOf) {
+      const combined: Record<string, unknown> = {};
+      for (const subSchema of schema.allOf) {
+        const example = this.generateSchemaExample(subSchema as SchemaObject);
+        if (typeof example === 'object' && example !== null) {
+          Object.assign(combined, example);
+        }
+      }
+      return combined;
+    }
+
+    // Handle oneOf/anyOf - use first schema
+    if (schema.oneOf || schema.anyOf) {
+      const schemas = schema.oneOf ?? schema.anyOf;
+      if (schemas && schemas.length > 0) {
+        return this.generateSchemaExample(schemas[0] as SchemaObject);
+      }
+    }
+
+    // Return example if provided
+    if (schema.example !== undefined) {
+      return schema.example;
+    }
+
+    // Generate based on type
+    const obj: Record<string, unknown> = {};
+    switch (schema.type) {
+      case 'object':
+        if (schema.properties) {
+          for (const [key, propSchema] of Object.entries(schema.properties)) {
+            obj[key] = this.generateSchemaExample(propSchema as SchemaObject);
+          }
+        } else if (schema.additionalProperties) {
+          obj['{property1}'] = this.generateSchemaExample(
+            schema.additionalProperties as SchemaObject
+          );
+        }
+        return obj;
+
+      case 'array':
+        if (schema.items) {
+          return [this.generateSchemaExample(schema.items as SchemaObject)];
+        }
+        return [];
+
+      case 'string':
+        if (schema.format === 'date') return '2023-01-01';
+        if (schema.format === 'date-time') return '2023-01-01T00:00:00Z';
+        if (schema.format === 'email') return 'user@example.com';
+        if (schema.format === 'uri') return 'https://example.com';
+        if (schema.format === 'uuid') return '123e4567-e89b-12d3-a456-426614174000';
+        if (schema.enum && schema.enum.length > 0) return schema.enum[0];
+        return 'string';
+
+      case 'number':
+      case 'integer':
+        if (schema.enum && schema.enum.length > 0) return schema.enum[0];
+        if (schema.minimum !== undefined) return schema.minimum;
+        return schema.type === 'integer' ? 0 : 0.0;
+
+      case 'boolean':
+        return false;
+
+      default:
+        // Handle object without explicit type
+        if (schema.properties) {
+          const obj: Record<string, unknown> = {};
+          for (const [key, propSchema] of Object.entries(schema.properties)) {
+            obj[key] = this.generateSchemaExample(propSchema as SchemaObject);
+          }
+          return obj;
+        }
+        return null;
+    }
+  }
+
+  /**
+   * Generates curl command examples for an operation
+   *
+   * @param path - The resource path for the operation
+   * @param verb - The HTTP verb for the operation
+   * @returns Array of curl command objects with command and description
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const curlCommands = api.getCurlCommands('/users', 'post');
+   * console.log(curlCommands[0].command);
+   * ```
+   */
+  getCurlCommands(path: string, verb: string): Array<{ command: string; description: string }> {
+    const results: Array<{ command: string; description: string }> = [];
+    const method = verb.toUpperCase();
+
+    let dataOption = '';
+    if (['POST', 'PUT', 'PATCH'].includes(method)) {
+      const contentTypes = this.getOperationRequestMedia(path, verb);
+      const contentType = contentTypes.length > 0 ? contentTypes[0] : 'application/json';
+      dataOption = `-H "Content-Type: ${contentType}" -d '<request-payload>'`;
+    }
+
+    for (const server of this.servers) {
+      const command =
+        `curl -i -X ${method} "${server.url}${path}" -H "Authorization: <auth-token>" ${dataOption}`.trim();
+      results.push({
+        command,
+        description: server.description ?? '',
+      });
+    }
+
+    return results;
+  }
+
+  /**
+   * Generates Python code sample for an operation
+   *
+   * @param path - The resource path for the operation
+   * @param verb - The HTTP verb for the operation
+   * @returns Python code as a string
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const pythonCode = api.getPythonCode('/users', 'post');
+   * console.log(pythonCode);
+   * ```
+   */
+  getPythonCode(path: string, verb: string): string {
+    let code = 'import requests\nimport json\n\n';
+
+    // Add server URLs
+    let count = 1;
+    for (const server of this.servers) {
+      code += `# Endpoint for '${server.description ?? 'Server ' + count}'\n`;
+      if (count === 1) {
+        code += `URL = '${server.url}${path}'\n`;
+      } else {
+        code += `# URL = '${server.url}${path}'\n`;
+      }
+      count++;
+    }
+
+    // Add parameters
+    code += '\n# Add query params here\n';
+    code += 'params = {}\n\n';
+    code += '# Add headers here\n';
+    code += 'headers = {}\n\n';
+
+    // Add request body if needed
+    const requestSample = this.generateJsonSample(path, verb, 'request');
+    if (requestSample) {
+      code += '# Add request body here (see example below)\n';
+      code += `data = ${JSON.stringify(requestSample, null, 2)}\n\n`;
+      code += `response = requests.${verb.toLowerCase()}(url=URL, params=params, headers=headers, json=data)\n`;
+    } else {
+      code += `response = requests.${verb.toLowerCase()}(url=URL, params=params, headers=headers)\n`;
+    }
+
+    // Add response handling
+    const responseSample = this.generateJsonSample(path, verb, 'response');
+    if (responseSample) {
+      code += '\n# Parse JSON response\n';
+      code += 'if response.headers.get("content-type", "").startswith("application/json"):\n';
+      code += '    data = response.json()\n';
+      code += 'else:\n';
+      code += '    data = response.text\n';
+    }
+
+    code += '\nstatus_code = response.status_code\n';
+    code += 'print(f"Status: {status_code}")';
+
+    return code;
+  }
+
+  /**
+   * Generates JavaScript code sample for an operation
+   *
+   * @param path - The resource path for the operation
+   * @param verb - The HTTP verb for the operation
+   * @param useAsync - Whether to use async/await or promises
+   * @returns JavaScript code as a string
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const jsCode = api.getJavaScriptCode('/users', 'post', true);
+   * console.log(jsCode);
+   * ```
+   */
+  getJavaScriptCode(path: string, verb: string, useAsync: boolean = true): string {
+    let code = '';
+
+    if (useAsync) {
+      code += 'async function makeRequest() {\n';
+    } else {
+      code += 'function makeRequest() {\n';
+    }
+
+    // Add server URL
+    const server = this.servers[0];
+    const baseUrl = server ? server.url : 'https://api.example.com';
+    code += `  const url = '${baseUrl}${path}';\n\n`;
+
+    // Add request configuration
+    code += '  const config = {\n';
+    code += `    method: '${verb.toUpperCase()}',\n`;
+    code += '    headers: {\n';
+    code += "      'Content-Type': 'application/json',\n";
+    code += "      'Authorization': 'Bearer <your-token>'\n";
+    code += '    }\n';
+
+    // Add request body if needed
+    const requestSample = this.generateJsonSample(path, verb, 'request');
+    if (requestSample) {
+      code += ',\n    body: JSON.stringify(';
+      code += JSON.stringify(requestSample, null, 6).replace(/\n/g, '\n    ');
+      code += ')\n';
+    }
+
+    code += '  };\n\n';
+
+    // Add fetch call
+    if (useAsync) {
+      code += '  try {\n';
+      code += '    const response = await fetch(url, config);\n';
+      code += '    \n';
+      code += '    if (!response.ok) {\n';
+      code += '      throw new Error(`HTTP error! status: ${response.status}`);\n';
+      code += '    }\n';
+      code += '    \n';
+      code += '    const data = await response.json();\n';
+      code += '    console.log("Success:", data);\n';
+      code += '    return data;\n';
+      code += '  } catch (error) {\n';
+      code += '    console.error("Error:", error);\n';
+      code += '    throw error;\n';
+      code += '  }\n';
+    } else {
+      code += '  return fetch(url, config)\n';
+      code += '    .then(response => {\n';
+      code += '      if (!response.ok) {\n';
+      code += '        throw new Error(`HTTP error! status: ${response.status}`);\n';
+      code += '      }\n';
+      code += '      return response.json();\n';
+      code += '    })\n';
+      code += '    .then(data => {\n';
+      code += '      console.log("Success:", data);\n';
+      code += '      return data;\n';
+      code += '    })\n';
+      code += '    .catch(error => {\n';
+      code += '      console.error("Error:", error);\n';
+      code += '      throw error;\n';
+      code += '    });\n';
+    }
+
+    code += '}\n\n';
+    code += '// Call the function\n';
+    if (useAsync) {
+      code += 'makeRequest();';
+    } else {
+      code += 'makeRequest()\n';
+      code += '  .then(result => console.log(result))\n';
+      code += '  .catch(error => console.error(error));';
+    }
+
+    return code;
+  }
+
+  /**
+   * Generates TypeScript code sample for an operation
+   *
+   * @param path - The resource path for the operation
+   * @param verb - The HTTP verb for the operation
+   * @returns TypeScript code as a string
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const tsCode = api.getTypeScriptCode('/users', 'post');
+   * console.log(tsCode);
+   * ```
+   */
+  getTypeScriptCode(path: string, verb: string): string {
+    let code = '';
+
+    // Generate interfaces from request/response schemas
+    const requestSample = this.generateJsonSample(path, verb, 'request');
+    const responseSample = this.generateJsonSample(path, verb, 'response');
+
+    if (requestSample) {
+      code += 'interface RequestBody {\n';
+      code += this.generateTypeScriptInterface(requestSample, '  ');
+      code += '}\n\n';
+    }
+
+    if (responseSample) {
+      code += 'interface ResponseBody {\n';
+      code += this.generateTypeScriptInterface(responseSample, '  ');
+      code += '}\n\n';
+    }
+
+    // Generate the function
+    const operationId = this.getOperationId(path, verb);
+    const functionName = operationId || `${verb.toLowerCase()}${path.replace(/[^a-zA-Z0-9]/g, '')}`;
+
+    code += `async function ${functionName}(`;
+    if (requestSample) {
+      code += 'requestBody: RequestBody';
+    }
+    code += `): Promise<${responseSample ? 'ResponseBody' : 'any'}> {\n`;
+
+    // Add server URL
+    const server = this.servers[0];
+    const baseUrl = server ? server.url : 'https://api.example.com';
+    code += `  const url = '${baseUrl}${path}';\n\n`;
+
+    // Add request configuration
+    code += '  const config: RequestInit = {\n';
+    code += `    method: '${verb.toUpperCase()}',\n`;
+    code += '    headers: {\n';
+    code += "      'Content-Type': 'application/json',\n";
+    code += "      'Authorization': 'Bearer <your-token>'\n";
+    code += '    }';
+
+    if (requestSample) {
+      code += ',\n    body: JSON.stringify(requestBody)';
+    }
+
+    code += '\n  };\n\n';
+
+    // Add fetch call with error handling
+    code += '  try {\n';
+    code += '    const response = await fetch(url, config);\n';
+    code += '    \n';
+    code += '    if (!response.ok) {\n';
+    code += '      throw new Error(`HTTP error! status: ${response.status}`);\n';
+    code += '    }\n';
+    code += '    \n';
+    code += `    const data: ${responseSample ? 'ResponseBody' : 'any'} = await response.json();\n`;
+    code += '    return data;\n';
+    code += '  } catch (error) {\n';
+    code += '    console.error("Error:", error);\n';
+    code += '    throw error;\n';
+    code += '  }\n';
+    code += '}\n\n';
+
+    // Add usage example
+    code += '// Usage example:\n';
+    if (requestSample) {
+      code += 'const requestData: RequestBody = ';
+      code += JSON.stringify(requestSample, null, 2) + ';\n';
+      code += `${functionName}(requestData)\n`;
+    } else {
+      code += `${functionName}()\n`;
+    }
+    code += '  .then(result => console.log(result))\n';
+    code += '  .catch(error => console.error(error));';
+
+    return code;
+  }
+
+  /**
+   * Generates TypeScript interface definition from a sample object
+   *
+   * @param obj - The object to generate interface from
+   * @param indent - Indentation string
+   * @returns TypeScript interface properties as string
+   */
+  private generateTypeScriptInterface(obj: unknown, indent: string = ''): string {
+    if (typeof obj !== 'object' || obj === null) {
+      return '';
+    }
+
+    let result = '';
+    const entries = Object.entries(obj as Record<string, unknown>);
+
+    for (const [key, value] of entries) {
+      const safeKey = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : `"${key}"`;
+
+      if (Array.isArray(value)) {
+        if (value.length > 0) {
+          const itemType = this.getTypeScriptType(value[0]);
+          result += `${indent}${safeKey}: ${itemType}[];\n`;
+        } else {
+          result += `${indent}${safeKey}: any[];\n`;
+        }
+      } else if (typeof value === 'object' && value !== null) {
+        result += `${indent}${safeKey}: {\n`;
+        result += this.generateTypeScriptInterface(value, indent + '  ');
+        result += `${indent}};\n`;
+      } else {
+        const type = this.getTypeScriptType(value);
+        result += `${indent}${safeKey}: ${type};\n`;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Gets TypeScript type for a value
+   *
+   * @param value - The value to get type for
+   * @returns TypeScript type as string
+   */
+  private getTypeScriptType(value: unknown): string {
+    if (value === null) return 'null';
+    if (typeof value === 'string') return 'string';
+    if (typeof value === 'number') return 'number';
+    if (typeof value === 'boolean') return 'boolean';
+    if (Array.isArray(value)) return 'any[]';
+    if (typeof value === 'object') return 'object';
+    return 'any';
   }
 }

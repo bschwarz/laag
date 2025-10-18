@@ -221,6 +221,41 @@ if (validation.valid) {
 }
 ```
 
+### Sample Generation
+
+Generate sample payloads and code from your OpenAPI schemas:
+
+```typescript
+import { Openapi } from '@laag/openapi';
+
+const api = new Openapi(/* your document */);
+
+// Generate JSON samples from schemas
+const requestSample = api.generateJsonSample('/users', 'post', 'request');
+const responseSample = api.generateJsonSample('/users', 'post', 'response');
+
+console.log('Request:', JSON.stringify(requestSample, null, 2));
+console.log('Response:', JSON.stringify(responseSample, null, 2));
+
+// Generate curl commands
+const curlCommands = api.getCurlCommands('/users', 'post');
+for (const cmd of curlCommands) {
+  console.log(cmd.command);
+}
+
+// Generate Python code
+const pythonCode = api.getPythonCode('/users', 'post');
+console.log(pythonCode);
+
+// Generate JavaScript code (async/await or promises)
+const jsCodeAsync = api.getJavaScriptCode('/users', 'post', true);
+const jsCodePromise = api.getJavaScriptCode('/users', 'get', false);
+
+// Generate TypeScript code with interfaces
+const tsCode = api.getTypeScriptCode('/users', 'post');
+console.log(tsCode);
+```
+
 ### Advanced Operations
 
 ```typescript
@@ -291,6 +326,14 @@ Creates a new OpenAPI document instance. If no document is provided, creates a m
 - `getOperationDescription(path: string, method: string): string` - Get operation description
 - `getOperationRequestMedia(path: string, method: string): string[]` - Get request media types
 - `getOperationResponseMedia(path: string, method: string): string[]` - Get response media types
+
+#### Sample Generation Methods
+
+- `generateJsonSample(path: string, verb: string, type: 'request' | 'response'): unknown` - Generate sample JSON from schema
+- `getCurlCommands(path: string, verb: string): Array<{command: string, description: string}>` - Generate curl commands
+- `getPythonCode(path: string, verb: string): string` - Generate Python code sample
+- `getJavaScriptCode(path: string, verb: string, useAsync?: boolean): string` - Generate JavaScript code sample
+- `getTypeScriptCode(path: string, verb: string): string` - Generate TypeScript code with interfaces
 
 #### Utility Methods
 

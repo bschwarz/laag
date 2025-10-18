@@ -114,6 +114,24 @@ The CLI is built on top of the `@laag/openapi` library, providing the same robus
 - Comprehensive error handling
 - Support for OpenAPI extensions
 - Validation of document structure
+- Sample generation capabilities (JSON, code samples, curl commands)
+
+### Programmatic Usage
+
+While the CLI provides basic analysis, you can use the underlying library for advanced features:
+
+```javascript
+import { Openapi } from '@laag/openapi';
+
+const api = new Openapi(document);
+
+// Generate samples and code
+const requestSample = api.generateJsonSample('/users', 'post', 'request');
+const pythonCode = api.getPythonCode('/users', 'post');
+const jsCode = api.getJavaScriptCode('/users', 'post');
+const tsCode = api.getTypeScriptCode('/users', 'post');
+const curlCommands = api.getCurlCommands('/users', 'post');
+```
 
 ## Development
 
