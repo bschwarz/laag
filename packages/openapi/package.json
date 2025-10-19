@@ -1,6 +1,6 @@
 {
   "name": "@laag/openapi",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "TypeScript library for interfacing with OpenAPI/Swagger documents",
   "keywords": [
     "rest",
@@ -87,5 +87,8 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^5.0.0"
-  }
+  },
+  "path": "/Users/brettschwarz/repos/laag/packages/openapi",
+  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/openapi/package.json",
+  "directoryName": "openapi"
 }

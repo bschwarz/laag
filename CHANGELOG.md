@@ -14,8 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Browser-compatible bundles with tree-shaking
 - Comprehensive error handling with typed errors
 - Bun-based build system and testing
-- Automated release management
+- Automated release management with individual package support
 - Cross-platform compatibility testing
+- Sample generation methods (JSON, Python, JavaScript, TypeScript, curl)
+- Individual package release capabilities
+- GitHub Actions workflows for automated publishing
 
 ### Changed
 

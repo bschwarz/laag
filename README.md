@@ -97,6 +97,33 @@ bun test
 bun run quality
 ```
 
+## Releases
+
+### Unified Releases (All Packages)
+
+```bash
+# Release all packages together
+bun run release:patch    # Bug fixes
+bun run release:minor    # New features
+bun run release:major    # Breaking changes
+bun run release:beta     # Beta release
+```
+
+### Individual Package Releases
+
+```bash
+# Release specific packages independently
+bun run release:openapi:patch    # OpenAPI package patch
+bun run release:core:minor       # Core package minor
+bun run release:cli:major        # CLI package major
+
+# Or use the release script directly
+bun run scripts/release-package.ts @laag/openapi --patch
+bun run scripts/release-package.ts @laag/openapi --version=2.1.0
+```
+
+See [Individual Releases Guide](docs/INDIVIDUAL_RELEASES.md) for detailed instructions.
+
 ## Status
 
 **Version 2.0** - Complete TypeScript rewrite with modern tooling and comprehensive test coverage.

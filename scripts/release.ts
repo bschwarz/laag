@@ -17,6 +17,7 @@ interface ReleaseOptions {
   skipBuild?: boolean;
   packages?: string[];
   verbose?: boolean;
+  independent?: boolean;
 }
 
 class ReleaseManager {
@@ -30,7 +31,7 @@ class ReleaseManager {
 
   private discoverPackages(): void {
     const packagesDir = join(this.workspaceRoot, 'packages');
-    const packageDirs = ['core', 'openapi', 'raml'];
+    const packageDirs = ['core', 'openapi', 'raml', 'cli'];
 
     for (const packageDir of packageDirs) {
       const packagePath = join(packagesDir, packageDir);
@@ -42,6 +43,7 @@ class ReleaseManager {
           ...packageJson,
           path: packagePath,
           packageJsonPath,
+          directoryName: packageDir,
         });
       }
     }
@@ -74,10 +76,12 @@ class ReleaseManager {
     console.log(`✅ Updated ${packageName} to version ${version}`);
   }
 
-  private validatePackages(): void {
+  private validatePackages(packagesToValidate?: Map<string, any>): void {
     console.log('🔍 Validating packages...');
     
-    for (const [name, pkg] of this.packages) {
+    const packages = packagesToValidate || this.packages;
+    
+    for (const [name, pkg] of packages) {
       // Check required fields
       const requiredFields = ['name', 'version', 'description', 'license', 'author'];
       for (const field of requiredFields) {
@@ -105,23 +109,51 @@ class ReleaseManager {
     console.log('✅ All packages validated');
   }
 
-  private async runTests(): Promise<void> {
+  private async runTests(packages?: string[]): Promise<void> {
     console.log('🧪 Running tests...');
-    this.exec('bun test --recursive');
+    if (packages && packages.length > 0) {
+      // Run tests for specific packages
+      for (const packageName of packages) {
+        const pkg = this.packages.get(packageName);
+        if (pkg) {
+          console.log(`Testing ${packageName}...`);
+          this.exec('bun test', pkg.path);
+        }
+      }
+    } else {
+      // Run all tests
+      this.exec('bun test --recursive');
+    }
     console.log('✅ All tests passed');
   }
 
-  private async buildPackages(): Promise<void> {
+  private async buildPackages(packages?: string[]): Promise<void> {
     console.log('🔨 Building packages...');
-    this.exec('bun run build');
+    if (packages && packages.length > 0) {
+      // Build specific packages
+      for (const packageName of packages) {
+        const pkg = this.packages.get(packageName);
+        if (pkg) {
+          console.log(`Building ${packageName}...`);
+          this.exec(`bun run build:${pkg.directoryName}`);
+        }
+      }
+    } else {
+      // Build all packages
+      this.exec('bun run build');
+    }
     console.log('✅ All packages built');
   }
 
-  private async publishPackages(options: ReleaseOptions): Promise<void> {
-    const publishOrder = ['@laag/core', '@laag/openapi', '@laag/raml'];
+  private async publishPackages(options: ReleaseOptions, packagesToPublish?: Map<string, any>): Promise<void> {
+    const packages = packagesToPublish || this.packages;
+    const publishOrder = ['@laag/core', '@laag/openapi', '@laag/raml', '@laag/cli'];
     
-    for (const packageName of publishOrder) {
-      const pkg = this.packages.get(packageName);
+    // Filter and order packages based on dependency order
+    const orderedPackages = publishOrder.filter(name => packages.has(name));
+    
+    for (const packageName of orderedPackages) {
+      const pkg = packages.get(packageName);
       if (!pkg) continue;
 
       console.log(`📦 Publishing ${packageName}...`);
@@ -144,30 +176,41 @@ class ReleaseManager {
     console.log('🚀 Starting release process...');
 
     try {
+      // Filter packages if specific packages are requested
+      const packagesToRelease = options.packages 
+        ? new Map([...this.packages].filter(([name]) => options.packages!.includes(name)))
+        : this.packages;
+
+      if (packagesToRelease.size === 0) {
+        throw new Error('No packages found to release');
+      }
+
+      console.log(`📦 Releasing packages: ${Array.from(packagesToRelease.keys()).join(', ')}`);
+
       // Validate packages
-      this.validatePackages();
+      this.validatePackages(packagesToRelease);
 
       // Update versions if specified
       if (options.version) {
         console.log(`📝 Updating versions to ${options.version}...`);
-        for (const packageName of this.packages.keys()) {
+        for (const packageName of packagesToRelease.keys()) {
           this.updatePackageVersion(packageName, options.version);
         }
       }
 
-      // Run tests
+      // Run tests (for specific packages if specified)
       if (!options.skipTests) {
-        await this.runTests();
+        await this.runTests(options.packages);
       }
 
-      // Build packages
+      // Build packages (for specific packages if specified)
       if (!options.skipBuild) {
-        await this.buildPackages();
+        await this.buildPackages(options.packages);
       }
 
       // Publish packages
       if (!options.dryRun) {
-        await this.publishPackages(options);
+        await this.publishPackages(options, packagesToRelease);
       } else {
         console.log('🔍 Dry run - would publish packages');
       }
@@ -190,6 +233,10 @@ class ReleaseManager {
 async function main() {
   const args = process.argv.slice(2);
   
+  // Parse packages argument
+  const packagesArg = args.find(arg => arg.startsWith('--packages='))?.split('=')[1];
+  const packages = packagesArg ? packagesArg.split(',') : undefined;
+  
   const options: ReleaseOptions = {
     version: args.find(arg => arg.startsWith('--version='))?.split('=')[1],
     tag: args.find(arg => arg.startsWith('--tag='))?.split('=')[1],
@@ -197,6 +244,8 @@ async function main() {
     skipTests: args.includes('--skip-tests'),
     skipBuild: args.includes('--skip-build'),
     verbose: args.includes('--verbose'),
+    packages,
+    independent: args.includes('--independent'),
   };
 
   const manager = new ReleaseManager();

@@ -1,0 +1,144 @@
+name: Release Individual Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release'
+        required: true
+        type: choice
+        options:
+          - '@laag/core'
+          - '@laag/openapi'
+          - '@laag/raml'
+          - '@laag/cli'
+      version_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
+        default: 'patch'
+      custom_version:
+        description: 'Custom version (optional, overrides version_type)'
+        required: false
+        type: string
+      tag:
+        description: 'NPM tag'
+        required: false
+        default: 'latest'
+        type: choice
+        options:
+          - latest
+          - beta
+          - alpha
+      dry_run:
+        description: 'Dry run (do not actually publish)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  release-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write # for npm provenance
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Release Package
+        run: |
+          PACKAGE="${{ github.event.inputs.package }}"
+          VERSION_TYPE="${{ github.event.inputs.version_type }}"
+          CUSTOM_VERSION="${{ github.event.inputs.custom_version }}"
+          TAG="${{ github.event.inputs.tag }}"
+          DRY_RUN="${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}"
+
+          echo "Releasing package: $PACKAGE"
+          echo "Version type: $VERSION_TYPE"
+          echo "Custom version: $CUSTOM_VERSION"
+          echo "Tag: $TAG"
+
+          if [ -n "$CUSTOM_VERSION" ]; then
+            bun run scripts/release-package.ts "$PACKAGE" --version="$CUSTOM_VERSION" --tag="$TAG" $DRY_RUN
+          else
+            bun run scripts/release-package.ts "$PACKAGE" --"$VERSION_TYPE" --tag="$TAG" $DRY_RUN
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Git Tag
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          PACKAGE="${{ github.event.inputs.package }}"
+          PACKAGE_DIR=$(echo "$PACKAGE" | sed 's/@laag\///')
+          VERSION=$(cd packages/$PACKAGE_DIR && node -p "require('./package.json').version")
+          TAG_NAME="${PACKAGE}@${VERSION}"
+
+          echo "Creating tag: $TAG_NAME"
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+
+      - name: Create GitHub Release
+        if: github.event.inputs.dry_run != 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.package }}@${{ steps.get-version.outputs.version }}
+          release_name: ${{ github.event.inputs.package }}@${{ steps.get-version.outputs.version }}
+          draft: false
+          prerelease: ${{ contains(github.event.inputs.tag, 'alpha') || contains(github.event.inputs.tag, 'beta') }}
+          body: |
+            ## ${{ github.event.inputs.package }} Release
+
+            ### Changes
+            See [CHANGELOG.md](https://github.com/bschwarz/laag/blob/main/CHANGELOG.md) for details.
+
+            ### Installation
+            ```bash
+            npm install ${{ github.event.inputs.package }}@${{ steps.get-version.outputs.version }}
+            ```
+
+            ### Package Information
+            - **Package**: ${{ github.event.inputs.package }}
+            - **Version**: ${{ steps.get-version.outputs.version }}
+            - **Tag**: ${{ github.event.inputs.tag }}
+            - **Type**: ${{ github.event.inputs.version_type }}
+
+      - name: Get Version
+        id: get-version
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          PACKAGE="${{ github.event.inputs.package }}"
+          PACKAGE_DIR=$(echo "$PACKAGE" | sed 's/@laag\///')
+          VERSION=$(cd packages/$PACKAGE_DIR && node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
