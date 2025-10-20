@@ -184,10 +184,13 @@ jobs:
           name: build-artifacts-node
           path: .
 
+      - name: Build packages for testing
+        run: bun run build
+
       - name: Test ESM imports
         run: |
           echo "Testing ESM imports..."
-          node -e "
+          bun -e "
             import('@laag/core').then(core => {
               console.log('✅ Core ESM import successful');
               console.log('Available exports:', Object.keys(core));
@@ -200,7 +203,7 @@ jobs:
       - name: Test CommonJS requires
         run: |
           echo "Testing CommonJS requires..."
-          node -e "
+          bun -e "
             try {
               const core = require('@laag/core');
               console.log('✅ Core CommonJS require successful');
@@ -209,6 +212,19 @@ jobs:
               console.error('❌ Core CommonJS require failed:', err);
               process.exit(1);
             }
+          "
+
+      - name: Test OpenAPI package imports
+        run: |
+          echo "Testing OpenAPI package imports..."
+          bun -e "
+            import('@laag/openapi').then(openapi => {
+              console.log('✅ OpenAPI ESM import successful');
+              console.log('Available exports:', Object.keys(openapi));
+            }).catch(err => {
+              console.error('❌ OpenAPI ESM import failed:', err);
+              process.exit(1);
+            });
           "
 
       - name: Test browser bundle
@@ -253,8 +269,8 @@ jobs:
       - name: Run performance benchmarks
         run: |
           echo "Running performance benchmarks..."
-          # Add performance tests here when available
-          echo "⏱️ Performance tests would run here"
+          bun run test:compatibility
+          echo "⏱️ Performance benchmarks completed"
 
   # Security audit
   security:
