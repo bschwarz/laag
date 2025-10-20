@@ -18,6 +18,8 @@ interface PackageReleaseOptions {
   skipTests?: boolean;
   skipBuild?: boolean;
   verbose?: boolean;
+  otp?: string;
+  skipOtp?: boolean;
 }
 
 class PackageReleaseManager {
@@ -167,15 +169,56 @@ class PackageReleaseManager {
   private async publishPackage(options: PackageReleaseOptions): Promise<void> {
     console.log(`📦 Publishing ${this.packageInfo.name}...`);
 
+    // Handle OTP for NPM 2FA
+    let otp: string | undefined;
+    if (!options.dryRun && !options.skipOtp) {
+      if (options.otp) {
+        // Use provided OTP
+        otp = options.otp;
+        console.log('✅ Using provided OTP');
+      } else {
+        // Prompt for OTP
+        console.log('\n🔐 NPM requires 2FA authentication for publishing.');
+        console.log('Please check your authenticator app for the OTP code.');
+        
+        const otpInput = prompt('Enter your NPM OTP (6-digit code): ');
+        if (!otpInput || otpInput.length !== 6 || !/^\d{6}$/.test(otpInput)) {
+          throw new Error('Invalid OTP format. Please enter a 6-digit numeric code.');
+        }
+        otp = otpInput;
+        console.log('✅ OTP received\n');
+      }
+    }
+
     const publishCmd = options.dryRun 
       ? 'npm publish --dry-run'
-      : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}`;
+      : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
 
     try {
       this.exec(publishCmd, this.packageInfo.path);
       console.log(`✅ Published ${this.packageInfo.name}@${this.packageInfo.version}`);
     } catch (error) {
       console.error(`❌ Failed to publish ${this.packageInfo.name}:`, error);
+      
+      // If OTP error, allow retry with new OTP
+      if (error instanceof Error && error.message.includes('OTP') && !options.dryRun) {
+        console.log('\n🔄 OTP may have expired or be incorrect. Please try again.');
+        const newOtpInput = prompt('Enter a new NPM OTP (6-digit code): ');
+        if (newOtpInput && newOtpInput.length === 6 && /^\d{6}$/.test(newOtpInput)) {
+          otp = newOtpInput;
+          console.log('🔄 Retrying with new OTP...');
+          
+          const retryCmd = `npm publish${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
+          try {
+            this.exec(retryCmd, this.packageInfo.path);
+            console.log(`✅ Published ${this.packageInfo.name}@${this.packageInfo.version} (retry successful)`);
+            return;
+          } catch (retryError) {
+            console.error(`❌ Retry failed for ${this.packageInfo.name}:`, retryError);
+          }
+        }
+      }
+      
       throw error;
     }
   }
@@ -240,23 +283,30 @@ Options:
   --major             Bump major version
   --prerelease        Bump prerelease version
   --tag=TAG           NPM tag (latest, beta, alpha)
+  --otp=CODE          Provide NPM OTP code directly (6-digit)
   --dry-run           Test without publishing
   --skip-tests        Skip running tests
   --skip-build        Skip building package
+  --skip-otp          Skip OTP prompting (for CI environments)
   --verbose           Verbose output
 
 Examples:
-  # Release OpenAPI package with patch version bump
+  # Release OpenAPI package with patch version bump (will prompt for OTP)
   bun run scripts/release-package.ts @laag/openapi --patch
 
   # Release with specific version
   bun run scripts/release-package.ts @laag/openapi --version=2.1.0
+
+  # Release with OTP provided directly
+  bun run scripts/release-package.ts @laag/openapi --patch --otp=123456
 
   # Dry run release
   bun run scripts/release-package.ts @laag/openapi --patch --dry-run
 
   # Release with beta tag
   bun run scripts/release-package.ts @laag/openapi --prerelease --tag=beta
+
+Note: NPM 2FA is required. The script will prompt for OTP unless --skip-otp or --otp is provided.
 `);
     return;
   }
@@ -275,9 +325,11 @@ Examples:
                  args.includes('--major') ? 'major' :
                  args.includes('--prerelease') ? 'prerelease' : undefined,
     tag: args.find(arg => arg.startsWith('--tag='))?.split('=')[1],
+    otp: args.find(arg => arg.startsWith('--otp='))?.split('=')[1],
     dryRun: args.includes('--dry-run'),
     skipTests: args.includes('--skip-tests'),
     skipBuild: args.includes('--skip-build'),
+    skipOtp: args.includes('--skip-otp'),
     verbose: args.includes('--verbose'),
   };
 
