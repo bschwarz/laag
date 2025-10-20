@@ -18,6 +18,8 @@ interface ReleaseOptions {
   packages?: string[];
   verbose?: boolean;
   independent?: boolean;
+  skipOtp?: boolean;
+  otp?: string;
 }
 
 class ReleaseManager {
@@ -152,6 +154,27 @@ class ReleaseManager {
     // Filter and order packages based on dependency order
     const orderedPackages = publishOrder.filter(name => packages.has(name));
     
+    // Handle OTP for NPM 2FA
+    let otp: string | undefined;
+    if (!options.dryRun && !options.skipOtp) {
+      if (options.otp) {
+        // Use provided OTP
+        otp = options.otp;
+        console.log('✅ Using provided OTP\n');
+      } else {
+        // Prompt for OTP
+        console.log('\n🔐 NPM requires 2FA authentication for publishing.');
+        console.log('Please check your authenticator app for the OTP code.');
+        
+        const otpInput = prompt('Enter your NPM OTP (6-digit code): ');
+        if (!otpInput || otpInput.length !== 6 || !/^\d{6}$/.test(otpInput)) {
+          throw new Error('Invalid OTP format. Please enter a 6-digit numeric code.');
+        }
+        otp = otpInput;
+        console.log('✅ OTP received\n');
+      }
+    }
+    
     for (const packageName of orderedPackages) {
       const pkg = packages.get(packageName);
       if (!pkg) continue;
@@ -160,13 +183,33 @@ class ReleaseManager {
       
       const publishCmd = options.dryRun 
         ? 'npm publish --dry-run'
-        : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}`;
+        : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
 
       try {
         this.exec(publishCmd, pkg.path);
         console.log(`✅ Published ${packageName}`);
       } catch (error) {
         console.error(`❌ Failed to publish ${packageName}:`, error);
+        
+        // If OTP error, allow retry with new OTP
+        if (error instanceof Error && error.message.includes('OTP') && !options.dryRun) {
+          console.log('\n🔄 OTP may have expired or be incorrect. Please try again.');
+          const newOtpInput = prompt('Enter a new NPM OTP (6-digit code): ');
+          if (newOtpInput && newOtpInput.length === 6 && /^\d{6}$/.test(newOtpInput)) {
+            otp = newOtpInput;
+            console.log('🔄 Retrying with new OTP...');
+            
+            const retryCmd = `npm publish${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
+            try {
+              this.exec(retryCmd, pkg.path);
+              console.log(`✅ Published ${packageName} (retry successful)`);
+              continue;
+            } catch (retryError) {
+              console.error(`❌ Retry failed for ${packageName}:`, retryError);
+            }
+          }
+        }
+        
         throw error;
       }
     }
@@ -240,15 +283,48 @@ async function main() {
   const options: ReleaseOptions = {
     version: args.find(arg => arg.startsWith('--version='))?.split('=')[1],
     tag: args.find(arg => arg.startsWith('--tag='))?.split('=')[1],
+    otp: args.find(arg => arg.startsWith('--otp='))?.split('=')[1],
     dryRun: args.includes('--dry-run'),
     skipTests: args.includes('--skip-tests'),
     skipBuild: args.includes('--skip-build'),
+    skipOtp: args.includes('--skip-otp'),
     verbose: args.includes('--verbose'),
     packages,
     independent: args.includes('--independent'),
   };
 
   const manager = new ReleaseManager();
+
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+🚀 Laag Release Manager
+
+Usage: bun run scripts/release.ts [options]
+
+Options:
+  --version=<version>     Set specific version (e.g., 1.2.3)
+  --tag=<tag>            NPM dist-tag (e.g., beta, alpha)
+  --packages=<packages>   Comma-separated list of packages to release
+  --otp=<code>           Provide NPM OTP code directly (6-digit)
+  --dry-run              Simulate release without publishing
+  --skip-tests           Skip running tests
+  --skip-build           Skip building packages
+  --skip-otp             Skip OTP prompting (for CI environments)
+  --verbose              Enable verbose output
+  --independent          Release packages independently
+  --list                 List all publishable packages
+  --help, -h             Show this help message
+
+Examples:
+  bun run scripts/release.ts --dry-run
+  bun run scripts/release.ts --packages=@laag/core --version=1.2.3
+  bun run scripts/release.ts --otp=123456 --tag=beta
+  bun run scripts/release.ts --skip-otp (for CI environments)
+
+Note: NPM 2FA is required. The script will prompt for OTP unless --skip-otp or --otp is provided.
+`);
+    return;
+  }
 
   if (args.includes('--list')) {
     manager.listPackages();

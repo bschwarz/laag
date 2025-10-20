@@ -25,7 +25,7 @@ The laag monorepo supports both unified releases (all packages together) and ind
 #### Using the Individual Package Release Script
 
 ```bash
-# Release with version bump
+# Release with version bump (will prompt for OTP)
 bun run scripts/release-package.ts @laag/openapi --patch
 bun run scripts/release-package.ts @laag/openapi --minor
 bun run scripts/release-package.ts @laag/openapi --major
@@ -35,6 +35,9 @@ bun run scripts/release-package.ts @laag/openapi --version=2.1.0
 
 # Release with prerelease version and beta tag
 bun run scripts/release-package.ts @laag/openapi --prerelease --tag=beta
+
+# Release with OTP provided directly
+bun run scripts/release-package.ts @laag/openapi --patch --otp=123456
 
 # Dry run (test without publishing)
 bun run scripts/release-package.ts @laag/openapi --patch --dry-run
@@ -83,9 +86,12 @@ bun run release:cli
 ### 3. Using the General Release Script
 
 ```bash
-# Release specific packages
+# Release specific packages (will prompt for OTP)
 bun run scripts/release.ts --packages=@laag/openapi --version=2.1.0
 bun run scripts/release.ts --packages=@laag/openapi,@laag/core --patch
+
+# Release with OTP provided directly
+bun run scripts/release.ts --packages=@laag/openapi --version=2.1.0 --otp=123456
 
 # Multiple packages with different versions (not recommended)
 bun run scripts/release.ts --packages=@laag/openapi --independent
@@ -288,13 +294,77 @@ bun run scripts/release-package.ts @laag/openapi --patch --skip-tests
 - Open an issue for release-related problems
 - Use `--dry-run` to test releases safely
 
+## NPM 2FA and OTP Requirements
+
+All releases require NPM 2FA (Two-Factor Authentication). The release script will automatically prompt for your OTP (One-Time Password) code.
+
+### Interactive OTP Prompt
+
+When running any release command, you'll see:
+
+```
+🔐 NPM requires 2FA authentication for publishing.
+Please check your authenticator app for the OTP code.
+Enter your NPM OTP (6-digit code): ______
+```
+
+### Providing OTP Directly
+
+You can provide the OTP code directly to avoid the prompt:
+
+```bash
+# Provide OTP directly
+bun run scripts/release.ts --packages=@laag/openapi --otp=123456
+
+# Or with individual package script
+bun run scripts/release-package.ts @laag/openapi --patch --otp=123456
+```
+
+### CI/Automated Environments
+
+For CI environments where interactive prompts aren't possible:
+
+```bash
+# Skip OTP prompting (requires NPM_TOKEN with automation token)
+bun run scripts/release.ts --packages=@laag/openapi --skip-otp
+
+# Or set OTP via environment variable
+OTP_CODE=123456 bun run scripts/release.ts --packages=@laag/openapi --otp=$OTP_CODE
+```
+
+### OTP Error Handling
+
+If your OTP expires or is incorrect, the script will:
+
+1. Detect the OTP error
+2. Prompt for a new OTP code
+3. Automatically retry the publish
+4. Continue with remaining packages
+
+### Setting Up NPM 2FA
+
+If you haven't set up 2FA yet:
+
+```bash
+# Enable 2FA for your NPM account
+npm profile enable-2fa auth-and-writes
+
+# Use an authenticator app like:
+# - Google Authenticator
+# - Authy
+# - 1Password
+# - Microsoft Authenticator
+```
+
 ## Security Considerations
 
+- **NPM 2FA is required** for all publishing operations
 - NPM tokens should be stored securely
-- Use 2FA for NPM publishing
+- Use automation tokens for CI environments
 - Verify package contents before publishing
 - Monitor for unauthorized releases
 - Use provenance for supply chain security
+- Keep your authenticator app secure and backed up
 
 ## Monitoring Releases
 

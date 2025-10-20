@@ -102,17 +102,20 @@ bun run quality
 ### Unified Releases (All Packages)
 
 ```bash
-# Release all packages together
+# Release all packages together (will prompt for NPM OTP)
 bun run release:patch    # Bug fixes
 bun run release:minor    # New features
 bun run release:major    # Breaking changes
 bun run release:beta     # Beta release
+
+# Provide OTP directly
+bun run scripts/release.ts --version=1.2.3 --otp=123456
 ```
 
 ### Individual Package Releases
 
 ```bash
-# Release specific packages independently
+# Release specific packages independently (will prompt for NPM OTP)
 bun run release:openapi:patch    # OpenAPI package patch
 bun run release:core:minor       # Core package minor
 bun run release:cli:major        # CLI package major
@@ -120,7 +123,12 @@ bun run release:cli:major        # CLI package major
 # Or use the release script directly
 bun run scripts/release-package.ts @laag/openapi --patch
 bun run scripts/release-package.ts @laag/openapi --version=2.1.0
+
+# Provide OTP directly to avoid prompts
+bun run scripts/release.ts --packages=@laag/openapi --patch --otp=123456
 ```
+
+**Note**: All releases require NPM 2FA. The script will prompt for your OTP code unless provided via `--otp` flag.
 
 See [Individual Releases Guide](docs/INDIVIDUAL_RELEASES.md) for detailed instructions.
 
