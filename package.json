@@ -68,18 +68,18 @@
     "test:integration:modules": "bun run scripts/test-integration.ts --skip-workflow --skip-performance"
   },
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
+    "@eslint/js": "^9.38.0",
     "@types/bun": "latest",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "prettier": "^3.6.2",
     "typedoc": "^0.28.14",
     "typedoc-plugin-markdown": "^4.9.0",
-    "typescript": "^5.0.0",
+    "typescript": "^5.9.3",
     "yaml": "^2.8.1"
   },
   "engines": {
