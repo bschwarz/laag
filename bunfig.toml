@@ -1,0 +1,39 @@
+[install]
+# Configure package manager behavior
+cache = true
+exact = false
+production = false
+optional = true
+dev = true
+peer = false
+frozenLockfile = false
+
+[install.scopes]
+# Configure scoped registries if needed
+
+[test]
+# Test configuration
+coverage = true
+timeout = 30000
+bail = 0
+
+[build]
+# Build configuration
+target = "node"
+format = "esm"
+splitting = true
+outdir = "./dist"
+sourcemap = "external"
+minify = false
+
+# TypeScript configuration
+loader = { ".ts" = "ts", ".tsx" = "tsx" }
+
+[run]
+# Runtime configuration
+shell = "system"
+silent = false
+
+[bunfig]
+# Bun configuration
+logLevel = "info"

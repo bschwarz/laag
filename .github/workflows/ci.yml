@@ -1,0 +1,373 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '18'
+  BUN_VERSION: 'latest'
+
+jobs:
+  # Quality checks job
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Type checking
+        run: bun run type-check
+
+      - name: Linting
+        run: bun run lint
+
+      - name: Format checking
+        run: bun run format:check
+
+      - name: Upload quality results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-results
+          path: |
+            eslint-report.json
+            prettier-report.txt
+          retention-days: 7
+
+  # Build job
+  build:
+    name: Build Packages
+    runs-on: ubuntu-latest
+    needs: quality
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        target: [node, browser]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build packages
+        run: bun run build --verbose
+
+      - name: Verify build outputs
+        run: |
+          echo "Checking build outputs..."
+          for package in packages/*/dist; do
+            if [ -d "$package" ]; then
+              echo "✅ $package exists"
+              ls -la "$package"
+            else
+              echo "❌ $package missing"
+              exit 1
+            fi
+          done
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ matrix.target }}
+          path: |
+            packages/*/dist/
+            packages/*/package.json
+          retention-days: 7
+
+  # Test job
+  test:
+    name: Test Suite
+    runs-on: ${{ matrix.os }}
+    needs: quality
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: ['18', '20', '21']
+        exclude:
+          # Reduce matrix size for faster CI
+          - os: windows-latest
+            node-version: '21'
+          - os: macos-latest
+            node-version: '21'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run tests
+        run: bun test --coverage
+
+      - name: Upload coverage reports
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-node${{ matrix.node-version }}
+          path: |
+            coverage/
+            test-results.xml
+          retention-days: 7
+
+  # Compatibility tests
+  compatibility:
+    name: Compatibility Tests
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-node
+          path: .
+
+      - name: Build packages for testing
+        run: bun run build
+
+      - name: Test ESM imports
+        run: |
+          echo "Testing ESM imports..."
+          bun -e "
+            import('@laag/core').then(core => {
+              console.log('✅ Core ESM import successful');
+              console.log('Available exports:', Object.keys(core));
+            }).catch(err => {
+              console.error('❌ Core ESM import failed:', err);
+              process.exit(1);
+            });
+          "
+
+      - name: Test CommonJS requires
+        run: |
+          echo "Testing CommonJS requires..."
+          bun -e "
+            try {
+              const core = require('@laag/core');
+              console.log('✅ Core CommonJS require successful');
+              console.log('Available exports:', Object.keys(core));
+            } catch (err) {
+              console.error('❌ Core CommonJS require failed:', err);
+              process.exit(1);
+            }
+          "
+
+      - name: Test OpenAPI package imports
+        run: |
+          echo "Testing OpenAPI package imports..."
+          bun -e "
+            import('@laag/openapi').then(openapi => {
+              console.log('✅ OpenAPI ESM import successful');
+              console.log('Available exports:', Object.keys(openapi));
+            }).catch(err => {
+              console.error('❌ OpenAPI ESM import failed:', err);
+              process.exit(1);
+            });
+          "
+
+      - name: Test browser bundle
+        run: |
+          echo "Testing browser bundle..."
+          if [ -f "packages/openapi/dist/browser/index.js" ]; then
+            echo "✅ Browser bundle exists"
+            # Basic syntax check
+            node -c packages/openapi/dist/browser/index.js
+            echo "✅ Browser bundle syntax is valid"
+          else
+            echo "❌ Browser bundle missing"
+            exit 1
+          fi
+
+  # Performance benchmarks
+  performance:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-node
+          path: .
+
+      - name: Run performance benchmarks
+        run: |
+          echo "Running performance benchmarks..."
+          bun run test:compatibility
+          echo "⏱️ Performance benchmarks completed"
+
+  # Security audit
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run security audit
+        run: bun audit
+
+      - name: Upload security results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit
+          path: audit-results.json
+          retention-days: 30
+
+  # Release job (only on main branch)
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [quality, build, test, compatibility]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-node
+          path: .
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet HEAD~1 HEAD -- packages/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create release
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Creating release..."
+          # Add release logic here when ready
+          echo "🚀 Release would be created here"
+
+  # Cleanup job
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [quality, build, test, compatibility, security]
+    if: always()
+    timeout-minutes: 5
+
+    steps:
+      - name: Delete old artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: |
+            build-artifacts-*
+            test-results-*
+            quality-results
+          failOnError: false

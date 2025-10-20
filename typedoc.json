@@ -1,0 +1,40 @@
+{
+  "entryPoints": ["packages/core/src/index.ts", "packages/openapi/src/index.ts"],
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "README.md",
+  "name": "Laag Library Collection",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "categorizeByGroup": true,
+  "categoryOrder": ["Core", "OpenAPI", "Types", "Errors"],
+  "groupOrder": ["Classes", "Interfaces", "Type Aliases", "Functions", "Variables"],
+  "sort": ["source-order"],
+  "kindSortOrder": [
+    "Class",
+    "Constructor",
+    "Property",
+    "Method",
+    "Function",
+    "Interface",
+    "TypeAlias"
+  ],
+  "navigationLinks": {
+    "GitHub": "https://github.com/your-org/laag",
+    "NPM": "https://www.npmjs.com/package/@laag/core"
+  },
+  "sidebarLinks": {
+    "Getting Started": "https://github.com/your-org/laag#getting-started",
+    "Examples": "https://github.com/your-org/laag/tree/main/examples"
+  },
+  "githubPages": false,
+  "hideGenerator": true,
+  "searchInComments": true,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  }
+}
