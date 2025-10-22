@@ -1,9 +1,9 @@
 # Technology Stack
 
 ## Build System & Package Management
-- **Monorepo**: Managed with Lerna for multi-package development
+- **Monorepo**: Managed with Bun workspaces for multi-package development
 - **Package Manager**: Bun (evidenced by `bun.lockb` files and test scripts)
-- **Module System**: CommonJS modules for Node.js compatibility
+- **Module System**: ESM modules with CommonJS compatibility
 
 ## Core Technologies
 - **Runtime**: Node.js
@@ -33,9 +33,11 @@ cd packages/openapi && bun test
 # Install dependencies (uses Bun)
 bun install
 
-# Lerna commands for monorepo management
-npx lerna version
-npx lerna publish
+# Bun workspace commands for monorepo management
+bun run workspace:version --patch    # Version all packages
+bun run workspace:list              # List all packages
+bun run workspace:test              # Test all packages
+bun run workspace:build             # Build all packages
 ```
 
 ## Code Patterns

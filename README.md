@@ -84,14 +84,20 @@ laag --help
 git clone https://github.com/bschwarz/laag.git
 cd laag
 
-# Install dependencies
+# Install dependencies for all workspace packages
 bun install
 
 # Build all packages
-bun run build
+bun run workspace:build
 
-# Run tests
-bun test
+# Run tests across all packages
+bun run workspace:test
+
+# List all workspace packages
+bun run workspace:list
+
+# Version management
+bun run workspace:version --patch
 
 # Run quality checks
 bun run quality
