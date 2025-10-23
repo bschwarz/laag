@@ -49,15 +49,15 @@
     - Add placeholder for future IDL parser
     - _Requirements: 3.1_
 
-- [ ] 5. Implement validation logic
-  - [ ] 5.1 Create model validator in `src/validators/model-validator.ts`
+- [x] 5. Implement validation logic
+  - [x] 5.1 Create model validator in `src/validators/model-validator.ts`
     - Implement Smithy version validation
     - Implement metadata validation
     - Implement shapes collection validation
     - Return ValidationResult from @laag/core
     - _Requirements: 3.2, 3.3, 3.6, 3.7_
 
-  - [ ] 5.2 Create shape validator in `src/validators/shape-validator.ts`
+  - [x] 5.2 Create shape validator in `src/validators/shape-validator.ts`
     - Implement shape type validation
     - Implement structure shape validation
     - Implement service shape validation
@@ -66,7 +66,7 @@
     - Validate shape references
     - _Requirements: 3.4, 3.5, 3.6, 3.7_
 
-  - [ ] 5.3 Create trait validator in `src/validators/trait-validator.ts`
+  - [x] 5.3 Create trait validator in `src/validators/trait-validator.ts`
     - Implement trait application validation
     - Implement standard trait validation (http, required, documentation)
     - Implement custom trait validation
