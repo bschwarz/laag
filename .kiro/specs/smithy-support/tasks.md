@@ -23,14 +23,14 @@
     - Define shape type discriminated unions
     - _Requirements: 7.1, 7.2, 7.3_
 
-- [ ] 3. Implement utility classes and functions
-  - [ ] 3.1 Create ShapeId utilities in `src/utils/shape-id.ts`
+- [x] 3. Implement utility classes and functions
+  - [x] 3.1 Create ShapeId utilities in `src/utils/shape-id.ts`
     - Implement shape ID parsing (namespace#ShapeName)
     - Implement shape ID validation
     - Implement shape ID comparison utilities
     - _Requirements: 4.1, 4.2_
 
-  - [ ] 3.2 Create selector utilities in `src/utils/selector.ts`
+  - [x] 3.2 Create selector utilities in `src/utils/selector.ts`
     - Implement basic selector parsing
     - Implement shape matching logic
     - Create selector query interface
