@@ -8,8 +8,8 @@
   - Add package to workspace build system
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 11.1, 11.2, 11.3_
 
-- [ ] 2. Implement core type definitions
-  - [ ] 2.1 Create base type definitions in `src/types.ts`
+- [x] 2. Implement core type definitions
+  - [x] 2.1 Create base type definitions in `src/types.ts`
     - Define SmithyModel interface
     - Define Shape type and all shape variants (structure, service, operation, resource, etc.)
     - Define Trait interfaces
@@ -17,7 +17,7 @@
     - Define common trait interfaces (HttpTrait, RequiredTrait, DocumentationTrait)
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6_
 
-  - [ ] 2.2 Create shape-specific type definitions
+  - [x] 2.2 Create shape-specific type definitions
     - Define StructureShape, ServiceShape, OperationShape, ResourceShape interfaces
     - Define MemberShape interface
     - Define shape type discriminated unions
