@@ -68,7 +68,14 @@
     "test:integration": "bun run scripts/test-integration.ts",
     "test:integration:workflow": "bun run scripts/test-integration.ts --skip-performance --skip-module-formats",
     "test:integration:performance": "bun run scripts/test-integration.ts --skip-workflow --skip-module-formats",
-    "test:integration:modules": "bun run scripts/test-integration.ts --skip-workflow --skip-performance"
+    "test:integration:modules": "bun run scripts/test-integration.ts --skip-workflow --skip-performance",
+    "workspace:list": "find packages -name 'package.json' -not -path '*/dist/*' -exec jq -r '.name + \"@\" + .version + \" (\" + (.scripts.build // \"no build\") + \")\"' {} \\;",
+    "workspace:install": "bun install --frozen-lockfile",
+    "workspace:update": "bun update",
+    "workspace:clean": "bun run --filter='*' clean",
+    "workspace:test": "bun test --recursive",
+    "workspace:build": "bun run build",
+    "workspace:version": "bun run scripts/version-workspace.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",

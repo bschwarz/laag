@@ -3,11 +3,12 @@
 ## Repository Layout
 ```
 laag/
-├── packages/                    # Lerna monorepo packages
+├── packages/                    # Bun workspace packages
 │   ├── openapi/                # OpenAPI/Swagger library
 │   ├── raml/                   # RAML library (in development)
 │   ├── smithy/                 # Smithy library (planned)
 │   └── core/                   # Shared core functionality
+├── scripts/                    # Build and release scripts
 ├── coverage/                   # Test coverage reports
 ├── .husky/                     # Git hooks configuration
 ├── .kiro/                      # Kiro AI assistant configuration
