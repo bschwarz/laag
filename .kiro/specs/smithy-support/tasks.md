@@ -36,15 +36,15 @@
     - Create selector query interface
     - _Requirements: 12.1_
 
-- [ ] 4. Implement parsing logic
-  - [ ] 4.1 Create JSON parser in `src/parsers/json-parser.ts`
+- [x] 4. Implement parsing logic
+  - [x] 4.1 Create JSON parser in `src/parsers/json-parser.ts`
     - Implement JSON AST parsing
     - Implement format validation
     - Handle both string and object inputs
     - Add error handling for malformed JSON
     - _Requirements: 3.1, 3.2_
 
-  - [ ] 4.2 Create parser index and exports
+  - [x] 4.2 Create parser index and exports
     - Export JsonParser from `src/parsers/index.ts`
     - Add placeholder for future IDL parser
     - _Requirements: 3.1_
