@@ -76,6 +76,22 @@
         "typescript",
       ],
     },
+    "packages/smithy": {
+      "name": "@laag/smithy",
+      "version": "1.0.0-alpha.0",
+      "devDependencies": {
+        "@laag/core": "workspace:*",
+        "@types/bun": "latest",
+        "typescript": "^5.0.0",
+      },
+      "peerDependencies": {
+        "@laag/core": "workspace:*",
+        "typescript": ">=4.5.0",
+      },
+      "optionalPeers": [
+        "typescript",
+      ],
+    },
   },
   "overrides": {
     "brace-expansion": "^2.0.0",
@@ -120,6 +136,8 @@
     "@laag/openapi": ["@laag/openapi@workspace:packages/openapi"],
 
     "@laag/raml": ["@laag/raml@workspace:packages/raml"],
+
+    "@laag/smithy": ["@laag/smithy@workspace:packages/smithy"],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
