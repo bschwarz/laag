@@ -72,8 +72,8 @@
     - Implement custom trait validation
     - _Requirements: 5.2, 5.4, 5.5_
 
-- [ ] 6. Implement shape management
-  - [ ] 6.1 Create ShapeManager class in `src/shapes/shape-manager.ts`
+- [x] 6. Implement shape management
+  - [x] 6.1 Create ShapeManager class in `src/shapes/shape-manager.ts`
     - Implement shape storage using Map
     - Implement get, getAll, getByType methods
     - Implement add, remove, has methods
@@ -82,7 +82,7 @@
     - Implement shape queries (findShapesByTrait, getShapeHierarchy)
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6_
 
-  - [ ] 6.2 Create base shape classes
+  - [x] 6.2 Create base shape classes
     - Create BaseShape class in `src/shapes/base-shape.ts`
     - Create StructureShape class in `src/shapes/structure.ts`
     - Create ServiceShape class in `src/shapes/service.ts`
