@@ -91,15 +91,15 @@
     - Export all shape classes from `src/shapes/index.ts`
     - _Requirements: 4.3, 4.4, 4.5_
 
-- [ ] 7. Implement trait management
-  - [ ] 7.1 Create TraitManager class in `src/traits/trait-manager.ts`
+- [x] 7. Implement trait management
+  - [x] 7.1 Create TraitManager class in `src/traits/trait-manager.ts`
     - Implement trait storage per shape
     - Implement get, has, add, remove methods
     - Implement trait validation integration
     - Implement standard trait accessors (getHttpTrait, getDocumentation, isRequired)
     - _Requirements: 5.1, 5.2, 5.3, 5.5, 5.6_
 
-  - [ ] 7.2 Create trait implementations
+  - [x] 7.2 Create trait implementations
     - Create BaseTrait class in `src/traits/base-trait.ts`
     - Create HTTP traits in `src/traits/http-traits.ts`
     - Create AWS traits in `src/traits/aws-traits.ts`

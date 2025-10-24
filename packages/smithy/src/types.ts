@@ -230,7 +230,7 @@ export interface Trait {
 /**
  * HTTP trait - defines HTTP binding for operations
  */
-export interface HttpTrait {
+export interface HttpTrait extends Record<string, unknown> {
   /** HTTP method (GET, POST, PUT, DELETE, PATCH, etc.) */
   method: string;
   /** URI pattern */
