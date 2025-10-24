@@ -114,44 +114,44 @@
     - Implement HTTP binding extraction (getHttpBinding)
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6_
 
-- [ ] 9. Implement main Smithy class
-  - [ ] 9.1 Create Smithy class in `src/smithy.ts`
+- [x] 9. Implement main Smithy class
+  - [x] 9.1 Create Smithy class in `src/smithy.ts`
     - Extend LaagBase from @laag/core
     - Implement constructor accepting SmithyModel or string
     - Initialize ShapeManager, TraitManager, ServiceManager
     - Implement model accessors (version, metadata, shapes)
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-  - [ ] 9.2 Implement shape operations in Smithy class
+  - [x] 9.2 Implement shape operations in Smithy class
     - Implement getShape, getShapesByType methods
     - Implement addShape, removeShape, hasShape methods
     - Delegate to ShapeManager
     - _Requirements: 4.1, 4.2, 4.6_
 
-  - [ ] 9.3 Implement service operations in Smithy class
+  - [x] 9.3 Implement service operations in Smithy class
     - Implement getServices, getService methods
     - Implement getOperations method
     - Delegate to ServiceManager
     - _Requirements: 6.1, 6.2_
 
-  - [ ] 9.4 Implement trait operations in Smithy class
+  - [x] 9.4 Implement trait operations in Smithy class
     - Implement getTraits, hasTrait, addTrait methods
     - Delegate to TraitManager
     - _Requirements: 5.1, 5.6_
 
-  - [ ] 9.5 Implement validation in Smithy class
+  - [x] 9.5 Implement validation in Smithy class
     - Implement validate method
     - Integrate ModelValidator, ShapeValidator, TraitValidator
     - Return comprehensive ValidationResult
     - _Requirements: 3.6, 3.7_
 
-  - [ ] 9.6 Implement serialization in Smithy class
+  - [x] 9.6 Implement serialization in Smithy class
     - Implement toJSON method
     - Implement toString method
     - Ensure valid Smithy JSON AST output
     - _Requirements: 4.7_
 
-  - [ ] 9.7 Implement selector support in Smithy class
+  - [x] 9.7 Implement selector support in Smithy class
     - Implement select method
     - Integrate selector utilities
     - Return matching shapes

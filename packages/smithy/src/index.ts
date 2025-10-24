@@ -3,6 +3,9 @@
  * @module @laag/smithy
  */
 
+// Export main Smithy class
+export { Smithy } from './smithy.js';
+
 // Export managers
 export { ServiceManager } from './service-manager.js';
 export { ShapeManager } from './shapes/shape-manager.js';
@@ -45,3 +48,6 @@ export { createShapeId, isAbsoluteShapeId, parseShapeId } from './utils/shape-id
 export * from './types.js';
 
 export const version = '1.0.0-alpha.0';
+
+// Default export
+export { Smithy as default } from './smithy.js';
