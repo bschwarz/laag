@@ -186,7 +186,7 @@
     - Add GeneratorOptions interface
     - _Requirements: 8.1, 8.4, 8.5_
 
-- [ ] 11. Create package exports
+- [x] 11. Create package exports
   - Create `src/index.ts` with all exports
   - Export Smithy class as default and named export
   - Export all types from types.ts

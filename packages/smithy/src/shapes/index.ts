@@ -3,9 +3,9 @@
  * @module shapes
  */
 
-export { BaseShape } from './base-shape';
-export { OperationShape } from './operation';
-export { ResourceShape } from './resource';
-export { ServiceShape } from './service';
-export { ShapeManager } from './shape-manager';
-export { StructureShape } from './structure';
+export { BaseShape } from './base-shape.js';
+export { OperationShape } from './operation.js';
+export { ResourceShape } from './resource.js';
+export { ServiceShape } from './service.js';
+export { ShapeManager } from './shape-manager.js';
+export { StructureShape } from './structure.js';

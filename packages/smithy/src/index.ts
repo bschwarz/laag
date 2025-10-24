@@ -3,56 +3,106 @@
  * @module @laag/smithy
  */
 
-// Export main Smithy class
-export { Smithy } from './smithy.js';
+// ============================================================================
+// Main Smithy Class
+// ============================================================================
 
-// Export managers
+export { Smithy, Smithy as default } from './smithy.js';
+
+// ============================================================================
+// Managers
+// ============================================================================
+
 export { ServiceManager } from './service-manager.js';
 export { ShapeManager } from './shapes/shape-manager.js';
 export { TraitManager } from './traits/trait-manager.js';
 
-// Export shape classes
+// ============================================================================
+// Shape Classes
+// ============================================================================
+
 export { BaseShape } from './shapes/base-shape.js';
 export { OperationShape } from './shapes/operation.js';
 export { ResourceShape } from './shapes/resource.js';
 export { ServiceShape } from './shapes/service.js';
 export { StructureShape } from './shapes/structure.js';
 
-// Export trait classes
-export {
-    AwsApiGatewayIntegrationTrait, AwsArnReferenceTrait,
-    AwsArnTemplateTrait, AwsAuthTrait, AwsClientDiscoveredEndpointTrait, AwsClientEndpointDiscoveryTrait, AwsCloudFormationNameTrait, AwsControlPlaneTrait,
-    AwsDataPlaneTrait, AwsIamActionTrait,
-    AwsIamResourceTrait, AwsProtocolTrait, AwsSdkServiceIdTrait
-} from './traits/aws-traits.js';
-export { BaseTrait } from './traits/base-trait.js';
-export { HttpTrait as HttpTraitClass } from './traits/http-traits.js';
+// ============================================================================
+// Trait Classes
+// ============================================================================
 
-// Export validators
+// Base trait classes
+export {
+    ArrayTrait, BaseTrait,
+    MarkerTrait, NumberTrait,
+    ObjectTrait, ShapeReferenceTrait, StringTrait
+} from './traits/base-trait.js';
+
+// HTTP trait classes
+export {
+    CorsTrait, HttpErrorTrait, HttpHeaderTrait, HttpLabelTrait, HttpPayloadTrait, HttpQueryTrait, HttpResponseCodeTrait, HttpTrait
+} from './traits/http-traits.js';
+
+// AWS trait classes
+export {
+    AwsApiGatewayIntegrationTrait,
+    AwsArnReferenceTrait,
+    AwsArnTemplateTrait,
+    AwsAuthTrait,
+    AwsClientDiscoveredEndpointTrait,
+    AwsClientEndpointDiscoveryTrait,
+    AwsCloudFormationNameTrait,
+    AwsControlPlaneTrait,
+    AwsDataPlaneTrait,
+    AwsIamActionTrait,
+    AwsIamResourceTrait,
+    AwsProtocolTrait,
+    AwsSdkServiceIdTrait
+} from './traits/aws-traits.js';
+
+// ============================================================================
+// Validators
+// ============================================================================
+
 export { ModelValidator } from './validators/model-validator.js';
 export { ShapeValidator } from './validators/shape-validator.js';
 export { TraitValidator } from './validators/trait-validator.js';
 
-// Export parsers
+// ============================================================================
+// Parsers
+// ============================================================================
+
 export { JsonParser } from './parsers/json-parser.js';
 
-// Export generators
+// ============================================================================
+// Code Generators
+// ============================================================================
+
 export { JavaScriptGenerator } from './generators/javascript-generator.js';
 export { PythonGenerator } from './generators/python-generator.js';
 export { TypeScriptGenerator } from './generators/typescript-generator.js';
 
-// Export utilities
-export {
-    createSelectorQuery,
-    isValidSelector, matchSelector, parseSelector, selectByNamespace, selectByTrait, selectByType, selectShapes, type SelectorContext,
-    type SelectorMatch
-} from './utils/selector.js';
+// ============================================================================
+// Utilities
+// ============================================================================
+
+// Shape ID utilities
 export { createShapeId, isAbsoluteShapeId, parseShapeId } from './utils/shape-id.js';
 
-// Export all types
+// Selector utilities
+export {
+    createSelectorQuery,
+    isValidSelector, matchSelector, parseSelector, selectByNamespace, selectByTrait, selectByType, selectShapes, type SelectorContext, type SelectorMatch
+} from './utils/selector.js';
+
+// ============================================================================
+// Type Definitions
+// ============================================================================
+
 export * from './types.js';
 
-export const version = '1.0.0-alpha.0';
+// ============================================================================
+// Package Metadata
+// ============================================================================
 
-// Default export
-export { Smithy as default } from './smithy.js';
+export const version = '1.0.0-alpha.0';
