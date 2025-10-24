@@ -7,7 +7,7 @@
 // Main Smithy Class
 // ============================================================================
 
-export { Smithy, Smithy as default } from './smithy.js';
+export { Smithy as default, Smithy } from './smithy.js';
 
 // ============================================================================
 // Managers
@@ -33,31 +33,42 @@ export { StructureShape } from './shapes/structure.js';
 
 // Base trait classes
 export {
-    ArrayTrait, BaseTrait,
-    MarkerTrait, NumberTrait,
-    ObjectTrait, ShapeReferenceTrait, StringTrait
+  ArrayTrait,
+  BaseTrait,
+  MarkerTrait,
+  NumberTrait,
+  ObjectTrait,
+  ShapeReferenceTrait,
+  StringTrait,
 } from './traits/base-trait.js';
 
 // HTTP trait classes
 export {
-    CorsTrait, HttpErrorTrait, HttpHeaderTrait, HttpLabelTrait, HttpPayloadTrait, HttpQueryTrait, HttpResponseCodeTrait, HttpTrait
+  CorsTrait,
+  HttpErrorTrait,
+  HttpHeaderTrait,
+  HttpLabelTrait,
+  HttpPayloadTrait,
+  HttpQueryTrait,
+  HttpResponseCodeTrait,
+  HttpTrait,
 } from './traits/http-traits.js';
 
 // AWS trait classes
 export {
-    AwsApiGatewayIntegrationTrait,
-    AwsArnReferenceTrait,
-    AwsArnTemplateTrait,
-    AwsAuthTrait,
-    AwsClientDiscoveredEndpointTrait,
-    AwsClientEndpointDiscoveryTrait,
-    AwsCloudFormationNameTrait,
-    AwsControlPlaneTrait,
-    AwsDataPlaneTrait,
-    AwsIamActionTrait,
-    AwsIamResourceTrait,
-    AwsProtocolTrait,
-    AwsSdkServiceIdTrait
+  AwsApiGatewayIntegrationTrait,
+  AwsArnReferenceTrait,
+  AwsArnTemplateTrait,
+  AwsAuthTrait,
+  AwsClientDiscoveredEndpointTrait,
+  AwsClientEndpointDiscoveryTrait,
+  AwsCloudFormationNameTrait,
+  AwsControlPlaneTrait,
+  AwsDataPlaneTrait,
+  AwsIamActionTrait,
+  AwsIamResourceTrait,
+  AwsProtocolTrait,
+  AwsSdkServiceIdTrait,
 } from './traits/aws-traits.js';
 
 // ============================================================================
@@ -91,8 +102,16 @@ export { createShapeId, isAbsoluteShapeId, parseShapeId } from './utils/shape-id
 
 // Selector utilities
 export {
-    createSelectorQuery,
-    isValidSelector, matchSelector, parseSelector, selectByNamespace, selectByTrait, selectByType, selectShapes, type SelectorContext, type SelectorMatch
+  createSelectorQuery,
+  isValidSelector,
+  matchSelector,
+  parseSelector,
+  selectByNamespace,
+  selectByTrait,
+  selectByType,
+  selectShapes,
+  type SelectorContext,
+  type SelectorMatch,
 } from './utils/selector.js';
 
 // ============================================================================

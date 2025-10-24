@@ -5,14 +5,14 @@
  * code from a Smithy model using the @laag/smithy library.
  */
 
-import { Smithy } from '../src/index';
+import { Smithy, type SmithyModel } from '../src/index';
 
 // Define a simple weather service model
-const weatherModel = {
+const weatherModel: SmithyModel = {
   smithy: '2.0',
   shapes: {
     'example.weather#Weather': {
-      type: 'service',
+      type: 'service' as const,
       version: '2006-03-01',
       operations: ['example.weather#GetWeather'],
       traits: {
@@ -20,7 +20,7 @@ const weatherModel = {
       },
     },
     'example.weather#GetWeather': {
-      type: 'operation',
+      type: 'operation' as const,
       input: 'example.weather#GetWeatherInput',
       output: 'example.weather#GetWeatherOutput',
       traits: {
@@ -33,7 +33,7 @@ const weatherModel = {
       },
     },
     'example.weather#GetWeatherInput': {
-      type: 'structure',
+      type: 'structure' as const,
       members: {
         city: {
           target: 'smithy.api#String',
@@ -49,7 +49,7 @@ const weatherModel = {
       },
     },
     'example.weather#GetWeatherOutput': {
-      type: 'structure',
+      type: 'structure' as const,
       members: {
         temperature: {
           target: 'smithy.api#Float',
