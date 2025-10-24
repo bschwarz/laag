@@ -397,4 +397,52 @@ describe('Smithy', () => {
       expect(matches[0]?.shapeId).toBe('example.weather#GetWeather');
     });
   });
+
+  describe('code generation', () => {
+    describe('generateTypeScript', () => {
+      test('should generate TypeScript code', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generateTypeScript();
+        expect(code).toContain('export interface GetWeatherInput');
+        expect(code).toContain('export class WeatherClient');
+      });
+
+      test('should respect generator options', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generateTypeScript({ includeComments: false });
+        expect(code).not.toContain('/**');
+      });
+    });
+
+    describe('generateJavaScript', () => {
+      test('should generate JavaScript code', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generateJavaScript();
+        expect(code).toContain('export class GetWeatherInput');
+        expect(code).toContain('export class WeatherClient');
+      });
+
+      test('should respect generator options', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generateJavaScript({ includeComments: false });
+        expect(code).not.toContain('/**');
+      });
+    });
+
+    describe('generatePython', () => {
+      test('should generate Python code', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generatePython();
+        expect(code).toContain('@dataclass');
+        expect(code).toContain('class GetWeatherInput:');
+        expect(code).toContain('class WeatherClient:');
+      });
+
+      test('should respect generator options', () => {
+        const smithy = new Smithy(validModel);
+        const code = smithy.generatePython({ includeComments: false });
+        expect(code).not.toContain('"""');
+      });
+    });
+  });
 });

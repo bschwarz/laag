@@ -157,29 +157,29 @@
     - Return matching shapes
     - _Requirements: 12.1_
 
-- [ ] 10. Implement code generation
-  - [ ] 10.1 Create TypeScript generator in `src/generators/typescript-generator.ts`
+- [x] 10. Implement code generation
+  - [x] 10.1 Create TypeScript generator in `src/generators/typescript-generator.ts`
     - Implement generate method for full model
     - Implement generateInterface for structures
     - Implement generateClient for services
     - Add proper formatting and comments
     - _Requirements: 8.1, 8.2, 8.3, 8.6_
 
-  - [ ] 10.2 Create JavaScript generator in `src/generators/javascript-generator.ts`
+  - [x] 10.2 Create JavaScript generator in `src/generators/javascript-generator.ts`
     - Implement generate method for full model
     - Implement generateClass for structures
     - Implement generateClient for services
     - Add proper formatting and comments
     - _Requirements: 8.1, 8.3, 8.6_
 
-  - [ ] 10.3 Create Python generator in `src/generators/python-generator.ts`
+  - [x] 10.3 Create Python generator in `src/generators/python-generator.ts`
     - Implement generate method for full model
     - Implement generateClass for structures
     - Implement generateClient for services
     - Add proper formatting and comments
     - _Requirements: 8.1, 8.3, 8.6_
 
-  - [ ] 10.4 Integrate generators into Smithy class
+  - [x] 10.4 Integrate generators into Smithy class
     - Implement generateTypeScript method
     - Implement generateJavaScript method
     - Implement generatePython method

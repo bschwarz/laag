@@ -5,11 +5,15 @@
 
 import type { ValidationResult } from '@laag/core';
 import { LaagBase, ParseError, ValidationError } from '@laag/core';
+import { JavaScriptGenerator } from './generators/javascript-generator.js';
+import { PythonGenerator } from './generators/python-generator.js';
+import { TypeScriptGenerator } from './generators/typescript-generator.js';
 import { JsonParser } from './parsers/json-parser.js';
 import { ServiceManager } from './service-manager.js';
 import { ShapeManager } from './shapes/shape-manager.js';
 import { TraitManager } from './traits/trait-manager.js';
 import type {
+    GeneratorOptions,
     HttpBinding,
     OperationShape,
     ResourceShape,
@@ -17,7 +21,7 @@ import type {
     Shape,
     ShapeId,
     ShapeType,
-    SmithyModel,
+    SmithyModel
 } from './types.js';
 import { selectShapes, type SelectorMatch } from './utils/selector.js';
 import { ModelValidator } from './validators/model-validator.js';
@@ -568,5 +572,75 @@ export class Smithy extends LaagBase {
    */
   select(selector: string): SelectorMatch[] {
     return selectShapes(selector, this.shapes);
+  }
+
+  /**
+   * Generate TypeScript code from the model
+   *
+   * Generates TypeScript interfaces for structures and client classes for services.
+   *
+   * @param options - Generator options
+   * @returns Generated TypeScript code
+   *
+   * @example
+   * ```typescript
+   * const smithy = new Smithy(model);
+   * const code = smithy.generateTypeScript({
+   *   includeComments: true,
+   *   indent: 2
+   * });
+   * console.log(code);
+   * ```
+   */
+  generateTypeScript(options?: GeneratorOptions): string {
+    const generator = new TypeScriptGenerator(options);
+    return generator.generate(this.toJSON(), options);
+  }
+
+  /**
+   * Generate JavaScript code from the model
+   *
+   * Generates JavaScript classes for structures and client classes for services.
+   *
+   * @param options - Generator options
+   * @returns Generated JavaScript code
+   *
+   * @example
+   * ```typescript
+   * const smithy = new Smithy(model);
+   * const code = smithy.generateJavaScript({
+   *   includeComments: true,
+   *   outputFormat: 'class',
+   *   indent: 2
+   * });
+   * console.log(code);
+   * ```
+   */
+  generateJavaScript(options?: GeneratorOptions): string {
+    const generator = new JavaScriptGenerator(options);
+    return generator.generate(this.toJSON(), options);
+  }
+
+  /**
+   * Generate Python code from the model
+   *
+   * Generates Python dataclasses for structures and client classes for services.
+   *
+   * @param options - Generator options
+   * @returns Generated Python code
+   *
+   * @example
+   * ```typescript
+   * const smithy = new Smithy(model);
+   * const code = smithy.generatePython({
+   *   includeComments: true,
+   *   indent: 4
+   * });
+   * console.log(code);
+   * ```
+   */
+  generatePython(options?: GeneratorOptions): string {
+    const generator = new PythonGenerator(options);
+    return generator.generate(this.toJSON(), options);
   }
 }

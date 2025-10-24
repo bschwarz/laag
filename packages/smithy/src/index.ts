@@ -36,6 +36,11 @@ export { TraitValidator } from './validators/trait-validator.js';
 // Export parsers
 export { JsonParser } from './parsers/json-parser.js';
 
+// Export generators
+export { JavaScriptGenerator } from './generators/javascript-generator.js';
+export { PythonGenerator } from './generators/python-generator.js';
+export { TypeScriptGenerator } from './generators/typescript-generator.js';
+
 // Export utilities
 export {
     createSelectorQuery,
