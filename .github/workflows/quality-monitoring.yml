@@ -3,7 +3,7 @@ name: Quality Monitoring
 on:
   schedule:
     # Run daily at 6 AM UTC
-    - cron: '0 6 * * *'
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,8 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        # run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Generate quality metrics
         run: |
