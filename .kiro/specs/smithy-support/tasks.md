@@ -194,8 +194,8 @@
   - Export generator classes
   - _Requirements: 2.6, 7.6_
 
-- [ ] 12. Write comprehensive tests
-  - [ ] 12.1 Create Smithy class tests in `__tests__/smithy.test.ts`
+- [x] 12. Write comprehensive tests
+  - [x] 12.1 Create Smithy class tests in `__tests__/smithy.test.ts`
     - Test constructor with valid inputs
     - Test constructor with invalid inputs
     - Test shape accessors and mutations
@@ -206,7 +206,7 @@
     - Test selector support
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-  - [ ] 12.2 Create shape tests in `__tests__/shapes/`
+  - [x] 12.2 Create shape tests in `__tests__/shapes/`
     - Test StructureShape in `structure.test.ts`
     - Test ServiceShape in `service.test.ts`
     - Test OperationShape in `operation.test.ts`
@@ -214,28 +214,28 @@
     - Test ShapeManager in `shape-manager.test.ts`
     - _Requirements: 9.2, 9.3_
 
-  - [ ] 12.3 Create trait tests in `__tests__/traits/`
+  - [x] 12.3 Create trait tests in `__tests__/traits/`
     - Test TraitManager in `trait-manager.test.ts`
     - Test HTTP traits in `http-traits.test.ts`
     - Test AWS traits in `aws-traits.test.ts`
     - Test trait validation
     - _Requirements: 9.2, 9.3_
 
-  - [ ] 12.4 Create validator tests in `__tests__/validators/`
+  - [x] 12.4 Create validator tests in `__tests__/validators/`
     - Test ModelValidator in `model-validator.test.ts`
     - Test ShapeValidator in `shape-validator.test.ts`
     - Test TraitValidator in `trait-validator.test.ts`
     - Test error cases and edge conditions
     - _Requirements: 9.2, 9.4_
 
-  - [ ] 12.5 Create generator tests in `__tests__/generators/`
+  - [x] 12.5 Create generator tests in `__tests__/generators/`
     - Test TypeScriptGenerator in `typescript-generator.test.ts`
     - Test JavaScriptGenerator in `javascript-generator.test.ts`
     - Test PythonGenerator in `python-generator.test.ts`
     - Verify generated code syntax and correctness
     - _Requirements: 9.2, 9.5_
 
-  - [ ] 12.6 Create test fixtures in `__tests__/fixtures/`
+  - [x] 12.6 Create test fixtures in `__tests__/fixtures/`
     - Create weather-service.json (complete example)
     - Create simple-service.json (minimal example)
     - Create complex-service.json (advanced features)
