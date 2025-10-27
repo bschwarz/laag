@@ -242,8 +242,8 @@
     - Create invalid models for error testing
     - _Requirements: 9.6_
 
-- [ ] 13. Create documentation and examples
-  - [ ] 13.1 Create README.md
+- [x] 13. Create documentation and examples
+  - [x] 13.1 Create README.md
     - Write introduction and features section
     - Add installation instructions
     - Add quick start guide
@@ -254,7 +254,7 @@
     - Add license information
     - _Requirements: 10.1, 10.4_
 
-  - [ ] 13.2 Create usage examples in `examples/`
+  - [x] 13.2 Create usage examples in `examples/`
     - Create basic-usage.ts showing model creation and manipulation
     - Create code-generation.ts showing code generation features
     - Create trait-usage.ts showing trait operations
@@ -262,14 +262,14 @@
     - Create sample Smithy models in `examples/models/`
     - _Requirements: 10.3, 10.5_
 
-  - [ ] 13.3 Add JSDoc comments
+  - [x] 13.3 Add JSDoc comments
     - Add comprehensive JSDoc to Smithy class
     - Add JSDoc to all public methods
     - Add JSDoc to all exported types
     - Add usage examples in JSDoc
     - _Requirements: 10.4_
 
-  - [ ] 13.4 Configure TypeDoc
+  - [x] 13.4 Configure TypeDoc
     - Add typedoc.json configuration
     - Configure output directory
     - Add documentation generation script

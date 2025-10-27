@@ -8,3 +8,4 @@
 
 - [@laag/core](@laag/core/README.md)
 - [openapi/src](openapi/src/README.md)
+- [smithy/src](smithy/src/README.md)

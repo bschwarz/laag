@@ -1,0 +1,66 @@
+{
+  "smithy": "2.0",
+  "metadata": {
+    "authors": ["simple-example@company.com"]
+  },
+  "shapes": {
+    "example.simple#SimpleService": {
+      "type": "service",
+      "version": "1.0.0",
+      "operations": ["example.simple#Echo"],
+      "traits": {
+        "smithy.api#documentation": "A simple echo service for demonstration"
+      }
+    },
+    "example.simple#Echo": {
+      "type": "operation",
+      "input": "example.simple#EchoInput",
+      "output": "example.simple#EchoOutput",
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/echo"
+        },
+        "smithy.api#documentation": "Echo back the input message"
+      }
+    },
+    "example.simple#EchoInput": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The message to echo back"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for the echo operation"
+      }
+    },
+    "example.simple#EchoOutput": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The echoed message"
+          }
+        },
+        "timestamp": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "When the echo was processed"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Output from the echo operation"
+      }
+    }
+  }
+}

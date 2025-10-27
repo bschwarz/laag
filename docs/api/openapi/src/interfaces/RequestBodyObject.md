@@ -6,7 +6,7 @@
 
 # Interface: RequestBodyObject
 
-Defined in: [packages/openapi/src/types.ts:219](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L219)
+Defined in: [packages/openapi/src/types.ts:219](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L219)
 
 Describes a single request body
 
@@ -24,7 +24,7 @@ Describes a single request body
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:221](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L221)
+Defined in: [packages/openapi/src/types.ts:221](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L221)
 
 A brief description of the request body
 
@@ -34,7 +34,7 @@ A brief description of the request body
 
 > **content**: `Record`\<`string`, [`MediaTypeObject`](MediaTypeObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:223](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L223)
+Defined in: [packages/openapi/src/types.ts:223](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L223)
 
 REQUIRED. The content of the request body
 
@@ -44,6 +44,6 @@ REQUIRED. The content of the request body
 
 > `optional` **required**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:225](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L225)
+Defined in: [packages/openapi/src/types.ts:225](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L225)
 
 Determines if the request body is required in the request

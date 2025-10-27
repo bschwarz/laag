@@ -6,7 +6,7 @@
 
 # Interface: OAuthFlowObject
 
-Defined in: [packages/openapi/src/types.ts:481](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L481)
+Defined in: [packages/openapi/src/types.ts:481](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L481)
 
 Configuration details for a supported OAuth Flow
 
@@ -24,7 +24,7 @@ Configuration details for a supported OAuth Flow
 
 > `optional` **authorizationUrl**: `string`
 
-Defined in: [packages/openapi/src/types.ts:483](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L483)
+Defined in: [packages/openapi/src/types.ts:483](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L483)
 
 REQUIRED for implicit, authorizationCode. The authorization URL to be used for this flow
 
@@ -34,7 +34,7 @@ REQUIRED for implicit, authorizationCode. The authorization URL to be used for t
 
 > `optional` **tokenUrl**: `string`
 
-Defined in: [packages/openapi/src/types.ts:485](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L485)
+Defined in: [packages/openapi/src/types.ts:485](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L485)
 
 REQUIRED for password, clientCredentials, authorizationCode. The token URL to be used for this flow
 
@@ -44,7 +44,7 @@ REQUIRED for password, clientCredentials, authorizationCode. The token URL to be
 
 > `optional` **refreshUrl**: `string`
 
-Defined in: [packages/openapi/src/types.ts:487](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L487)
+Defined in: [packages/openapi/src/types.ts:487](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L487)
 
 The URL to be used for obtaining refresh tokens
 
@@ -54,6 +54,6 @@ The URL to be used for obtaining refresh tokens
 
 > **scopes**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/openapi/src/types.ts:489](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L489)
+Defined in: [packages/openapi/src/types.ts:489](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L489)
 
 REQUIRED. The available scopes for the OAuth2 security scheme

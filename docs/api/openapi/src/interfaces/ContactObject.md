@@ -6,7 +6,7 @@
 
 # Interface: ContactObject
 
-Defined in: [packages/openapi/src/types.ts:52](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L52)
+Defined in: [packages/openapi/src/types.ts:52](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L52)
 
 Contact information for the exposed API
 
@@ -24,7 +24,7 @@ Contact information for the exposed API
 
 > `optional` **name**: `string`
 
-Defined in: [packages/openapi/src/types.ts:54](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L54)
+Defined in: [packages/openapi/src/types.ts:54](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L54)
 
 The identifying name of the contact person/organization
 
@@ -34,7 +34,7 @@ The identifying name of the contact person/organization
 
 > `optional` **url**: `string`
 
-Defined in: [packages/openapi/src/types.ts:56](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L56)
+Defined in: [packages/openapi/src/types.ts:56](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L56)
 
 The URL pointing to the contact information
 
@@ -44,6 +44,6 @@ The URL pointing to the contact information
 
 > `optional` **email**: `string`
 
-Defined in: [packages/openapi/src/types.ts:58](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L58)
+Defined in: [packages/openapi/src/types.ts:58](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L58)
 
 The email address of the contact person/organization

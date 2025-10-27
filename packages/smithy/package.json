@@ -64,6 +64,9 @@
     "type-check": "tsc --noEmit --skipLibCheck",
     "lint": "eslint src/**/*.ts __tests__/**/*.ts",
     "lint:fix": "eslint src/**/*.ts __tests__/**/*.ts --fix",
+    "docs": "typedoc",
+    "docs:clean": "rm -rf docs/api",
+    "docs:serve": "bun run docs && cd docs/api && python3 -m http.server 8080",
     "prepublishOnly": "bun run build && bun run test && bun run type-check"
   },
   "bugs": {

@@ -1,5 +1,9 @@
 {
-  "entryPoints": ["packages/core/src/index.ts", "packages/openapi/src/index.ts"],
+  "entryPoints": [
+    "packages/core/src/index.ts",
+    "packages/openapi/src/index.ts",
+    "packages/smithy/src/index.ts"
+  ],
   "out": "docs/api",
   "plugin": ["typedoc-plugin-markdown"],
   "readme": "README.md",
@@ -9,7 +13,7 @@
   "excludeProtected": false,
   "excludeInternal": true,
   "categorizeByGroup": true,
-  "categoryOrder": ["Core", "OpenAPI", "Types", "Errors"],
+  "categoryOrder": ["Core", "OpenAPI", "Smithy", "Types", "Errors"],
   "groupOrder": ["Classes", "Interfaces", "Type Aliases", "Functions", "Variables"],
   "sort": ["source-order"],
   "kindSortOrder": [

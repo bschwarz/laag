@@ -6,7 +6,7 @@
 
 # Abstract Class: LaagBase
 
-Defined in: [packages/core/src/base.ts:43](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L43)
+Defined in: [packages/core/src/base.ts:43](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L43)
 
 Abstract base class that provides common functionality for all API specification libraries.
 
@@ -41,6 +41,7 @@ const spec = new MyApiSpec({ version: '1.0.0' });
 ## Extended by
 
 - [`Openapi`](../../../openapi/src/classes/Openapi.md)
+- [`Smithy`](../../../smithy/src/classes/Smithy.md)
 
 ## Constructors
 
@@ -48,7 +49,7 @@ const spec = new MyApiSpec({ version: '1.0.0' });
 
 > **new LaagBase**(`doc?`, `errorOptions?`): `LaagBase`
 
-Defined in: [packages/core/src/base.ts:70](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L70)
+Defined in: [packages/core/src/base.ts:70](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L70)
 
 Creates a new instance of the LaagBase class.
 
@@ -96,7 +97,7 @@ const spec = new MyApiSpec(doc, {
 
 > `protected` **dictKeysExists**(`obj`, ...`keys`): `boolean`
 
-Defined in: [packages/core/src/base.ts:117](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L117)
+Defined in: [packages/core/src/base.ts:117](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L117)
 
 Check if all specified keys exist in an object, supporting nested key paths.
 
@@ -146,7 +147,7 @@ this.dictKeysExists(doc, 'info.description'); // false
 
 > `protected` **getExtensions**(`level?`): [`ExtensionObject`](../interfaces/ExtensionObject.md)
 
-Defined in: [packages/core/src/base.ts:174](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L174)
+Defined in: [packages/core/src/base.ts:174](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L174)
 
 Get extension properties (x-* properties) from a specific level or the root document.
 
@@ -198,7 +199,7 @@ this.getExtensions('info'); // { 'x-logo': 'logo.png' }
 
 > `protected` **setExtensions**(`values`, `level?`): `void`
 
-Defined in: [packages/core/src/base.ts:225](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L225)
+Defined in: [packages/core/src/base.ts:225](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L225)
 
 Set extension properties (x-* properties) at a specific level or the root document.
 
@@ -251,7 +252,7 @@ this.setExtensions({ 'invalid-key': 'value' }); // Error: keys must start with '
 
 > `protected` **getNestedValue**(`obj`, `path`): `any`
 
-Defined in: [packages/core/src/base.ts:280](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L280)
+Defined in: [packages/core/src/base.ts:280](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L280)
 
 Get a nested value from an object using dot notation path traversal.
 
@@ -303,7 +304,7 @@ this.getNestedValue(doc, 'info.nonexistent'); // undefined
 
 > `protected` **setNestedValue**(`obj`, `path`, `value`): `void`
 
-Defined in: [packages/core/src/base.ts:322](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L322)
+Defined in: [packages/core/src/base.ts:322](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L322)
 
 Set a nested value in an object using dot notation, creating intermediate objects as needed.
 
@@ -361,7 +362,7 @@ this.setNestedValue(doc, 'info.contact.email', 'test@example.com');
 
 > `abstract` **validate**(): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [packages/core/src/base.ts:374](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L374)
+Defined in: [packages/core/src/base.ts:374](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L374)
 
 Validate the document structure according to the specific API specification format.
 
@@ -405,7 +406,7 @@ class MyApiSpec extends LaagBase {
 
 > **getDocument**(): [`BaseDocument`](../interfaces/BaseDocument.md)
 
-Defined in: [packages/core/src/base.ts:397](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L397)
+Defined in: [packages/core/src/base.ts:397](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L397)
 
 Get a copy of the document as a JavaScript object.
 
@@ -440,7 +441,7 @@ console.log(spec.getDocument().version); // Still '1.0.0'
 
 > **getDocumentAsJson**(`pretty`): `string`
 
-Defined in: [packages/core/src/base.ts:429](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L429)
+Defined in: [packages/core/src/base.ts:429](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L429)
 
 Get the document as a JSON string representation.
 
@@ -489,7 +490,7 @@ const pretty = spec.getDocumentAsJson(true);
 
 > `protected` **doc**: [`BaseDocument`](../interfaces/BaseDocument.md)
 
-Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L44)
+Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L44)
 
 ***
 
@@ -497,4 +498,4 @@ Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob
 
 > `protected` **errorOptions**: [`ErrorHandlingOptions`](../interfaces/ErrorHandlingOptions.md)
 
-Defined in: [packages/core/src/base.ts:45](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L45)
+Defined in: [packages/core/src/base.ts:45](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L45)

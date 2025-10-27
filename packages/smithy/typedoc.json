@@ -1,0 +1,68 @@
+{
+  "extends": "../../typedoc.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "name": "@laag/smithy",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Main",
+    "Managers",
+    "Shapes",
+    "Traits",
+    "Validators",
+    "Parsers",
+    "Generators",
+    "Utilities",
+    "Types"
+  ],
+  "groupOrder": ["Classes", "Interfaces", "Type Aliases", "Functions", "Variables", "Namespaces"],
+  "sort": ["source-order"],
+  "kindSortOrder": [
+    "Class",
+    "Constructor",
+    "Property",
+    "Method",
+    "Function",
+    "Interface",
+    "TypeAlias",
+    "Variable",
+    "Namespace"
+  ],
+  "navigationLinks": {
+    "GitHub": "https://github.com/bschwarz/laag/tree/main/packages/smithy",
+    "NPM": "https://www.npmjs.com/package/@laag/smithy"
+  },
+  "sidebarLinks": {
+    "Getting Started": "https://github.com/bschwarz/laag/tree/main/packages/smithy#quick-start",
+    "Examples": "https://github.com/bschwarz/laag/tree/main/packages/smithy/examples",
+    "Smithy Specification": "https://smithy.io/2.0/spec/"
+  },
+  "githubPages": false,
+  "hideGenerator": true,
+  "searchInComments": true,
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  },
+
+  "plugin": ["typedoc-plugin-markdown"],
+  "theme": "default",
+  "lightHighlightTheme": "light-plus",
+  "darkHighlightTheme": "dark-plus",
+  "treatWarningsAsErrors": false,
+  "treatValidationWarningsAsErrors": false,
+  "logLevel": "Info",
+  "excludeExternals": true,
+  "excludeNotDocumented": false,
+  "excludeReferences": false,
+  "disableSources": false,
+  "sourceLinkTemplate": "https://github.com/bschwarz/laag/blob/main/packages/smithy/{path}#L{line}",
+  "gitRevision": "main",
+  "gitRemote": "origin"
+}
