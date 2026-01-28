@@ -7,6 +7,7 @@ This guide helps you resolve common issues when using laag v2.
 ### Issue: Package Not Found
 
 **Error:**
+
 ```
 npm ERR! 404 Not Found - GET https://registry.npmjs.org/@laag/core
 ```
@@ -25,6 +26,7 @@ npm install @laag/core@2.0.0 @laag/openapi@2.0.0
 ### Issue: Peer Dependency Warnings
 
 **Error:**
+
 ```
 npm WARN @laag/openapi@2.0.0 requires a peer of @laag/core@^2.0.0
 ```
@@ -39,6 +41,7 @@ npm install @laag/core @laag/openapi
 ### Issue: Module Resolution in Monorepos
 
 **Error:**
+
 ```
 Cannot resolve module '@laag/core' from '@laag/openapi'
 ```
@@ -62,6 +65,7 @@ Ensure proper workspace configuration:
 ### Issue: Cannot Import ESM Module
 
 **Error:**
+
 ```
 SyntaxError: Cannot use import statement outside a module
 ```
@@ -85,11 +89,13 @@ const { Openapi } = require('@laag/openapi');
 ### Issue: TypeScript Import Errors
 
 **Error:**
+
 ```
 Cannot find module '@laag/openapi' or its corresponding type declarations
 ```
 
 **Solution:**
+
 1. Ensure TypeScript can find the types:
 
 ```json
@@ -115,6 +121,7 @@ import Openapi from '@laag/openapi';
 ### Issue: Bundler Configuration
 
 **Error:**
+
 ```
 Module not found: Can't resolve '@laag/openapi'
 ```
@@ -123,24 +130,26 @@ Module not found: Can't resolve '@laag/openapi'
 Configure your bundler properly:
 
 **Webpack:**
+
 ```javascript
 // webpack.config.js
 module.exports = {
   resolve: {
-    extensions: ['.ts', '.js', '.json']
-  }
+    extensions: ['.ts', '.js', '.json'],
+  },
 };
 ```
 
 **Vite:**
+
 ```javascript
 // vite.config.js
 export default {
   resolve: {
     alias: {
-      '@laag/openapi': '@laag/openapi/dist/esm/index.js'
-    }
-  }
+      '@laag/openapi': '@laag/openapi/dist/esm/index.js',
+    },
+  },
 };
 ```
 
@@ -149,11 +158,13 @@ export default {
 ### Issue: ParseError on Valid JSON
 
 **Error:**
+
 ```
 ParseError: Failed to parse document as JSON
 ```
 
 **Debugging:**
+
 ```typescript
 import { ParseError } from '@laag/core';
 
@@ -169,12 +180,14 @@ try {
 ```
 
 **Common Causes:**
+
 1. BOM (Byte Order Mark) in JSON file
 2. Trailing commas in JSON
 3. Single quotes instead of double quotes
 4. Unescaped characters
 
 **Solution:**
+
 ```typescript
 // Clean the JSON string
 const cleanJson = jsonString
@@ -188,11 +201,13 @@ const api = new Openapi(cleanJson);
 ### Issue: ValidationError on Valid OpenAPI Document
 
 **Error:**
+
 ```
 ValidationError: Info object is required (at path: info)
 ```
 
 **Debugging:**
+
 ```typescript
 const api = new Openapi(document);
 const validation = api.validate();
@@ -212,21 +227,24 @@ console.log('Info object:', api.getDocument().info);
 ```
 
 **Common Causes:**
+
 1. Missing required fields
 2. Incorrect field types
 3. Invalid OpenAPI version
 4. Malformed nested objects
 
 **Solution:**
+
 ```typescript
 // Ensure required fields are present
 const document = {
-  openapi: '3.0.2',           // Required
-  info: {                     // Required
-    title: 'My API',          // Required
-    version: '1.0.0'          // Required
+  openapi: '3.0.2', // Required
+  info: {
+    // Required
+    title: 'My API', // Required
+    version: '1.0.0', // Required
   },
-  paths: {}                   // Required
+  paths: {}, // Required
 };
 
 const api = new Openapi(document);
@@ -235,22 +253,24 @@ const api = new Openapi(document);
 ### Issue: Extension Property Errors
 
 **Error:**
+
 ```
 ValidationError: Invalid extension key 'custom': extension keys must start with 'x-'
 ```
 
 **Solution:**
+
 ```typescript
 // Incorrect
 api.rootExtensions = {
-  'custom': 'value',          // ❌ Invalid
-  'vendor-extension': 'value' // ❌ Invalid
+  custom: 'value', // ❌ Invalid
+  'vendor-extension': 'value', // ❌ Invalid
 };
 
 // Correct
 api.rootExtensions = {
-  'x-custom': 'value',        // ✅ Valid
-  'x-vendor-extension': 'value' // ✅ Valid
+  'x-custom': 'value', // ✅ Valid
+  'x-vendor-extension': 'value', // ✅ Valid
 };
 ```
 
@@ -259,11 +279,13 @@ api.rootExtensions = {
 ### Issue: Type Errors with Valid Code
 
 **Error:**
+
 ```
 Property 'customProperty' does not exist on type 'Openapi'
 ```
 
 **Solution:**
+
 1. Check if the property exists in the API:
 
 ```typescript
@@ -289,22 +311,22 @@ declare module '@laag/openapi' {
 ### Issue: Generic Type Inference Problems
 
 **Error:**
+
 ```
 Argument of type 'unknown' is not assignable to parameter of type 'OpenAPIDocument'
 ```
 
 **Solution:**
+
 ```typescript
 // Use type assertion
 const api = new Openapi(unknownDocument as OpenAPIDocument);
 
 // Or validate first
 function isOpenAPIDocument(obj: unknown): obj is OpenAPIDocument {
-  return typeof obj === 'object' && 
-         obj !== null && 
-         'openapi' in obj && 
-         'info' in obj && 
-         'paths' in obj;
+  return (
+    typeof obj === 'object' && obj !== null && 'openapi' in obj && 'info' in obj && 'paths' in obj
+  );
 }
 
 if (isOpenAPIDocument(unknownDocument)) {
@@ -315,11 +337,13 @@ if (isOpenAPIDocument(unknownDocument)) {
 ### Issue: Strict Mode Errors
 
 **Error:**
+
 ```
 Object is possibly 'undefined'
 ```
 
 **Solution:**
+
 ```typescript
 // Use optional chaining
 const title = api.info?.title;
@@ -336,11 +360,13 @@ if (api.info) {
 ### Issue: Slow Document Loading
 
 **Symptoms:**
+
 - Long delays when creating Openapi instances
 - High memory usage
 - Slow validation
 
 **Debugging:**
+
 ```typescript
 import { performance } from 'perf_hooks';
 
@@ -353,13 +379,14 @@ console.log(`Document size: ${JSON.stringify(largeDocument).length} characters`)
 ```
 
 **Solutions:**
+
 1. **Lazy loading for large documents:**
 
 ```typescript
 // Load document without immediate validation
-const api = new Openapi(document, { 
-  development: false,  // Disable development features
-  includeContext: false // Reduce memory usage
+const api = new Openapi(document, {
+  development: false, // Disable development features
+  includeContext: false, // Reduce memory usage
 });
 
 // Validate only when needed
@@ -377,16 +404,13 @@ import { pipeline } from 'stream/promises';
 
 async function loadLargeDocument(filePath: string) {
   const chunks: Buffer[] = [];
-  
-  await pipeline(
-    createReadStream(filePath),
-    async function* (source) {
-      for await (const chunk of source) {
-        chunks.push(chunk);
-      }
+
+  await pipeline(createReadStream(filePath), async function* (source) {
+    for await (const chunk of source) {
+      chunks.push(chunk);
     }
-  );
-  
+  });
+
   const jsonString = Buffer.concat(chunks).toString();
   return new Openapi(jsonString);
 }
@@ -395,10 +419,12 @@ async function loadLargeDocument(filePath: string) {
 ### Issue: Memory Leaks
 
 **Symptoms:**
+
 - Increasing memory usage over time
 - Application crashes with out-of-memory errors
 
 **Debugging:**
+
 ```typescript
 // Monitor memory usage
 function checkMemory() {
@@ -406,7 +432,7 @@ function checkMemory() {
   console.log('Memory usage:', {
     rss: Math.round(usage.rss / 1024 / 1024) + 'MB',
     heapUsed: Math.round(usage.heapUsed / 1024 / 1024) + 'MB',
-    heapTotal: Math.round(usage.heapTotal / 1024 / 1024) + 'MB'
+    heapTotal: Math.round(usage.heapTotal / 1024 / 1024) + 'MB',
   });
 }
 
@@ -416,6 +442,7 @@ checkMemory();
 ```
 
 **Solutions:**
+
 1. **Proper cleanup:**
 
 ```typescript
@@ -438,11 +465,13 @@ const pathItem = api.getPath('/users');
 ### Issue: Bundle Size Too Large
 
 **Problem:**
+
 ```
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit
 ```
 
 **Solution:**
+
 1. **Use tree-shaking:**
 
 ```typescript
@@ -460,8 +489,8 @@ import { Openapi } from '@laag/openapi';
 module.exports = {
   optimization: {
     usedExports: true,
-    sideEffects: false
-  }
+    sideEffects: false,
+  },
 };
 ```
 
@@ -478,6 +507,7 @@ async function loadApi() {
 ### Issue: Browser Compatibility
 
 **Error:**
+
 ```
 ReferenceError: process is not defined
 ```
@@ -490,14 +520,14 @@ Configure your bundler to provide Node.js polyfills:
 module.exports = {
   resolve: {
     fallback: {
-      "process": require.resolve("process/browser")
-    }
+      process: require.resolve('process/browser'),
+    },
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: 'process/browser'
-    })
-  ]
+      process: 'process/browser',
+    }),
+  ],
 };
 ```
 
@@ -506,11 +536,13 @@ module.exports = {
 ### Issue: IDE Not Recognizing Types
 
 **Problem:**
+
 - No IntelliSense/autocomplete
 - Type errors not showing
 - Import suggestions not working
 
 **Solution:**
+
 1. **Restart TypeScript service:**
    - VS Code: `Ctrl+Shift+P` → "TypeScript: Restart TS Server"
    - WebStorm: File → Invalidate Caches and Restart
@@ -547,6 +579,7 @@ npm install --force
 Changes to laag code don't trigger hot reload in development.
 
 **Solution:**
+
 1. **Configure your dev server:**
 
 ```javascript
@@ -554,9 +587,9 @@ Changes to laag code don't trigger hot reload in development.
 export default {
   server: {
     watch: {
-      include: ['src/**', 'node_modules/@laag/**']
-    }
-  }
+      include: ['src/**', 'node_modules/@laag/**'],
+    },
+  },
 };
 ```
 
@@ -566,8 +599,8 @@ export default {
 // webpack.config.js
 module.exports = {
   watchOptions: {
-    ignored: /node_modules\/(?!@laag)/
-  }
+    ignored: /node_modules\/(?!@laag)/,
+  },
 };
 ```
 
@@ -580,7 +613,7 @@ module.exports = {
 const api = new Openapi(document, {
   development: true,
   includeContext: true,
-  includeStack: true
+  includeStack: true,
 });
 ```
 
@@ -593,7 +626,7 @@ function collectDiagnostics() {
     platform: process.platform,
     laagVersion: require('@laag/openapi/package.json').version,
     typescriptVersion: require('typescript/package.json').version,
-    memoryUsage: process.memoryUsage()
+    memoryUsage: process.memoryUsage(),
   };
 }
 
