@@ -6,7 +6,7 @@
 
 # Interface: SchemaObject
 
-Defined in: [packages/openapi/src/types.ts:341](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L341)
+Defined in: [packages/openapi/src/types.ts:341](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L341)
 
 The Schema Object allows the definition of input and output data types
 
@@ -24,7 +24,7 @@ The Schema Object allows the definition of input and output data types
 
 > `optional` **title**: `string`
 
-Defined in: [packages/openapi/src/types.ts:343](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L343)
+Defined in: [packages/openapi/src/types.ts:343](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L343)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/openapi/src/types.ts:343](https://github.com/bschwarz/laag
 
 > `optional` **multipleOf**: `number`
 
-Defined in: [packages/openapi/src/types.ts:344](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L344)
+Defined in: [packages/openapi/src/types.ts:344](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L344)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [packages/openapi/src/types.ts:344](https://github.com/bschwarz/laag
 
 > `optional` **maximum**: `number`
 
-Defined in: [packages/openapi/src/types.ts:345](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L345)
+Defined in: [packages/openapi/src/types.ts:345](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L345)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [packages/openapi/src/types.ts:345](https://github.com/bschwarz/laag
 
 > `optional` **exclusiveMaximum**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:346](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L346)
+Defined in: [packages/openapi/src/types.ts:346](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L346)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [packages/openapi/src/types.ts:346](https://github.com/bschwarz/laag
 
 > `optional` **minimum**: `number`
 
-Defined in: [packages/openapi/src/types.ts:347](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L347)
+Defined in: [packages/openapi/src/types.ts:347](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L347)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [packages/openapi/src/types.ts:347](https://github.com/bschwarz/laag
 
 > `optional` **exclusiveMinimum**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:348](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L348)
+Defined in: [packages/openapi/src/types.ts:348](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L348)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [packages/openapi/src/types.ts:348](https://github.com/bschwarz/laag
 
 > `optional` **maxLength**: `number`
 
-Defined in: [packages/openapi/src/types.ts:349](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L349)
+Defined in: [packages/openapi/src/types.ts:349](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L349)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [packages/openapi/src/types.ts:349](https://github.com/bschwarz/laag
 
 > `optional` **minLength**: `number`
 
-Defined in: [packages/openapi/src/types.ts:350](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L350)
+Defined in: [packages/openapi/src/types.ts:350](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L350)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [packages/openapi/src/types.ts:350](https://github.com/bschwarz/laag
 
 > `optional` **pattern**: `string`
 
-Defined in: [packages/openapi/src/types.ts:351](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L351)
+Defined in: [packages/openapi/src/types.ts:351](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L351)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [packages/openapi/src/types.ts:351](https://github.com/bschwarz/laag
 
 > `optional` **maxItems**: `number`
 
-Defined in: [packages/openapi/src/types.ts:352](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L352)
+Defined in: [packages/openapi/src/types.ts:352](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L352)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [packages/openapi/src/types.ts:352](https://github.com/bschwarz/laag
 
 > `optional` **minItems**: `number`
 
-Defined in: [packages/openapi/src/types.ts:353](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L353)
+Defined in: [packages/openapi/src/types.ts:353](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L353)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [packages/openapi/src/types.ts:353](https://github.com/bschwarz/laag
 
 > `optional` **uniqueItems**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:354](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L354)
+Defined in: [packages/openapi/src/types.ts:354](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L354)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [packages/openapi/src/types.ts:354](https://github.com/bschwarz/laag
 
 > `optional` **maxProperties**: `number`
 
-Defined in: [packages/openapi/src/types.ts:355](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L355)
+Defined in: [packages/openapi/src/types.ts:355](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L355)
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: [packages/openapi/src/types.ts:355](https://github.com/bschwarz/laag
 
 > `optional` **minProperties**: `number`
 
-Defined in: [packages/openapi/src/types.ts:356](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L356)
+Defined in: [packages/openapi/src/types.ts:356](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L356)
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: [packages/openapi/src/types.ts:356](https://github.com/bschwarz/laag
 
 > `optional` **required**: `string`[]
 
-Defined in: [packages/openapi/src/types.ts:357](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L357)
+Defined in: [packages/openapi/src/types.ts:357](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L357)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: [packages/openapi/src/types.ts:357](https://github.com/bschwarz/laag
 
 > `optional` **enum**: `unknown`[]
 
-Defined in: [packages/openapi/src/types.ts:358](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L358)
+Defined in: [packages/openapi/src/types.ts:358](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L358)
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [packages/openapi/src/types.ts:358](https://github.com/bschwarz/laag
 
 > `optional` **type**: `"string"` \| `"number"` \| `"boolean"` \| `"object"` \| `"null"` \| `"array"` \| `"integer"`
 
-Defined in: [packages/openapi/src/types.ts:361](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L361)
+Defined in: [packages/openapi/src/types.ts:361](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L361)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [packages/openapi/src/types.ts:361](https://github.com/bschwarz/laag
 
 > `optional` **allOf**: ([`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`)[]
 
-Defined in: [packages/openapi/src/types.ts:362](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L362)
+Defined in: [packages/openapi/src/types.ts:362](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L362)
 
 ***
 
@@ -168,7 +168,7 @@ Defined in: [packages/openapi/src/types.ts:362](https://github.com/bschwarz/laag
 
 > `optional` **oneOf**: ([`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`)[]
 
-Defined in: [packages/openapi/src/types.ts:363](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L363)
+Defined in: [packages/openapi/src/types.ts:363](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L363)
 
 ***
 
@@ -176,7 +176,7 @@ Defined in: [packages/openapi/src/types.ts:363](https://github.com/bschwarz/laag
 
 > `optional` **anyOf**: ([`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`)[]
 
-Defined in: [packages/openapi/src/types.ts:364](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L364)
+Defined in: [packages/openapi/src/types.ts:364](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L364)
 
 ***
 
@@ -184,7 +184,7 @@ Defined in: [packages/openapi/src/types.ts:364](https://github.com/bschwarz/laag
 
 > `optional` **not**: [`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`
 
-Defined in: [packages/openapi/src/types.ts:365](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L365)
+Defined in: [packages/openapi/src/types.ts:365](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L365)
 
 ***
 
@@ -192,7 +192,7 @@ Defined in: [packages/openapi/src/types.ts:365](https://github.com/bschwarz/laag
 
 > `optional` **items**: [`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`
 
-Defined in: [packages/openapi/src/types.ts:366](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L366)
+Defined in: [packages/openapi/src/types.ts:366](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L366)
 
 ***
 
@@ -200,7 +200,7 @@ Defined in: [packages/openapi/src/types.ts:366](https://github.com/bschwarz/laag
 
 > `optional` **properties**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`\>
 
-Defined in: [packages/openapi/src/types.ts:367](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L367)
+Defined in: [packages/openapi/src/types.ts:367](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L367)
 
 ***
 
@@ -208,7 +208,7 @@ Defined in: [packages/openapi/src/types.ts:367](https://github.com/bschwarz/laag
 
 > `optional` **additionalProperties**: `boolean` \| [`ReferenceObject`](ReferenceObject.md) \| `SchemaObject`
 
-Defined in: [packages/openapi/src/types.ts:368](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L368)
+Defined in: [packages/openapi/src/types.ts:368](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L368)
 
 ***
 
@@ -216,7 +216,7 @@ Defined in: [packages/openapi/src/types.ts:368](https://github.com/bschwarz/laag
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:369](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L369)
+Defined in: [packages/openapi/src/types.ts:369](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L369)
 
 ***
 
@@ -224,7 +224,7 @@ Defined in: [packages/openapi/src/types.ts:369](https://github.com/bschwarz/laag
 
 > `optional` **format**: `string`
 
-Defined in: [packages/openapi/src/types.ts:370](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L370)
+Defined in: [packages/openapi/src/types.ts:370](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L370)
 
 ***
 
@@ -232,7 +232,7 @@ Defined in: [packages/openapi/src/types.ts:370](https://github.com/bschwarz/laag
 
 > `optional` **default**: `unknown`
 
-Defined in: [packages/openapi/src/types.ts:371](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L371)
+Defined in: [packages/openapi/src/types.ts:371](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L371)
 
 ***
 
@@ -240,7 +240,7 @@ Defined in: [packages/openapi/src/types.ts:371](https://github.com/bschwarz/laag
 
 > `optional` **nullable**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:374](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L374)
+Defined in: [packages/openapi/src/types.ts:374](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L374)
 
 ***
 
@@ -248,7 +248,7 @@ Defined in: [packages/openapi/src/types.ts:374](https://github.com/bschwarz/laag
 
 > `optional` **discriminator**: [`DiscriminatorObject`](DiscriminatorObject.md)
 
-Defined in: [packages/openapi/src/types.ts:375](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L375)
+Defined in: [packages/openapi/src/types.ts:375](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L375)
 
 ***
 
@@ -256,7 +256,7 @@ Defined in: [packages/openapi/src/types.ts:375](https://github.com/bschwarz/laag
 
 > `optional` **readOnly**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:376](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L376)
+Defined in: [packages/openapi/src/types.ts:376](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L376)
 
 ***
 
@@ -264,7 +264,7 @@ Defined in: [packages/openapi/src/types.ts:376](https://github.com/bschwarz/laag
 
 > `optional` **writeOnly**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:377](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L377)
+Defined in: [packages/openapi/src/types.ts:377](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L377)
 
 ***
 
@@ -272,7 +272,7 @@ Defined in: [packages/openapi/src/types.ts:377](https://github.com/bschwarz/laag
 
 > `optional` **xml**: [`XMLObject`](XMLObject.md)
 
-Defined in: [packages/openapi/src/types.ts:378](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L378)
+Defined in: [packages/openapi/src/types.ts:378](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L378)
 
 ***
 
@@ -280,7 +280,7 @@ Defined in: [packages/openapi/src/types.ts:378](https://github.com/bschwarz/laag
 
 > `optional` **externalDocs**: [`ExternalDocumentationObject`](ExternalDocumentationObject.md)
 
-Defined in: [packages/openapi/src/types.ts:379](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L379)
+Defined in: [packages/openapi/src/types.ts:379](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L379)
 
 ***
 
@@ -288,7 +288,7 @@ Defined in: [packages/openapi/src/types.ts:379](https://github.com/bschwarz/laag
 
 > `optional` **example**: `unknown`
 
-Defined in: [packages/openapi/src/types.ts:380](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L380)
+Defined in: [packages/openapi/src/types.ts:380](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L380)
 
 ***
 
@@ -296,4 +296,4 @@ Defined in: [packages/openapi/src/types.ts:380](https://github.com/bschwarz/laag
 
 > `optional` **deprecated**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:381](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L381)
+Defined in: [packages/openapi/src/types.ts:381](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L381)

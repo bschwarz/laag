@@ -1,12 +1,30 @@
 {
   "name": "laag",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/bun": "^1.3.8",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "brace-expansion": "^2.0.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "husky": "^9.1.7",
+    "minimatch": "^10.1.2",
+    "prettier": "^3.8.1",
+    "typedoc": "^0.28.16",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "^5.9.3",
+    "yaml": "^2.8.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
   "private": true,
-  "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "resolutions": {
-    "brace-expansion": "^2.0.0"
+    "brace-expansion": "^2.0.0",
+    "js-yaml": "^4.1.1"
   },
   "scripts": {
     "build": "bun run scripts/build-workspace.ts",
@@ -14,6 +32,7 @@
     "build:core": "bun run scripts/build-workspace.ts --package=@laag/core",
     "build:openapi": "bun run scripts/build-workspace.ts --package=@laag/openapi",
     "build:raml": "bun run scripts/build-workspace.ts --package=@laag/raml",
+    "build:smithy": "bun run scripts/build-workspace.ts --package=@laag/smithy",
     "build:clean": "bun run clean && bun run build",
     "build:list": "bun run scripts/build-workspace.ts --list",
     "test": "bun test --recursive",
@@ -58,6 +77,10 @@
     "release:cli:patch": "bun run scripts/release.ts --packages=@laag/cli --version=$(cd packages/cli && npm version patch --no-git-tag-version)",
     "release:cli:minor": "bun run scripts/release.ts --packages=@laag/cli --version=$(cd packages/cli && npm version minor --no-git-tag-version)",
     "release:cli:major": "bun run scripts/release.ts --packages=@laag/cli --version=$(cd packages/cli && npm version major --no-git-tag-version)",
+    "release:smithy": "bun run scripts/release.ts --packages=@laag/smithy",
+    "release:smithy:patch": "bun run scripts/release.ts --packages=@laag/smithy --version=$(cd packages/smithy && npm version patch --no-git-tag-version)",
+    "release:smithy:minor": "bun run scripts/release.ts --packages=@laag/smithy --version=$(cd packages/smithy && npm version minor --no-git-tag-version)",
+    "release:smithy:major": "bun run scripts/release.ts --packages=@laag/smithy --version=$(cd packages/smithy && npm version major --no-git-tag-version)",
     "validate:publishing": "bun run scripts/validate-publishing.ts",
     "pack:all": "bun run --filter='*' pack",
     "pack:dry": "bun run --filter='*' pack --dry-run",
@@ -77,25 +100,11 @@
     "workspace:build": "bun run build",
     "workspace:version": "bun run scripts/version-workspace.ts"
   },
-  "devDependencies": {
-    "@eslint/js": "^9.38.0",
-    "@types/bun": "^1.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.1",
-    "@typescript-eslint/parser": "^8.46.1",
-    "brace-expansion": "^2.0.2",
-    "eslint": "^9.38.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "husky": "^9.1.7",
-    "minimatch": "^10.0.3",
-    "prettier": "^3.6.2",
-    "typedoc": "^0.28.14",
-    "typedoc-plugin-markdown": "^4.9.0",
-    "typescript": "^5.9.3",
-    "yaml": "^2.8.1"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "bun": ">=1.0.0"
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "js-yaml": "^4.1.1"
   }
 }

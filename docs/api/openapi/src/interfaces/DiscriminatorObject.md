@@ -6,7 +6,7 @@
 
 # Interface: DiscriminatorObject
 
-Defined in: [packages/openapi/src/types.ts:387](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L387)
+Defined in: [packages/openapi/src/types.ts:387](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L387)
 
 When request bodies or response payloads may be one of a number of different schemas, a discriminator object can be used to aid in serialization, deserialization, and validation
 
@@ -16,7 +16,7 @@ When request bodies or response payloads may be one of a number of different sch
 
 > **propertyName**: `string`
 
-Defined in: [packages/openapi/src/types.ts:389](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L389)
+Defined in: [packages/openapi/src/types.ts:389](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L389)
 
 REQUIRED. The name of the property in the payload that will hold the discriminator value
 
@@ -26,6 +26,6 @@ REQUIRED. The name of the property in the payload that will hold the discriminat
 
 > `optional` **mapping**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/openapi/src/types.ts:391](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L391)
+Defined in: [packages/openapi/src/types.ts:391](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L391)
 
 An object to hold mappings between payload values and schema names or references

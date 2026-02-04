@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "18"
-  BUN_VERSION: "latest"
+  NODE_VERSION: '18'
+  BUN_VERSION: 'latest'
 
 jobs:
   # Quality checks job
@@ -113,13 +113,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: ["18", "20", "21"]
+        node-version: ['18', '20', '21']
         exclude:
           # Reduce matrix size for faster CI
           - os: windows-latest
-            node-version: "21"
+            node-version: '21'
           - os: macos-latest
-            node-version: "21"
+            node-version: '21'
 
     steps:
       - name: Checkout code
@@ -189,12 +189,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
 
       - name: Build packages for testing
         run: bun run build
@@ -272,11 +266,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
+      - name: Build packages
+        run: bun run build
 
       - name: Run performance benchmarks
         run: |
@@ -336,11 +327,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
+      - name: Build packages
+        run: bun run build
 
       - name: Configure Git
         run: |

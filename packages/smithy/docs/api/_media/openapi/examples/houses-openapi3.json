@@ -1,0 +1,829 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "House API Example",
+    "version": "1.9.2",
+    "description": "This describes is a set of APIs to help manage.",
+    "contact": {
+      "name": "",
+      "email": "someone@something.sky"
+    }
+  },
+  "paths": {
+    "/houses": {
+      "description": "Main collection that holds the individual houses",
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accept"
+        },
+        {
+          "$ref": "#/components/parameters/accept-encoding"
+        },
+        {
+          "$ref": "#/components/parameters/authorization"
+        }
+      ],
+      "get": {
+        "description": "Retrieve a list of houses",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Retrieve a list of houses",
+        "deprecated": false,
+        "operationId": "ListHouses",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/MaxItems"
+          },
+          {
+            "$ref": "#/components/parameters/StartingToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/houses"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Create a new house",
+        "deprecated": true,
+        "operationId": "Createhouse",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/houseRequest"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Createhouse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/houses/{houseId}": {
+      "description": "Resource that holds the individual house information",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "houseId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Path parameter"
+        },
+        {
+          "$ref": "#/components/parameters/accept"
+        },
+        {
+          "$ref": "#/components/parameters/accept-encoding"
+        },
+        {
+          "$ref": "#/components/parameters/authorization"
+        }
+      ],
+      "get": {
+        "description": "Retrieve an individual house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Retrieve an individual house",
+        "deprecated": false,
+        "operationId": "Gethouse",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/house"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "description": "Put (update) an individual house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Put (update) an individual house",
+        "deprecated": false,
+        "operationId": "Puthouse",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/houseRequest"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/house"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an individual house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Delete an individual house",
+        "deprecated": false,
+        "operationId": "Deletehouse",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/NoContent"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/houses/{houseId}/members": {
+      "description": "Main collection that holds the individual members of a house",
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accept"
+        },
+        {
+          "$ref": "#/components/parameters/accept-encoding"
+        },
+        {
+          "$ref": "#/components/parameters/authorization"
+        },
+        {
+          "in": "path",
+          "name": "houseId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Path parameter"
+        }
+      ],
+      "get": {
+        "description": "Retrieve a list of members for a specific house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Retrieve a list of members for a specific house",
+        "deprecated": false,
+        "operationId": "ListMembers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/MaxItems"
+          },
+          {
+            "$ref": "#/components/parameters/StartingToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Members"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new member for a specific house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Create a new member for a specific house",
+        "deprecated": false,
+        "operationId": "CreateMember",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MemberRequest"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/CreateMember"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/houses/{houseId}/members/{MemberId}": {
+      "description": "Resource that holds the individual member of a house information",
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accept"
+        },
+        {
+          "$ref": "#/components/parameters/accept-encoding"
+        },
+        {
+          "$ref": "#/components/parameters/authorization"
+        },
+        {
+          "in": "path",
+          "name": "houseId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Path parameter"
+        },
+        {
+          "in": "path",
+          "name": "MemberId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Path parameter"
+        }
+      ],
+      "get": {
+        "description": "Retrieve an individual member of a house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Retrieve an individual member of a house",
+        "deprecated": false,
+        "operationId": "GetMember",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Member"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "description": "Put (update) an individual member of a house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Put (update) an individual member of a house",
+        "deprecated": false,
+        "operationId": "PutMember",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MemberRequest"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Member"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an individual member of a house",
+        "tags": [
+          "houses"
+        ],
+        "summary": "Delete an individual member of a house",
+        "deprecated": false,
+        "operationId": "DeleteMember",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/NoContent"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "houses",
+      "description": "API operations that manage houses and members"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "houses": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "$ref": "#/components/schemas/Count"
+          },
+          "NextToken": {
+            "$ref": "#/components/schemas/NextToken"
+          },
+          "houses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/house"
+            }
+          }
+        }
+      },
+      "houseRequest": {
+        "type": "object",
+        "properties": {
+          "houseName": {
+            "type": "string",
+            "example": "My House"
+          }
+        }
+      },
+      "MemberRequest": {
+        "type": "object",
+        "properties": {
+          "MemberName": {
+            "type": "string",
+            "example": "Larry"
+          }
+        }
+      },
+      "house": {
+        "type": "object",
+        "properties": {
+          "houseId": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "houseName": {
+            "type": "string",
+            "example": "My House"
+          }
+        }
+      },
+      "Members": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "$ref": "#/components/schemas/Count"
+          },
+          "NextToken": {
+            "$ref": "#/components/schemas/NextToken"
+          },
+          "HouseHoldId": {
+            "type": "string"
+          },
+          "houseName": {
+            "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Member"
+            }
+          }
+        }
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "MemberId": {
+            "type": "string",
+            "example": "1234567890"
+          },
+          "MemberName": {
+            "type": "string",
+            "example": "Larry"
+          }
+        }
+      },
+      "Count": {
+        "type": "integer",
+        "example": 10
+      },
+      "NextToken": {
+        "type": "string",
+        "example": "1234567890"
+      },
+      "Exception": {
+        "type": "object",
+        "properties": {
+          "__type": {
+            "type": "string"
+          },
+          "Message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "houseRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/houseRequest"
+            }
+          }
+        },
+        "required": true
+      },
+      "MemberRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/MemberRequest"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "parameters": {
+      "accept": {
+        "name": "accept",
+        "in": "header",
+        "required": true,
+        "description": "A string of acceptable content-types",
+        "example": "application/json",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "accept-encoding": {
+        "name": "accept-encoding",
+        "in": "header",
+        "required": true,
+        "description": "A string of acceptable content encodings",
+        "example": "gzip, deflate",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "authorization": {
+        "name": "authorization",
+        "in": "header",
+        "required": true,
+        "description": "An authorization token",
+        "example": "FADBE2D888...",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "PageSize": {
+        "name": "PageSize",
+        "in": "query",
+        "required": false,
+        "description": "The number of items in a page for pagination operations.",
+        "example": 100,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "MaxItems": {
+        "name": "MaxItems",
+        "in": "query",
+        "required": false,
+        "description": "The maximum number of items to query for.",
+        "example": 1000,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "StartingToken": {
+        "name": "StartingToken",
+        "in": "query",
+        "required": false,
+        "description": "The starting token or marker to use for the request.",
+        "example": "ABC123DEF",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {},
+    "headers": {
+      "Location": {
+        "description": "The URL of the newly created resource",
+        "example": "/houses/1234567890",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ContentType": {
+        "description": "The MIME type of the body of the response.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "CacheControl": {
+        "description": "Header used to direct caching done by browsers. Must be set to 'no-store'",
+        "example": "no-store",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ContentSecurityPolicy": {
+        "description": "Header used to direct caching done by browsers. Must be set to \"frame-ancestors 'none'\"",
+        "example": "frame-ancestors 'none'",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "StrictTransportSecurity": {
+        "description": "Header to instruct a browser that the domain should only be accessed using HTTPS. Must be set to 'max-age=63072000; includeSubDomains'",
+        "example": "max-age=63072000; includeSubDomains",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "XContentTypeOptions": {
+        "description": "Header to instruct a browser to always use the MIME type that is declared in the content-type header rather than trying to determine the MIME type based on the file's content. Must be set to 'nosniff'",
+        "example": "nosniff",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "XFrameOptions": {
+        "description": "Header used to specify whether a response can be framed in a <frame>, <iframe>, <embed> or <object> element. Must be set to 'DENY'",
+        "example": "DENY",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {},
+    "links": {},
+    "callbacks": {},
+    "responses": {
+      "houses": {
+        "description": "A list of houses",
+        "headers": {
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/houses"
+            }
+          }
+        }
+      },
+      "house": {
+        "headers": {
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "description": "A specific house",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/house"
+            }
+          }
+        }
+      },
+      "Createhouse": {
+        "headers": {
+          "location": {
+            "$ref": "#/components/headers/Location"
+          },
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "description": "A specific house",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/house"
+            }
+          }
+        }
+      },
+      "Members": {
+        "description": "A list of members for a specific houshold",
+        "headers": {
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Members"
+            }
+          }
+        }
+      },
+      "Member": {
+        "description": "A member of a house",
+        "headers": {
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Member"
+            }
+          }
+        }
+      },
+      "CreateMember": {
+        "description": "A member of a house",
+        "headers": {
+          "location": {
+            "$ref": "#/components/headers/Location"
+          },
+          "content-type": {
+            "$ref": "#/components/headers/ContentType"
+          },
+          "cache-control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "content-security-policy": {
+            "$ref": "#/components/headers/ContentSecurityPolicy"
+          },
+          "strict-transport-security": {
+            "$ref": "#/components/headers/StrictTransportSecurity"
+          },
+          "x-content-type-options": {
+            "$ref": "#/components/headers/XContentTypeOptions"
+          },
+          "x-frame-options": {
+            "$ref": "#/components/headers/XFrameOptions"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Member"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "BAD REQUEST",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Exception"
+            }
+          }
+        }
+      },
+      "NoContent": {
+        "description": "NO CONTENT"
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Exception"
+            }
+          }
+        }
+      }
+    }
+  }
+}
