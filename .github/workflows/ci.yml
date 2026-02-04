@@ -139,20 +139,6 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Build packages (ensure artifacts available)
         run: bun run build --verbose
-      - name: Ubuntu debug logs
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          echo "Node version:"; node -v
-          echo "Bun version:"; bun -v || true
-          echo "Listing package files for smithy openapi docs"
-          ls -la packages/smithy/docs/api/_media/openapi || true
-          echo "Listing built dist files (packages/*/dist):"
-          for d in packages/*/dist; do [ -d "$d" ] && echo "-- $d --" && ls -la "$d"; done
-          echo "Attempt require test (print exported keys):"
-          node -e "try{const p=require('./packages/smithy/docs/api/_media/openapi/src/index.js');console.log('require result keys:',p && Object.keys(p));}catch(e){console.error('require err',e)}"
-          - name: Run tests
-            run: bun test --coverage
-
       - name: Upload coverage reports
         if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
         uses: codecov/codecov-action@v3
