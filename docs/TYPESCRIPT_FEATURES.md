@@ -5,6 +5,7 @@ This document highlights the TypeScript-specific features and benefits available
 ## Overview
 
 Laag v2 is built from the ground up with TypeScript, providing:
+
 - **Complete type safety** for all API operations
 - **IntelliSense support** in modern IDEs
 - **Compile-time error detection** for better development experience
@@ -22,22 +23,22 @@ import { Openapi, OpenAPIDocument, InfoObject } from '@laag/openapi';
 const document: OpenAPIDocument = {
   openapi: '3.0.2',
   info: {
-    title: 'My API',        // Required: string
-    version: '1.0.0',       // Required: string
+    title: 'My API', // Required: string
+    version: '1.0.0', // Required: string
     description: 'Optional description',
     contact: {
       name: 'API Team',
       email: 'team@company.com',
-      url: 'https://company.com'
-    }
+      url: 'https://company.com',
+    },
   },
   paths: {},
   servers: [
     {
-      url: 'https://api.company.com',  // Required: string
-      description: 'Production server' // Optional: string
-    }
-  ]
+      url: 'https://api.company.com', // Required: string
+      description: 'Production server', // Optional: string
+    },
+  ],
 };
 
 const api = new Openapi(document);
@@ -49,17 +50,17 @@ const api = new Openapi(document);
 // All properties are strongly typed
 const api = new Openapi();
 
-api.title = 'My API';           // ✅ string
-api.title = 123;                // ❌ TypeScript error
+api.title = 'My API'; // ✅ string
+api.title = 123; // ❌ TypeScript error
 
-api.version = '1.0.0';          // ✅ string
-api.version = { major: 1 };     // ❌ TypeScript error
+api.version = '1.0.0'; // ✅ string
+api.version = { major: 1 }; // ❌ TypeScript error
 
 // Complex objects are also typed
 api.contact = {
-  name: 'Support Team',         // ✅ string
+  name: 'Support Team', // ✅ string
   email: 'support@company.com', // ✅ string (with format validation)
-  phone: 123456789              // ❌ TypeScript error (should be string)
+  phone: 123456789, // ❌ TypeScript error (should be string)
 };
 ```
 
@@ -67,30 +68,34 @@ api.contact = {
 
 ```typescript
 // Method parameters are typed
-api.appendPath('/users', {      // PathItemObject type
-  get: {                        // OperationObject type
-    summary: 'Get users',       // string
-    operationId: 'getUsers',    // string
-    responses: {                // ResponsesObject type
-      '200': {                  // ResponseObject type
+api.appendPath('/users', {
+  // PathItemObject type
+  get: {
+    // OperationObject type
+    summary: 'Get users', // string
+    operationId: 'getUsers', // string
+    responses: {
+      // ResponsesObject type
+      '200': {
+        // ResponseObject type
         description: 'Success', // Required: string
         content: {
           'application/json': {
             schema: {
               type: 'array',
-              items: { $ref: '#/components/schemas/User' }
-            }
-          }
-        }
-      }
-    }
-  }
+              items: { $ref: '#/components/schemas/User' },
+            },
+          },
+        },
+      },
+    },
+  },
 });
 
 // Return types are also typed
-const paths: string[] = api.getPathNames();           // string[]
-const operations = api.getOperationIds();             // Array<{id: string, path: string, method: string}>
-const validation: ValidationResult = api.validate();   // ValidationResult type
+const paths: string[] = api.getPathNames(); // string[]
+const operations = api.getOperationIds(); // Array<{id: string, path: string, method: string}>
+const validation: ValidationResult = api.validate(); // ValidationResult type
 ```
 
 ## Advanced Type Features
@@ -108,14 +113,14 @@ const userSchema: SchemaOrReference = {
   properties: {
     id: { type: 'string' },
     name: { type: 'string' },
-    email: { type: 'string', format: 'email' }
+    email: { type: 'string', format: 'email' },
   },
-  required: ['id', 'name', 'email']
+  required: ['id', 'name', 'email'],
 };
 
 // Or reference to existing schema
 const userReference: SchemaOrReference = {
-  $ref: '#/components/schemas/User'
+  $ref: '#/components/schemas/User',
 };
 ```
 
@@ -126,10 +131,10 @@ import type { ExtensionObject } from '@laag/core';
 
 // Extension properties are typed with template literals
 const extensions: ExtensionObject = {
-  'x-custom-property': 'value',     // ✅ Valid extension
-  'x-rate-limit': 1000,             // ✅ Valid extension
-  'x-complex': { nested: 'data' },  // ✅ Valid extension
-  'invalid-extension': 'value'      // ❌ TypeScript error: must start with 'x-'
+  'x-custom-property': 'value', // ✅ Valid extension
+  'x-rate-limit': 1000, // ✅ Valid extension
+  'x-complex': { nested: 'data' }, // ✅ Valid extension
+  'invalid-extension': 'value', // ❌ TypeScript error: must start with 'x-'
 };
 
 api.rootExtensions = extensions;
@@ -141,8 +146,8 @@ api.rootExtensions = extensions;
 import type { HttpMethod } from '@laag/openapi';
 
 // HTTP methods are strictly typed
-const method: HttpMethod = 'get';     // ✅ Valid
-const invalid: HttpMethod = 'PATCH';  // ❌ TypeScript error: must be lowercase
+const method: HttpMethod = 'get'; // ✅ Valid
+const invalid: HttpMethod = 'PATCH'; // ❌ TypeScript error: must be lowercase
 
 // Type-safe method checking
 function processOperation(path: string, method: HttpMethod) {
@@ -163,18 +168,18 @@ const jsonResponse: ResponseObject = {
   description: 'JSON response',
   content: {
     'application/json': {
-      schema: { type: 'object' }
-    }
-  }
+      schema: { type: 'object' },
+    },
+  },
 };
 
 const xmlResponse: ResponseObject = {
   description: 'XML response',
   content: {
     'application/xml': {
-      schema: { type: 'string' }
-    }
-  }
+      schema: { type: 'string' },
+    },
+  },
 };
 ```
 
@@ -186,17 +191,18 @@ const xmlResponse: ResponseObject = {
 const api = new Openapi();
 
 // IDE provides autocomplete for all properties
-api.info.  // Shows: title, version, description, contact, license, etc.
-
-// Method suggestions with parameter hints
-api.appendPath(  // Shows parameter types and descriptions
-  '/users',      // path: string
-  {              // pathItem: PathItemObject
-    get: {       // Shows all HTTP methods
-      // IDE shows all OperationObject properties
+api.info.api // Method suggestions with parameter hints // Shows: title, version, description, contact, license, etc.
+  .appendPath(
+    // Shows parameter types and descriptions
+    '/users', // path: string
+    {
+      // pathItem: PathItemObject
+      get: {
+        // Shows all HTTP methods
+        // IDE shows all OperationObject properties
+      },
     }
-  }
-);
+  );
 ```
 
 ### 2. Real-time Error Detection
@@ -207,15 +213,15 @@ const api = new Openapi();
 // IDE immediately highlights errors
 api.info = {
   title: 'My API',
-  version: 1.0,        // ❌ Error: Type 'number' is not assignable to type 'string'
-  description: true    // ❌ Error: Type 'boolean' is not assignable to type 'string'
+  version: 1.0, // ❌ Error: Type 'number' is not assignable to type 'string'
+  description: true, // ❌ Error: Type 'boolean' is not assignable to type 'string'
 };
 
 // Suggests corrections
 api.info = {
   title: 'My API',
-  version: '1.0.0',    // ✅ Fixed
-  description: 'API'   // ✅ Fixed
+  version: '1.0.0', // ✅ Fixed
+  description: 'API', // ✅ Fixed
 };
 ```
 
@@ -278,7 +284,7 @@ type ApiPaths = Pick<OpenAPIDocument, 'paths'>;
 type InfoUpdate = Partial<InfoObject>;
 
 const updateInfo: InfoUpdate = {
-  description: 'Updated description'
+  description: 'Updated description',
   // Other fields are optional
 };
 ```
@@ -328,15 +334,15 @@ function createApi(config: ApiConfig): Openapi {
     info: {
       title: config.title,
       version: config.version,
-      description: config.description
+      description: config.description,
     },
     servers: [
       {
         url: config.baseUrl,
-        description: 'API server'
-      }
+        description: 'API server',
+      },
     ],
-    paths: {}
+    paths: {},
   });
 }
 ```
@@ -366,7 +372,7 @@ getOperationById(opId);
 const api = new Openapi();
 
 // Add types gradually
-api.title = 'My API';  // Already type-safe
+api.title = 'My API'; // Already type-safe
 
 // Add interface definitions over time
 interface UserSchema {
