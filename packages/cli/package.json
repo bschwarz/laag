@@ -43,7 +43,7 @@
     "@laag/openapi": "workspace:*"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.1"
   },
   "devDependencies": {
     "@laag/openapi": "workspace:*"
