@@ -6,7 +6,7 @@
 
 # Interface: OperationObject
 
-Defined in: [packages/openapi/src/types.ts:135](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L135)
+Defined in: [packages/openapi/src/types.ts:135](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L135)
 
 Describes a single API operation on a path
 
@@ -24,7 +24,7 @@ Describes a single API operation on a path
 
 > `optional` **tags**: `string`[]
 
-Defined in: [packages/openapi/src/types.ts:137](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L137)
+Defined in: [packages/openapi/src/types.ts:137](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L137)
 
 A list of tags for API documentation control
 
@@ -34,7 +34,7 @@ A list of tags for API documentation control
 
 > `optional` **summary**: `string`
 
-Defined in: [packages/openapi/src/types.ts:139](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L139)
+Defined in: [packages/openapi/src/types.ts:139](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L139)
 
 A short summary of what the operation does
 
@@ -44,7 +44,7 @@ A short summary of what the operation does
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:141](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L141)
+Defined in: [packages/openapi/src/types.ts:141](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L141)
 
 A verbose explanation of the operation behavior
 
@@ -54,7 +54,7 @@ A verbose explanation of the operation behavior
 
 > `optional` **externalDocs**: [`ExternalDocumentationObject`](ExternalDocumentationObject.md)
 
-Defined in: [packages/openapi/src/types.ts:143](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L143)
+Defined in: [packages/openapi/src/types.ts:143](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L143)
 
 Additional external documentation for this operation
 
@@ -64,7 +64,7 @@ Additional external documentation for this operation
 
 > `optional` **operationId**: `string`
 
-Defined in: [packages/openapi/src/types.ts:145](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L145)
+Defined in: [packages/openapi/src/types.ts:145](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L145)
 
 Unique string used to identify the operation
 
@@ -74,7 +74,7 @@ Unique string used to identify the operation
 
 > `optional` **parameters**: ([`ParameterObject`](ParameterObject.md) \| [`ReferenceObject`](ReferenceObject.md))[]
 
-Defined in: [packages/openapi/src/types.ts:147](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L147)
+Defined in: [packages/openapi/src/types.ts:147](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L147)
 
 A list of parameters that are applicable for this operation
 
@@ -84,7 +84,7 @@ A list of parameters that are applicable for this operation
 
 > `optional` **requestBody**: [`ReferenceObject`](ReferenceObject.md) \| [`RequestBodyObject`](RequestBodyObject.md)
 
-Defined in: [packages/openapi/src/types.ts:149](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L149)
+Defined in: [packages/openapi/src/types.ts:149](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L149)
 
 The request body applicable for this operation
 
@@ -94,7 +94,7 @@ The request body applicable for this operation
 
 > **responses**: [`ResponsesObject`](ResponsesObject.md)
 
-Defined in: [packages/openapi/src/types.ts:151](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L151)
+Defined in: [packages/openapi/src/types.ts:151](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L151)
 
 REQUIRED. The list of possible responses as they are returned from executing this operation
 
@@ -104,7 +104,7 @@ REQUIRED. The list of possible responses as they are returned from executing thi
 
 > `optional` **callbacks**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`CallbackObject`](../type-aliases/CallbackObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:153](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L153)
+Defined in: [packages/openapi/src/types.ts:153](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L153)
 
 A map of possible out-of band callbacks related to the parent operation
 
@@ -114,7 +114,7 @@ A map of possible out-of band callbacks related to the parent operation
 
 > `optional` **deprecated**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:155](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L155)
+Defined in: [packages/openapi/src/types.ts:155](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L155)
 
 Declares this operation to be deprecated
 
@@ -124,7 +124,7 @@ Declares this operation to be deprecated
 
 > `optional` **security**: [`SecurityRequirementObject`](SecurityRequirementObject.md)[]
 
-Defined in: [packages/openapi/src/types.ts:157](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L157)
+Defined in: [packages/openapi/src/types.ts:157](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L157)
 
 A declaration of which security mechanisms can be used for this operation
 
@@ -134,6 +134,6 @@ A declaration of which security mechanisms can be used for this operation
 
 > `optional` **servers**: [`ServerObject`](ServerObject.md)[]
 
-Defined in: [packages/openapi/src/types.ts:159](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L159)
+Defined in: [packages/openapi/src/types.ts:159](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L159)
 
 An alternative server array to service this operation

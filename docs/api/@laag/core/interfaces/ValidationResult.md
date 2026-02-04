@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [packages/core/src/types.ts:57](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L57)
+Defined in: [packages/core/src/types.ts:57](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L57)
 
 Result of a document validation operation.
 
@@ -40,7 +40,7 @@ const result: ValidationResult = {
 
 > **valid**: `boolean`
 
-Defined in: [packages/core/src/types.ts:59](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L59)
+Defined in: [packages/core/src/types.ts:59](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L59)
 
 Whether the validation passed without any errors
 
@@ -50,6 +50,6 @@ Whether the validation passed without any errors
 
 > **errors**: [`ValidationErrorType`](ValidationErrorType.md)[]
 
-Defined in: [packages/core/src/types.ts:61](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L61)
+Defined in: [packages/core/src/types.ts:61](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L61)
 
 Array of validation errors found during validation

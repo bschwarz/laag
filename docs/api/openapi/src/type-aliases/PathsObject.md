@@ -8,6 +8,6 @@
 
 > **PathsObject** = `Record`\<`string`, [`PathItemObject`](../interfaces/PathItemObject.md) \| `undefined`\> & [`ExtensionObject`](../../../@laag/core/interfaces/ExtensionObject.md)
 
-Defined in: [packages/openapi/src/types.ts:98](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L98)
+Defined in: [packages/openapi/src/types.ts:98](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L98)
 
 Holds the relative paths to the individual endpoints and their operations

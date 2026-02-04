@@ -6,7 +6,7 @@
 
 # Interface: ComponentsObject
 
-Defined in: [packages/openapi/src/types.ts:421](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L421)
+Defined in: [packages/openapi/src/types.ts:421](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L421)
 
 Holds a set of reusable objects for different aspects of the OAS
 
@@ -24,7 +24,7 @@ Holds a set of reusable objects for different aspects of the OAS
 
 > `optional` **schemas**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`SchemaObject`](SchemaObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:423](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L423)
+Defined in: [packages/openapi/src/types.ts:423](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L423)
 
 An object to hold reusable Schema Objects
 
@@ -34,7 +34,7 @@ An object to hold reusable Schema Objects
 
 > `optional` **responses**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`ResponseObject`](ResponseObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:425](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L425)
+Defined in: [packages/openapi/src/types.ts:425](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L425)
 
 An object to hold reusable Response Objects
 
@@ -44,7 +44,7 @@ An object to hold reusable Response Objects
 
 > `optional` **parameters**: `Record`\<`string`, [`ParameterObject`](ParameterObject.md) \| [`ReferenceObject`](ReferenceObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:427](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L427)
+Defined in: [packages/openapi/src/types.ts:427](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L427)
 
 An object to hold reusable Parameter Objects
 
@@ -54,7 +54,7 @@ An object to hold reusable Parameter Objects
 
 > `optional` **examples**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`ExampleObject`](ExampleObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:429](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L429)
+Defined in: [packages/openapi/src/types.ts:429](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L429)
 
 An object to hold reusable Example Objects
 
@@ -64,7 +64,7 @@ An object to hold reusable Example Objects
 
 > `optional` **requestBodies**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`RequestBodyObject`](RequestBodyObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:431](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L431)
+Defined in: [packages/openapi/src/types.ts:431](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L431)
 
 An object to hold reusable Request Body Objects
 
@@ -74,7 +74,7 @@ An object to hold reusable Request Body Objects
 
 > `optional` **headers**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`HeaderObject`](../type-aliases/HeaderObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:433](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L433)
+Defined in: [packages/openapi/src/types.ts:433](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L433)
 
 An object to hold reusable Header Objects
 
@@ -84,7 +84,7 @@ An object to hold reusable Header Objects
 
 > `optional` **securitySchemes**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`SecuritySchemeObject`](SecuritySchemeObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:435](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L435)
+Defined in: [packages/openapi/src/types.ts:435](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L435)
 
 An object to hold reusable Security Scheme Objects
 
@@ -94,7 +94,7 @@ An object to hold reusable Security Scheme Objects
 
 > `optional` **links**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`LinkObject`](LinkObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:437](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L437)
+Defined in: [packages/openapi/src/types.ts:437](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L437)
 
 An object to hold reusable Link Objects
 
@@ -104,6 +104,6 @@ An object to hold reusable Link Objects
 
 > `optional` **callbacks**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`CallbackObject`](../type-aliases/CallbackObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:439](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L439)
+Defined in: [packages/openapi/src/types.ts:439](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L439)
 
 An object to hold reusable Callback Objects

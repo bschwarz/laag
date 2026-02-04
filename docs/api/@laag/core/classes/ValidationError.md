@@ -6,7 +6,7 @@
 
 # Class: ValidationError
 
-Defined in: [packages/core/src/errors.ts:166](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L166)
+Defined in: [packages/core/src/errors.ts:166](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L166)
 
 Error thrown when document or data validation fails.
 
@@ -41,7 +41,7 @@ throw new ValidationError(
 
 > **new ValidationError**(`message`, `path`, `context?`): `ValidationError`
 
-Defined in: [packages/core/src/errors.ts:183](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L183)
+Defined in: [packages/core/src/errors.ts:183](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L183)
 
 Creates a new ValidationError instance.
 
@@ -89,7 +89,7 @@ const error = new ValidationError(
 
 > **getFormattedMessage**(`options`): `string`
 
-Defined in: [packages/core/src/errors.ts:96](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L96)
+Defined in: [packages/core/src/errors.ts:96](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L96)
 
 Get a formatted error message with optional context information.
 
@@ -137,7 +137,7 @@ error.getFormattedMessage({ development: true, includeContext: true });
 
 > **toJSON**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/errors.ts:134](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L134)
+Defined in: [packages/core/src/errors.ts:134](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L134)
 
 Convert the error to a JSON-serializable representation.
 
@@ -175,35 +175,75 @@ console.log(JSON.stringify(json, null, 2));
 
 ***
 
-### isError()
-
-> `static` **isError**(`value`): `value is Error`
-
-Defined in: node\_modules/.bun/bun-types@1.3.0/node\_modules/bun-types/globals.d.ts:1038
-
-Check if a value is an instance of Error
-
-#### Parameters
-
-##### value
-
-`unknown`
-
-The value to check
-
-#### Returns
-
-`value is Error`
-
-True if the value is an instance of Error, false otherwise
-
-#### Inherited from
-
-[`LaagError`](LaagError.md).[`isError`](LaagError.md#iserror)
-
-***
-
 ### captureStackTrace()
+
+#### Call Signature
+
+> `static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+
+Defined in: node\_modules/.bun/@types+node@24.8.1/node\_modules/@types/node/globals.d.ts:52
+
+Creates a `.stack` property on `targetObject`, which when accessed returns
+a string representing the location in the code at which
+`Error.captureStackTrace()` was called.
+
+```js
+const myObject = {};
+Error.captureStackTrace(myObject);
+myObject.stack;  // Similar to `new Error().stack`
+```
+
+The first line of the trace will be prefixed with
+`${myObject.name}: ${myObject.message}`.
+
+The optional `constructorOpt` argument accepts a function. If given, all frames
+above `constructorOpt`, including `constructorOpt`, will be omitted from the
+generated stack trace.
+
+The `constructorOpt` argument is useful for hiding implementation
+details of error generation from the user. For instance:
+
+```js
+function a() {
+  b();
+}
+
+function b() {
+  c();
+}
+
+function c() {
+  // Create an error without stack trace to avoid calculating the stack trace twice.
+  const { stackTraceLimit } = Error;
+  Error.stackTraceLimit = 0;
+  const error = new Error();
+  Error.stackTraceLimit = stackTraceLimit;
+
+  // Capture the stack trace above function b
+  Error.captureStackTrace(error, b); // Neither function c, nor b is included in the stack trace
+  throw error;
+}
+
+a();
+```
+
+##### Parameters
+
+###### targetObject
+
+`object`
+
+###### constructorOpt?
+
+`Function`
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[`LaagError`](LaagError.md).[`captureStackTrace`](LaagError.md#capturestacktrace)
 
 #### Call Signature
 
@@ -231,77 +271,13 @@ Create .stack property on a target object
 
 [`LaagError`](LaagError.md).[`captureStackTrace`](LaagError.md#capturestacktrace)
 
-#### Call Signature
-
-> `static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
-
-Defined in: node\_modules/.bun/@types+node@22.10.1/node\_modules/@types/node/globals.d.ts:136
-
-Create .stack property on a target object
-
-##### Parameters
-
-###### targetObject
-
-`object`
-
-###### constructorOpt?
-
-`Function`
-
-##### Returns
-
-`void`
-
-##### Inherited from
-
-[`LaagError`](LaagError.md).[`captureStackTrace`](LaagError.md#capturestacktrace)
-
-## Properties
-
-### code
-
-> `readonly` **code**: `string`
-
-Defined in: [packages/core/src/errors.ts:38](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L38)
-
-#### Inherited from
-
-[`LaagError`](LaagError.md).[`code`](LaagError.md#code)
-
 ***
 
-### path?
+### prepareStackTrace()
 
-> `readonly` `optional` **path**: `string`
+> `static` **prepareStackTrace**(`err`, `stackTraces`): `any`
 
-Defined in: [packages/core/src/errors.ts:39](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L39)
-
-#### Inherited from
-
-[`LaagError`](LaagError.md).[`path`](LaagError.md#path)
-
-***
-
-### context?
-
-> `readonly` `optional` **context**: `Record`\<`string`, `unknown`\>
-
-Defined in: [packages/core/src/errors.ts:40](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/errors.ts#L40)
-
-#### Inherited from
-
-[`LaagError`](LaagError.md).[`context`](LaagError.md#context)
-
-***
-
-### prepareStackTrace()?
-
-> `static` `optional` **prepareStackTrace**: (`err`, `stackTraces`) => `any`
-
-Defined in: node\_modules/.bun/@types+node@22.10.1/node\_modules/@types/node/globals.d.ts:143
-
-Optional override for formatting stack traces
+Defined in: node\_modules/.bun/@types+node@24.8.1/node\_modules/@types/node/globals.d.ts:56
 
 #### Parameters
 
@@ -327,13 +303,85 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ***
 
+### isError()
+
+> `static` **isError**(`value`): `value is Error`
+
+Defined in: node\_modules/.bun/bun-types@1.3.0/node\_modules/bun-types/globals.d.ts:1038
+
+Check if a value is an instance of Error
+
+#### Parameters
+
+##### value
+
+`unknown`
+
+The value to check
+
+#### Returns
+
+`value is Error`
+
+True if the value is an instance of Error, false otherwise
+
+#### Inherited from
+
+[`LaagError`](LaagError.md).[`isError`](LaagError.md#iserror)
+
+## Properties
+
+### code
+
+> `readonly` **code**: `string`
+
+Defined in: [packages/core/src/errors.ts:38](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L38)
+
+#### Inherited from
+
+[`LaagError`](LaagError.md).[`code`](LaagError.md#code)
+
+***
+
+### path?
+
+> `readonly` `optional` **path**: `string`
+
+Defined in: [packages/core/src/errors.ts:39](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L39)
+
+#### Inherited from
+
+[`LaagError`](LaagError.md).[`path`](LaagError.md#path)
+
+***
+
+### context?
+
+> `readonly` `optional` **context**: `Record`\<`string`, `unknown`\>
+
+Defined in: [packages/core/src/errors.ts:40](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/errors.ts#L40)
+
+#### Inherited from
+
+[`LaagError`](LaagError.md).[`context`](LaagError.md#context)
+
+***
+
 ### stackTraceLimit
 
 > `static` **stackTraceLimit**: `number`
 
-Defined in: node\_modules/.bun/bun-types@1.3.0/node\_modules/bun-types/globals.d.ts:1048
+Defined in: node\_modules/.bun/@types+node@24.8.1/node\_modules/@types/node/globals.d.ts:68
 
-The maximum number of stack frames to capture.
+The `Error.stackTraceLimit` property specifies the number of stack frames
+collected by a stack trace (whether generated by `new Error().stack` or
+`Error.captureStackTrace(obj)`).
+
+The default value is `10` but may be set to any valid JavaScript number. Changes
+will affect any stack trace captured _after_ the value has been changed.
+
+If set to a non-number value, or set to a negative number, stack traces will
+not capture any frames.
 
 #### Inherited from
 

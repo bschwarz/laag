@@ -1,0 +1,57 @@
+{
+  "smithy": "2.0",
+  "shapes": {
+    "example.simple#SimpleService": {
+      "type": "service",
+      "version": "1.0.0",
+      "operations": ["example.simple#GetItem"],
+      "traits": {
+        "smithy.api#documentation": "A simple service for testing"
+      }
+    },
+    "example.simple#GetItem": {
+      "type": "operation",
+      "input": "example.simple#GetItemInput",
+      "output": "example.simple#GetItemOutput",
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/items/{id}"
+        }
+      }
+    },
+    "example.simple#GetItemInput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpLabel": {}
+          }
+        }
+      }
+    },
+    "example.simple#GetItemOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "smithy.api#String"
+        }
+      }
+    }
+  }
+}
