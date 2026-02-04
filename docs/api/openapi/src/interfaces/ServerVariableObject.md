@@ -6,7 +6,7 @@
 
 # Interface: ServerVariableObject
 
-Defined in: [packages/openapi/src/types.ts:86](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L86)
+Defined in: [packages/openapi/src/types.ts:86](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L86)
 
 An object representing a Server Variable for server URL template substitution
 
@@ -24,7 +24,7 @@ An object representing a Server Variable for server URL template substitution
 
 > **default**: `string`
 
-Defined in: [packages/openapi/src/types.ts:88](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L88)
+Defined in: [packages/openapi/src/types.ts:88](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L88)
 
 REQUIRED. The default value to use for substitution
 
@@ -34,7 +34,7 @@ REQUIRED. The default value to use for substitution
 
 > `optional` **enum**: `string`[]
 
-Defined in: [packages/openapi/src/types.ts:90](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L90)
+Defined in: [packages/openapi/src/types.ts:90](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L90)
 
 An enumeration of string values to be used if the substitution options are from a limited set
 
@@ -44,6 +44,6 @@ An enumeration of string values to be used if the substitution options are from 
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:92](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L92)
+Defined in: [packages/openapi/src/types.ts:92](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L92)
 
 An optional description for the server variable

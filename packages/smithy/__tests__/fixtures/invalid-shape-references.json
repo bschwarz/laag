@@ -1,0 +1,23 @@
+{
+  "smithy": "2.0",
+  "shapes": {
+    "example#TestService": {
+      "type": "service",
+      "version": "1.0.0",
+      "operations": ["example#NonExistentOperation"]
+    },
+    "example#TestOperation": {
+      "type": "operation",
+      "input": "example#NonExistentInput",
+      "output": "example#NonExistentOutput"
+    },
+    "example#TestStructure": {
+      "type": "structure",
+      "members": {
+        "field": {
+          "target": "example#NonExistentType"
+        }
+      }
+    }
+  }
+}

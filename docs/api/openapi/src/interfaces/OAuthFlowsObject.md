@@ -6,7 +6,7 @@
 
 # Interface: OAuthFlowsObject
 
-Defined in: [packages/openapi/src/types.ts:467](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L467)
+Defined in: [packages/openapi/src/types.ts:467](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L467)
 
 Allows configuration of the supported OAuth Flows
 
@@ -24,7 +24,7 @@ Allows configuration of the supported OAuth Flows
 
 > `optional` **implicit**: [`OAuthFlowObject`](OAuthFlowObject.md)
 
-Defined in: [packages/openapi/src/types.ts:469](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L469)
+Defined in: [packages/openapi/src/types.ts:469](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L469)
 
 Configuration for the OAuth Implicit flow
 
@@ -34,7 +34,7 @@ Configuration for the OAuth Implicit flow
 
 > `optional` **password**: [`OAuthFlowObject`](OAuthFlowObject.md)
 
-Defined in: [packages/openapi/src/types.ts:471](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L471)
+Defined in: [packages/openapi/src/types.ts:471](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L471)
 
 Configuration for the OAuth Resource Owner Password flow
 
@@ -44,7 +44,7 @@ Configuration for the OAuth Resource Owner Password flow
 
 > `optional` **clientCredentials**: [`OAuthFlowObject`](OAuthFlowObject.md)
 
-Defined in: [packages/openapi/src/types.ts:473](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L473)
+Defined in: [packages/openapi/src/types.ts:473](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L473)
 
 Configuration for the OAuth Client Credentials flow
 
@@ -54,6 +54,6 @@ Configuration for the OAuth Client Credentials flow
 
 > `optional` **authorizationCode**: [`OAuthFlowObject`](OAuthFlowObject.md)
 
-Defined in: [packages/openapi/src/types.ts:475](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L475)
+Defined in: [packages/openapi/src/types.ts:475](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L475)
 
 Configuration for the OAuth Authorization Code flow

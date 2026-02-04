@@ -1,32 +1,17 @@
 {
-  "typescript.preferences.includePackageJsonAutoImports": "on",
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "files.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/lib": true,
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
   },
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/lib": true,
-    "**/coverage": true
-  },
-  "eslint.workingDirectories": [
-    "packages/core",
-    "packages/openapi",
-    "packages/raml",
-    "packages/smithy"
-  ],
-  "typescript.preferences.importModuleSpecifier": "relative"
+  "prettier.requireConfig": true,
+  "eslint.format.enable": false
 }

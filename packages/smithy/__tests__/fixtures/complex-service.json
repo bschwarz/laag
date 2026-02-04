@@ -1,0 +1,707 @@
+{
+  "smithy": "2.0",
+  "metadata": {
+    "authors": ["complex-team@example.com"],
+    "description": "A complex service demonstrating advanced Smithy features",
+    "version": "2.0.0",
+    "protocols": ["aws.protocols#restJson1", "aws.protocols#awsJson1_1"]
+  },
+  "shapes": {
+    "example.complex#ComplexService": {
+      "type": "service",
+      "version": "2.0.0",
+      "operations": [
+        "example.complex#CreateUser",
+        "example.complex#GetUser",
+        "example.complex#UpdateUser",
+        "example.complex#DeleteUser",
+        "example.complex#ListUsers",
+        "example.complex#BatchGetUsers"
+      ],
+      "resources": ["example.complex#User", "example.complex#UserGroup"],
+      "errors": ["example.complex#ServiceError", "example.complex#ThrottlingError"],
+      "traits": {
+        "smithy.api#documentation": "A complex service with advanced features",
+        "smithy.api#title": "Complex Service API",
+        "aws.protocols#restJson1": {},
+        "aws.auth#sigv4": {
+          "name": "complex-service"
+        },
+        "aws.api#service": {
+          "sdkId": "Complex Service",
+          "cloudFormationName": "ComplexService",
+          "cloudTrailEventSource": "complex-service.amazonaws.com"
+        }
+      }
+    },
+    "example.complex#User": {
+      "type": "resource",
+      "identifiers": {
+        "userId": "smithy.api#String"
+      },
+      "properties": {
+        "email": "smithy.api#String",
+        "name": "smithy.api#String",
+        "status": "example.complex#UserStatus",
+        "createdAt": "smithy.api#Timestamp",
+        "updatedAt": "smithy.api#Timestamp"
+      },
+      "create": "example.complex#CreateUser",
+      "read": "example.complex#GetUser",
+      "update": "example.complex#UpdateUser",
+      "delete": "example.complex#DeleteUser",
+      "list": "example.complex#ListUsers",
+      "operations": ["example.complex#GetUserPreferences", "example.complex#UpdateUserPreferences"],
+      "resources": ["example.complex#UserSession"],
+      "traits": {
+        "smithy.api#documentation": "A user resource with full CRUD operations"
+      }
+    },
+    "example.complex#UserGroup": {
+      "type": "resource",
+      "identifiers": {
+        "groupId": "smithy.api#String"
+      },
+      "properties": {
+        "name": "smithy.api#String",
+        "description": "smithy.api#String",
+        "memberCount": "smithy.api#Integer"
+      },
+      "create": "example.complex#CreateUserGroup",
+      "read": "example.complex#GetUserGroup",
+      "update": "example.complex#UpdateUserGroup",
+      "delete": "example.complex#DeleteUserGroup",
+      "list": "example.complex#ListUserGroups",
+      "traits": {
+        "smithy.api#documentation": "A user group resource"
+      }
+    },
+    "example.complex#UserSession": {
+      "type": "resource",
+      "identifiers": {
+        "userId": "smithy.api#String",
+        "sessionId": "smithy.api#String"
+      },
+      "properties": {
+        "createdAt": "smithy.api#Timestamp",
+        "expiresAt": "smithy.api#Timestamp",
+        "ipAddress": "smithy.api#String"
+      },
+      "read": "example.complex#GetUserSession",
+      "delete": "example.complex#DeleteUserSession",
+      "list": "example.complex#ListUserSessions"
+    },
+    "example.complex#CreateUser": {
+      "type": "operation",
+      "input": "example.complex#CreateUserInput",
+      "output": "example.complex#CreateUserOutput",
+      "errors": [
+        "example.complex#ValidationError",
+        "example.complex#ConflictError",
+        "example.complex#ServiceError"
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/users",
+          "code": 201
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#documentation": "Creates a new user"
+      }
+    },
+    "example.complex#CreateUserInput": {
+      "type": "structure",
+      "members": {
+        "email": {
+          "target": "example.complex#EmailAddress",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "User's email address"
+          }
+        },
+        "name": {
+          "target": "example.complex#UserName",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "User's full name"
+          }
+        },
+        "preferences": {
+          "target": "example.complex#UserPreferences",
+          "traits": {
+            "smithy.api#documentation": "Initial user preferences"
+          }
+        },
+        "tags": {
+          "target": "example.complex#TagMap",
+          "traits": {
+            "smithy.api#documentation": "Resource tags"
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#httpHeader": "X-Client-Token",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#documentation": "Idempotency token"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for creating a user"
+      }
+    },
+    "example.complex#CreateUserOutput": {
+      "type": "structure",
+      "members": {
+        "user": {
+          "target": "example.complex#UserDetails",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The created user"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Output for creating a user"
+      }
+    },
+    "example.complex#GetUser": {
+      "type": "operation",
+      "input": "example.complex#GetUserInput",
+      "output": "example.complex#GetUserOutput",
+      "errors": ["example.complex#NotFoundError", "example.complex#ServiceError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/users/{userId}",
+          "code": 200
+        },
+        "smithy.api#documentation": "Gets a user by ID"
+      }
+    },
+    "example.complex#GetUserInput": {
+      "type": "structure",
+      "members": {
+        "userId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpLabel": {},
+            "smithy.api#documentation": "The user ID"
+          }
+        },
+        "includePreferences": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#httpQuery": "includePreferences",
+            "smithy.api#documentation": "Include user preferences in response"
+          }
+        }
+      }
+    },
+    "example.complex#GetUserOutput": {
+      "type": "structure",
+      "members": {
+        "user": {
+          "target": "example.complex#UserDetails",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "example.complex#ListUsers": {
+      "type": "operation",
+      "input": "example.complex#ListUsersInput",
+      "output": "example.complex#ListUsersOutput",
+      "errors": ["example.complex#ValidationError", "example.complex#ServiceError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/users",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "users",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#documentation": "Lists users with pagination"
+      }
+    },
+    "example.complex#ListUsersInput": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults",
+            "smithy.api#range": {
+              "min": 1,
+              "max": 100
+            },
+            "smithy.api#documentation": "Maximum number of results per page"
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#documentation": "Token for next page"
+          }
+        },
+        "status": {
+          "target": "example.complex#UserStatus",
+          "traits": {
+            "smithy.api#httpQuery": "status",
+            "smithy.api#documentation": "Filter by user status"
+          }
+        },
+        "createdAfter": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#httpQuery": "createdAfter",
+            "smithy.api#documentation": "Filter users created after this date"
+          }
+        }
+      }
+    },
+    "example.complex#ListUsersOutput": {
+      "type": "structure",
+      "members": {
+        "users": {
+          "target": "example.complex#UserList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String"
+        },
+        "totalCount": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "Total number of users (if available)"
+          }
+        }
+      }
+    },
+    "example.complex#BatchGetUsers": {
+      "type": "operation",
+      "input": "example.complex#BatchGetUsersInput",
+      "output": "example.complex#BatchGetUsersOutput",
+      "errors": ["example.complex#ValidationError", "example.complex#ServiceError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/users/batch",
+          "code": 200
+        },
+        "smithy.api#documentation": "Gets multiple users by their IDs"
+      }
+    },
+    "example.complex#BatchGetUsersInput": {
+      "type": "structure",
+      "members": {
+        "userIds": {
+          "target": "example.complex#UserIdList",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpPayload": {},
+            "smithy.api#documentation": "List of user IDs to retrieve"
+          }
+        }
+      }
+    },
+    "example.complex#BatchGetUsersOutput": {
+      "type": "structure",
+      "members": {
+        "users": {
+          "target": "example.complex#UserList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "notFound": {
+          "target": "example.complex#UserIdList",
+          "traits": {
+            "smithy.api#documentation": "User IDs that were not found"
+          }
+        }
+      }
+    },
+    "example.complex#UserDetails": {
+      "type": "structure",
+      "members": {
+        "userId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "email": {
+          "target": "example.complex#EmailAddress",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "example.complex#UserName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "example.complex#UserStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "preferences": {
+          "target": "example.complex#UserPreferences"
+        },
+        "tags": {
+          "target": "example.complex#TagMap"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Complete user information"
+      }
+    },
+    "example.complex#UserPreferences": {
+      "type": "structure",
+      "members": {
+        "theme": {
+          "target": "example.complex#Theme",
+          "traits": {
+            "smithy.api#documentation": "UI theme preference"
+          }
+        },
+        "language": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "Language preference (ISO 639-1)"
+          }
+        },
+        "timezone": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "Timezone preference (IANA timezone)"
+          }
+        },
+        "notifications": {
+          "target": "example.complex#NotificationSettings"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "User preference settings"
+      }
+    },
+    "example.complex#NotificationSettings": {
+      "type": "structure",
+      "members": {
+        "email": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "Enable email notifications"
+          }
+        },
+        "push": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "Enable push notifications"
+          }
+        },
+        "frequency": {
+          "target": "example.complex#NotificationFrequency"
+        }
+      }
+    },
+    "example.complex#UserStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "active",
+            "name": "ACTIVE",
+            "documentation": "User is active and can access the system"
+          },
+          {
+            "value": "inactive",
+            "name": "INACTIVE",
+            "documentation": "User is inactive but account exists"
+          },
+          {
+            "value": "suspended",
+            "name": "SUSPENDED",
+            "documentation": "User account is temporarily suspended"
+          },
+          {
+            "value": "deleted",
+            "name": "DELETED",
+            "documentation": "User account has been deleted"
+          }
+        ],
+        "smithy.api#documentation": "User account status"
+      }
+    },
+    "example.complex#Theme": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "light",
+            "name": "LIGHT"
+          },
+          {
+            "value": "dark",
+            "name": "DARK"
+          },
+          {
+            "value": "auto",
+            "name": "AUTO"
+          }
+        ]
+      }
+    },
+    "example.complex#NotificationFrequency": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "immediate",
+            "name": "IMMEDIATE"
+          },
+          {
+            "value": "daily",
+            "name": "DAILY"
+          },
+          {
+            "value": "weekly",
+            "name": "WEEKLY"
+          },
+          {
+            "value": "never",
+            "name": "NEVER"
+          }
+        ]
+      }
+    },
+    "example.complex#EmailAddress": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        "smithy.api#documentation": "A valid email address"
+      }
+    },
+    "example.complex#UserName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^[a-zA-Z\\s'-]+$",
+        "smithy.api#documentation": "A user's full name"
+      }
+    },
+    "example.complex#UserList": {
+      "type": "list",
+      "member": {
+        "target": "example.complex#UserDetails"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of users"
+      }
+    },
+    "example.complex#UserIdList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#documentation": "A list of user IDs"
+      }
+    },
+    "example.complex#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String",
+        "traits": {
+          "smithy.api#length": {
+            "min": 1,
+            "max": 128
+          }
+        }
+      },
+      "value": {
+        "target": "smithy.api#String",
+        "traits": {
+          "smithy.api#length": {
+            "min": 0,
+            "max": 256
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        },
+        "smithy.api#documentation": "A map of resource tags"
+      }
+    },
+    "example.complex#ServiceError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "requestId": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500,
+        "smithy.api#documentation": "Internal service error"
+      }
+    },
+    "example.complex#ValidationError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "fieldErrors": {
+          "target": "example.complex#FieldErrorList"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400,
+        "smithy.api#documentation": "Request validation failed"
+      }
+    },
+    "example.complex#ConflictError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "conflictingResource": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409,
+        "smithy.api#documentation": "Resource conflict"
+      }
+    },
+    "example.complex#NotFoundError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "smithy.api#String"
+        },
+        "resourceId": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404,
+        "smithy.api#documentation": "Resource not found"
+      }
+    },
+    "example.complex#ThrottlingError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "retryAfterSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        },
+        "smithy.api#documentation": "Request was throttled"
+      }
+    },
+    "example.complex#FieldError": {
+      "type": "structure",
+      "members": {
+        "field": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "code": {
+          "target": "smithy.api#String"
+        }
+      }
+    },
+    "example.complex#FieldErrorList": {
+      "type": "list",
+      "member": {
+        "target": "example.complex#FieldError"
+      }
+    }
+  }
+}
