@@ -33,7 +33,7 @@ class ReleaseManager {
 
   private discoverPackages(): void {
     const packagesDir = join(this.workspaceRoot, 'packages');
-    const packageDirs = ['core', 'openapi', 'raml', 'cli'];
+    const packageDirs = ['core', 'openapi', 'raml', 'smithy', 'cli'];
 
     for (const packageDir of packageDirs) {
       const packagePath = join(packagesDir, packageDir);
