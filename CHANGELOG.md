@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **@laag/smithy** - Complete AWS Smithy model support with:
+  - Full TypeScript implementation with comprehensive type definitions
+  - Shape management (services, operations, structures, resources)
+  - Trait support (standard and custom traits)
+  - Code generation (TypeScript, JavaScript, Python)
+  - Selector support for querying shapes
+  - Model validation according to Smithy specification
+  - HTTP binding extraction
 - Complete TypeScript rewrite with full type safety
 - Modern ESM and CommonJS dual module support
 - Browser-compatible bundles with tree-shaking
@@ -40,9 +48,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Various type safety issues in the original JavaScript implementation
 - Inconsistent error handling across packages
+- CI test failures due to missing build artifacts in test jobs
 
 ### Security
 
+- Updated js-yaml from 4.1.0 to 4.1.1 to fix prototype pollution vulnerability (GHSA-mh29-5h37-fv8m)
+- Added resolution for js-yaml to force version 4.1.1+ across all transitive dependencies
 - Updated all dependencies to latest secure versions
 - Added automated security scanning in CI/CD
 

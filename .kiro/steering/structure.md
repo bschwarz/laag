@@ -4,10 +4,11 @@
 ```
 laag/
 ├── packages/                    # Bun workspace packages
-│   ├── openapi/                # OpenAPI/Swagger library
-│   ├── raml/                   # RAML library (in development)
-│   ├── smithy/                 # Smithy library (planned)
-│   └── core/                   # Shared core functionality
+│   ├── core/                   # Shared core functionality (v2.0+)
+│   ├── openapi/                # OpenAPI/Swagger library (v2.0+)
+│   ├── smithy/                 # AWS Smithy library (v1.0-alpha)
+│   ├── raml/                   # RAML library (v1.0-alpha, in development)
+│   └── cli/                    # Command-line interface (v2.0+)
 ├── scripts/                    # Build and release scripts
 ├── coverage/                   # Test coverage reports
 ├── .husky/                     # Git hooks configuration
@@ -20,30 +21,40 @@ Each package follows a consistent structure:
 ```
 packages/{format}/
 ├── package.json                # Package configuration
-├── lib/                        # Compiled/built library files
-│   └── laag-{format}.js       # Main library file
+├── src/                        # TypeScript source files
+│   ├── index.ts               # Main entry point
+│   ├── {format}.ts            # Main class implementation
+│   └── types.ts               # Type definitions
+├── dist/                       # Built library files
+│   ├── esm/                   # ESM build
+│   ├── cjs/                   # CommonJS build
+│   ├── browser/               # Browser bundle
+│   └── types/                 # Type declarations
 ├── __tests__/                  # Test files
-│   ├── laag-{format}.test.js  # Main tests
-│   └── laag-{format}-component.test.js # Component tests
+│   ├── {format}.test.ts       # Main tests
+│   ├── integration.test.ts    # Integration tests
+│   └── fixtures/              # Test fixtures
 ├── examples/                   # Usage examples
-│   ├── read-example.js        # Reading examples
-│   ├── write-example.js       # Writing examples
-│   └── *.json/*.raml          # Sample specification files
-├── src/                        # Source files (if applicable)
+│   ├── basic-usage.ts         # Basic examples
+│   ├── code-generation.ts     # Code generation examples (Smithy)
+│   └── models/                # Sample model files
 └── README.md                   # Package documentation
 ```
 
 ## Naming Conventions
-- **Packages**: `@laag/{format}` for published packages, `{format}` for internal
-- **Main files**: `laag-{format}.js` in lib directory
-- **Test files**: `laag-{format}.test.js` and `laag-{format}-component.test.js`
-- **Classes**: PascalCase (e.g., `Openapi`, `Core`)
+- **Packages**: `@laag/{format}` for published packages (e.g., @laag/openapi, @laag/smithy)
+- **Main files**: `{format}.ts` in src directory (e.g., openapi.ts, smithy.ts)
+- **Test files**: `{format}.test.ts`, `integration.test.ts`, `{feature}.test.ts`
+- **Classes**: PascalCase (e.g., `Openapi`, `Smithy`, `LaagBase`)
 - **Methods**: camelCase with descriptive names
+- **Types**: PascalCase with descriptive suffixes (e.g., `SmithyModel`, `ValidationResult`)
 - **Extensions**: Use `getExtensions()` pattern for x-* properties
 
 ## File Organization Rules
-- Keep main library logic in `lib/` directory
+- Keep TypeScript source in `src/` directory
+- Built artifacts go in `dist/` directory (esm, cjs, browser, types)
 - Place all tests in `__tests__/` directory
 - Provide working examples in `examples/` directory
 - Use consistent README structure across packages
 - Maintain separate package.json for each package with proper metadata
+- Include fixtures and sample models in `__tests__/fixtures/` or `examples/models/`
