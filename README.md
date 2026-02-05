@@ -6,7 +6,8 @@ A modern TypeScript library collection for working with API specification format
 
 - **[@laag/core](packages/core/)** - Core utilities and base classes for all laag packages
 - **[@laag/openapi](packages/openapi/)** - Comprehensive OpenAPI/Swagger document parsing and manipulation
-- **[@laag/raml](packages/raml/)** - RAML document support (coming soon)
+- **[@laag/smithy](packages/smithy/)** - AWS Smithy model support with code generation
+- **[@laag/raml](packages/raml/)** - RAML document support (in development)
 - **[@laag/cli](packages/cli/)** - Command-line interface for analyzing API specifications
 
 ## Quick Start
@@ -74,6 +75,7 @@ laag --help
 
 - [Core Package](packages/core/README.md) - Base functionality and utilities
 - [OpenAPI Package](packages/openapi/README.md) - OpenAPI/Swagger support
+- [Smithy Package](packages/smithy/README.md) - AWS Smithy model support
 - [CLI Package](packages/cli/README.md) - Command-line interface
 - [Examples](examples/) - Usage examples and tutorials
 
@@ -123,12 +125,13 @@ bun run scripts/release.ts --version=1.2.3 --otp=123456
 ```bash
 # Release specific packages independently (will prompt for NPM OTP)
 bun run release:openapi:patch    # OpenAPI package patch
+bun run release:smithy:patch     # Smithy package patch
 bun run release:core:minor       # Core package minor
 bun run release:cli:major        # CLI package major
 
 # Or use the release script directly
 bun run scripts/release-package.ts @laag/openapi --patch
-bun run scripts/release-package.ts @laag/openapi --version=2.1.0
+bun run scripts/release-package.ts @laag/smithy --version=1.0.0
 
 # Provide OTP directly to avoid prompts
 bun run scripts/release.ts --packages=@laag/openapi --patch --otp=123456
