@@ -1,6 +1,6 @@
 {
   "name": "@laag/raml",
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.1",
   "description": "TypeScript library for interfacing with RAML documents",
   "keywords": [
     "rest",
@@ -88,5 +88,8 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^5.0.0"
-  }
+  },
+  "path": "/Users/brettschwarz/repos/laag/packages/raml",
+  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/raml/package.json",
+  "directoryName": "raml"
 }

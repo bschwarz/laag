@@ -1,6 +1,6 @@
 {
   "name": "@laag/cli",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Command-line interface for the laag library collection",
   "type": "module",
   "main": "laag-cli.js",
@@ -50,5 +50,8 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "path": "/Users/brettschwarz/repos/laag/packages/cli",
+  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/cli/package.json",
+  "directoryName": "cli"
 }

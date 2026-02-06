@@ -1,6 +1,6 @@
 {
   "name": "@laag/smithy",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.1",
   "description": "TypeScript library for interfacing with AWS Smithy models",
   "keywords": [
     "smithy",
@@ -91,5 +91,8 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^5.0.0"
-  }
+  },
+  "path": "/Users/brettschwarz/repos/laag/packages/smithy",
+  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/smithy/package.json",
+  "directoryName": "smithy"
 }
