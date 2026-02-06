@@ -1,6 +1,6 @@
 {
   "name": "@laag/core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Core utilities and base classes for the laag library collection",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -67,5 +67,8 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "path": "/Users/brettschwarz/repos/laag/packages/core",
+  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/core/package.json",
+  "directoryName": "core"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@laag/openapi",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "description": "TypeScript library for interfacing with OpenAPI/Swagger documents",
   "keywords": [
     "rest",
