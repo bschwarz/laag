@@ -1,6 +1,6 @@
 {
   "name": "@laag/core",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "Core utilities and base classes for the laag library collection",
   "type": "module",
   "main": "./dist/cjs/index.js",
