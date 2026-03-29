@@ -88,8 +88,5 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^6.0.2"
-  },
-  "path": "/Users/brettschwarz/repos/laag/packages/raml",
-  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/raml/package.json",
-  "directoryName": "raml"
+  }
 }

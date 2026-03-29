@@ -71,23 +71,27 @@ class PackageReleaseManager {
   }
 
   private updateVersion(versionType?: string, customVersion?: string): string {
-    if (customVersion) {
-      this.packageInfo.version = customVersion;
-      writeFileSync(this.packageInfo.packageJsonPath, JSON.stringify(this.packageInfo, null, 2) + '\n');
-      return customVersion;
-    }
+      // Strip internal metadata before writing to disk
+      const { path: _path, packageJsonPath, directoryName, ...cleanPackageInfo } = this.packageInfo;
 
-    if (versionType) {
-      // Parse current version and bump it
-      const currentVersion = this.packageInfo.version;
-      const newVersion = this.bumpVersion(currentVersion, versionType);
-      this.packageInfo.version = newVersion;
-      writeFileSync(this.packageInfo.packageJsonPath, JSON.stringify(this.packageInfo, null, 2) + '\n');
-      return newVersion;
-    }
+      if (customVersion) {
+        cleanPackageInfo.version = customVersion;
+        this.packageInfo.version = customVersion;
+        writeFileSync(packageJsonPath, JSON.stringify(cleanPackageInfo, null, 2) + '\n');
+        return customVersion;
+      }
 
-    return this.packageInfo.version;
-  }
+      if (versionType) {
+        const currentVersion = this.packageInfo.version;
+        const newVersion = this.bumpVersion(currentVersion, versionType);
+        cleanPackageInfo.version = newVersion;
+        this.packageInfo.version = newVersion;
+        writeFileSync(packageJsonPath, JSON.stringify(cleanPackageInfo, null, 2) + '\n');
+        return newVersion;
+      }
+
+      return this.packageInfo.version;
+    }
 
   private bumpVersion(currentVersion: string, versionType: string): string {
     const parts = currentVersion.split('.');
