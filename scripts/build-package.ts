@@ -6,9 +6,9 @@
  */
 
 import { execSync, spawn } from 'child_process';
-import { existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
-import { basename, join } from 'path';
 import { build as esbuildBuild } from 'esbuild';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
+import { basename, join } from 'path';
 
 interface BuildOptions {
   watch?: boolean;
@@ -71,39 +71,129 @@ class PackageBuilder {
     mkdirSync(this.distDir, { recursive: true });
   }
 
+  private get workspaceRoot(): string {
+    return join(this.packageDir, '..', '..');
+  }
+
+  private get packageTsConfigPath(): string {
+    return join(this.packageDir, 'tsconfig.json');
+  }
+
+  private get tscCommand(): string {
+    return `bun run --cwd ${this.workspaceRoot} tsc`;
+  }
+
+  private getWorkspacePaths(): Record<string, string[]> {
+    const paths: Record<string, string[]> = {};
+    const dependencies = {
+      ...this.packageJson.dependencies,
+      ...this.packageJson.devDependencies,
+    };
+
+    for (const [dep, version] of Object.entries(dependencies)) {
+      if (typeof version === 'string' && version.startsWith('workspace:')) {
+        const depName = dep.replace('@laag/', '');
+        paths[dep] = [join(this.packageDir, '..', depName, 'dist', 'types', 'index.d.ts')];
+      }
+    }
+
+    return paths;
+  }
+
+  private createTempTsConfig(overrides: Record<string, unknown>, suffix: string): string {
+    const sourceConfig = JSON.parse(readFileSync(this.packageTsConfigPath, 'utf-8'));
+    const tempConfig = {
+      ...sourceConfig,
+      compilerOptions: {
+        ...sourceConfig.compilerOptions,
+        ...overrides,
+      },
+    };
+    const tempConfigPath = join(this.packageDir, `.tsconfig.build.${suffix}.json`);
+    writeFileSync(tempConfigPath, JSON.stringify(tempConfig, null, 2));
+    return tempConfigPath;
+  }
+
+  private removeTempTsConfig(path: string): void {
+    if (existsSync(path)) {
+      rmSync(path);
+    }
+  }
+
   private buildESM(sourceMaps: boolean): void {
     this.log('Building ESM...');
     const sourceMapFlag = sourceMaps ? '--sourceMap' : '';
-    execSync(
-      `tsc --project tsconfig.json --module ESNext --moduleResolution bundler --outDir dist/esm --rootDir src --target ES2020 ${sourceMapFlag}`,
+    const tempConfigPath = this.createTempTsConfig(
       {
+        module: 'ESNext',
+        moduleResolution: 'node',
+        outDir: './dist/esm',
+        sourceMap: sourceMaps,
+        composite: false,
+        paths: this.getWorkspacePaths(),
+      },
+      'esm'
+    );
+
+    try {
+      execSync(`${this.tscCommand} --project ${tempConfigPath} --target ES2020 ${sourceMapFlag} --composite false`, {
         stdio: 'inherit',
         cwd: this.packageDir,
-      }
-    );
+      });
+    } finally {
+      this.removeTempTsConfig(tempConfigPath);
+    }
   }
 
   private buildCJS(sourceMaps: boolean): void {
     this.log('Building CommonJS...');
     const sourceMapFlag = sourceMaps ? '--sourceMap' : '';
-    execSync(
-      `tsc --project tsconfig.json --module CommonJS --moduleResolution node --outDir dist/cjs --rootDir src --target ES2020 ${sourceMapFlag}`,
+    const tempConfigPath = this.createTempTsConfig(
       {
+        module: 'CommonJS',
+        moduleResolution: 'node',
+        outDir: './dist/cjs',
+        sourceMap: sourceMaps,
+        composite: false,
+        paths: this.getWorkspacePaths(),
+      },
+      'cjs'
+    );
+
+    try {
+      execSync(`${this.tscCommand} --project ${tempConfigPath} --target ES2020 ${sourceMapFlag} --composite false`, {
         stdio: 'inherit',
         cwd: this.packageDir,
-      }
-    );
+      });
+    } finally {
+      this.removeTempTsConfig(tempConfigPath);
+    }
   }
 
   private buildTypes(): void {
     this.log('Generating type declarations...');
-    execSync(
-      'tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types --rootDir src --skipLibCheck',
+    const tempConfigPath = this.createTempTsConfig(
       {
+        declaration: true,
+        emitDeclarationOnly: true,
+        outDir: './dist/types',
+        sourceMap: false,
+        skipLibCheck: true,
+        composite: false,
+        moduleResolution: 'node',
+        paths: this.getWorkspacePaths(),
+      },
+      'types'
+    );
+
+    try {
+      execSync(`${this.tscCommand} --project ${tempConfigPath} --composite false`, {
         stdio: 'inherit',
         cwd: this.packageDir,
-      }
-    );
+      });
+    } finally {
+      this.removeTempTsConfig(tempConfigPath);
+    }
   }
 
   private async buildBrowser(sourceMaps: boolean): Promise<void> {
@@ -185,12 +275,19 @@ class PackageBuilder {
     this.build({ clean: true, sourceMaps: true });
 
     // Watch for changes
-    const watcher = spawn('tsc', [
-      '--project', 'tsconfig.json',
+    const watcher = spawn('bun', [
+      'run',
+      '--cwd',
+      this.workspaceRoot,
+      'tsc',
+      '--project',
+      this.packageTsConfigPath,
       '--watch',
       '--preserveWatchOutput',
-      '--module', 'ESNext',
-      '--outDir', 'dist/esm',
+      '--module',
+      'ESNext',
+      '--outDir',
+      'dist/esm',
       '--sourceMap'
     ], {
       cwd: this.packageDir,

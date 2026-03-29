@@ -13,15 +13,15 @@ import { ServiceManager } from './service-manager.js';
 import { ShapeManager } from './shapes/shape-manager.js';
 import { TraitManager } from './traits/trait-manager.js';
 import type {
-    GeneratorOptions,
-    HttpBinding,
-    OperationShape,
-    ResourceShape,
-    ServiceShape,
-    Shape,
-    ShapeId,
-    ShapeType,
-    SmithyModel
+  GeneratorOptions,
+  HttpBinding,
+  OperationShape,
+  ResourceShape,
+  ServiceShape,
+  Shape,
+  ShapeId,
+  ShapeType,
+  SmithyModel,
 } from './types.js';
 import { selectShapes, type SelectorMatch } from './utils/selector.js';
 import { ModelValidator } from './validators/model-validator.js';
@@ -118,7 +118,9 @@ export class Smithy extends LaagBase {
     // Validate the model structure
     const validationResult = this.modelValidator.validate(this.model);
     if (!validationResult.valid) {
-      const errorMessages = validationResult.errors?.map(e => e.message).join('; ') || 'Unknown error';
+      const errorMessages =
+        validationResult.errors?.map((e: { message: string }) => e.message).join('; ') ||
+        'Unknown error';
       throw new ValidationError(`Invalid Smithy model: ${errorMessages}`, 'model');
     }
 
@@ -486,11 +488,12 @@ export class Smithy extends LaagBase {
         for (const [traitId, value] of Object.entries(shape.traits)) {
           const traitResult = this.traitManager.validateTrait(traitId, value);
           if (!traitResult.valid) {
-            const traitErrors = traitResult.errors?.map(e => ({
-              path: `${shapeId}.traits.${traitId}`,
-              message: e.message,
-              code: e.code || 'TRAIT_VALIDATION_ERROR',
-            })) || [];
+            const traitErrors =
+              traitResult.errors?.map((e: { message: string; code?: string }) => ({
+                path: `${shapeId}.traits.${traitId}`,
+                message: e.message,
+                code: e.code || 'TRAIT_VALIDATION_ERROR',
+              })) || [];
             errors.push(...traitErrors);
           }
         }

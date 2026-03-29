@@ -1,6 +1,6 @@
 {
   "name": "@laag/cli",
-  "version": "2.0.3",
+  "version": "v0.0.2",
   "description": "Command-line interface for the laag library collection",
   "type": "module",
   "main": "laag-cli.js",

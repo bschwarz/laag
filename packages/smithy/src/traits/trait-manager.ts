@@ -78,7 +78,8 @@ export class TraitManager {
     const validationResult = this.validateTrait(traitId, value);
     if (!validationResult.valid) {
       const errorMessages =
-        validationResult.errors?.map(e => e.message).join(', ') || 'Unknown error';
+        validationResult.errors?.map((e: { message: string }) => e.message).join(', ') ||
+        'Unknown error';
       throw new Error(`Invalid trait "${traitId}": ${errorMessages}`);
     }
 
