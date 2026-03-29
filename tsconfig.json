@@ -20,6 +20,7 @@
     "outDir": "./dist",
     "rootDir": ".",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@laag/core": ["./packages/core/src"],
       "@laag/openapi": ["./packages/openapi/src"],
