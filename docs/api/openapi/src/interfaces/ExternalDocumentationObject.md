@@ -6,7 +6,7 @@
 
 # Interface: ExternalDocumentationObject
 
-Defined in: [packages/openapi/src/types.ts:165](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L165)
+Defined in: [packages/openapi/src/types.ts:165](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L165)
 
 Allows referencing an external resource for extended documentation
 
@@ -24,7 +24,7 @@ Allows referencing an external resource for extended documentation
 
 > **url**: `string`
 
-Defined in: [packages/openapi/src/types.ts:167](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L167)
+Defined in: [packages/openapi/src/types.ts:167](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L167)
 
 REQUIRED. The URL for the target documentation
 
@@ -34,6 +34,6 @@ REQUIRED. The URL for the target documentation
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:169](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L169)
+Defined in: [packages/openapi/src/types.ts:169](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L169)
 
 A short description of the target documentation

@@ -6,7 +6,7 @@
 
 # Class: Openapi
 
-Defined in: [packages/openapi/src/openapi.ts:75](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L75)
+Defined in: [packages/openapi/src/openapi.ts:75](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L75)
 
 Main class for working with OpenAPI/Swagger documents.
 
@@ -63,7 +63,7 @@ api.appendPath('/users', {
 
 > **get** **httpMethods**(): [`HttpMethod`](../type-aliases/HttpMethod.md)[]
 
-Defined in: [packages/openapi/src/openapi.ts:231](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L231)
+Defined in: [packages/openapi/src/openapi.ts:231](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L231)
 
 ##### Returns
 
@@ -73,7 +73,7 @@ Defined in: [packages/openapi/src/openapi.ts:231](https://github.com/bschwarz/la
 
 > **set** **httpMethods**(`methods`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:235](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L235)
+Defined in: [packages/openapi/src/openapi.ts:235](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L235)
 
 ##### Parameters
 
@@ -93,7 +93,7 @@ Defined in: [packages/openapi/src/openapi.ts:235](https://github.com/bschwarz/la
 
 > **get** **docVersion**(): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:240](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L240)
+Defined in: [packages/openapi/src/openapi.ts:240](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L240)
 
 ##### Returns
 
@@ -103,7 +103,7 @@ Defined in: [packages/openapi/src/openapi.ts:240](https://github.com/bschwarz/la
 
 > **set** **docVersion**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:244](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L244)
+Defined in: [packages/openapi/src/openapi.ts:244](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L244)
 
 ##### Parameters
 
@@ -123,7 +123,7 @@ Defined in: [packages/openapi/src/openapi.ts:244](https://github.com/bschwarz/la
 
 > **get** **info**(): [`InfoObject`](../interfaces/InfoObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:263](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L263)
+Defined in: [packages/openapi/src/openapi.ts:263](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L263)
 
 ##### Returns
 
@@ -133,7 +133,7 @@ Defined in: [packages/openapi/src/openapi.ts:263](https://github.com/bschwarz/la
 
 > **set** **info**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:267](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L267)
+Defined in: [packages/openapi/src/openapi.ts:267](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L267)
 
 ##### Parameters
 
@@ -153,7 +153,7 @@ Defined in: [packages/openapi/src/openapi.ts:267](https://github.com/bschwarz/la
 
 > **get** **title**(): `string` \| `null`
 
-Defined in: [packages/openapi/src/openapi.ts:281](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L281)
+Defined in: [packages/openapi/src/openapi.ts:281](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L281)
 
 ##### Returns
 
@@ -163,7 +163,7 @@ Defined in: [packages/openapi/src/openapi.ts:281](https://github.com/bschwarz/la
 
 > **set** **title**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:285](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L285)
+Defined in: [packages/openapi/src/openapi.ts:285](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L285)
 
 ##### Parameters
 
@@ -183,7 +183,7 @@ Defined in: [packages/openapi/src/openapi.ts:285](https://github.com/bschwarz/la
 
 > **get** **description**(): `string` \| `null`
 
-Defined in: [packages/openapi/src/openapi.ts:290](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L290)
+Defined in: [packages/openapi/src/openapi.ts:290](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L290)
 
 ##### Returns
 
@@ -193,7 +193,7 @@ Defined in: [packages/openapi/src/openapi.ts:290](https://github.com/bschwarz/la
 
 > **set** **description**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:296](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L296)
+Defined in: [packages/openapi/src/openapi.ts:296](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L296)
 
 ##### Parameters
 
@@ -213,7 +213,7 @@ Defined in: [packages/openapi/src/openapi.ts:296](https://github.com/bschwarz/la
 
 > **get** **version**(): `string` \| `null`
 
-Defined in: [packages/openapi/src/openapi.ts:301](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L301)
+Defined in: [packages/openapi/src/openapi.ts:301](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L301)
 
 ##### Returns
 
@@ -223,7 +223,7 @@ Defined in: [packages/openapi/src/openapi.ts:301](https://github.com/bschwarz/la
 
 > **set** **version**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:307](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L307)
+Defined in: [packages/openapi/src/openapi.ts:307](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L307)
 
 ##### Parameters
 
@@ -243,7 +243,7 @@ Defined in: [packages/openapi/src/openapi.ts:307](https://github.com/bschwarz/la
 
 > **get** **termsOfService**(): `string` \| `null`
 
-Defined in: [packages/openapi/src/openapi.ts:312](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L312)
+Defined in: [packages/openapi/src/openapi.ts:312](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L312)
 
 ##### Returns
 
@@ -253,7 +253,7 @@ Defined in: [packages/openapi/src/openapi.ts:312](https://github.com/bschwarz/la
 
 > **set** **termsOfService**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:318](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L318)
+Defined in: [packages/openapi/src/openapi.ts:318](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L318)
 
 ##### Parameters
 
@@ -273,7 +273,7 @@ Defined in: [packages/openapi/src/openapi.ts:318](https://github.com/bschwarz/la
 
 > **get** **contact**(): [`ContactObject`](../interfaces/ContactObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:323](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L323)
+Defined in: [packages/openapi/src/openapi.ts:323](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L323)
 
 ##### Returns
 
@@ -283,7 +283,7 @@ Defined in: [packages/openapi/src/openapi.ts:323](https://github.com/bschwarz/la
 
 > **set** **contact**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:329](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L329)
+Defined in: [packages/openapi/src/openapi.ts:329](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L329)
 
 ##### Parameters
 
@@ -303,7 +303,7 @@ Defined in: [packages/openapi/src/openapi.ts:329](https://github.com/bschwarz/la
 
 > **get** **license**(): [`LicenseObject`](../interfaces/LicenseObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:343](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L343)
+Defined in: [packages/openapi/src/openapi.ts:343](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L343)
 
 ##### Returns
 
@@ -313,7 +313,7 @@ Defined in: [packages/openapi/src/openapi.ts:343](https://github.com/bschwarz/la
 
 > **set** **license**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:349](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L349)
+Defined in: [packages/openapi/src/openapi.ts:349](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L349)
 
 ##### Parameters
 
@@ -333,7 +333,7 @@ Defined in: [packages/openapi/src/openapi.ts:349](https://github.com/bschwarz/la
 
 > **get** **servers**(): [`ServerObject`](../interfaces/ServerObject.md)[]
 
-Defined in: [packages/openapi/src/openapi.ts:364](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L364)
+Defined in: [packages/openapi/src/openapi.ts:364](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L364)
 
 ##### Returns
 
@@ -343,7 +343,7 @@ Defined in: [packages/openapi/src/openapi.ts:364](https://github.com/bschwarz/la
 
 > **set** **servers**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:368](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L368)
+Defined in: [packages/openapi/src/openapi.ts:368](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L368)
 
 ##### Parameters
 
@@ -363,7 +363,7 @@ Defined in: [packages/openapi/src/openapi.ts:368](https://github.com/bschwarz/la
 
 > **get** **baseUri**(): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:392](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L392)
+Defined in: [packages/openapi/src/openapi.ts:392](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L392)
 
 ##### Returns
 
@@ -373,7 +373,7 @@ Defined in: [packages/openapi/src/openapi.ts:392](https://github.com/bschwarz/la
 
 > **set** **baseUri**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:396](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L396)
+Defined in: [packages/openapi/src/openapi.ts:396](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L396)
 
 ##### Parameters
 
@@ -393,7 +393,7 @@ Defined in: [packages/openapi/src/openapi.ts:396](https://github.com/bschwarz/la
 
 > **get** **protocols**(): `string`[]
 
-Defined in: [packages/openapi/src/openapi.ts:400](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L400)
+Defined in: [packages/openapi/src/openapi.ts:400](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L400)
 
 ##### Returns
 
@@ -403,7 +403,7 @@ Defined in: [packages/openapi/src/openapi.ts:400](https://github.com/bschwarz/la
 
 > **set** **protocols**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:404](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L404)
+Defined in: [packages/openapi/src/openapi.ts:404](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L404)
 
 ##### Parameters
 
@@ -423,7 +423,7 @@ Defined in: [packages/openapi/src/openapi.ts:404](https://github.com/bschwarz/la
 
 > **get** **paths**(): [`PathsObject`](../type-aliases/PathsObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:413](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L413)
+Defined in: [packages/openapi/src/openapi.ts:413](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L413)
 
 ##### Returns
 
@@ -433,7 +433,7 @@ Defined in: [packages/openapi/src/openapi.ts:413](https://github.com/bschwarz/la
 
 > **set** **paths**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:417](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L417)
+Defined in: [packages/openapi/src/openapi.ts:417](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L417)
 
 ##### Parameters
 
@@ -453,7 +453,7 @@ Defined in: [packages/openapi/src/openapi.ts:417](https://github.com/bschwarz/la
 
 > **get** **components**(): [`ComponentsObject`](../interfaces/ComponentsObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:441](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L441)
+Defined in: [packages/openapi/src/openapi.ts:441](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L441)
 
 ##### Returns
 
@@ -463,7 +463,7 @@ Defined in: [packages/openapi/src/openapi.ts:441](https://github.com/bschwarz/la
 
 > **set** **components**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:447](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L447)
+Defined in: [packages/openapi/src/openapi.ts:447](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L447)
 
 ##### Parameters
 
@@ -483,7 +483,7 @@ Defined in: [packages/openapi/src/openapi.ts:447](https://github.com/bschwarz/la
 
 > **get** **componentsSchemas**(): `Record`\<`string`, [`SchemaObject`](../interfaces/SchemaObject.md) \| [`ReferenceObject`](../interfaces/ReferenceObject.md)\>
 
-Defined in: [packages/openapi/src/openapi.ts:451](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L451)
+Defined in: [packages/openapi/src/openapi.ts:451](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L451)
 
 ##### Returns
 
@@ -497,7 +497,7 @@ Defined in: [packages/openapi/src/openapi.ts:451](https://github.com/bschwarz/la
 
 > **get** **security**(): [`SecurityRequirementObject`](../interfaces/SecurityRequirementObject.md)[]
 
-Defined in: [packages/openapi/src/openapi.ts:458](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L458)
+Defined in: [packages/openapi/src/openapi.ts:458](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L458)
 
 ##### Returns
 
@@ -507,7 +507,7 @@ Defined in: [packages/openapi/src/openapi.ts:458](https://github.com/bschwarz/la
 
 > **set** **security**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:464](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L464)
+Defined in: [packages/openapi/src/openapi.ts:464](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L464)
 
 ##### Parameters
 
@@ -527,7 +527,7 @@ Defined in: [packages/openapi/src/openapi.ts:464](https://github.com/bschwarz/la
 
 > **get** **tags**(): [`TagObject`](../interfaces/TagObject.md)[]
 
-Defined in: [packages/openapi/src/openapi.ts:469](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L469)
+Defined in: [packages/openapi/src/openapi.ts:469](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L469)
 
 ##### Returns
 
@@ -537,7 +537,7 @@ Defined in: [packages/openapi/src/openapi.ts:469](https://github.com/bschwarz/la
 
 > **set** **tags**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:473](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L473)
+Defined in: [packages/openapi/src/openapi.ts:473](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L473)
 
 ##### Parameters
 
@@ -557,7 +557,7 @@ Defined in: [packages/openapi/src/openapi.ts:473](https://github.com/bschwarz/la
 
 > **get** **externalDocs**(): [`ExternalDocumentationObject`](../interfaces/ExternalDocumentationObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:487](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L487)
+Defined in: [packages/openapi/src/openapi.ts:487](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L487)
 
 ##### Returns
 
@@ -567,7 +567,7 @@ Defined in: [packages/openapi/src/openapi.ts:487](https://github.com/bschwarz/la
 
 > **set** **externalDocs**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:493](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L493)
+Defined in: [packages/openapi/src/openapi.ts:493](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L493)
 
 ##### Parameters
 
@@ -587,7 +587,7 @@ Defined in: [packages/openapi/src/openapi.ts:493](https://github.com/bschwarz/la
 
 > **get** **rootExtensions**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/openapi/src/openapi.ts:743](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L743)
+Defined in: [packages/openapi/src/openapi.ts:743](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L743)
 
 ##### Returns
 
@@ -597,7 +597,7 @@ Defined in: [packages/openapi/src/openapi.ts:743](https://github.com/bschwarz/la
 
 > **set** **rootExtensions**(`values`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:747](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L747)
+Defined in: [packages/openapi/src/openapi.ts:747](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L747)
 
 ##### Parameters
 
@@ -617,7 +617,7 @@ Defined in: [packages/openapi/src/openapi.ts:747](https://github.com/bschwarz/la
 
 > **get** **infoExtensions**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/openapi/src/openapi.ts:758](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L758)
+Defined in: [packages/openapi/src/openapi.ts:758](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L758)
 
 ##### Returns
 
@@ -627,7 +627,7 @@ Defined in: [packages/openapi/src/openapi.ts:758](https://github.com/bschwarz/la
 
 > **set** **infoExtensions**(`values`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:762](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L762)
+Defined in: [packages/openapi/src/openapi.ts:762](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L762)
 
 ##### Parameters
 
@@ -647,7 +647,7 @@ Defined in: [packages/openapi/src/openapi.ts:762](https://github.com/bschwarz/la
 
 > **get** **pathsExtensions**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/openapi/src/openapi.ts:773](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L773)
+Defined in: [packages/openapi/src/openapi.ts:773](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L773)
 
 ##### Returns
 
@@ -657,7 +657,7 @@ Defined in: [packages/openapi/src/openapi.ts:773](https://github.com/bschwarz/la
 
 > **set** **pathsExtensions**(`values`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:777](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L777)
+Defined in: [packages/openapi/src/openapi.ts:777](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L777)
 
 ##### Parameters
 
@@ -675,7 +675,7 @@ Defined in: [packages/openapi/src/openapi.ts:777](https://github.com/bschwarz/la
 
 > **new Openapi**(`doc?`): `Openapi`
 
-Defined in: [packages/openapi/src/openapi.ts:149](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L149)
+Defined in: [packages/openapi/src/openapi.ts:149](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L149)
 
 Creates a new OpenAPI document instance.
 
@@ -732,7 +732,7 @@ const api3 = new Openapi(jsonDoc);
 
 > `protected` **dictKeysExists**(`obj`, ...`keys`): `boolean`
 
-Defined in: [packages/core/src/base.ts:117](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L117)
+Defined in: [packages/core/src/base.ts:117](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L117)
 
 Check if all specified keys exist in an object, supporting nested key paths.
 
@@ -786,7 +786,7 @@ this.dictKeysExists(doc, 'info.description'); // false
 
 > `protected` **getExtensions**(`level?`): [`ExtensionObject`](../../../@laag/core/interfaces/ExtensionObject.md)
 
-Defined in: [packages/core/src/base.ts:174](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L174)
+Defined in: [packages/core/src/base.ts:174](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L174)
 
 Get extension properties (x-* properties) from a specific level or the root document.
 
@@ -842,7 +842,7 @@ this.getExtensions('info'); // { 'x-logo': 'logo.png' }
 
 > `protected` **setExtensions**(`values`, `level?`): `void`
 
-Defined in: [packages/core/src/base.ts:225](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L225)
+Defined in: [packages/core/src/base.ts:225](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L225)
 
 Set extension properties (x-* properties) at a specific level or the root document.
 
@@ -899,7 +899,7 @@ this.setExtensions({ 'invalid-key': 'value' }); // Error: keys must start with '
 
 > `protected` **getNestedValue**(`obj`, `path`): `any`
 
-Defined in: [packages/core/src/base.ts:280](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L280)
+Defined in: [packages/core/src/base.ts:280](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L280)
 
 Get a nested value from an object using dot notation path traversal.
 
@@ -955,7 +955,7 @@ this.getNestedValue(doc, 'info.nonexistent'); // undefined
 
 > `protected` **setNestedValue**(`obj`, `path`, `value`): `void`
 
-Defined in: [packages/core/src/base.ts:322](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L322)
+Defined in: [packages/core/src/base.ts:322](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L322)
 
 Set a nested value in an object using dot notation, creating intermediate objects as needed.
 
@@ -1017,7 +1017,7 @@ this.setNestedValue(doc, 'info.contact.email', 'test@example.com');
 
 > **getDocument**(): [`BaseDocument`](../../../@laag/core/interfaces/BaseDocument.md)
 
-Defined in: [packages/core/src/base.ts:397](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L397)
+Defined in: [packages/core/src/base.ts:397](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L397)
 
 Get a copy of the document as a JavaScript object.
 
@@ -1056,7 +1056,7 @@ console.log(spec.getDocument().version); // Still '1.0.0'
 
 > **getDocumentAsJson**(`pretty`): `string`
 
-Defined in: [packages/core/src/base.ts:429](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L429)
+Defined in: [packages/core/src/base.ts:429](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L429)
 
 Get the document as a JSON string representation.
 
@@ -1109,7 +1109,7 @@ const pretty = spec.getDocumentAsJson(true);
 
 > **validate**(): [`ValidationResult`](../../../@laag/core/interfaces/ValidationResult.md)
 
-Defined in: [packages/openapi/src/openapi.ts:181](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L181)
+Defined in: [packages/openapi/src/openapi.ts:181](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L181)
 
 Validate the OpenAPI document structure according to the OpenAPI 3.0 specification.
 
@@ -1149,7 +1149,7 @@ console.log(result.errors);
 
 > **getDefinition**(`format`): `string` \| [`OpenAPIDocument`](../interfaces/OpenAPIDocument.md)
 
-Defined in: [packages/openapi/src/openapi.ts:249](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L249)
+Defined in: [packages/openapi/src/openapi.ts:249](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L249)
 
 #### Parameters
 
@@ -1167,7 +1167,7 @@ Defined in: [packages/openapi/src/openapi.ts:249](https://github.com/bschwarz/la
 
 > **appendServer**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:386](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L386)
+Defined in: [packages/openapi/src/openapi.ts:386](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L386)
 
 #### Parameters
 
@@ -1185,7 +1185,7 @@ Defined in: [packages/openapi/src/openapi.ts:386](https://github.com/bschwarz/la
 
 > **appendProtocol**(`value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:408](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L408)
+Defined in: [packages/openapi/src/openapi.ts:408](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L408)
 
 #### Parameters
 
@@ -1203,7 +1203,7 @@ Defined in: [packages/openapi/src/openapi.ts:408](https://github.com/bschwarz/la
 
 > **appendPath**(`path`, `value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:421](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L421)
+Defined in: [packages/openapi/src/openapi.ts:421](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L421)
 
 #### Parameters
 
@@ -1225,7 +1225,7 @@ Defined in: [packages/openapi/src/openapi.ts:421](https://github.com/bschwarz/la
 
 > **getPathNames**(): `string`[]
 
-Defined in: [packages/openapi/src/openapi.ts:427](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L427)
+Defined in: [packages/openapi/src/openapi.ts:427](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L427)
 
 #### Returns
 
@@ -1237,7 +1237,7 @@ Defined in: [packages/openapi/src/openapi.ts:427](https://github.com/bschwarz/la
 
 > **getPath**(`path`): [`PathItemObject`](../interfaces/PathItemObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:434](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L434)
+Defined in: [packages/openapi/src/openapi.ts:434](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L434)
 
 #### Parameters
 
@@ -1255,7 +1255,7 @@ Defined in: [packages/openapi/src/openapi.ts:434](https://github.com/bschwarz/la
 
 > **operationExists**(`path`, `verb`): `boolean`
 
-Defined in: [packages/openapi/src/openapi.ts:507](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L507)
+Defined in: [packages/openapi/src/openapi.ts:507](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L507)
 
 #### Parameters
 
@@ -1277,7 +1277,7 @@ Defined in: [packages/openapi/src/openapi.ts:507](https://github.com/bschwarz/la
 
 > **pathExists**(`path`): `boolean`
 
-Defined in: [packages/openapi/src/openapi.ts:513](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L513)
+Defined in: [packages/openapi/src/openapi.ts:513](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L513)
 
 #### Parameters
 
@@ -1295,7 +1295,7 @@ Defined in: [packages/openapi/src/openapi.ts:513](https://github.com/bschwarz/la
 
 > **getAllHttpMethods**(): [`HttpMethod`](../type-aliases/HttpMethod.md)[]
 
-Defined in: [packages/openapi/src/openapi.ts:517](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L517)
+Defined in: [packages/openapi/src/openapi.ts:517](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L517)
 
 #### Returns
 
@@ -1307,7 +1307,7 @@ Defined in: [packages/openapi/src/openapi.ts:517](https://github.com/bschwarz/la
 
 > **getStatusCodes**(`path`, `verb`): `object`[]
 
-Defined in: [packages/openapi/src/openapi.ts:533](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L533)
+Defined in: [packages/openapi/src/openapi.ts:533](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L533)
 
 #### Parameters
 
@@ -1329,7 +1329,7 @@ Defined in: [packages/openapi/src/openapi.ts:533](https://github.com/bschwarz/la
 
 > **getAllStatusCodes**(): `string`[]
 
-Defined in: [packages/openapi/src/openapi.ts:563](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L563)
+Defined in: [packages/openapi/src/openapi.ts:563](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L563)
 
 #### Returns
 
@@ -1341,7 +1341,7 @@ Defined in: [packages/openapi/src/openapi.ts:563](https://github.com/bschwarz/la
 
 > **getOperationId**(`path`, `verb`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:580](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L580)
+Defined in: [packages/openapi/src/openapi.ts:580](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L580)
 
 #### Parameters
 
@@ -1363,7 +1363,7 @@ Defined in: [packages/openapi/src/openapi.ts:580](https://github.com/bschwarz/la
 
 > **setOperationId**(`path`, `verb`, `value`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:598](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L598)
+Defined in: [packages/openapi/src/openapi.ts:598](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L598)
 
 #### Parameters
 
@@ -1389,7 +1389,7 @@ Defined in: [packages/openapi/src/openapi.ts:598](https://github.com/bschwarz/la
 
 > **getDisplayName**(`path`, `verb`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:612](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L612)
+Defined in: [packages/openapi/src/openapi.ts:612](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L612)
 
 #### Parameters
 
@@ -1411,7 +1411,7 @@ Defined in: [packages/openapi/src/openapi.ts:612](https://github.com/bschwarz/la
 
 > **setDisplayName**(`path`, `verb`, `value`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:616](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L616)
+Defined in: [packages/openapi/src/openapi.ts:616](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L616)
 
 #### Parameters
 
@@ -1437,7 +1437,7 @@ Defined in: [packages/openapi/src/openapi.ts:616](https://github.com/bschwarz/la
 
 > **getOperationIds**(): `object`[]
 
-Defined in: [packages/openapi/src/openapi.ts:620](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L620)
+Defined in: [packages/openapi/src/openapi.ts:620](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L620)
 
 #### Returns
 
@@ -1449,7 +1449,7 @@ Defined in: [packages/openapi/src/openapi.ts:620](https://github.com/bschwarz/la
 
 > **getOperationRequestMedia**(`path`, `verb`): `string`[]
 
-Defined in: [packages/openapi/src/openapi.ts:639](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L639)
+Defined in: [packages/openapi/src/openapi.ts:639](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L639)
 
 #### Parameters
 
@@ -1471,7 +1471,7 @@ Defined in: [packages/openapi/src/openapi.ts:639](https://github.com/bschwarz/la
 
 > **getOperationResponseMedia**(`path`, `verb`, `code?`): `string`[]
 
-Defined in: [packages/openapi/src/openapi.ts:656](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L656)
+Defined in: [packages/openapi/src/openapi.ts:656](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L656)
 
 #### Parameters
 
@@ -1497,7 +1497,7 @@ Defined in: [packages/openapi/src/openapi.ts:656](https://github.com/bschwarz/la
 
 > **getOperationResponse**(`path`, `verb`, `statusCode`): [`ResponseObject`](../interfaces/ResponseObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:668](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L668)
+Defined in: [packages/openapi/src/openapi.ts:668](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L668)
 
 #### Parameters
 
@@ -1523,7 +1523,7 @@ Defined in: [packages/openapi/src/openapi.ts:668](https://github.com/bschwarz/la
 
 > **getOperationRequest**(`path`, `verb`): [`RequestBodyObject`](../interfaces/RequestBodyObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:677](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L677)
+Defined in: [packages/openapi/src/openapi.ts:677](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L677)
 
 #### Parameters
 
@@ -1545,7 +1545,7 @@ Defined in: [packages/openapi/src/openapi.ts:677](https://github.com/bschwarz/la
 
 > **getOperationDescription**(`path`, `verb`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:686](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L686)
+Defined in: [packages/openapi/src/openapi.ts:686](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L686)
 
 #### Parameters
 
@@ -1567,7 +1567,7 @@ Defined in: [packages/openapi/src/openapi.ts:686](https://github.com/bschwarz/la
 
 > **getOperationData**(`path`, `verb`): [`OperationObject`](../interfaces/OperationObject.md)
 
-Defined in: [packages/openapi/src/openapi.ts:693](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L693)
+Defined in: [packages/openapi/src/openapi.ts:693](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L693)
 
 #### Parameters
 
@@ -1589,7 +1589,7 @@ Defined in: [packages/openapi/src/openapi.ts:693](https://github.com/bschwarz/la
 
 > **isOperationDeprecated**(`path`, `verb`): `boolean`
 
-Defined in: [packages/openapi/src/openapi.ts:700](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L700)
+Defined in: [packages/openapi/src/openapi.ts:700](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L700)
 
 #### Parameters
 
@@ -1611,7 +1611,7 @@ Defined in: [packages/openapi/src/openapi.ts:700](https://github.com/bschwarz/la
 
 > **getSuccessCode**(`path`, `verb`): `string`
 
-Defined in: [packages/openapi/src/openapi.ts:707](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L707)
+Defined in: [packages/openapi/src/openapi.ts:707](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L707)
 
 #### Parameters
 
@@ -1633,7 +1633,7 @@ Defined in: [packages/openapi/src/openapi.ts:707](https://github.com/bschwarz/la
 
 > **getBasePath**(): `string` \| `null`
 
-Defined in: [packages/openapi/src/openapi.ts:720](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L720)
+Defined in: [packages/openapi/src/openapi.ts:720](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L720)
 
 #### Returns
 
@@ -1645,7 +1645,7 @@ Defined in: [packages/openapi/src/openapi.ts:720](https://github.com/bschwarz/la
 
 > **getComponentFromPath**(`refPath`): `unknown`
 
-Defined in: [packages/openapi/src/openapi.ts:725](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L725)
+Defined in: [packages/openapi/src/openapi.ts:725](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L725)
 
 #### Parameters
 
@@ -1663,7 +1663,7 @@ Defined in: [packages/openapi/src/openapi.ts:725](https://github.com/bschwarz/la
 
 > **appendRootExtension**(`name`, `value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:751](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L751)
+Defined in: [packages/openapi/src/openapi.ts:751](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L751)
 
 #### Parameters
 
@@ -1685,7 +1685,7 @@ Defined in: [packages/openapi/src/openapi.ts:751](https://github.com/bschwarz/la
 
 > **appendInfoExtension**(`name`, `value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:766](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L766)
+Defined in: [packages/openapi/src/openapi.ts:766](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L766)
 
 #### Parameters
 
@@ -1707,7 +1707,7 @@ Defined in: [packages/openapi/src/openapi.ts:766](https://github.com/bschwarz/la
 
 > **appendPathsExtension**(`name`, `value`): `void`
 
-Defined in: [packages/openapi/src/openapi.ts:781](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/openapi.ts#L781)
+Defined in: [packages/openapi/src/openapi.ts:781](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L781)
 
 #### Parameters
 
@@ -1723,13 +1723,215 @@ Defined in: [packages/openapi/src/openapi.ts:781](https://github.com/bschwarz/la
 
 `void`
 
+***
+
+### generateJsonSample()
+
+> **generateJsonSample**(`path`, `verb`, `type`): `unknown`
+
+Defined in: [packages/openapi/src/openapi.ts:804](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L804)
+
+Generates sample JSON payload from either request or response schema
+
+#### Parameters
+
+##### path
+
+`string`
+
+The resource path for the operation
+
+##### verb
+
+`string`
+
+The HTTP verb for the operation
+
+##### type
+
+Either 'request' or 'response'
+
+`"response"` | `"request"`
+
+#### Returns
+
+`unknown`
+
+Sample JSON object or null if no schema found
+
+#### Example
+
+```typescript
+const api = new Openapi(document);
+const requestSample = api.generateJsonSample('/users', 'post', 'request');
+const responseSample = api.generateJsonSample('/users', 'post', 'response');
+```
+
+***
+
+### getCurlCommands()
+
+> **getCurlCommands**(`path`, `verb`): `object`[]
+
+Defined in: [packages/openapi/src/openapi.ts:951](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L951)
+
+Generates curl command examples for an operation
+
+#### Parameters
+
+##### path
+
+`string`
+
+The resource path for the operation
+
+##### verb
+
+`string`
+
+The HTTP verb for the operation
+
+#### Returns
+
+`object`[]
+
+Array of curl command objects with command and description
+
+#### Example
+
+```typescript
+const api = new Openapi(document);
+const curlCommands = api.getCurlCommands('/users', 'post');
+console.log(curlCommands[0].command);
+```
+
+***
+
+### getPythonCode()
+
+> **getPythonCode**(`path`, `verb`): `string`
+
+Defined in: [packages/openapi/src/openapi.ts:988](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L988)
+
+Generates Python code sample for an operation
+
+#### Parameters
+
+##### path
+
+`string`
+
+The resource path for the operation
+
+##### verb
+
+`string`
+
+The HTTP verb for the operation
+
+#### Returns
+
+`string`
+
+Python code as a string
+
+#### Example
+
+```typescript
+const api = new Openapi(document);
+const pythonCode = api.getPythonCode('/users', 'post');
+console.log(pythonCode);
+```
+
+***
+
+### getJavaScriptCode()
+
+> **getJavaScriptCode**(`path`, `verb`, `useAsync`): `string`
+
+Defined in: [packages/openapi/src/openapi.ts:1050](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L1050)
+
+Generates JavaScript code sample for an operation
+
+#### Parameters
+
+##### path
+
+`string`
+
+The resource path for the operation
+
+##### verb
+
+`string`
+
+The HTTP verb for the operation
+
+##### useAsync
+
+`boolean` = `true`
+
+Whether to use async/await or promises
+
+#### Returns
+
+`string`
+
+JavaScript code as a string
+
+#### Example
+
+```typescript
+const api = new Openapi(document);
+const jsCode = api.getJavaScriptCode('/users', 'post', true);
+console.log(jsCode);
+```
+
+***
+
+### getTypeScriptCode()
+
+> **getTypeScriptCode**(`path`, `verb`): `string`
+
+Defined in: [packages/openapi/src/openapi.ts:1143](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/openapi.ts#L1143)
+
+Generates TypeScript code sample for an operation
+
+#### Parameters
+
+##### path
+
+`string`
+
+The resource path for the operation
+
+##### verb
+
+`string`
+
+The HTTP verb for the operation
+
+#### Returns
+
+`string`
+
+TypeScript code as a string
+
+#### Example
+
+```typescript
+const api = new Openapi(document);
+const tsCode = api.getTypeScriptCode('/users', 'post');
+console.log(tsCode);
+```
+
 ## Properties
 
 ### doc
 
 > `protected` **doc**: [`BaseDocument`](../../../@laag/core/interfaces/BaseDocument.md)
 
-Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L44)
+Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L44)
 
 #### Inherited from
 
@@ -1741,7 +1943,7 @@ Defined in: [packages/core/src/base.ts:44](https://github.com/bschwarz/laag/blob
 
 > `protected` **errorOptions**: [`ErrorHandlingOptions`](../../../@laag/core/interfaces/ErrorHandlingOptions.md)
 
-Defined in: [packages/core/src/base.ts:45](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/base.ts#L45)
+Defined in: [packages/core/src/base.ts:45](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/base.ts#L45)
 
 #### Inherited from
 

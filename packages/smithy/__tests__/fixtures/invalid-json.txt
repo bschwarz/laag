@@ -1,0 +1,6 @@
+This is not valid JSON at all!
+{
+  "smithy": "2.0"
+  "missing comma here"
+  "shapes": {}
+}

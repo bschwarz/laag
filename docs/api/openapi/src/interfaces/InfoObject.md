@@ -6,7 +6,7 @@
 
 # Interface: InfoObject
 
-Defined in: [packages/openapi/src/types.ts:34](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L34)
+Defined in: [packages/openapi/src/types.ts:34](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L34)
 
 The object provides metadata about the API
 
@@ -24,7 +24,7 @@ The object provides metadata about the API
 
 > **title**: `string`
 
-Defined in: [packages/openapi/src/types.ts:36](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L36)
+Defined in: [packages/openapi/src/types.ts:36](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L36)
 
 REQUIRED. The title of the API
 
@@ -34,7 +34,7 @@ REQUIRED. The title of the API
 
 > **version**: `string`
 
-Defined in: [packages/openapi/src/types.ts:38](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L38)
+Defined in: [packages/openapi/src/types.ts:38](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L38)
 
 REQUIRED. The version of the OpenAPI document
 
@@ -44,7 +44,7 @@ REQUIRED. The version of the OpenAPI document
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:40](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L40)
+Defined in: [packages/openapi/src/types.ts:40](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L40)
 
 A short description of the API
 
@@ -54,7 +54,7 @@ A short description of the API
 
 > `optional` **termsOfService**: `string`
 
-Defined in: [packages/openapi/src/types.ts:42](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L42)
+Defined in: [packages/openapi/src/types.ts:42](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L42)
 
 A URL to the Terms of Service for the API
 
@@ -64,7 +64,7 @@ A URL to the Terms of Service for the API
 
 > `optional` **contact**: [`ContactObject`](ContactObject.md)
 
-Defined in: [packages/openapi/src/types.ts:44](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L44)
+Defined in: [packages/openapi/src/types.ts:44](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L44)
 
 The contact information for the exposed API
 
@@ -74,6 +74,6 @@ The contact information for the exposed API
 
 > `optional` **license**: [`LicenseObject`](LicenseObject.md)
 
-Defined in: [packages/openapi/src/types.ts:46](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L46)
+Defined in: [packages/openapi/src/types.ts:46](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L46)
 
 The license information for the exposed API

@@ -33,7 +33,7 @@ class ReleaseManager {
 
   private discoverPackages(): void {
     const packagesDir = join(this.workspaceRoot, 'packages');
-    const packageDirs = ['core', 'openapi', 'raml', 'cli'];
+    const packageDirs = ['core', 'openapi', 'raml', 'smithy', 'cli'];
 
     for (const packageDir of packageDirs) {
       const packagePath = join(packagesDir, packageDir);
@@ -92,8 +92,9 @@ class ReleaseManager {
         }
       }
 
-      // Check exports configuration
-      if (!pkg.exports || !pkg.exports['.']) {
+      // Check exports configuration (not required for CLI packages with bin)
+      const isCLI = pkg.bin !== undefined;
+      if (!isCLI && (!pkg.exports || !pkg.exports['.'])) {
         throw new Error(`Package ${name} is missing proper exports configuration`);
       }
 

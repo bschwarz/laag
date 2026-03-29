@@ -1,0 +1,20 @@
+{
+  "name": "laag-browser-examples",
+  "version": "1.0.0",
+  "description": "Browser usage examples for @laag/openapi",
+  "type": "module",
+  "scripts": {
+    "build": "bun run build:webpack && bun run build:vite",
+    "build:webpack": "webpack --mode=production",
+    "build:vite": "vite build",
+    "serve": "python3 -m http.server 8080",
+    "dev": "vite",
+    "clean": "rm -rf dist webpack-dist"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "html-webpack-plugin": "^5.5.4"
+  }
+}

@@ -6,7 +6,7 @@
 
 # Interface: ServerObject
 
-Defined in: [packages/openapi/src/types.ts:74](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L74)
+Defined in: [packages/openapi/src/types.ts:74](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L74)
 
 An object representing a Server
 
@@ -24,7 +24,7 @@ An object representing a Server
 
 > **url**: `string`
 
-Defined in: [packages/openapi/src/types.ts:76](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L76)
+Defined in: [packages/openapi/src/types.ts:76](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L76)
 
 REQUIRED. A URL to the target host
 
@@ -34,7 +34,7 @@ REQUIRED. A URL to the target host
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:78](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L78)
+Defined in: [packages/openapi/src/types.ts:78](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L78)
 
 An optional string describing the host designated by the URL
 
@@ -44,6 +44,6 @@ An optional string describing the host designated by the URL
 
 > `optional` **variables**: `Record`\<`string`, [`ServerVariableObject`](ServerVariableObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:80](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L80)
+Defined in: [packages/openapi/src/types.ts:80](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L80)
 
 A map between a variable name and its value

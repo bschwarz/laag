@@ -6,7 +6,7 @@
 
 # Interface: ValidationErrorType
 
-Defined in: [packages/core/src/types.ts:88](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L88)
+Defined in: [packages/core/src/types.ts:88](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L88)
 
 Detailed information about a validation error.
 
@@ -41,7 +41,7 @@ const error: ValidationError = {
 
 > **path**: `string`
 
-Defined in: [packages/core/src/types.ts:90](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L90)
+Defined in: [packages/core/src/types.ts:90](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L90)
 
 Path to the location in the document where the validation error occurred
 
@@ -51,7 +51,7 @@ Path to the location in the document where the validation error occurred
 
 > **message**: `string`
 
-Defined in: [packages/core/src/types.ts:92](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L92)
+Defined in: [packages/core/src/types.ts:92](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L92)
 
 Human-readable description of the validation error
 
@@ -61,7 +61,7 @@ Human-readable description of the validation error
 
 > **code**: `string`
 
-Defined in: [packages/core/src/types.ts:94](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L94)
+Defined in: [packages/core/src/types.ts:94](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L94)
 
 Machine-readable error code for programmatic handling
 
@@ -71,6 +71,6 @@ Machine-readable error code for programmatic handling
 
 > `optional` **context**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/types.ts:96](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L96)
+Defined in: [packages/core/src/types.ts:96](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L96)
 
 Optional additional context information about the error

@@ -107,7 +107,7 @@ jobs:
   test:
     name: Test Suite
     runs-on: ${{ matrix.os }}
-    needs: quality
+    needs: [quality, build]
     timeout-minutes: 15
 
     strategy:
@@ -137,10 +137,8 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Run tests
-        run: bun test --coverage
-
+      - name: Build packages (ensure artifacts available)
+        run: bun run build --verbose
       - name: Upload coverage reports
         if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
         uses: codecov/codecov-action@v3
@@ -177,12 +175,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
 
       - name: Build packages for testing
         run: bun run build
@@ -260,11 +252,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
+      - name: Build packages
+        run: bun run build
 
       - name: Run performance benchmarks
         run: |
@@ -324,11 +313,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts-node
-          path: .
+      - name: Build packages
+        run: bun run build
 
       - name: Configure Git
         run: |

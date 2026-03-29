@@ -1,0 +1,591 @@
+{
+  "smithy": "2.0",
+  "metadata": {
+    "authors": ["weather-team@example.com"],
+    "description": "A comprehensive weather service API",
+    "version": "1.0.0"
+  },
+  "shapes": {
+    "example.weather#Weather": {
+      "type": "service",
+      "version": "2006-03-01",
+      "operations": [
+        "example.weather#GetCurrentWeather",
+        "example.weather#GetForecast",
+        "example.weather#GetHistoricalWeather"
+      ],
+      "resources": ["example.weather#WeatherStation"],
+      "errors": ["example.weather#WeatherServiceError"],
+      "traits": {
+        "smithy.api#documentation": "Provides weather forecasts and current conditions",
+        "smithy.api#title": "Weather Service API",
+        "aws.protocols#restJson1": {}
+      }
+    },
+    "example.weather#GetCurrentWeather": {
+      "type": "operation",
+      "input": "example.weather#GetCurrentWeatherInput",
+      "output": "example.weather#GetCurrentWeatherOutput",
+      "errors": ["example.weather#CityNotFoundError", "example.weather#WeatherServiceError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/weather/current/{city}",
+          "code": 200
+        },
+        "smithy.api#documentation": "Gets the current weather conditions for a specified city"
+      }
+    },
+    "example.weather#GetCurrentWeatherInput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpLabel": {},
+            "smithy.api#documentation": "The city name to get weather for"
+          }
+        },
+        "units": {
+          "target": "example.weather#TemperatureUnit",
+          "traits": {
+            "smithy.api#httpQuery": "units",
+            "smithy.api#documentation": "Temperature unit preference"
+          }
+        },
+        "includeDetails": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#httpQuery": "details",
+            "smithy.api#documentation": "Include detailed weather information"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for getting current weather"
+      }
+    },
+    "example.weather#GetCurrentWeatherOutput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The city name"
+          }
+        },
+        "temperature": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "Current temperature"
+          }
+        },
+        "conditions": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "Weather conditions description"
+          }
+        },
+        "humidity": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "Humidity percentage"
+          }
+        },
+        "windSpeed": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#documentation": "Wind speed"
+          }
+        },
+        "details": {
+          "target": "example.weather#WeatherDetails",
+          "traits": {
+            "smithy.api#documentation": "Detailed weather information"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Current weather response"
+      }
+    },
+    "example.weather#GetForecast": {
+      "type": "operation",
+      "input": "example.weather#GetForecastInput",
+      "output": "example.weather#GetForecastOutput",
+      "errors": ["example.weather#CityNotFoundError", "example.weather#WeatherServiceError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/weather/forecast/{city}",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "forecasts",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#documentation": "Gets weather forecast for a specified city"
+      }
+    },
+    "example.weather#GetForecastInput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpLabel": {},
+            "smithy.api#documentation": "The city name"
+          }
+        },
+        "days": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#httpQuery": "days",
+            "smithy.api#documentation": "Number of forecast days (1-10)"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults",
+            "smithy.api#documentation": "Maximum number of results per page"
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#documentation": "Token for pagination"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for getting weather forecast"
+      }
+    },
+    "example.weather#GetForecastOutput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The city name"
+          }
+        },
+        "forecasts": {
+          "target": "example.weather#ForecastList",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "List of weather forecasts"
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "Token for next page of results"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Weather forecast response"
+      }
+    },
+    "example.weather#GetHistoricalWeather": {
+      "type": "operation",
+      "input": "example.weather#GetHistoricalWeatherInput",
+      "output": "example.weather#GetHistoricalWeatherOutput",
+      "errors": [
+        "example.weather#CityNotFoundError",
+        "example.weather#DateRangeError",
+        "example.weather#WeatherServiceError"
+      ],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/weather/historical",
+          "code": 200
+        },
+        "smithy.api#documentation": "Gets historical weather data for a city and date range"
+      }
+    },
+    "example.weather#GetHistoricalWeatherInput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The city name"
+          }
+        },
+        "startDate": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "Start date for historical data"
+          }
+        },
+        "endDate": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "End date for historical data"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for getting historical weather data"
+      }
+    },
+    "example.weather#GetHistoricalWeatherOutput": {
+      "type": "structure",
+      "members": {
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "The city name"
+          }
+        },
+        "data": {
+          "target": "example.weather#HistoricalDataList",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#documentation": "Historical weather data"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Historical weather response"
+      }
+    },
+    "example.weather#WeatherStation": {
+      "type": "resource",
+      "identifiers": {
+        "stationId": "smithy.api#String"
+      },
+      "properties": {
+        "name": "smithy.api#String",
+        "location": "example.weather#Location",
+        "status": "example.weather#StationStatus"
+      },
+      "read": "example.weather#GetWeatherStation",
+      "update": "example.weather#UpdateWeatherStation",
+      "delete": "example.weather#DeleteWeatherStation",
+      "list": "example.weather#ListWeatherStations",
+      "operations": ["example.weather#GetStationReadings"],
+      "traits": {
+        "smithy.api#documentation": "A weather monitoring station"
+      }
+    },
+    "example.weather#GetWeatherStation": {
+      "type": "operation",
+      "input": "example.weather#GetWeatherStationInput",
+      "output": "example.weather#GetWeatherStationOutput",
+      "errors": ["example.weather#StationNotFoundError"],
+      "traits": {
+        "smithy.api#readonly": {},
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/stations/{stationId}",
+          "code": 200
+        }
+      }
+    },
+    "example.weather#GetWeatherStationInput": {
+      "type": "structure",
+      "members": {
+        "stationId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {},
+            "smithy.api#httpLabel": {}
+          }
+        }
+      }
+    },
+    "example.weather#GetWeatherStationOutput": {
+      "type": "structure",
+      "members": {
+        "stationId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "location": {
+          "target": "example.weather#Location",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "example.weather#StationStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "example.weather#TemperatureUnit": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "celsius",
+            "name": "CELSIUS"
+          },
+          {
+            "value": "fahrenheit",
+            "name": "FAHRENHEIT"
+          },
+          {
+            "value": "kelvin",
+            "name": "KELVIN"
+          }
+        ],
+        "smithy.api#documentation": "Temperature unit enumeration"
+      }
+    },
+    "example.weather#StationStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "active",
+            "name": "ACTIVE"
+          },
+          {
+            "value": "inactive",
+            "name": "INACTIVE"
+          },
+          {
+            "value": "maintenance",
+            "name": "MAINTENANCE"
+          }
+        ]
+      }
+    },
+    "example.weather#WeatherDetails": {
+      "type": "structure",
+      "members": {
+        "pressure": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#documentation": "Atmospheric pressure"
+          }
+        },
+        "visibility": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#documentation": "Visibility distance"
+          }
+        },
+        "uvIndex": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "UV index"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Detailed weather information"
+      }
+    },
+    "example.weather#Location": {
+      "type": "structure",
+      "members": {
+        "latitude": {
+          "target": "smithy.api#Double",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "longitude": {
+          "target": "smithy.api#Double",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "altitude": {
+          "target": "smithy.api#Float"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Geographic location"
+      }
+    },
+    "example.weather#ForecastList": {
+      "type": "list",
+      "member": {
+        "target": "example.weather#ForecastItem"
+      },
+      "traits": {
+        "smithy.api#documentation": "List of weather forecasts"
+      }
+    },
+    "example.weather#ForecastItem": {
+      "type": "structure",
+      "members": {
+        "date": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "highTemperature": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "lowTemperature": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "conditions": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "precipitationChance": {
+          "target": "smithy.api#Integer"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A single forecast item"
+      }
+    },
+    "example.weather#HistoricalDataList": {
+      "type": "list",
+      "member": {
+        "target": "example.weather#HistoricalDataItem"
+      }
+    },
+    "example.weather#HistoricalDataItem": {
+      "type": "structure",
+      "members": {
+        "date": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "temperature": {
+          "target": "smithy.api#Float",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "conditions": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "precipitation": {
+          "target": "smithy.api#Float"
+        }
+      }
+    },
+    "example.weather#WeatherServiceError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "code": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500,
+        "smithy.api#documentation": "General weather service error"
+      }
+    },
+    "example.weather#CityNotFoundError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "city": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404,
+        "smithy.api#documentation": "The specified city was not found"
+      }
+    },
+    "example.weather#DateRangeError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400,
+        "smithy.api#documentation": "Invalid date range specified"
+      }
+    },
+    "example.weather#StationNotFoundError": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "stationId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404,
+        "smithy.api#documentation": "The specified weather station was not found"
+      }
+    }
+  }
+}

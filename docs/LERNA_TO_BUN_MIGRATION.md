@@ -24,18 +24,22 @@ This document outlines the migration from Lerna to Bun workspaces for the laag m
 ## Migration Steps Completed
 
 ### ✅ 1. Removed Lerna Configuration
+
 - Deleted `lerna.json` file
 - Removed Lerna from dependencies (was not present)
 
 ### ✅ 2. Enhanced Bun Workspace Configuration
+
 - Already had `workspaces: ["packages/*"]` in `package.json`
 - Added workspace-specific npm scripts
 
 ### ✅ 3. Created Workspace Management Scripts
+
 - `scripts/version-workspace.ts` - Replaces `lerna version`
 - Enhanced `scripts/release.ts` - Replaces `lerna publish`
 
 ### ✅ 4. Updated Documentation
+
 - Updated tech stack documentation
 - Updated project structure documentation
 - Created this migration guide
@@ -163,21 +167,25 @@ Bun supports the workspace protocol for dependencies:
 ## Migration Benefits Realized
 
 ### 1. Faster Operations
+
 - **Install**: 10x faster dependency installation
 - **Testing**: 5x faster test execution across packages
 - **Building**: 5x faster build process
 
 ### 2. Simplified Tooling
+
 - No need for separate Lerna installation
 - Unified command interface through Bun
 - Better integration with existing Bun-based build system
 
 ### 3. Better Developer Experience
+
 - Faster feedback loops
 - Simpler command structure
 - Better error messages and output
 
 ### 4. Modern Features
+
 - Native TypeScript support
 - Better workspace dependency resolution
 - Improved caching mechanisms
@@ -207,6 +215,7 @@ bun run workspace:version --version=2.0.0
 #### 3. Build Order Issues
 
 The build system automatically handles dependency order:
+
 1. `@laag/core` (no dependencies)
 2. `@laag/openapi` (depends on core)
 3. `@laag/raml` (depends on core)
@@ -215,16 +224,19 @@ The build system automatically handles dependency order:
 ## Best Practices
 
 ### 1. Version Management
+
 - Use unified versioning for related releases
 - Use independent versioning for hotfixes
 - Always test before versioning: `bun run workspace:version --dry-run`
 
 ### 2. Dependency Management
+
 - Use `workspace:*` for internal dependencies
 - Keep external dependencies in sync across packages
 - Regular dependency updates: `bun run workspace:update`
 
 ### 3. Development Workflow
+
 - Use workspace commands for cross-package operations
 - Use filtering for package-specific operations
 - Leverage Bun's speed for rapid iteration
@@ -232,11 +244,13 @@ The build system automatically handles dependency order:
 ## Performance Monitoring
 
 ### Before Migration (Lerna)
+
 - Full test suite: ~45 seconds
 - Full build: ~60 seconds
 - Dependency install: ~30 seconds
 
 ### After Migration (Bun Workspaces)
+
 - Full test suite: ~8 seconds
 - Full build: ~12 seconds
 - Dependency install: ~3 seconds
@@ -246,12 +260,14 @@ The build system automatically handles dependency order:
 ## Future Enhancements
 
 ### Planned Improvements
+
 1. **Automated Changelog Generation**: Integrate with conventional commits
 2. **Enhanced CI/CD**: Leverage Bun's speed in GitHub Actions
 3. **Package Analytics**: Monitor workspace health and dependencies
 4. **Advanced Filtering**: More sophisticated package selection
 
 ### Potential Additions
+
 - Workspace dependency graph visualization
 - Automated security auditing across packages
 - Performance benchmarking across workspace changes

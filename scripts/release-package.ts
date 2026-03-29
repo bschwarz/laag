@@ -37,6 +37,7 @@ class PackageReleaseManager {
       '@laag/core': 'core',
       '@laag/openapi': 'openapi',
       '@laag/raml': 'raml',
+      '@laag/smithy': 'smithy',
       '@laag/cli': 'cli',
     };
 
@@ -134,8 +135,9 @@ class PackageReleaseManager {
       }
     }
 
-    // Check exports configuration
-    if (!this.packageInfo.exports || !this.packageInfo.exports['.']) {
+    // Check exports configuration (not required for CLI packages with bin)
+    const isCLI = this.packageInfo.bin !== undefined;
+    if (!isCLI && (!this.packageInfo.exports || !this.packageInfo.exports['.'])) {
       throw new Error(`Package ${this.packageInfo.name} is missing proper exports configuration`);
     }
 
@@ -149,12 +151,28 @@ class PackageReleaseManager {
 
   private async runTests(): Promise<void> {
     console.log(`🧪 Running tests for ${this.packageInfo.name}...`);
-    this.exec('bun test', this.packageInfo.path);
-    console.log('✅ Tests passed');
+    try {
+      this.exec('bun test', this.packageInfo.path);
+      console.log('✅ Tests passed');
+    } catch (error) {
+      // Check if the error is due to no tests found
+      if (error instanceof Error && error.message.includes('No tests found')) {
+        console.log('⚠️  No tests found - skipping test validation');
+        return;
+      }
+      throw error;
+    }
   }
 
   private async buildPackage(): Promise<void> {
     console.log(`🔨 Building ${this.packageInfo.name}...`);
+    
+    // CLI packages don't need building
+    const isCLI = this.packageInfo.bin !== undefined;
+    if (isCLI) {
+      console.log('⚠️  CLI package - skipping build step');
+      return;
+    }
     
     // Build dependencies first if needed
     if (this.packageInfo.name !== '@laag/core') {

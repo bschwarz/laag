@@ -5,6 +5,29 @@ All notable changes to the laag library collection will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] - 2026-02-04
+
+### Added
+
+- **@laag/smithy v1.0.0** - Complete AWS Smithy model support with:
+  - Full TypeScript implementation with comprehensive type definitions
+  - Shape management (services, operations, structures, resources)
+  - Trait support (standard and custom traits)
+  - Code generation (TypeScript, JavaScript, Python)
+  - Selector support for querying shapes
+  - Model validation according to Smithy specification
+  - HTTP binding extraction
+
+### Fixed
+
+- CI test failures due to missing build artifacts in test jobs
+- Integration tests now properly build packages before running
+
+### Security
+
+- Updated js-yaml from 4.1.0 to 4.1.1 to fix prototype pollution vulnerability (GHSA-mh29-5h37-fv8m)
+- Added resolution for js-yaml to force version 4.1.1+ across all transitive dependencies
+
 ## [Unreleased]
 
 ### Added
@@ -27,24 +50,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved API design with better type safety
 - Enhanced error messages with context and suggestions
 - Modernized build pipeline with Bun
-
-### Deprecated
-
-- Legacy CommonJS-only builds (still supported but deprecated)
-
-### Removed
-
-- Support for Node.js versions below 18.0.0
-
-### Fixed
-
-- Various type safety issues in the original JavaScript implementation
-- Inconsistent error handling across packages
-
-### Security
-
-- Updated all dependencies to latest secure versions
-- Added automated security scanning in CI/CD
 
 ## [2.0.0] - TBD
 

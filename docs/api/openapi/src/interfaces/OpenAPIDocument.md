@@ -6,7 +6,7 @@
 
 # Interface: OpenAPIDocument
 
-Defined in: [packages/openapi/src/types.ts:12](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L12)
+Defined in: [packages/openapi/src/types.ts:12](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L12)
 
 The root document object of the OpenAPI document
 
@@ -26,7 +26,7 @@ The root document object of the OpenAPI document
 
 > **openapi**: `string`
 
-Defined in: [packages/openapi/src/types.ts:14](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L14)
+Defined in: [packages/openapi/src/types.ts:14](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L14)
 
 REQUIRED. This string MUST be the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
 
@@ -36,7 +36,7 @@ REQUIRED. This string MUST be the semantic version number of the OpenAPI Specifi
 
 > **info**: [`InfoObject`](InfoObject.md)
 
-Defined in: [packages/openapi/src/types.ts:16](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L16)
+Defined in: [packages/openapi/src/types.ts:16](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L16)
 
 REQUIRED. Provides metadata about the API
 
@@ -46,7 +46,7 @@ REQUIRED. Provides metadata about the API
 
 > **paths**: [`PathsObject`](../type-aliases/PathsObject.md)
 
-Defined in: [packages/openapi/src/types.ts:18](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L18)
+Defined in: [packages/openapi/src/types.ts:18](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L18)
 
 REQUIRED. The available paths and operations for the API
 
@@ -56,7 +56,7 @@ REQUIRED. The available paths and operations for the API
 
 > `optional` **servers**: [`ServerObject`](ServerObject.md)[]
 
-Defined in: [packages/openapi/src/types.ts:20](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L20)
+Defined in: [packages/openapi/src/types.ts:20](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L20)
 
 An array of Server Objects, which provide connectivity information to a target server
 
@@ -66,7 +66,7 @@ An array of Server Objects, which provide connectivity information to a target s
 
 > `optional` **components**: [`ComponentsObject`](ComponentsObject.md)
 
-Defined in: [packages/openapi/src/types.ts:22](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L22)
+Defined in: [packages/openapi/src/types.ts:22](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L22)
 
 An element to hold various schemas for the specification
 
@@ -76,7 +76,7 @@ An element to hold various schemas for the specification
 
 > `optional` **security**: [`SecurityRequirementObject`](SecurityRequirementObject.md)[]
 
-Defined in: [packages/openapi/src/types.ts:24](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L24)
+Defined in: [packages/openapi/src/types.ts:24](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L24)
 
 A declaration of which security mechanisms can be used across the API
 
@@ -86,7 +86,7 @@ A declaration of which security mechanisms can be used across the API
 
 > `optional` **tags**: [`TagObject`](TagObject.md)[]
 
-Defined in: [packages/openapi/src/types.ts:26](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L26)
+Defined in: [packages/openapi/src/types.ts:26](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L26)
 
 A list of tags used by the specification with additional metadata
 
@@ -96,6 +96,6 @@ A list of tags used by the specification with additional metadata
 
 > `optional` **externalDocs**: [`ExternalDocumentationObject`](ExternalDocumentationObject.md)
 
-Defined in: [packages/openapi/src/types.ts:28](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L28)
+Defined in: [packages/openapi/src/types.ts:28](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L28)
 
 Additional external documentation

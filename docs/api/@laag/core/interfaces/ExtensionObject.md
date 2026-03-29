@@ -6,7 +6,7 @@
 
 # Interface: ExtensionObject
 
-Defined in: [packages/core/src/types.ts:30](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/core/src/types.ts#L30)
+Defined in: [packages/core/src/types.ts:30](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/core/src/types.ts#L30)
 
 Extension object type for API specification extensions (x-* properties).
 

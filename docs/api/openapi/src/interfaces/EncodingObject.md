@@ -6,7 +6,7 @@
 
 # Interface: EncodingObject
 
-Defined in: [packages/openapi/src/types.ts:245](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L245)
+Defined in: [packages/openapi/src/types.ts:245](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L245)
 
 A single encoding definition applied to a single schema property
 
@@ -24,7 +24,7 @@ A single encoding definition applied to a single schema property
 
 > `optional` **contentType**: `string`
 
-Defined in: [packages/openapi/src/types.ts:247](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L247)
+Defined in: [packages/openapi/src/types.ts:247](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L247)
 
 The Content-Type for encoding a specific property
 
@@ -34,7 +34,7 @@ The Content-Type for encoding a specific property
 
 > `optional` **headers**: `Record`\<`string`, [`ReferenceObject`](ReferenceObject.md) \| [`HeaderObject`](../type-aliases/HeaderObject.md)\>
 
-Defined in: [packages/openapi/src/types.ts:249](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L249)
+Defined in: [packages/openapi/src/types.ts:249](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L249)
 
 A map allowing additional information to be provided as headers
 
@@ -44,7 +44,7 @@ A map allowing additional information to be provided as headers
 
 > `optional` **style**: [`ParameterStyle`](../type-aliases/ParameterStyle.md)
 
-Defined in: [packages/openapi/src/types.ts:251](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L251)
+Defined in: [packages/openapi/src/types.ts:251](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L251)
 
 Describes how a specific property value will be serialized depending on its type
 
@@ -54,7 +54,7 @@ Describes how a specific property value will be serialized depending on its type
 
 > `optional` **explode**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:253](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L253)
+Defined in: [packages/openapi/src/types.ts:253](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L253)
 
 When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the map
 
@@ -64,6 +64,6 @@ When this is true, property values of type array or object generate separate par
 
 > `optional` **allowReserved**: `boolean`
 
-Defined in: [packages/openapi/src/types.ts:255](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L255)
+Defined in: [packages/openapi/src/types.ts:255](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L255)
 
 Determines whether the parameter value SHOULD allow reserved characters

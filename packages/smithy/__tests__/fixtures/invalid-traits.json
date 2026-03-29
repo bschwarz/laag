@@ -1,0 +1,30 @@
+{
+  "smithy": "2.0",
+  "shapes": {
+    "example#TestOperation": {
+      "type": "operation",
+      "traits": {
+        "smithy.api#http": {
+          "method": "INVALID_METHOD",
+          "uri": "invalid-uri-without-slash"
+        },
+        "smithy.api#httpError": "not-a-number",
+        "smithy.api#required": {
+          "invalidProperty": "should-be-empty"
+        }
+      }
+    },
+    "example#TestStructure": {
+      "type": "structure",
+      "members": {
+        "field": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#httpQuery": 123,
+            "smithy.api#httpHeader": ""
+          }
+        }
+      }
+    }
+  }
+}

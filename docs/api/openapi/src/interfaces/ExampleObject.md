@@ -6,7 +6,7 @@
 
 # Interface: ExampleObject
 
-Defined in: [packages/openapi/src/types.ts:289](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L289)
+Defined in: [packages/openapi/src/types.ts:289](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L289)
 
 Example Object
 
@@ -24,7 +24,7 @@ Example Object
 
 > `optional` **summary**: `string`
 
-Defined in: [packages/openapi/src/types.ts:291](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L291)
+Defined in: [packages/openapi/src/types.ts:291](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L291)
 
 Short description for the example
 
@@ -34,7 +34,7 @@ Short description for the example
 
 > `optional` **description**: `string`
 
-Defined in: [packages/openapi/src/types.ts:293](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L293)
+Defined in: [packages/openapi/src/types.ts:293](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L293)
 
 Long description for the example
 
@@ -44,7 +44,7 @@ Long description for the example
 
 > `optional` **value**: `unknown`
 
-Defined in: [packages/openapi/src/types.ts:295](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L295)
+Defined in: [packages/openapi/src/types.ts:295](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L295)
 
 Embedded literal example
 
@@ -54,6 +54,6 @@ Embedded literal example
 
 > `optional` **externalValue**: `string`
 
-Defined in: [packages/openapi/src/types.ts:297](https://github.com/bschwarz/laag/blob/fbbd59f53b1467155cca720fc2d13c5cf1b8ba8f/packages/openapi/src/types.ts#L297)
+Defined in: [packages/openapi/src/types.ts:297](https://github.com/bschwarz/laag/blob/2efb78c681fb20640fcb7692d4ecbc92c0afa33c/packages/openapi/src/types.ts#L297)
 
 A URL that points to the literal example

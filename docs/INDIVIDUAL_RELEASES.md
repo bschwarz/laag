@@ -14,7 +14,7 @@ The laag monorepo supports both unified releases (all packages together) and ind
 ## Available Packages
 
 - **@laag/core** - Core utilities and base classes
-- **@laag/openapi** - OpenAPI/Swagger document library  
+- **@laag/openapi** - OpenAPI/Swagger document library
 - **@laag/raml** - RAML document library
 - **@laag/cli** - Command-line interface
 
@@ -48,7 +48,7 @@ bun run scripts/release-package.ts @laag/openapi --patch --dry-run
 ```bash
 # OpenAPI package releases
 bun run release:openapi:patch    # Patch version bump
-bun run release:openapi:minor    # Minor version bump  
+bun run release:openapi:minor    # Minor version bump
 bun run release:openapi:major    # Major version bump
 bun run release:openapi          # Current version
 
@@ -127,7 +127,7 @@ Each package maintains its own version number:
 ```json
 {
   "@laag/core": "2.0.1",
-  "@laag/openapi": "2.1.0", 
+  "@laag/openapi": "2.1.0",
   "@laag/raml": "1.0.0",
   "@laag/cli": "1.2.0"
 }
@@ -174,6 +174,7 @@ npm install @laag/openapi@alpha
 Git tags follow the format: `{package-name}@{version}`
 
 Examples:
+
 - `@laag/openapi@2.1.0`
 - `@laag/core@2.0.1`
 - `@laag/cli@1.2.0`
@@ -183,12 +184,14 @@ Examples:
 ### When to Use Individual Releases
 
 ✅ **Good for:**
+
 - Bug fixes in specific packages
 - New features that don't affect other packages
 - Different release cycles for different packages
 - Emergency patches
 
 ❌ **Avoid for:**
+
 - Breaking changes that affect multiple packages
 - Major API changes across the ecosystem
 - Initial releases (use unified release)
@@ -263,6 +266,7 @@ bun run scripts/release-package.ts @laag/openapi --patch --skip-tests
 ### Common Issues
 
 1. **Dependency Build Failures**
+
    ```bash
    # Build dependencies manually first
    bun run build:core
@@ -270,12 +274,14 @@ bun run scripts/release-package.ts @laag/openapi --patch --skip-tests
    ```
 
 2. **Version Conflicts**
+
    ```bash
    # Check current versions
    bun run scripts/release-package.ts @laag/openapi --info
    ```
 
 3. **NPM Authentication**
+
    ```bash
    # Ensure NPM token is set
    npm whoami

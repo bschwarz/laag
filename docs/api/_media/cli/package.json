@@ -1,0 +1,54 @@
+{
+  "name": "@laag/cli",
+  "version": "2.0.0",
+  "description": "Command-line interface for the laag library collection",
+  "type": "module",
+  "main": "laag-cli.js",
+  "bin": {
+    "laag": "./laag-cli.js"
+  },
+  "keywords": [
+    "cli",
+    "api",
+    "specification",
+    "openapi",
+    "swagger",
+    "raml",
+    "command-line"
+  ],
+  "author": "Brett Schwarz <brett.schwarz@gmail.com>",
+  "contributors": [
+    "laag contributors"
+  ],
+  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bschwarz/laag.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/bschwarz/laag/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "laag-cli.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {
+    "@laag/openapi": "workspace:*"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@laag/openapi": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

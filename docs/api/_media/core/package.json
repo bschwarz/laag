@@ -1,0 +1,71 @@
+{
+  "name": "@laag/core",
+  "version": "2.0.0",
+  "description": "Core utilities and base classes for the laag library collection",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "bun run ../../scripts/build-package.ts",
+    "build:watch": "bun run ../../scripts/build-package.ts --watch",
+    "build:clean": "rm -rf dist",
+    "clean": "rm -rf dist",
+    "dev": "bun run build:watch",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prepublishOnly": "bun run build && bun run test && bun run type-check"
+  },
+  "keywords": [
+    "api",
+    "specification",
+    "openapi",
+    "swagger",
+    "raml",
+    "typescript",
+    "utilities",
+    "core",
+    "base-class",
+    "error-handling"
+  ],
+  "author": "Brett Schwarz <brett.schwarz@gmail.com>",
+  "contributors": [
+    "laag contributors"
+  ],
+  "homepage": "https://github.com/bschwarz/laag/tree/main/packages/core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bschwarz/laag.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/bschwarz/laag/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
