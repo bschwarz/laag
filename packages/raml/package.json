@@ -1,6 +1,6 @@
 {
   "name": "@laag/raml",
-  "version": "v0.0.2",
+  "version": "1.0.1",
   "description": "TypeScript library for interfacing with RAML documents",
   "keywords": [
     "rest",

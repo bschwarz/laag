@@ -209,8 +209,8 @@ class PackageReleaseManager {
     }
 
     const publishCmd = options.dryRun 
-      ? 'npm publish --dry-run'
-      : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
+      ? 'npm publish --dry-run --ignore-scripts'
+      : `npm publish --ignore-scripts${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
 
     try {
       this.exec(publishCmd, this.packageInfo.path);
@@ -226,7 +226,7 @@ class PackageReleaseManager {
           otp = newOtpInput;
           console.log('🔄 Retrying with new OTP...');
           
-          const retryCmd = `npm publish${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
+          const retryCmd = `npm publish --ignore-scripts${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
           try {
             this.exec(retryCmd, this.packageInfo.path);
             console.log(`✅ Published ${this.packageInfo.name}@${this.packageInfo.version} (retry successful)`);

@@ -150,7 +150,7 @@ class ReleaseManager {
 
   private async publishPackages(options: ReleaseOptions, packagesToPublish?: Map<string, any>): Promise<void> {
     const packages = packagesToPublish || this.packages;
-    const publishOrder = ['@laag/core', '@laag/openapi', '@laag/raml', '@laag/cli'];
+    const publishOrder = ['@laag/core', '@laag/openapi', '@laag/smithy', '@laag/raml', '@laag/cli'];
     
     // Filter and order packages based on dependency order
     const orderedPackages = publishOrder.filter(name => packages.has(name));
@@ -183,8 +183,8 @@ class ReleaseManager {
       console.log(`📦 Publishing ${packageName}...`);
       
       const publishCmd = options.dryRun 
-        ? 'npm publish --dry-run'
-        : `npm publish${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
+        ? 'npm publish --dry-run --ignore-scripts'
+        : `npm publish --ignore-scripts${options.tag ? ` --tag ${options.tag}` : ''}${otp ? ` --otp ${otp}` : ''}`;
 
       try {
         this.exec(publishCmd, pkg.path);
@@ -200,7 +200,7 @@ class ReleaseManager {
             otp = newOtpInput;
             console.log('🔄 Retrying with new OTP...');
             
-            const retryCmd = `npm publish${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
+            const retryCmd = `npm publish --ignore-scripts${options.tag ? ` --tag ${options.tag}` : ''} --otp ${otp}`;
             try {
               this.exec(retryCmd, pkg.path);
               console.log(`✅ Published ${packageName} (retry successful)`);

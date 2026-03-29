@@ -43,11 +43,11 @@
     "docs:clean": "rm -rf docs/api",
     "release": "bun run scripts/release.ts",
     "release:dry": "bun run scripts/release.ts --dry-run",
-    "release:patch": "bun run scripts/release.ts --version=$(npm version patch --no-git-tag-version --workspaces=false)",
-    "release:minor": "bun run scripts/release.ts --version=$(npm version minor --no-git-tag-version --workspaces=false)",
-    "release:major": "bun run scripts/release.ts --version=$(npm version major --no-git-tag-version --workspaces=false)",
-    "release:beta": "bun run scripts/release.ts --version=$(npm version prerelease --preid=beta --no-git-tag-version --workspaces=false) --tag=beta",
-    "release:alpha": "bun run scripts/release.ts --version=$(npm version prerelease --preid=alpha --no-git-tag-version --workspaces=false) --tag=alpha",
+    "release:patch": "echo 'Use individual package release scripts instead, e.g.: bun run release:core:patch'",
+    "release:minor": "echo 'Use individual package release scripts instead, e.g.: bun run release:core:minor'",
+    "release:major": "echo 'Use individual package release scripts instead, e.g.: bun run release:core:major'",
+    "release:beta": "echo 'Use individual package release scripts instead, e.g.: bun run release:core:patch --tag=beta'",
+    "release:alpha": "echo 'Use individual package release scripts instead, e.g.: bun run release:core:patch --tag=alpha'",
     "prerelease": "bun run quality && bun test && bun run build",
     "release:openapi": "bun run scripts/release-package.ts @laag/openapi",
     "release:openapi:patch": "bun run scripts/release-package.ts @laag/openapi --patch",
@@ -110,5 +110,5 @@
     "node": ">=18.0.0",
     "bun": ">=1.0.0"
   },
-  "version": "0.0.2"
+  "version": "2.0.3"
 }
