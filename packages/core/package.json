@@ -67,8 +67,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "path": "/Users/brettschwarz/repos/laag/packages/core",
-  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/core/package.json",
-  "directoryName": "core"
+  }
 }

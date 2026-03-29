@@ -91,8 +91,5 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^6.0.2"
-  },
-  "path": "/Users/brettschwarz/repos/laag/packages/smithy",
-  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/smithy/package.json",
-  "directoryName": "smithy"
+  }
 }

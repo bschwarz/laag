@@ -87,8 +87,5 @@
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
     "typescript": "^6.0.2"
-  },
-  "path": "/Users/brettschwarz/repos/laag/packages/openapi",
-  "packageJsonPath": "/Users/brettschwarz/repos/laag/packages/openapi/package.json",
-  "directoryName": "openapi"
+  }
 }
