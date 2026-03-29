@@ -11,6 +11,12 @@
 
 import { ErrorHandlingOptions } from './types.js';
 
+declare global {
+  interface ErrorConstructor {
+    captureStackTrace?(target: object, constructorOpt?: Function): void;
+  }
+}
+
 /**
  * Base error class for all laag library errors.
  *
