@@ -74,8 +74,8 @@ class CompatibilityTester {
       
       // Test basic module loading
       const testScript = `
-        const { Openapi } = require('@laag/openapi');
-        const { LaagBase } = require('@laag/core');
+        const { Openapi } = require('${join(this.workspaceRoot, 'packages/openapi/dist/cjs/index.js')}');
+        const { LaagBase } = require('${join(this.workspaceRoot, 'packages/core/dist/cjs/index.js')}');
         
         console.log('✓ CommonJS modules loaded successfully');
         
@@ -105,8 +105,8 @@ class CompatibilityTester {
 
   private async testESMSupport(): Promise<void> {
     const testScript = `
-        import { Openapi } from '@laag/openapi';
-        import { LaagBase } from '@laag/core';
+        import { Openapi } from '${join(this.workspaceRoot, 'packages/openapi/dist/esm/index.js')}';
+        import { LaagBase } from '${join(this.workspaceRoot, 'packages/core/dist/esm/index.js')}';
       
         console.log('✓ ESM modules loaded successfully');
       
@@ -291,6 +291,15 @@ console.log('TypeScript compilation test passed');
       return;
     }
     
+    // Ensure dependencies are installed for the CLI
+    try {
+      execSync(`bun install`, { 
+        cwd: cliPath,
+        stdio: 'pipe'
+      });
+    } catch (error) {
+      throw new Error(`Failed to install CLI dependencies: ${error}`);
+    }
     // Test basic CLI operations
     try {
       execSync(`node laag-cli.js --help`, { 

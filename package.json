@@ -1,6 +1,9 @@
 {
   "name": "laag",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "resolutions": {
     "brace-expansion": "^2.0.0",
     "js-yaml": "^4.1.1",

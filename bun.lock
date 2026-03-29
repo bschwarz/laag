@@ -22,6 +22,77 @@
         "yaml": "^2.8.3",
       },
     },
+    "packages/cli": {
+      "name": "@laag/cli",
+      "version": "2.0.3",
+      "bin": {
+        "laag": "./laag-cli.js",
+      },
+      "dependencies": {
+        "js-yaml": "^4.1.1",
+      },
+      "devDependencies": {
+        "@laag/openapi": "workspace:*",
+      },
+      "peerDependencies": {
+        "@laag/openapi": "workspace:*",
+      },
+    },
+    "packages/core": {
+      "name": "@laag/core",
+      "version": "2.0.2",
+      "devDependencies": {
+        "typescript": "^6.0.2",
+      },
+    },
+    "packages/openapi": {
+      "name": "@laag/openapi",
+      "version": "2.0.6",
+      "devDependencies": {
+        "@laag/core": "workspace:*",
+        "@types/bun": "latest",
+        "typescript": "^6.0.2",
+      },
+      "peerDependencies": {
+        "@laag/core": "workspace:*",
+        "typescript": ">=4.5.0",
+      },
+      "optionalPeers": [
+        "typescript",
+      ],
+    },
+    "packages/raml": {
+      "name": "@laag/raml",
+      "version": "1.0.2",
+      "devDependencies": {
+        "@laag/core": "workspace:*",
+        "@types/bun": "latest",
+        "typescript": "^6.0.2",
+      },
+      "peerDependencies": {
+        "@laag/core": "workspace:*",
+        "typescript": ">=4.5.0",
+      },
+      "optionalPeers": [
+        "typescript",
+      ],
+    },
+    "packages/smithy": {
+      "name": "@laag/smithy",
+      "version": "1.0.3",
+      "devDependencies": {
+        "@laag/core": "workspace:*",
+        "@types/bun": "latest",
+        "typescript": "^6.0.2",
+      },
+      "peerDependencies": {
+        "@laag/core": "workspace:*",
+        "typescript": ">=4.5.0",
+      },
+      "optionalPeers": [
+        "typescript",
+      ],
+    },
   },
   "overrides": {
     "flat-cache": "^6.1.20",
@@ -61,6 +132,16 @@
     "@keyv/bigmap": ["@keyv/bigmap@1.3.1", "", { "dependencies": { "hashery": "^1.4.0", "hookified": "^1.15.0" }, "peerDependencies": { "keyv": "^5.6.0" } }, "sha512-WbzE9sdmQtKy8vrNPa9BRnwZh5UF4s1KTmSK0KUVLo3eff5BlQNNWDnFOouNpKfPKDnms9xynJjsMYjMaT/aFQ=="],
 
     "@keyv/serialize": ["@keyv/serialize@1.1.1", "", {}, "sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA=="],
+
+    "@laag/cli": ["@laag/cli@workspace:packages/cli"],
+
+    "@laag/core": ["@laag/core@workspace:packages/core"],
+
+    "@laag/openapi": ["@laag/openapi@workspace:packages/openapi"],
+
+    "@laag/raml": ["@laag/raml@workspace:packages/raml"],
+
+    "@laag/smithy": ["@laag/smithy@workspace:packages/smithy"],
 
     "@pkgr/core": ["@pkgr/core@0.2.9", "", {}, "sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA=="],
 
@@ -189,6 +270,8 @@
     "is-glob": ["is-glob@4.0.3", "", { "dependencies": { "is-extglob": "^2.1.1" } }, "sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg=="],
 
     "isexe": ["isexe@2.0.0", "", {}, "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="],
+
+    "js-yaml": ["js-yaml@4.1.1", "", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA=="],
 
     "json-schema-traverse": ["json-schema-traverse@0.4.1", "", {}, "sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg=="],
 
