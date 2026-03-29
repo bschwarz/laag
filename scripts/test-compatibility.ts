@@ -295,7 +295,7 @@ console.log('TypeScript compilation test passed');
     try {
       execSync(`bun install`, { 
         cwd: cliPath,
-        stdio: 'pipe'
+        stdio: 'pipe',
       });
     } catch (error) {
       throw new Error(`Failed to install CLI dependencies: ${error}`);
