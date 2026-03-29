@@ -8,6 +8,7 @@
 import { execSync, spawn } from 'child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
 import { basename, join } from 'path';
+import { build as esbuildBuild } from 'esbuild';
 
 interface BuildOptions {
   watch?: boolean;
@@ -105,7 +106,7 @@ class PackageBuilder {
     );
   }
 
-  private buildBrowser(sourceMaps: boolean): void {
+  private async buildBrowser(sourceMaps: boolean): Promise<void> {
     // Only build browser bundle if package.json has browser field
     if (!this.packageJson.browser) return;
 
@@ -113,15 +114,20 @@ class PackageBuilder {
     if (!existsSync(entryPoint)) return;
 
     this.log('Building browser bundle...');
-    const sourceMapFlag = sourceMaps ? '--sourcemap' : '';
-    
-    execSync(
-      `bun build ${entryPoint} --outdir dist/browser --format esm --target browser --minify ${sourceMapFlag}`,
-      {
-        stdio: 'inherit',
-        cwd: this.packageDir,
-      }
-    );
+
+    await esbuildBuild({
+      entryPoints: [entryPoint],
+      bundle: true,
+      outfile: join(this.packageDir, 'dist/browser/index.js'),
+      format: 'esm',
+      platform: 'browser',
+      target: ['es2020'],
+      sourcemap: sourceMaps ? 'external' : false,
+      minify: true,
+      define: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'production'),
+      },
+    });
   }
 
   private runPostBuild(): void {
@@ -160,7 +166,7 @@ class PackageBuilder {
       this.buildESM(sourceMaps);
       this.buildCJS(sourceMaps);
       this.buildTypes();
-      this.buildBrowser(sourceMaps);
+      await this.buildBrowser(sourceMaps);
 
       // Run post-build script if it exists
       this.runPostBuild();

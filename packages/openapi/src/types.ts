@@ -258,8 +258,10 @@ export interface EncodingObject extends ExtensionObject {
 /**
  * A container for the expected responses of an operation
  */
-export interface ResponsesObject
-  extends Record<string, ResponseObject | ReferenceObject | undefined> {
+export interface ResponsesObject extends Record<
+  string,
+  ResponseObject | ReferenceObject | undefined
+> {
   /** The documentation of responses other than the ones declared for specific HTTP response codes */
   default?: ResponseObject | ReferenceObject;
 }

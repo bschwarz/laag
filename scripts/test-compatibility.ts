@@ -74,8 +74,8 @@ class CompatibilityTester {
       
       // Test basic module loading
       const testScript = `
-        const { Openapi } = require('./packages/openapi/dist/cjs/index.js');
-        const { LaagBase } = require('./packages/core/dist/cjs/index.js');
+        const { Openapi } = require('${join(this.workspaceRoot, 'packages/openapi/dist/cjs/index.js')}');
+        const { LaagBase } = require('${join(this.workspaceRoot, 'packages/core/dist/cjs/index.js')}');
         
         console.log('✓ CommonJS modules loaded successfully');
         
@@ -91,7 +91,8 @@ class CompatibilityTester {
       writeFileSync(join(this.workspaceRoot, 'test-node-compat.cjs'), testScript);
       execSync(`node test-node-compat.cjs`, { 
         cwd: this.workspaceRoot,
-        stdio: 'pipe'
+        stdio: 'pipe',
+        env: { ...process.env, NODE_PATH: join(this.workspaceRoot, 'node_modules') },
       });
       
       // Clean up
@@ -104,18 +105,18 @@ class CompatibilityTester {
 
   private async testESMSupport(): Promise<void> {
     const testScript = `
-      import { Openapi } from './packages/openapi/dist/esm/index.js';
-      import { LaagBase } from './packages/core/dist/esm/index.js';
+        import { Openapi } from '${join(this.workspaceRoot, 'packages/openapi/dist/esm/index.js')}';
+        import { LaagBase } from '${join(this.workspaceRoot, 'packages/core/dist/esm/index.js')}';
       
-      console.log('✓ ESM modules loaded successfully');
+        console.log('✓ ESM modules loaded successfully');
       
-      // Test basic functionality
-      const api = new Openapi();
-      console.log('✓ OpenAPI instance created successfully');
+        // Test basic functionality
+        const api = new Openapi();
+        console.log('✓ OpenAPI instance created successfully');
       
-      // Test that we can access properties
-      const info = api.info;
-      console.log('✓ OpenAPI info property accessible');
+        // Test that we can access properties
+        const info = api.info;
+        console.log('✓ OpenAPI info property accessible');
     `;
     
     writeFileSync(join(this.workspaceRoot, 'test-esm-compat.mjs'), testScript);
@@ -290,6 +291,15 @@ console.log('TypeScript compilation test passed');
       return;
     }
     
+    // Ensure dependencies are installed for the CLI
+    try {
+      execSync(`bun install`, { 
+        cwd: cliPath,
+        stdio: 'pipe',
+      });
+    } catch (error) {
+      throw new Error(`Failed to install CLI dependencies: ${error}`);
+    }
     // Test basic CLI operations
     try {
       execSync(`node laag-cli.js --help`, { 
