@@ -25,7 +25,7 @@
     },
     "packages/cli": {
       "name": "@laag/cli",
-      "version": "2.0.3",
+      "version": "0.0.2",
       "bin": {
         "laag": "./laag-cli.js",
       },
@@ -41,14 +41,14 @@
     },
     "packages/core": {
       "name": "@laag/core",
-      "version": "2.0.2",
+      "version": "0.0.2",
       "devDependencies": {
         "typescript": "^6.0.2",
       },
     },
     "packages/openapi": {
       "name": "@laag/openapi",
-      "version": "2.0.6",
+      "version": "0.0.2",
       "devDependencies": {
         "@laag/core": "workspace:*",
         "@types/bun": "latest",
@@ -64,7 +64,7 @@
     },
     "packages/raml": {
       "name": "@laag/raml",
-      "version": "1.0.2",
+      "version": "0.0.2",
       "devDependencies": {
         "@laag/core": "workspace:*",
         "@types/bun": "latest",
@@ -80,7 +80,7 @@
     },
     "packages/smithy": {
       "name": "@laag/smithy",
-      "version": "1.0.3",
+      "version": "0.0.2",
       "devDependencies": {
         "@laag/core": "workspace:*",
         "@types/bun": "latest",

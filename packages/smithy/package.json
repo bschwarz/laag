@@ -1,6 +1,6 @@
 {
   "name": "@laag/smithy",
-  "version": "1.0.3",
+  "version": "v0.0.2",
   "description": "TypeScript library for interfacing with AWS Smithy models",
   "keywords": [
     "smithy",

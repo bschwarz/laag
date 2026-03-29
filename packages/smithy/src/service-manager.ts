@@ -6,12 +6,12 @@
 import type { ShapeManager } from './shapes/shape-manager';
 import type { TraitManager } from './traits/trait-manager';
 import type {
-    HttpBinding,
-    OperationShape,
-    ResourceShape,
-    ServiceShape,
-    ShapeId,
-    StructureShape,
+  HttpBinding,
+  OperationShape,
+  ResourceShape,
+  ServiceShape,
+  ShapeId,
+  StructureShape,
 } from './types';
 import { ShapeGuards } from './types';
 
