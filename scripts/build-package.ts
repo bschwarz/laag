@@ -116,7 +116,7 @@ class PackageBuilder {
     const sourceMapFlag = sourceMaps ? '--sourcemap' : '';
     
     execSync(
-      `bun build ${entryPoint} --outdir dist/browser --format esm --target browser --minify ${sourceMapFlag}`,
+      `bun build ${entryPoint} --outdir dist/browser --format esm --target browser ${sourceMapFlag}`,
       {
         stdio: 'inherit',
         cwd: this.packageDir,
