@@ -1,0 +1,125 @@
+# laag
+
+> laag is a TypeScript/JavaScript monorepo library for reading, writing, and manipulating API specification formats. It provides a unified, class-based interface across OpenAPI/Swagger, AWS Smithy, and RAML.
+
+## Packages
+
+- `@laag/openapi` — Read and write OpenAPI 3.0 documents, validate specs, generate JSON samples and code (Python, JS, TS, curl)
+- `@laag/smithy` — Parse and manipulate AWS Smithy 2.0 models, generate TypeScript/JavaScript/Python client code
+- `@laag/core` — Abstract base class (`LaagBase`) and shared types/errors used by all packages
+- `@laag/raml` — RAML support (in development)
+- `@laag/cli` — CLI for analyzing API specs (`laag api.yaml`)
+
+## Key Concepts
+
+All packages export a main class that extends `LaagBase`. Construct with a JSON string or object. All return `ValidationResult` from `validate()`.
+
+## @laag/openapi — Openapi class
+
+```typescript
+import { Openapi } from '@laag/openapi';
+
+const api = new Openapi(docObjectOrJsonString);
+
+// Read
+api.title                          // string | null
+api.version                        // string | null
+api.servers                        // ServerObject[]
+api.getPathNames()                  // string[] sorted
+api.getPath('/users')               // PathItemObject
+api.operationExists('/users', 'get') // boolean
+api.getOperationId('/users', 'post') // string
+api.getStatusCodes('/users', 'post') // [{ code, description, media }]
+api.getSuccessCode('/users', 'post') // '200' | '201' | ...
+api.getOperationData('/users', 'get') // OperationObject
+api.getOperationRequest('/users', 'post')      // RequestBodyObject
+api.getOperationResponse('/users', 'post', '200') // ResponseObject
+api.getOperationRequestMedia('/users', 'post') // string[]
+api.getOperationResponseMedia('/users', 'post') // string[]
+api.getComponentFromPath('#/components/schemas/User') // resolved component
+
+// Write
+api.appendPath('/users', pathItemObject)
+api.appendServer({ url: 'https://api.example.com' })
+api.setOperationId('/users', 'post', 'createUser')
+api.title = 'My API'
+api.version = '2.0.0'
+
+// Validate
+api.validate() // { valid: boolean, errors: [{ path, message, code }] }
+
+// Serialize
+api.getDefinition('js' | 'json' | 'prettyjson')
+api.getDocumentAsJson(pretty?: boolean)
+
+// Sample + code generation
+api.generateJsonSample('/users', 'post', 'request' | 'response') // sample object
+api.getCurlCommands('/users', 'post')    // [{ command, description }]
+api.getPythonCode('/users', 'post')      // Python requests code
+api.getJavaScriptCode('/users', 'post')  // JS fetch code
+api.getTypeScriptCode('/users', 'post')  // TS fetch code with interfaces
+```
+
+## @laag/smithy — Smithy class
+
+```typescript
+import { Smithy } from '@laag/smithy';
+
+const smithy = new Smithy(modelObjectOrJsonString);
+// Throws ParseError or ValidationError on invalid input
+
+smithy.version                      // '2.0'
+smithy.metadata                     // Record<string, unknown> | undefined
+smithy.shapes                       // Map<ShapeId, Shape>
+
+smithy.getShape('ns#Name')          // Shape | undefined
+smithy.getShapesByType('structure') // Shape[]
+smithy.hasShape('ns#Name')          // boolean
+smithy.addShape('ns#Name', shape)
+smithy.removeShape('ns#Name')       // boolean
+
+smithy.getServices()                // ServiceShape[]
+smithy.getService('ns#Weather')     // ServiceShape | undefined
+smithy.getOperations('ns#Weather')  // OperationShape[]
+smithy.getResources('ns#Weather')   // ResourceShape[]
+smithy.getHttpBinding('ns#GetOp')   // { method, uri, code? } | undefined
+
+smithy.getTraits('ns#Name')         // Map<string, unknown> | undefined
+smithy.hasTrait('ns#Name', 'smithy.api#required') // boolean
+smithy.addTrait('ns#Name', 'smithy.api#http', { method: 'GET', uri: '/...' })
+
+smithy.select('structure')          // SelectorMatch[] — supports *, type, [trait|x], [id|namespace = x]
+smithy.validate()                   // ValidationResult
+
+smithy.generateTypeScript(options)  // TS interfaces + client classes
+smithy.generateJavaScript(options)  // JS classes
+smithy.generatePython(options)      // Python dataclasses
+
+smithy.toJSON()                     // SmithyModel object
+smithy.toString(pretty?: boolean)   // JSON string
+```
+
+## @laag/core — LaagBase, errors, types
+
+```typescript
+import { LaagBase, ParseError, ValidationError } from '@laag/core';
+
+// All packages' main classes extend LaagBase:
+// - getDocument()          // shallow copy of internal doc
+// - getDocumentAsJson()    // JSON string
+// - validate()             // abstract — implemented per package
+```
+
+## Installation
+
+```bash
+npm install @laag/openapi @laag/core
+npm install @laag/smithy @laag/core
+npm install -g @laag/cli
+```
+
+## Source & Docs
+
+- GitHub: https://github.com/bschwarz/laag
+- OpenAPI package README: https://github.com/bschwarz/laag/blob/main/packages/openapi/README.md
+- Smithy package README: https://github.com/bschwarz/laag/blob/main/packages/smithy/README.md
