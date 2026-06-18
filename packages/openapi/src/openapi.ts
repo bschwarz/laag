@@ -246,6 +246,21 @@ export class Openapi extends LaagBase {
   }
 
   // Document retrieval methods
+  /**
+   * Get the full OpenAPI document in the specified format.
+   *
+   * @param format - Output format: `'js'` for a JavaScript object, `'json'` for compact JSON,
+   *                 `'prettyjson'` for indented JSON. Defaults to `'js'`.
+   * @returns The document as an `OpenAPIDocument` object or JSON string depending on format.
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * const obj  = api.getDefinition();            // OpenAPIDocument
+   * const json = api.getDefinition('json');      // compact JSON string
+   * const pretty = api.getDefinition('prettyjson'); // formatted JSON string
+   * ```
+   */
   getDefinition(format: 'js' | 'json' | 'prettyjson' = 'js'): OpenAPIDocument | string {
     switch (format) {
       case 'js':
@@ -383,6 +398,16 @@ export class Openapi extends LaagBase {
     this.doc.servers = ret;
   }
 
+  /**
+   * Append a server to the document's `servers` array.
+   *
+   * @param value - The `ServerObject` to add.
+   *
+   * @example
+   * ```typescript
+   * api.appendServer({ url: 'https://api.example.com', description: 'Production' });
+   * ```
+   */
   appendServer(value: ServerObject): void {
     this.doc.servers ??= [];
     (this.doc.servers as ServerObject[]).push(value);
@@ -418,12 +443,45 @@ export class Openapi extends LaagBase {
     this.doc.paths = value;
   }
 
+  /**
+   * Append a path and its item definition to the document.
+   *
+   * The path is normalized: leading/trailing whitespace is trimmed and a leading `/` is added
+   * if missing. If the path already exists it will be replaced.
+   *
+   * @param path - The path string (e.g. `'/users'` or `'/users/{id}'`).
+   * @param value - The `PathItemObject` describing the operations on this path.
+   *
+   * @example
+   * ```typescript
+   * api.appendPath('/users', {
+   *   get: {
+   *     summary: 'List users',
+   *     responses: { '200': { description: 'OK' } }
+   *   }
+   * });
+   * ```
+   */
   appendPath(path: string, value: PathItemObject): void {
     const cleanPath = path.trim().startsWith('/') ? path.trim() : `/${path.trim()}`;
     this.doc.paths ??= {};
     (this.doc.paths as PathsObject)[cleanPath] = value;
   }
 
+  /**
+   * Get a sorted list of all path names defined in the document.
+   *
+   * Extension keys (`x-*`) are excluded from the result. Paths are sorted
+   * case-insensitively using locale comparison.
+   *
+   * @returns Array of path strings, e.g. `['/pets', '/pets/{id}', '/users']`.
+   *
+   * @example
+   * ```typescript
+   * const api = new Openapi(document);
+   * console.log(api.getPathNames()); // ['/pets', '/pets/{id}', '/users']
+   * ```
+   */
   getPathNames(): string[] {
     const paths = Object.keys(this.doc.paths ?? {});
     return paths
@@ -431,6 +489,18 @@ export class Openapi extends LaagBase {
       .sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
   }
 
+  /**
+   * Get the `PathItemObject` for a specific path.
+   *
+   * @param path - The path string to look up (e.g. `'/users/{id}'`).
+   * @returns The `PathItemObject` for the path, or an empty object if the path doesn't exist.
+   *
+   * @example
+   * ```typescript
+   * const pathItem = api.getPath('/users');
+   * console.log(pathItem.get?.summary);
+   * ```
+   */
   getPath(path: string): PathItemObject {
     return this.dictKeysExists(this.doc, `paths.${path}`)
       ? ((this.doc.paths as PathsObject)[path] ?? {})
@@ -504,16 +574,51 @@ export class Openapi extends LaagBase {
   }
 
   // Operation utility methods
+  /**
+   * Check whether an operation exists for a given path and HTTP verb.
+   *
+   * @param path - The path string (e.g. `'/users/{id}'`).
+   * @param verb - The HTTP method, case-insensitive (e.g. `'get'`, `'POST'`).
+   * @returns `true` if the operation is defined.
+   *
+   * @example
+   * ```typescript
+   * if (api.operationExists('/users', 'post')) {
+   *   const code = api.getPythonCode('/users', 'post');
+   * }
+   * ```
+   */
   operationExists(path: string, verb: string): boolean {
     const method = verb.toLowerCase() as HttpMethod;
     const pathItem = (this.doc.paths as PathsObject)?.[path];
     return !!pathItem?.[method];
   }
 
+  /**
+   * Check whether a path is defined in the document.
+   *
+   * @param path - The path string to check (e.g. `'/users'`).
+   * @returns `true` if the path exists.
+   *
+   * @example
+   * ```typescript
+   * if (api.pathExists('/users')) { ... }
+   * ```
+   */
   pathExists(path: string): boolean {
     return !!(this.doc.paths as PathsObject)?.[path];
   }
 
+  /**
+   * Get the distinct set of HTTP methods used across all paths in the document.
+   *
+   * @returns Array of unique `HttpMethod` values that appear in at least one path item.
+   *
+   * @example
+   * ```typescript
+   * console.log(api.getAllHttpMethods()); // ['get', 'post', 'delete']
+   * ```
+   */
   getAllHttpMethods(): HttpMethod[] {
     const methods = new Set<HttpMethod>();
 
@@ -530,6 +635,21 @@ export class Openapi extends LaagBase {
     return Array.from(methods);
   }
 
+  /**
+   * Get all defined status codes for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns Array of status code entries sorted by code. Each entry contains the HTTP
+   *          status `code`, its `description`, and the response `media` type list.
+   *
+   * @example
+   * ```typescript
+   * api.getStatusCodes('/users', 'post');
+   * // [{ code: '201', description: 'Created', media: ['application/json'] },
+   * //  { code: '400', description: 'Bad Request', media: [] }]
+   * ```
+   */
   getStatusCodes(
     path: string,
     verb: string
@@ -560,6 +680,16 @@ export class Openapi extends LaagBase {
     return ret.sort((a, b) => a.code.localeCompare(b.code));
   }
 
+  /**
+   * Get all distinct HTTP status codes used across every operation in the document.
+   *
+   * @returns Array of unique status code strings (e.g. `['200', '201', '404']`).
+   *
+   * @example
+   * ```typescript
+   * console.log(api.getAllStatusCodes()); // ['200', '201', '400', '404']
+   * ```
+   */
   getAllStatusCodes(): string[] {
     const codes = new Set<string>();
 
@@ -577,6 +707,21 @@ export class Openapi extends LaagBase {
   }
 
   // Operation ID management
+  /**
+   * Get the `operationId` for an operation, generating one if it isn't defined.
+   *
+   * The auto-generated ID is composed from the HTTP method and the last path segment
+   * (with path parameters stripped), e.g. `GET /users/{id}` → `'getUsersId'`.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns The `operationId` string.
+   *
+   * @example
+   * ```typescript
+   * api.getOperationId('/users/{id}', 'get');  // 'getUser' or auto-generated
+   * ```
+   */
   getOperationId(path: string, verb: string): string {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -595,6 +740,19 @@ export class Openapi extends LaagBase {
     return method + pathSegment.charAt(0).toUpperCase() + pathSegment.slice(1);
   }
 
+  /**
+   * Set the `operationId` for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @param value - The new operation ID.
+   * @returns The value that was set, or an empty string if the operation doesn't exist.
+   *
+   * @example
+   * ```typescript
+   * api.setOperationId('/users', 'post', 'createUser');
+   * ```
+   */
   setOperationId(path: string, verb: string, value: string): string {
     const method = verb.toLowerCase() as HttpMethod;
     const pathItem = (this.doc.paths as PathsObject)?.[path];
@@ -617,6 +775,20 @@ export class Openapi extends LaagBase {
     return this.setOperationId(path, verb, value);
   }
 
+  /**
+   * Get all operation IDs across the entire document.
+   *
+   * @returns Array of `{ id, path, method }` objects for every operation defined in the document.
+   *
+   * @example
+   * ```typescript
+   * api.getOperationIds();
+   * // [
+   * //   { id: 'listUsers', path: '/users', method: 'get' },
+   * //   { id: 'createUser', path: '/users', method: 'post' }
+   * // ]
+   * ```
+   */
   getOperationIds(): Array<{ id: string; path: string; method: string }> {
     const ret: Array<{ id: string; path: string; method: string }> = [];
 
@@ -636,6 +808,18 @@ export class Openapi extends LaagBase {
   }
 
   // Media type methods
+  /**
+   * Get the request media types accepted by an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns Array of media type strings (e.g. `['application/json']`), or empty array.
+   *
+   * @example
+   * ```typescript
+   * api.getOperationRequestMedia('/users', 'post'); // ['application/json']
+   * ```
+   */
   getOperationRequestMedia(path: string, verb: string): string[] {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -653,6 +837,20 @@ export class Openapi extends LaagBase {
     return requestBody?.content ? Object.keys(requestBody.content) : [];
   }
 
+  /**
+   * Get the response media types produced by an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @param code - Optional status code to inspect. Defaults to the success code.
+   * @returns Array of media type strings, or empty array.
+   *
+   * @example
+   * ```typescript
+   * api.getOperationResponseMedia('/users', 'get');       // ['application/json']
+   * api.getOperationResponseMedia('/users', 'get', '200');
+   * ```
+   */
   getOperationResponseMedia(path: string, verb: string, code?: string): string[] {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -665,6 +863,20 @@ export class Openapi extends LaagBase {
     return response?.content ? Object.keys(response.content) : [];
   }
 
+  /**
+   * Get the `ResponseObject` for a specific status code on an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @param statusCode - The HTTP status code string (e.g. `'200'`).
+   * @returns The `ResponseObject`, or an empty object if not found.
+   *
+   * @example
+   * ```typescript
+   * const resp = api.getOperationResponse('/users', 'get', '200');
+   * console.log(resp.description);
+   * ```
+   */
   getOperationResponse(path: string, verb: string, statusCode: string): ResponseObject {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -674,6 +886,19 @@ export class Openapi extends LaagBase {
     return (operation.responses?.[statusCode] as ResponseObject) ?? {};
   }
 
+  /**
+   * Get the `RequestBodyObject` for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns The `RequestBodyObject`, or an empty object if the operation has no request body.
+   *
+   * @example
+   * ```typescript
+   * const req = api.getOperationRequest('/users', 'post');
+   * console.log(req.required); // true
+   * ```
+   */
   getOperationRequest(path: string, verb: string): RequestBodyObject {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -683,6 +908,13 @@ export class Openapi extends LaagBase {
     return (operation.requestBody as RequestBodyObject) ?? {};
   }
 
+  /**
+   * Get the description string for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns The description, or an empty string if not set.
+   */
   getOperationDescription(path: string, verb: string): string {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -690,6 +922,19 @@ export class Openapi extends LaagBase {
     return operation?.description ?? '';
   }
 
+  /**
+   * Get the full `OperationObject` for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns The `OperationObject`, or an empty object if the operation doesn't exist.
+   *
+   * @example
+   * ```typescript
+   * const op = api.getOperationData('/users', 'post');
+   * console.log(op.summary, op.tags, op.parameters);
+   * ```
+   */
   getOperationData(path: string, verb: string): OperationObject {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -697,6 +942,13 @@ export class Openapi extends LaagBase {
     return operation ?? ({} as OperationObject);
   }
 
+  /**
+   * Check whether an operation is marked as deprecated.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns `true` if the `deprecated` flag is set on the operation.
+   */
   isOperationDeprecated(path: string, verb: string): boolean {
     const method = verb.toLowerCase() as HttpMethod;
     const operation = (this.doc.paths as PathsObject)?.[path]?.[method] as OperationObject;
@@ -704,6 +956,19 @@ export class Openapi extends LaagBase {
     return operation?.deprecated ?? false;
   }
 
+  /**
+   * Get the first 2xx status code defined for an operation.
+   *
+   * @param path - The path string.
+   * @param verb - The HTTP method, case-insensitive.
+   * @returns The success status code string (e.g. `'200'`, `'201'`), or an empty string if none found.
+   *
+   * @example
+   * ```typescript
+   * api.getSuccessCode('/users', 'post'); // '201'
+   * api.getSuccessCode('/users', 'get');  // '200'
+   * ```
+   */
   getSuccessCode(path: string, verb: string): string {
     const codes = this.getStatusCodes(path, verb);
 
@@ -717,11 +982,31 @@ export class Openapi extends LaagBase {
     return '';
   }
 
+  /**
+   * Get the base path (legacy compatibility property).
+   *
+   * @returns The base path string, or `null` if not set.
+   */
   getBasePath(): string | null {
     return this._basePath;
   }
 
   // Component reference resolution
+  /**
+   * Resolve a JSON Reference path (`$ref`) to its target value within the document.
+   *
+   * Handles `#/` prefixed paths such as `#/components/schemas/User` by navigating
+   * the document object. Returns an empty object if any part of the path is missing.
+   *
+   * @param refPath - The reference path string (e.g. `'#/components/schemas/User'`).
+   * @returns The resolved value, or an empty object if the path cannot be resolved.
+   *
+   * @example
+   * ```typescript
+   * const schema = api.getComponentFromPath('#/components/schemas/User');
+   * console.log((schema as SchemaObject).properties);
+   * ```
+   */
   getComponentFromPath(refPath: string): unknown {
     const cleanPath = refPath.replace('#/', '');
     const parts = cleanPath.split('/');

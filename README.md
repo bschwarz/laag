@@ -78,6 +78,7 @@ laag --help
 - [Smithy Package](packages/smithy/README.md) - AWS Smithy model support
 - [CLI Package](packages/cli/README.md) - Command-line interface
 - [Examples](examples/) - Usage examples and tutorials
+- [AI Skills](docs/skills/) - Reusable skills for Claude Code, Kiro, and other AI tools
 
 ## Development
 
