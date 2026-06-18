@@ -90,6 +90,6 @@
   "devDependencies": {
     "@laag/core": "workspace:*",
     "@types/bun": "latest",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   }
 }
